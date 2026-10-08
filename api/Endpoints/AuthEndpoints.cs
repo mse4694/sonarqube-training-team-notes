@@ -15,8 +15,8 @@ public static class AuthEndpoints
         var form = await ctx.Request.ReadFormAsync();
         string email = form["email"].ToString();
         string password = form["password"].ToString();
-        // Lab 2 open redirect: "next" is sent straight to the Location header, no same-site check.
-        string next = string.IsNullOrEmpty(form["next"].ToString()) ? "/notes" : form["next"].ToString();
+        // Fix: accept only same-site relative paths for the post-login redirect.
+        string next = SafeRedirect.SafeNextPath(form["next"].ToString());
 
         await using var conn = await db.OpenConnectionAsync();
         var user = await conn.QueryFirstOrDefaultAsync<UserRow>(
