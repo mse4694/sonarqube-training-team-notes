@@ -52,20 +52,21 @@ public sealed class AuthService
         return handler.CreateToken(descriptor);
     }
 
-    // Day 1 vuln: the signature and expiry are NOT validated. RequireSignedTokens=false plus a
-    // pass-through SignatureValidator means a forged token (alg=none, or signed with any key)
-    // is accepted, so anyone can mint an "admin" session.
+    // Verify the HMAC signature with our key, pin the algorithm (rejects alg=none / key confusion),
+    // and enforce the expiry. A forged or expired token is now rejected.
     public Session? ValidateSessionToken(string token)
     {
         var handler = new JsonWebTokenHandler();
         var parameters = new TokenValidationParameters
         {
-            ValidateIssuerSigningKey = false,
-            RequireSignedTokens = false,
-            ValidateLifetime = false,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = SigningKey,
+            RequireSignedTokens = true,
+            ValidAlgorithms = [SecurityAlgorithms.HmacSha256],
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.FromSeconds(30),
             ValidateIssuer = false,
             ValidateAudience = false,
-            SignatureValidator = (t, _) => new JsonWebToken(t),
         };
 
         try
