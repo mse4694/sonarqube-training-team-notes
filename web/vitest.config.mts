@@ -10,6 +10,7 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'lcovonly'],
       reportsDirectory: './coverage',
+      reportOnFailure: true, // lab tests fail on `main` by design; still emit lcov for SonarQube
       include: ['lib/**', 'app/**', 'components/**'],
     },
   },
