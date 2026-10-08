@@ -12,15 +12,20 @@ public static class FilesEndpoints
         app.MapGet("/api/files", DownloadAsync);
     }
 
-    // Lab 2 path traversal: `name` is joined onto the uploads directory and opened directly.
-    // Path.Combine does not strip "../", so name=../../../etc/passwd escapes the uploads folder.
+    // Fix: resolve the final absolute path and confirm it is still inside uploads/
+    // (blocks "../" traversal and absolute paths like /etc/passwd).
     private static async Task<IResult> DownloadAsync(HttpContext ctx, string? name)
     {
         var session = ApiHelpers.GetSession(ctx);
         if (session is null) return ApiHelpers.Unauthorized();
 
         name ??= "";
-        string filePath = Path.Combine(UploadDir, name);
+        string root = Path.GetFullPath(UploadDir);
+        string filePath = Path.GetFullPath(Path.Combine(root, name));
+        if (string.IsNullOrEmpty(name) || !filePath.StartsWith(root + Path.DirectorySeparatorChar, StringComparison.Ordinal))
+        {
+            return Results.Json(new { error = "invalid file name" }, statusCode: 400);
+        }
         try
         {
             byte[] data = await File.ReadAllBytesAsync(filePath);
