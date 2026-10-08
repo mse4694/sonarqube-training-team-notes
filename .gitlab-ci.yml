@@ -1,26 +1,43 @@
-# Optional GitLab equivalent of .github/workflows/sonarqube.yml
-stages: [test, scan]
-
-test:
-  stage: test
-  image: node:24-alpine
-  script:
-    - npm ci
-    - npm run test:coverage
-  artifacts:
-    paths: [coverage/lcov.info]
+# GitLab CI equivalent of .github/workflows/sonarqube.yml (SonarScanner for .NET).
+# Set CI/CD variables: SONAR_HOST_URL and SONAR_TOKEN (masked).
+stages:
+  - test
 
 sonarqube:
-  stage: scan
-  image:
-    name: sonarsource/sonar-scanner-cli:latest
-    entrypoint: [""]
+  stage: test
+  image: mcr.microsoft.com/dotnet/sdk:10.0
   variables:
-    SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"
-    GIT_DEPTH: "0"
+    GIT_DEPTH: "0" # full history for new-code detection
   cache:
-    key: "${CI_JOB_NAME}"
-    paths: [.sonar/cache]
+    key: "sonar-dotnet"
+    paths:
+      - .sonar/cache
+      - ~/.nuget/packages
+  before_script:
+    # SonarScanner for .NET needs a JRE and Node (for the JS/TS analyzer).
+    - apt-get update && apt-get install -y --no-install-recommends default-jre curl
+    - curl -fsSL https://deb.nodesource.com/setup_24.x | bash - && apt-get install -y nodejs
+    - dotnet tool install --global dotnet-sonarscanner
+    - export PATH="$PATH:$HOME/.dotnet/tools"
   script:
-    - sonar-scanner -Dsonar.qualitygate.wait=true # SONAR_HOST_URL + SONAR_TOKEN from CI/CD variables
-  needs: [test]
+    - (cd web && npm ci && npm run test:coverage)
+    - >
+      dotnet sonarscanner begin
+      /k:"team-notes"
+      /d:sonar.host.url="$SONAR_HOST_URL"
+      /d:sonar.token="$SONAR_TOKEN"
+      /d:sonar.cs.opencover.reportsPaths="api.Tests/coverage/**/coverage.opencover.xml"
+      /d:sonar.javascript.lcov.reportPaths="web/coverage/lcov.info"
+      /d:sonar.exclusions="**/bin/**,**/obj/**,web/node_modules/**,web/.next/**,**/coverage/**"
+      /d:sonar.qualitygate.wait="true"
+    # Security tests fail on `main` by design; "|| true" keeps the scan + coverage import running.
+    - export UPLOADS_DIR="$CI_PROJECT_DIR/uploads"
+    - >
+      dotnet test api.Tests/Api.Tests.csproj -c Release
+      --collect:"XPlat Code Coverage" --settings api.Tests/coverlet.runsettings
+      --results-directory "$CI_PROJECT_DIR/api.Tests/coverage" || true
+    - dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
+  only:
+    - main
+    - solution
+    - merge_requests

@@ -1,5 +1,6 @@
-# Team Notes: app + PostgreSQL
-#   docker compose up -d --build   ->  http://localhost:3000
+# Team Notes: PostgreSQL + ASP.NET Core API + Next.js web
+#   docker compose up -d --build
+#   web  -> http://localhost:3000      api -> http://localhost:8080
 name: team-notes
 
 services:
@@ -21,15 +22,29 @@ services:
       retries: 20
     mem_limit: 256m
 
-  app:
-    build: .
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
     environment:
       DATABASE_URL: postgres://notes:notes@db:5432/notes
     ports:
-      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:8080:8080"
     depends_on:
       db:
         condition: service_healthy
+    mem_limit: 512m
+
+  web:
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    environment:
+      API_INTERNAL_URL: http://api:8080
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - api
     mem_limit: 512m
 
 volumes:

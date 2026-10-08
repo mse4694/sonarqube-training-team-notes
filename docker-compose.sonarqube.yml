@@ -5,7 +5,6 @@
 #
 # Elasticsearch inside SonarQube needs vm.max_map_count >= 262144 on the HOST:
 #   Linux:            sudo sysctl -w vm.max_map_count=262144
-#   Docker Desktop:   already OK (or: wsl -d docker-desktop sysctl -w vm.max_map_count=262144)
 # No sudo? export SONAR_SEARCH_JAVAADDITIONALOPTS=-Dnode.store.allow_mmap=false
 #   (slower search index, fine for a classroom).
 #

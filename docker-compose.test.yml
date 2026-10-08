@@ -1,0 +1,44 @@
+# Run the api.Tests xUnit suite against a sibling PostgreSQL on a compose network.
+# No docker-in-docker / Testcontainers needed:
+#   docker compose -f docker-compose.test.yml run --rm tests
+#   docker compose -f docker-compose.test.yml down -v
+name: team-notes-test
+
+services:
+  test-db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: notes
+      POSTGRES_PASSWORD: notes
+      POSTGRES_DB: notes
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U notes -d notes"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    mem_limit: 256m
+
+  tests:
+    image: mcr.microsoft.com/dotnet/sdk:10.0
+    working_dir: /src
+    environment:
+      DATABASE_URL: postgres://notes:notes@test-db:5432/notes
+      # Needed by the `solution` branch (secrets come from env); harmless on `main`.
+      SESSION_SECRET: test-session-secret-0123456789-not-the-committed-one
+      ASPNETCORE_ENVIRONMENT: Development
+      UPLOADS_DIR: /src/uploads
+      NUGET_PACKAGES: /nuget
+    volumes:
+      - ./:/src
+      - nuget:/nuget
+    depends_on:
+      test-db:
+        condition: service_healthy
+    mem_limit: 2g
+    command: >
+      bash -lc "dotnet test api.Tests/Api.Tests.csproj -c Release
+      --collect:'XPlat Code Coverage' --settings api.Tests/coverlet.runsettings
+      --results-directory /src/coverage --logger 'console;verbosity=normal'"
+
+volumes:
+  nuget: {}

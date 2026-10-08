@@ -1,4 +1,5 @@
 Release checklist v1.4
-- [ ] changelog
-- [ ] tag
-- [ ] announce
+- [ ] All tests green
+- [ ] Changelog updated
+- [ ] Tag the release
+- [ ] Announce in #releases
