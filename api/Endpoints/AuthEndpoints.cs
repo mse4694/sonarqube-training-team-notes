@@ -30,12 +30,15 @@ public static class AuthEndpoints
 
         string token = auth.CreateSessionToken(new Session(user.id, user.team_id, user.role, user.email));
 
-        // Day 1 vuln: the session cookie is not HttpOnly, not Secure and has no SameSite, so
-        // client-side JS (an XSS payload) can read it and it rides along on cross-site requests.
+        // HttpOnly: not readable from JS (XSS cannot steal it). SameSite=Lax: not sent on
+        // cross-site POSTs (CSRF). Secure in production; COOKIE_INSECURE=1 allows plain http in class.
         ctx.Response.Cookies.Append(AuthService.SessionCookie, token, new CookieOptions
         {
             Path = "/",
-            HttpOnly = false,
+            HttpOnly = true,
+            SameSite = SameSiteMode.Lax,
+            Secure = AppConfig.IsProduction && !AppConfig.CookieInsecure,
+            MaxAge = TimeSpan.FromHours(8),
         });
         return ApiHelpers.SeeOther(next);
     }
