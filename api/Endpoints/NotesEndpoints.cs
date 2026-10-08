@@ -60,20 +60,26 @@ public static class NotesEndpoints
         return Results.Json(new { results });
     }
 
-    // Lab 4 BOLA / IDOR: the note is looked up by id only, with no team/owner check.
+    // Object-level authorization: a note is only visible inside its own team (tenant).
+    private static async Task<NoteRow?> FindTeamNoteAsync(Npgsql.NpgsqlConnection conn, int id, Session session) =>
+        await conn.QueryFirstOrDefaultAsync<NoteRow>(
+            "SELECT * FROM notes WHERE id = @id AND team_id = @teamId", new { id, teamId = session.TeamId });
+
+    // Only the author or a team admin may change / delete it.
+    private static bool CanModify(NoteRow note, Session session) =>
+        note.owner_id == session.UserId || session.Role == "admin";
+
     private static async Task<IResult> GetAsync(HttpContext ctx, Database db, int id)
     {
         var session = ApiHelpers.GetSession(ctx);
         if (session is null) return ApiHelpers.Unauthorized();
 
         await using var conn = await db.OpenConnectionAsync();
-        var note = await conn.QueryFirstOrDefaultAsync<NoteRow>("SELECT * FROM notes WHERE id = @id", new { id });
+        var note = await FindTeamNoteAsync(conn, id, session);
         if (note is null) return Results.Json(new { error = "not found" }, statusCode: 404);
         return Results.Json(new { note });
     }
 
-    // Lab 4 BOLA + mass assignment: no ownership check, and every field in the body is written,
-    // so a caller can move a note to another team (team_id) or change its owner (owner_id).
     private static async Task<IResult> UpdateAsync(HttpContext ctx, Database db, int id)
     {
         var session = ApiHelpers.GetSession(ctx);
@@ -81,20 +87,25 @@ public static class NotesEndpoints
 
         var body = await ctx.Request.ReadFromJsonAsync<Dictionary<string, JsonElement>>();
         await using var conn = await db.OpenConnectionAsync();
+        var note = await FindTeamNoteAsync(conn, id, session);
+        if (note is null) return Results.Json(new { error = "not found" }, statusCode: 404);
+        if (!CanModify(note, session)) return Results.Json(new { error = "forbidden" }, statusCode: 403);
+
         int? updated = await Mutations.UpdateRowAsync(conn, "notes", id, Mutations.FromJson(body));
-        if (updated is null) return Results.Json(new { error = "not found" }, statusCode: 404);
-        return Results.Json(new { ok = true, id = updated });
+        return Results.Json(new { ok = true, id = updated ?? id });
     }
 
-    // Lab 4 BOLA: any authenticated user can delete any note by id.
     private static async Task<IResult> DeleteAsync(HttpContext ctx, Database db, int id)
     {
         var session = ApiHelpers.GetSession(ctx);
         if (session is null) return ApiHelpers.Unauthorized();
 
         await using var conn = await db.OpenConnectionAsync();
-        var deleted = (await conn.QueryAsync<int>("DELETE FROM notes WHERE id = @id RETURNING id", new { id })).ToList();
-        if (deleted.Count == 0) return Results.Json(new { error = "not found" }, statusCode: 404);
+        var note = await FindTeamNoteAsync(conn, id, session);
+        if (note is null) return Results.Json(new { error = "not found" }, statusCode: 404);
+        if (!CanModify(note, session)) return Results.Json(new { error = "forbidden" }, statusCode: 403);
+
+        await conn.ExecuteAsync("DELETE FROM notes WHERE id = @id", new { id });
         return Results.StatusCode(204);
     }
 }
