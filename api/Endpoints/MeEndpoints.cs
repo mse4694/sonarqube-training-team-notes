@@ -23,16 +23,16 @@ public static class MeEndpoints
         return Results.Json(new { user });
     }
 
-    // Lab 4 mass assignment: the whole request body is copied into the UPDATE, so a member can
-    // send {"display_name":"A","role":"admin"} and escalate to admin / change team_id.
+    // Fix: allow-list the updatable fields (never role / team_id), so mass assignment is impossible.
     private static async Task<IResult> UpdateAsync(HttpContext ctx, Database db)
     {
         var session = ApiHelpers.GetSession(ctx);
         if (session is null) return ApiHelpers.Unauthorized();
 
         var body = await ctx.Request.ReadFromJsonAsync<Dictionary<string, JsonElement>>();
+        var fields = Mutations.PickStrings(body, "display_name");
         await using var conn = await db.OpenConnectionAsync();
-        await Mutations.UpdateRowAsync(conn, "users", session.UserId, Mutations.FromJson(body));
+        await Mutations.UpdateRowAsync(conn, "users", session.UserId, fields);
         var user = await conn.QueryFirstOrDefaultAsync<MeRow>(MeSql, new { id = session.UserId });
         return Results.Json(new { user });
     }

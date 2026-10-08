@@ -91,7 +91,9 @@ public static class NotesEndpoints
         if (note is null) return Results.Json(new { error = "not found" }, statusCode: 404);
         if (!CanModify(note, session)) return Results.Json(new { error = "forbidden" }, statusCode: 403);
 
-        int? updated = await Mutations.UpdateRowAsync(conn, "notes", id, Mutations.FromJson(body));
+        // Allow-list updatable fields: team_id / owner_id can never be set from the request body.
+        var fields = Mutations.PickStrings(body, "title", "content");
+        int? updated = await Mutations.UpdateRowAsync(conn, "notes", id, fields);
         return Results.Json(new { ok = true, id = updated ?? id });
     }
 

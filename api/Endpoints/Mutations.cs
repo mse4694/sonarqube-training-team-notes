@@ -43,24 +43,21 @@ public static partial class Mutations
         return rows.Count > 0 ? rows[0] : null;
     }
 
-    public static Dictionary<string, object?> FromJson(Dictionary<string, JsonElement>? body)
+    /// <summary>Copy only allow-listed string fields from an untrusted body (blocks mass assignment).</summary>
+    public static Dictionary<string, object?> PickStrings(Dictionary<string, JsonElement>? body, params string[] allowed)
     {
-        var result = new Dictionary<string, object?>();
+        var picked = new Dictionary<string, object?>();
         if (body is null)
         {
-            return result;
+            return picked;
         }
-        foreach (var (key, value) in body)
+        foreach (var key in allowed)
         {
-            result[key] = value.ValueKind switch
+            if (body.TryGetValue(key, out var value) && value.ValueKind == JsonValueKind.String)
             {
-                JsonValueKind.String => value.GetString(),
-                JsonValueKind.Number => value.TryGetInt64(out long l) ? l : value.GetDouble(),
-                JsonValueKind.True => true,
-                JsonValueKind.False => false,
-                _ => null,
-            };
+                picked[key] = value.GetString();
+            }
         }
-        return result;
+        return picked;
     }
 }
