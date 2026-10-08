@@ -1,5 +1,5 @@
-using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 
@@ -14,16 +14,24 @@ public sealed class AuthService
     private static readonly SymmetricSecurityKey SigningKey = new(SigningKeyBytes);
 
     // ---- passwords -----------------------------------------------------------
-    // Day 1 vuln: unsalted MD5. Fast, unsalted, broken: identical passwords share a digest
-    // and GPU rainbow tables reverse it instantly.
-    public string HashPassword(string password)
-    {
-        byte[] digest = MD5.HashData(Encoding.UTF8.GetBytes(password));
-        return Convert.ToHexString(digest).ToLowerInvariant();
-    }
+    // PasswordHasher<T> uses PBKDF2 (HMAC-SHA512, 100k+ iterations) with a random per-password
+    // salt baked into the output, so the same password yields a different hash each time.
+    private static readonly PasswordHasher<object> Hasher = new();
+    private static readonly object HashSubject = new();
+
+    public string HashPassword(string password) => Hasher.HashPassword(HashSubject, password);
 
     public bool VerifyPassword(string password, string storedHash)
-        => string.Equals(HashPassword(password), storedHash, StringComparison.OrdinalIgnoreCase);
+    {
+        try
+        {
+            return Hasher.VerifyHashedPassword(HashSubject, storedHash, password) != PasswordVerificationResult.Failed;
+        }
+        catch (FormatException)
+        {
+            return false; // malformed / legacy (e.g. a raw md5 hex) hash
+        }
+    }
 
     // ---- session token (HS256) ----------------------------------------------
     public string CreateSessionToken(Session s)
