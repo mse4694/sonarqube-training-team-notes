@@ -1,8 +1,11 @@
 'use client';
 
-// Notes support simple rich text (<b>, <i>, links), so we render the stored HTML.
-// Lab 2 stored XSS: content comes from another user and is injected as raw HTML, so a note
-// containing <img src=x onerror=...> or <script> runs in the reader's browser.
-export function NoteBody({ content }: { content: string }) {
-  return <article className="note-body" dangerouslySetInnerHTML={{ __html: content }} />;
+// Render note content as text: React escapes it, so a stored <script> / <img onerror> stays inert.
+// (If rich text is needed later, sanitize with an allowlist such as DOMPurify before rendering HTML.)
+export function NoteBody({ content }: Readonly<{ content: string }>) {
+  return (
+    <article className="note-body" style={{ whiteSpace: 'pre-wrap' }}>
+      {content}
+    </article>
+  );
 }
