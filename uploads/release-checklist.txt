@@ -1,0 +1,4 @@
+Release checklist v1.4
+- [ ] changelog
+- [ ] tag
+- [ ] announce
