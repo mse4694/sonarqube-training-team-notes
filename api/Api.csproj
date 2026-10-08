@@ -18,8 +18,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.0" />
     <!-- Solution: PBKDF2 password hashing via ASP.NET Core Identity's PasswordHasher<T>. -->
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="10.0.0" />
-    <!-- Lab 6 (SCA): pinned to a version with a known high-severity advisory (GHSA-5crp-9r3c-p9vr). -->
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <!-- Lab 6 (SCA): upgraded past GHSA-5crp-9r3c-p9vr (was 12.0.3). -->
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>
