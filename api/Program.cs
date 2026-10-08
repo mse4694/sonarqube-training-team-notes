@@ -6,8 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton(_ => new Database(AppConfig.DatabaseUrl));
 builder.Services.AddSingleton<AuthService>();
 
-// Link-preview client. Default handler follows redirects (part of the Lab 2 SSRF behaviour).
-builder.Services.AddHttpClient("preview", c => c.Timeout = TimeSpan.FromSeconds(5));
+// Link-preview client. redirects disabled so a public URL cannot 30x-bounce to an internal one.
+builder.Services.AddHttpClient("preview", c => c.Timeout = TimeSpan.FromSeconds(5))
+    .ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler { AllowAutoRedirect = false });
 
 builder.Services.AddCors(o => o.AddDefaultPolicy(p =>
     p.SetIsOriginAllowed(_ => true).AllowAnyHeader().AllowAnyMethod().AllowCredentials()));

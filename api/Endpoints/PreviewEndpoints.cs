@@ -16,9 +16,8 @@ public static partial class PreviewEndpoints
         app.MapGet("/api/preview", PreviewAsync);
     }
 
-    // Lab 2 SSRF: fetch the URL a user pasted into a note and return its <title>. The URL is used
-    // as-is, so http://169.254.169.254/... (cloud metadata) or http://127.0.0.1:... reaches
-    // internal services, and redirects are followed to anywhere.
+    // Fix: allow only http(s) URLs that resolve to public IPs, and do not follow redirects
+    // (configured on the "preview" client) so a public URL cannot 30x-bounce us to an internal one.
     private static async Task<IResult> PreviewAsync(HttpContext ctx, IHttpClientFactory httpFactory)
     {
         var session = ApiHelpers.GetSession(ctx);
@@ -27,10 +26,20 @@ public static partial class PreviewEndpoints
         string? url = ctx.Request.Query["url"].ToString();
         if (string.IsNullOrEmpty(url)) return Results.Json(new { error = "url is required" }, statusCode: 400);
 
+        Uri target;
+        try
+        {
+            target = await UrlSafety.AssertPublicHttpUrlAsync(url);
+        }
+        catch (UnsafeUrlException ex)
+        {
+            return Results.Json(new { error = ex.Message }, statusCode: 400);
+        }
+
         try
         {
             var http = httpFactory.CreateClient("preview");
-            var res = await http.GetAsync(url);
+            var res = await http.GetAsync(target);
             string html = await res.Content.ReadAsStringAsync();
             string? title = TitleTag().Match(html) is { Success: true } m ? m.Groups[1].Value : null;
 
