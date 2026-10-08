@@ -28,6 +28,10 @@ services:
       dockerfile: api/Dockerfile
     environment:
       DATABASE_URL: postgres://notes:notes@db:5432/notes
+      # Read from .env next to this file (cp .env.example .env). Compose refuses to start if unset.
+      SESSION_SECRET: ${SESSION_SECRET:?set SESSION_SECRET in .env}
+      # Session cookies are Secure in production; allow plain http://<lan-ip>:3000 in class.
+      COOKIE_INSECURE: ${COOKIE_INSECURE:-1}
     ports:
       - "127.0.0.1:8080:8080"
     depends_on:

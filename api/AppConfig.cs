@@ -1,27 +1,28 @@
 namespace TeamNotes.Api;
 
 /// <summary>
-/// Central application configuration.
-/// NOTE (training app): every secret below is FAKE and exists only for the SonarQube labs.
+/// Central application configuration. Secrets come ONLY from the environment (see .env.example);
+/// in production inject them from a secret manager. Nothing sensitive is hard-coded.
 /// </summary>
 public static class AppConfig
 {
-    // Falls back to the shared staging database when DATABASE_URL is not set.
-    // (Lab 2 secrets: a PostgreSQL password hard-coded in the source.)
-    public const string FallbackDatabaseUrl =
-        "postgres://notes:Tn7vQ2mZ9rK4xW@db.staging.internal:5432/notes";
+    // No hard-coded fallback: a missing DATABASE_URL must fail fast, not silently use a shared DB.
+    public const string FallbackDatabaseUrl = "";
 
-    // Used to sign the session JWT (HS256). Hard-coded signing key.
-    public const string JwtSecret = "team-notes-jwt-secret-2026-do-not-share-0123456789";
+    public static string DatabaseUrl => RequireEnv("DATABASE_URL");
 
-    // Attachment storage (S3) - TODO: move to env vars before go-live
-    public const string AwsRegion = "ap-southeast-1";
-    public const string AwsBucket = "team-notes-attachments";
-    public const string AwsAccessKeyId = "AKIAIOSFODNN7EXAMPLE";
-    public const string AwsSecretAccessKey = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY";
+    // Used to sign the session JWT (HS256).
+    public static string JwtSecret => RequireEnv("SESSION_SECRET");
 
-    public static string DatabaseUrl =>
-        Environment.GetEnvironmentVariable("DATABASE_URL") is { Length: > 0 } v ? v : FallbackDatabaseUrl;
+    public static string AwsRegion => Environment.GetEnvironmentVariable("AWS_REGION") ?? "ap-southeast-1";
+    public static string AwsBucket => Environment.GetEnvironmentVariable("S3_BUCKET") ?? "team-notes-attachments";
+    public static string AwsAccessKeyId => Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID") ?? "";
+    public static string AwsSecretAccessKey => Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY") ?? "";
+
+    private static string RequireEnv(string name) =>
+        Environment.GetEnvironmentVariable(name) is { Length: > 0 } v
+            ? v
+            : throw new InvalidOperationException($"Missing required environment variable {name} (see .env.example)");
 
     /// <summary>Session cookies are Secure in production; set COOKIE_INSECURE=1 for plain http in class.</summary>
     public static bool CookieInsecure =>
