@@ -24,3 +24,5 @@ public sealed record UserRow(int id, string email, string display_name, string p
 public sealed record MeRow(int id, string email, string display_name, string role, int team_id);
 public sealed record AdminUserRow(int id, string email, string display_name, string role, string team);
 public sealed record SearchRow(int id, string title, int team_id);
+public sealed record ShareRow(int id, int note_id, string token, int created_by, DateTime created_at, DateTime? expires_at, DateTime? revoked_at);
+public sealed record SharedNoteRow(string title, string content, DateTime created_at, DateTime? expires_at);

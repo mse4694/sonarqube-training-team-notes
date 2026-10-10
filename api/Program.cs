@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton(_ => new Database(AppConfig.DatabaseUrl));
 builder.Services.AddSingleton<AuthService>();
+builder.Services.AddSingleton<MarkdownRenderer>();
 
 // Link-preview client. redirects disabled so a public URL cannot 30x-bounce to an internal one.
 builder.Services.AddHttpClient("preview", c => c.Timeout = TimeSpan.FromSeconds(5))
@@ -43,6 +44,8 @@ app.MapMe();
 app.MapAdmin();
 app.MapFiles();
 app.MapPreview();
+app.MapMarkdown();
+app.MapShares();
 
 await app.RunAsync();
 

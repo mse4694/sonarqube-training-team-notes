@@ -25,3 +25,14 @@ CREATE TABLE IF NOT EXISTS notes (
   attachment TEXT,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- Public share links (POST /api/notes/{id}/share, GET /api/share/{token}).
+CREATE TABLE IF NOT EXISTS note_shares (
+  id         SERIAL PRIMARY KEY,
+  note_id    INT  NOT NULL REFERENCES notes(id) ON DELETE CASCADE,
+  token      TEXT UNIQUE NOT NULL,
+  created_by INT  NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+  expires_at TIMESTAMPTZ,
+  revoked_at TIMESTAMPTZ
+);
