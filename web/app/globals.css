@@ -895,7 +895,7 @@ button:focus-visible {
 
 .share-item {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 10px;
   padding: 10px 12px;
@@ -913,6 +913,10 @@ button:focus-visible {
   font-family: var(--mono);
   font-size: 0.82rem;
   color: #334155;
+}
+
+.share-item > :not(.token) {
+  flex: none;
 }
 
 .share-meta {
@@ -979,6 +983,10 @@ button:disabled {
   .note-detail-head,
   .share-head {
     flex-direction: column;
+  }
+
+  .share-item {
+    flex-wrap: wrap;
   }
 }
 
