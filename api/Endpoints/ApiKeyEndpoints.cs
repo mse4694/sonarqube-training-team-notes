@@ -11,14 +11,12 @@ public static class ApiKeyEndpoints
         app.MapDelete("/api/me/api-keys/{id}", RevokeAsync);
     }
 
-    // Lab 3 API keys: the full key is returned on every listing ("so you can copy it again"),
-    // which only works because it is stored in plaintext.
+    // Fix: the key is shown once, in the POST response. Listings expose only the public prefix.
     private static object ToJson(ApiKeyRow k) => new
     {
         k.id,
         k.name,
         k.prefix,
-        key = k.secret,
         k.created_at,
         k.last_used_at,
         k.revoked_at,

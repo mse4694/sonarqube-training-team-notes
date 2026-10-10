@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using System.Text;
 using Dapper;
 using Microsoft.AspNetCore.WebUtilities;
 
@@ -15,13 +16,25 @@ public sealed class ApiKeyService(Database db)
 
     public static string NewKey() => "tnk_" + WebEncoders.Base64UrlEncode(RandomNumberGenerator.GetBytes(24));
 
-    // Lab 3 API keys: the key is stored exactly as issued (plaintext), so anyone who can read the
-    // table (a backup, a SQL injection, a support dashboard) gets working credentials.
-    internal static string ToStored(string key) => key;
+    // Fix: store only SHA-256(key) as hex. The key is 192 bits of CSPRNG output, so a fast hash is
+    // enough (no salt/KDF needed, unlike human passwords); a leaked table yields no usable keys.
+    internal static string ToStored(string key) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(key)));
 
-    // Lab 3 API keys: plain == compares character by character and returns at the first
-    // mismatch, so response time leaks how much of a guessed key is correct.
-    internal static bool Matches(string presentedKey, string stored) => presentedKey == stored;
+    // Fix: compare the digests in constant time so response timing reveals nothing about the key.
+    internal static bool Matches(string presentedKey, string stored)
+    {
+        byte[] expected;
+        try
+        {
+            expected = Convert.FromHexString(stored);
+        }
+        catch (FormatException)
+        {
+            return false; // legacy/plaintext row
+        }
+        byte[] actual = SHA256.HashData(Encoding.UTF8.GetBytes(presentedKey));
+        return CryptographicOperations.FixedTimeEquals(actual, expected);
+    }
 
     public async Task<(ApiKeyRow row, string key)> CreateAsync(int userId, string name)
     {
