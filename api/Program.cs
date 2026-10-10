@@ -19,6 +19,11 @@ var app = builder.Build();
 // Create schema + seed training data (retry while the DB container comes up).
 await InitializeDatabaseAsync(app);
 
+// Lab 7 error handling: the developer exception page is enabled unconditionally ("so support can
+// see what broke"), so in Production any unhandled exception returns the exception type, message,
+// stack trace and source paths to the caller. No security headers are sent either.
+app.UseDeveloperExceptionPage();
+
 app.UseCors();
 
 // Session middleware: read the `session` cookie and stash the resolved Session on the request.
