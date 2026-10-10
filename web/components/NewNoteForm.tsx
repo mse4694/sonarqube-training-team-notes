@@ -17,11 +17,12 @@ export function NewNoteForm() {
   }
 
   return (
-    <form onSubmit={submit} style={{ display: 'grid', gap: '0.5rem' }}>
+    <form onSubmit={submit} className="card form-card">
       <h3>New note</h3>
+      <p className="card-sub">Shared with everyone on your team.</p>
       <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
       <textarea value={content} onChange={(e) => setContent(e.target.value)} rows={4} placeholder="Content (basic HTML allowed)" />
-      <button type="submit">Create</button>
+      <button type="submit" className="btn-primary">Create</button>
     </form>
   );
 }

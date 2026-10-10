@@ -16,14 +16,19 @@ export default async function NotePage({ params }: Props) {
 
   return (
     <main>
-      <Link href="/notes">&larr; All notes</Link>
-      <h2>{note.title}</h2>
-      <NoteBody content={note.content} />
-      {note.attachment && (
-        <p>
-          Attachment: <a href={`/api/files?name=${encodeURIComponent(note.attachment)}`}>{note.attachment}</a>
-        </p>
-      )}
+      <Link href="/notes" className="back-link">&larr; All notes</Link>
+      <div className="card note-detail">
+        <h2>{note.title}</h2>
+        <NoteBody content={note.content} />
+        {note.attachment && (
+          <p className="attachment">
+            Attachment:{' '}
+            <a href={`/api/files?name=${encodeURIComponent(note.attachment)}`} className="attachment-chip">
+              {note.attachment}
+            </a>
+          </p>
+        )}
+      </div>
     </main>
   );
 }
