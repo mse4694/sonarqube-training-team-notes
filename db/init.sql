@@ -36,3 +36,17 @@ CREATE TABLE IF NOT EXISTS note_shares (
   expires_at TIMESTAMPTZ,
   revoked_at TIMESTAMPTZ
 );
+
+-- Personal API keys (Settings page, header X-Api-Key). `secret` holds the key material
+-- (plaintext on main, SHA-256 hex on solution).
+CREATE TABLE IF NOT EXISTS api_keys (
+  id           SERIAL PRIMARY KEY,
+  user_id      INT  NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  name         TEXT NOT NULL,
+  prefix       TEXT NOT NULL,
+  secret       TEXT NOT NULL,
+  created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
+  last_used_at TIMESTAMPTZ,
+  revoked_at   TIMESTAMPTZ
+);
+CREATE INDEX IF NOT EXISTS api_keys_prefix_idx ON api_keys (prefix);

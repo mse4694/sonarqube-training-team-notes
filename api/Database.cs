@@ -26,3 +26,5 @@ public sealed record AdminUserRow(int id, string email, string display_name, str
 public sealed record SearchRow(int id, string title, int team_id);
 public sealed record ShareRow(int id, int note_id, string token, int created_by, DateTime created_at, DateTime? expires_at, DateTime? revoked_at);
 public sealed record SharedNoteRow(string title, string content, DateTime created_at, DateTime? expires_at);
+public sealed record ApiKeyRow(int id, string name, string prefix, string secret, DateTime created_at, DateTime? last_used_at, DateTime? revoked_at);
+public sealed record ApiKeyAuthRow(int id, string secret, int user_id, int team_id, string role, string email);
