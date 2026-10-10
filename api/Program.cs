@@ -7,6 +7,7 @@ builder.Services.AddSingleton(_ => new Database(AppConfig.DatabaseUrl));
 builder.Services.AddSingleton<AuthService>();
 builder.Services.AddSingleton<MarkdownRenderer>();
 builder.Services.AddSingleton<ApiKeyService>();
+builder.Services.AddSingleton<LoginThrottle>();
 
 // Link-preview client. redirects disabled so a public URL cannot 30x-bounce to an internal one.
 builder.Services.AddHttpClient("preview", c => c.Timeout = TimeSpan.FromSeconds(5))

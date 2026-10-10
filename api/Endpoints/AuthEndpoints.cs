@@ -10,13 +10,21 @@ public static class AuthEndpoints
         app.MapPost("/api/auth/logout", Logout);
     }
 
-    private static async Task<IResult> LoginAsync(HttpContext ctx, Database db, AuthService auth, ILoggerFactory loggers)
+    private static async Task<IResult> LoginAsync(HttpContext ctx, Database db, AuthService auth, LoginThrottle throttle, ILoggerFactory loggers)
     {
         var form = await ctx.Request.ReadFormAsync();
         string email = form["email"].ToString();
         string password = form["password"].ToString();
         // Fix: accept only same-site relative paths for the post-login redirect.
         string next = SafeRedirect.SafeNextPath(form["next"].ToString());
+
+        // Fix: throttle online password guessing per client IP + email (fixed window, 429).
+        string throttleKey = LoginThrottle.KeyFor(ctx, email);
+        if (throttle.IsBlocked(throttleKey))
+        {
+            ctx.Response.Headers.RetryAfter = ((int)LoginThrottle.Window.TotalSeconds).ToString();
+            return Results.Json(new { error = "too many failed sign-in attempts, try again in a minute" }, statusCode: 429);
+        }
 
         await using var conn = await db.OpenConnectionAsync();
         var user = await conn.QueryFirstOrDefaultAsync<UserRow>(
@@ -29,6 +37,7 @@ public static class AuthEndpoints
         var log = loggers.CreateLogger("TeamNotes.Auth");
         if (user is null || !auth.VerifyPassword(password, user.password_hash))
         {
+            throttle.RecordFailure(throttleKey);
             log.LogWarning("Login failed for {Email} with password {Password}", email, password);
             return ApiHelpers.SeeOther("/login?error=1");
         }
