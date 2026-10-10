@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Diagnostics;
 using TeamNotes.Api;
 using TeamNotes.Api.Endpoints;
 
@@ -22,10 +23,39 @@ var app = builder.Build();
 // Create schema + seed training data (retry while the DB container comes up).
 await InitializeDatabaseAsync(app);
 
-// Lab 7 error handling: the developer exception page is enabled unconditionally ("so support can
-// see what broke"), so in Production any unhandled exception returns the exception type, message,
-// stack trace and source paths to the caller. No security headers are sent either.
-app.UseDeveloperExceptionPage();
+// Fix: basic security headers on every response, including error responses (OnStarting runs
+// after the exception handler has reset the response).
+app.Use((ctx, next) =>
+{
+    ctx.Response.OnStarting(() =>
+    {
+        var headers = ctx.Response.Headers;
+        headers.XContentTypeOptions = "nosniff";
+        headers.XFrameOptions = "DENY";
+        headers["Referrer-Policy"] = "no-referrer";
+        headers.ContentSecurityPolicy = "default-src 'none'; frame-ancestors 'none'";
+        if (ctx.Request.Path.StartsWithSegments("/api"))
+        {
+            headers.CacheControl = "no-store";
+        }
+        return Task.CompletedTask;
+    });
+    return next(ctx);
+});
+
+// Fix: unhandled exceptions become a generic RFC 9457 ProblemDetails (500 + traceId). The
+// exception itself is logged server-side and never sent to the client, in any environment.
+app.UseExceptionHandler(errorApp => errorApp.Run(async ctx =>
+{
+    var error = ctx.Features.Get<IExceptionHandlerFeature>()?.Error;
+    ctx.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("TeamNotes.Errors")
+        .LogError(error, "Unhandled exception, traceId {TraceId}", ctx.TraceIdentifier);
+    await Results.Problem(
+        title: "Something went wrong",
+        statusCode: StatusCodes.Status500InternalServerError,
+        extensions: new Dictionary<string, object?> { ["traceId"] = ctx.TraceIdentifier })
+        .ExecuteAsync(ctx);
+}));
 
 app.UseCors();
 

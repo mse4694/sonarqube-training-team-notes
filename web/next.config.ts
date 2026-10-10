@@ -6,6 +6,19 @@ const API_INTERNAL = process.env.API_INTERNAL_URL ?? 'http://api:8080';
 
 const nextConfig: NextConfig = {
   output: 'standalone',
+  // Basic security headers for the web pages (the API sets its own).
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+        ],
+      },
+    ];
+  },
   async rewrites() {
     return [{ source: '/api/:path*', destination: `${API_INTERNAL}/api/:path*` }];
   },
