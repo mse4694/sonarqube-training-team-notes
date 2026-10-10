@@ -50,3 +50,15 @@ CREATE TABLE IF NOT EXISTS api_keys (
   revoked_at   TIMESTAMPTZ
 );
 CREATE INDEX IF NOT EXISTS api_keys_prefix_idx ON api_keys (prefix);
+
+-- Security audit trail (admin page /admin/audit). No FK on actor_id: events outlive users.
+CREATE TABLE IF NOT EXISTS audit_log (
+  id          SERIAL PRIMARY KEY,
+  at          TIMESTAMPTZ NOT NULL DEFAULT now(),
+  actor_id    INT,
+  actor_email TEXT,
+  action      TEXT NOT NULL,
+  target      TEXT,
+  ip          TEXT,
+  detail      TEXT
+);

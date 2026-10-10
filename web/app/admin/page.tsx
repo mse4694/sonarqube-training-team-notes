@@ -1,5 +1,7 @@
 import { redirect } from 'next/navigation';
+import Link from 'next/link';
 import { apiGet } from '@/lib/api';
+import { UserNav, type Me } from '@/components/UserNav';
 
 export const dynamic = 'force-dynamic';
 
@@ -10,14 +12,19 @@ export default async function AdminPage() {
   if (res.status === 401) redirect('/login?next=/admin');
   if (res.status === 403) redirect('/notes');
   const users = ((await res.json()).users ?? []) as AdminUser[];
+  const me = (await (await apiGet('/api/me')).json()).user as Me;
 
   return (
     <main>
+      <UserNav me={me} />
       <div className="page-head">
         <div>
           <h2>Admin - users</h2>
           <p className="page-sub">Everyone with access to Team Notes, across all teams.</p>
         </div>
+        <Link href="/admin/audit" className="btn">
+          View audit log
+        </Link>
       </div>
       <div className="stats">
         <div className="card stat">
