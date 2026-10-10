@@ -15,7 +15,7 @@ public sealed class AppFixture : WebApplicationFactory<Program>
     {
         await using var conn = await Database.OpenConnectionAsync();
         await conn.ExecuteAsync(DbInitializer.SchemaSql);
-        await conn.ExecuteAsync("TRUNCATE note_shares, notes, users, teams RESTART IDENTITY CASCADE");
+        await conn.ExecuteAsync("TRUNCATE api_keys, note_shares, notes, users, teams RESTART IDENTITY CASCADE");
         await DbInitializer.EnsureCreatedAsync(Database, Auth);
     }
 

@@ -3,11 +3,11 @@ import { redirect } from 'next/navigation';
 import { apiGet } from '@/lib/api';
 import { NewNoteForm } from '@/components/NewNoteForm';
 import { TokenStash } from '@/components/TokenStash';
+import { UserNav, type Me } from '@/components/UserNav';
 
 export const dynamic = 'force-dynamic';
 
 type Note = { id: number; title: string };
-type Me = { email: string; role: string };
 
 export default async function NotesPage() {
   const meRes = await apiGet('/api/me');
@@ -18,22 +18,7 @@ export default async function NotesPage() {
   return (
     <main>
       <TokenStash />
-      <nav className="user-nav">
-        <span className="user-chip">
-          <span className="avatar" aria-hidden="true">{me.email.charAt(0)}</span>
-          <span>
-            Signed in as <strong>{me.email}</strong>
-          </span>
-        </span>
-        {me.role === 'admin' && (
-          <Link href="/admin" className="nav-link">
-            Admin
-          </Link>
-        )}
-        <form method="post" action="/api/auth/logout">
-          <button type="submit" className="btn-ghost">Sign out</button>
-        </form>
-      </nav>
+      <UserNav me={me} />
 
       <div className="page-head">
         <div>

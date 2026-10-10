@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton(_ => new Database(AppConfig.DatabaseUrl));
 builder.Services.AddSingleton<AuthService>();
 builder.Services.AddSingleton<MarkdownRenderer>();
+builder.Services.AddSingleton<ApiKeyService>();
 
 // Link-preview client. redirects disabled so a public URL cannot 30x-bounce to an internal one.
 builder.Services.AddHttpClient("preview", c => c.Timeout = TimeSpan.FromSeconds(5))
@@ -34,6 +35,17 @@ app.Use(async (ctx, next) =>
             ctx.Items["session"] = session;
         }
     }
+
+    // Scripts / CI can authenticate with a personal API key instead of the cookie.
+    if (ctx.Items["session"] is null && ctx.Request.Headers[ApiKeyService.HeaderName].ToString() is { Length: > 0 } apiKey)
+    {
+        var keys = ctx.RequestServices.GetRequiredService<ApiKeyService>();
+        var session = await keys.AuthenticateAsync(apiKey);
+        if (session is not null)
+        {
+            ctx.Items["session"] = session;
+        }
+    }
     await next();
 });
 
@@ -46,6 +58,7 @@ app.MapFiles();
 app.MapPreview();
 app.MapMarkdown();
 app.MapShares();
+app.MapApiKeys();
 
 await app.RunAsync();
 

@@ -981,3 +981,70 @@ button:disabled {
     flex-direction: column;
   }
 }
+
+/* ---- Settings / API keys -------------------------------------------------- */
+
+.settings-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.profile-card {
+  display: grid;
+  gap: 12px;
+}
+
+.kv {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 16px;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.kv dt {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.kv dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.inline-code {
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 0.85em;
+  background: #f1f5f9;
+}
+
+.inline-form input:not([type='checkbox']):not([type='hidden']) {
+  flex: 1;
+}
+
+.alert-title {
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+
+.token-full {
+  display: block;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+.key-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .settings-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

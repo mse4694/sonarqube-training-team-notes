@@ -37,6 +37,17 @@ public static class DbInitializer
           expires_at TIMESTAMPTZ,
           revoked_at TIMESTAMPTZ
         );
+        CREATE TABLE IF NOT EXISTS api_keys (
+          id           SERIAL PRIMARY KEY,
+          user_id      INT  NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+          name         TEXT NOT NULL,
+          prefix       TEXT NOT NULL,
+          secret       TEXT NOT NULL,
+          created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
+          last_used_at TIMESTAMPTZ,
+          revoked_at   TIMESTAMPTZ
+        );
+        CREATE INDEX IF NOT EXISTS api_keys_prefix_idx ON api_keys (prefix);
         """;
 
     public static async Task EnsureCreatedAsync(Database db, AuthService auth)
