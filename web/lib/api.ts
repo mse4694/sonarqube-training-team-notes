@@ -11,6 +11,17 @@ export async function apiGet(path: string): Promise<Response> {
   });
 }
 
+/** Server-side JSON POST to the API, forwarding the caller's session cookie. */
+export async function apiPost(path: string, body: unknown): Promise<Response> {
+  const cookieHeader = (await cookies()).toString();
+  return fetch(`${API_INTERNAL}${path}`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', ...(cookieHeader ? { cookie: cookieHeader } : {}) },
+    body: JSON.stringify(body),
+    cache: 'no-store',
+  });
+}
+
 /** Trim a snippet for display. Pure helper (unit-tested). */
 export function truncate(text: string, max = 140): string {
   return text.length > max ? text.slice(0, max) + '…' : text;
