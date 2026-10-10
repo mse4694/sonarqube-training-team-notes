@@ -10,7 +10,7 @@ public static class AuthEndpoints
         app.MapPost("/api/auth/logout", Logout);
     }
 
-    private static async Task<IResult> LoginAsync(HttpContext ctx, Database db, AuthService auth, LoginThrottle throttle, ILoggerFactory loggers)
+    private static async Task<IResult> LoginAsync(HttpContext ctx, Database db, AuthService auth, LoginThrottle throttle, AuditLog audit)
     {
         var form = await ctx.Request.ReadFormAsync();
         string email = form["email"].ToString();
@@ -22,6 +22,7 @@ public static class AuthEndpoints
         string throttleKey = LoginThrottle.KeyFor(ctx, email);
         if (throttle.IsBlocked(throttleKey))
         {
+            await audit.WriteAsync(ctx, "auth.login.throttled", actor: null, attemptedEmail: email);
             ctx.Response.Headers.RetryAfter = ((int)LoginThrottle.Window.TotalSeconds).ToString();
             return Results.Json(new { error = "too many failed sign-in attempts, try again in a minute" }, statusCode: 429);
         }
@@ -31,19 +32,18 @@ public static class AuthEndpoints
             "SELECT id, email, display_name, password_hash, role, team_id FROM users WHERE email = @email",
             new { email });
 
-        // Lab 7 logging: "debug" log lines left in production write the typed password and the
-        // issued session token into the application log, and nothing is recorded in audit_log,
-        // so an attack leaves no security trail while the logs themselves leak credentials.
-        var log = loggers.CreateLogger("TeamNotes.Auth");
+        // Fix: failures and successes go to the audit trail; the password and the session token
+        // are never written anywhere.
         if (user is null || !auth.VerifyPassword(password, user.password_hash))
         {
             throttle.RecordFailure(throttleKey);
-            log.LogWarning("Login failed for {Email} with password {Password}", email, password);
+            await audit.WriteAsync(ctx, "auth.login.failure", actor: null, detail: "wrong email or password", attemptedEmail: email);
             return ApiHelpers.SeeOther("/login?error=1");
         }
 
-        string token = auth.CreateSessionToken(new Session(user.id, user.team_id, user.role, user.email));
-        log.LogInformation("Login ok for {Email}, session token {Token}", email, token);
+        var session = new Session(user.id, user.team_id, user.role, user.email);
+        string token = auth.CreateSessionToken(session);
+        await audit.WriteAsync(ctx, "auth.login.success", session, target: $"user:{user.id}");
 
         // HttpOnly: not readable from JS (XSS cannot steal it). SameSite=Lax: not sent on
         // cross-site POSTs (CSRF). Secure in production; COOKIE_INSECURE=1 allows plain http in class.

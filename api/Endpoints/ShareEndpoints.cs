@@ -28,7 +28,7 @@ public static class ShareEndpoints
 
     // Fix: only the author (or a team admin) of a note in the caller's own team may share it,
     // and every link gets an expiry (default 24 h, max 7 days).
-    private static async Task<IResult> CreateAsync(HttpContext ctx, Database db, int id)
+    private static async Task<IResult> CreateAsync(HttpContext ctx, Database db, AuditLog audit, int id)
     {
         var session = ApiHelpers.GetSession(ctx);
         if (session is null) return ApiHelpers.Unauthorized();
@@ -44,6 +44,7 @@ public static class ShareEndpoints
               VALUES (@id, @token, @userId, now() + make_interval(hours => @hours))
               RETURNING id, note_id, token, created_by, created_at, expires_at, revoked_at",
             new { id, token = NewToken(), userId = session.UserId, hours });
+        await audit.WriteAsync(ctx, "share.create", session, target: $"note:{id}", detail: $"share:{share.id} expires {share.expires_at:O}");
         return Results.Json(new { share = ToJson(share) }, statusCode: 201);
     }
 
@@ -77,7 +78,7 @@ public static class ShareEndpoints
     }
 
     // Fix: same owner/admin check as creating a link; ReadSharedAsync now honours revoked_at.
-    private static async Task<IResult> RevokeAsync(HttpContext ctx, Database db, int id)
+    private static async Task<IResult> RevokeAsync(HttpContext ctx, Database db, AuditLog audit, int id)
     {
         var session = ApiHelpers.GetSession(ctx);
         if (session is null) return ApiHelpers.Unauthorized();
@@ -89,6 +90,7 @@ public static class ShareEndpoints
 
         int revoked = await conn.ExecuteAsync(
             "UPDATE note_shares SET revoked_at = now() WHERE note_id = @id AND revoked_at IS NULL", new { id });
+        await audit.WriteAsync(ctx, "share.revoke", session, target: $"note:{id}", detail: $"{revoked} link(s)");
         return Results.Json(new { revoked });
     }
 
