@@ -13,14 +13,59 @@ export default async function AdminPage() {
 
   return (
     <main>
-      <h2>Admin - users</h2>
-      <ul>
-        {users.map((u) => (
-          <li key={u.id}>
-            {u.email} ({u.role}) - {u.team}
-          </li>
-        ))}
-      </ul>
+      <div className="page-head">
+        <div>
+          <h2>Admin - users</h2>
+          <p className="page-sub">Everyone with access to Team Notes, across all teams.</p>
+        </div>
+      </div>
+      <div className="stats">
+        <div className="card stat">
+          <p className="stat-label">Total users</p>
+          <p className="stat-value">{users.length}</p>
+        </div>
+        <div className="card stat">
+          <p className="stat-label">Admins</p>
+          <p className="stat-value">{users.filter((u) => u.role === 'admin').length}</p>
+        </div>
+        <div className="card stat">
+          <p className="stat-label">Teams</p>
+          <p className="stat-value">{new Set(users.map((u) => u.team)).size}</p>
+        </div>
+      </div>
+      <div className="card table-card">
+        <div className="table-wrap">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Team</th>
+                <th>Role</th>
+                <th>ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((u) => (
+                <tr key={u.id}>
+                  <td>
+                    <span className="cell-user">
+                      <span className="avatar" aria-hidden="true">{u.email.charAt(0)}</span>
+                      {u.email}
+                    </span>
+                  </td>
+                  <td>
+                    <span className="team-pill">{u.team}</span>
+                  </td>
+                  <td>
+                    <span className={`badge badge-${u.role === 'admin' ? 'admin' : 'member'}`}>{u.role}</span>
+                  </td>
+                  <td className="cell-id">#{u.id}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </main>
   );
 }
