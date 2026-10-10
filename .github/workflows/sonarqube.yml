@@ -1,3 +1,16 @@
+# Build, test and scan Team Notes with SonarScanner for .NET (C# + TypeScript in one analysis).
+#
+# Works with SonarQube Server and SonarQube Cloud. Configure in your fork:
+#   Settings -> Secrets and variables -> Actions
+#     Secrets:   SONAR_TOKEN        (required; analysis token from SonarQube)
+#                SONAR_HOST_URL     (SonarQube Server URL; omit for SonarQube Cloud = https://sonarcloud.io)
+#     Variables: SONAR_PROJECT_KEY  (optional; default "<owner>_<repo>", the key SonarQube Cloud gives imported repos)
+#                SONAR_ORGANIZATION (SonarQube Cloud only; your organization key)
+#                SONAR_QUALITYGATE_WAIT (optional; "false" = do not fail the job on a red Quality Gate)
+# SONAR_HOST_URL / SONAR_ORGANIZATION may also be set as variables instead of secrets.
+#
+# No SONAR_TOKEN (e.g. a fresh fork, or a PR from a fork) -> the scan job is skipped and the run
+# stays green with a notice explaining what to configure.
 name: SonarQube
 
 on:
@@ -5,10 +18,72 @@ on:
     branches: [main, solution]
   pull_request:
     types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sonarqube-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build-test-scan:
+  config:
+    name: Check SonarQube configuration
     runs-on: ubuntu-latest
+    outputs:
+      enabled: ${{ steps.check.outputs.enabled }}
+    steps:
+      - id: check
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          if [ -n "$SONAR_TOKEN" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "SONAR_TOKEN is set: the SonarQube scan will run." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            msg="SONAR_TOKEN is not set, so the SonarQube scan is skipped. Add the SONAR_TOKEN secret (and SONAR_HOST_URL for SonarQube Server, or SONAR_ORGANIZATION for SonarQube Cloud) under Settings -> Secrets and variables -> Actions, then re-run. See README: Fork แล้ว scan ด้วย SonarQube."
+            echo "::notice title=SonarQube scan skipped::$msg"
+            echo "$msg" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+  build-test-scan:
+    name: Build, test, scan
+    needs: config
+    if: needs.config.outputs.enabled == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    # Same database the xUnit suite uses in docker-compose.test.yml.
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: notes
+          POSTGRES_PASSWORD: notes
+          POSTGRES_DB: notes
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U notes -d notes"
+          --health-interval 3s
+          --health-timeout 3s
+          --health-retries 20
+
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL || vars.SONAR_HOST_URL || 'https://sonarcloud.io' }}
+      SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION || vars.SONAR_ORGANIZATION || '' }}
+      SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY || format('{0}_{1}', github.repository_owner, github.event.repository.name) }}
+      SONAR_QUALITYGATE_WAIT: ${{ vars.SONAR_QUALITYGATE_WAIT || 'true' }}
+      # Test-only settings, mirroring docker-compose.test.yml (fake training values, not secrets).
+      DATABASE_URL: postgres://notes:notes@localhost:5432/notes
+      SESSION_SECRET: test-session-secret-0123456789-not-the-committed-one
+      ASPNETCORE_ENVIRONMENT: Development
+      DOTNET_NOLOGO: "1"
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+
     steps:
       - uses: actions/checkout@v5
         with:
@@ -22,44 +97,57 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: "21"
 
       - uses: actions/setup-node@v5
         with:
           node-version: 24
+          cache: npm
+          cache-dependency-path: web/package-lock.json
 
       # ---- web: unit tests + lcov coverage -----------------------------------
-      - run: npm ci
+      - name: Web dependencies
+        run: npm ci
         working-directory: web
       # XSS tests fail on `main` by design; keep going so lcov is still produced and imported.
-      - run: npm run test:coverage
+      - name: Web tests with lcov coverage
+        run: npm run test:coverage
         working-directory: web
         continue-on-error: true
 
       # ---- SonarScanner for .NET: begin -> build -> test -> end --------------
-      - run: dotnet tool install --global dotnet-sonarscanner
+      - name: Install SonarScanner for .NET
+        run: dotnet tool install --global dotnet-sonarscanner
 
       - name: SonarQube begin
-        run: >
-          dotnet sonarscanner begin
-          /k:"team-notes"
-          /d:sonar.host.url="${{ vars.SONAR_HOST_URL }}"
-          /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
-          /d:sonar.cs.opencover.reportsPaths="api.Tests/coverage/**/coverage.opencover.xml"
-          /d:sonar.javascript.lcov.reportPaths="web/coverage/lcov.info"
-          /d:sonar.exclusions="**/bin/**,**/obj/**,web/node_modules/**,web/.next/**,**/coverage/**"
-          /d:sonar.qualitygate.wait="true"
+        run: |
+          args=(
+            /k:"$SONAR_PROJECT_KEY"
+            /d:sonar.host.url="$SONAR_HOST_URL"
+            /d:sonar.token="$SONAR_TOKEN"
+            /d:sonar.cs.opencover.reportsPaths="api.Tests/coverage/**/coverage.opencover.xml"
+            /d:sonar.javascript.lcov.reportPaths="web/coverage/lcov.info"
+            /d:sonar.exclusions="**/bin/**,**/obj/**,web/node_modules/**,web/.next/**,**/coverage/**"
+            /d:sonar.qualitygate.wait="$SONAR_QUALITYGATE_WAIT"
+          )
+          if [ -n "$SONAR_ORGANIZATION" ]; then
+            args+=(/o:"$SONAR_ORGANIZATION")
+          fi
+          echo "Project key: $SONAR_PROJECT_KEY  Host: $SONAR_HOST_URL  Organization: ${SONAR_ORGANIZATION:-<none>}"
+          dotnet sonarscanner begin "${args[@]}"
+
+      - name: Build
+        run: dotnet build api.Tests/Api.Tests.csproj -c Release
 
       # Security tests fail on `main` by design; keep going so the scan still runs + imports coverage.
-      # `dotnet test` compiles both api/ and api.Tests/ under the scanner's MSBuild hook.
-      - name: Unit tests with OpenCover coverage
+      - name: xUnit tests with OpenCover coverage
         continue-on-error: true
         env:
           UPLOADS_DIR: ${{ github.workspace }}/uploads
         run: >
-          dotnet test api.Tests/Api.Tests.csproj -c Release
+          dotnet test api.Tests/Api.Tests.csproj -c Release --no-build
           --collect:"XPlat Code Coverage" --settings api.Tests/coverlet.runsettings
           --results-directory ${{ github.workspace }}/api.Tests/coverage
 
-      - name: SonarQube end (uploads + waits for the Quality Gate)
-        run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+      - name: SonarQube end (uploads, waits for the Quality Gate)
+        run: dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
