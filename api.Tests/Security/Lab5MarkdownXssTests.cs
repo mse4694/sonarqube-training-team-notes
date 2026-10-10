@@ -35,6 +35,17 @@ public sealed class Lab5MarkdownXssTests(AppFixture app) : TestBase(app)
     }
 
     [Fact]
+    public async Task Generic_attributes_cannot_inject_event_handlers()
+    {
+        // Markdig's "advanced" extensions include generic attributes: {onmouseover=...} becomes a
+        // real HTML attribute even when raw HTML is disabled.
+        var client = await App.LoginAsync("a@alpha.test", "alpha-pass-123");
+        string html = await RenderAsync(client, "# Agenda {onmouseover=\"alert(1)\" style=\"position:fixed;inset:0\"}");
+        // Escaped text such as "{onmouseover=&quot;...}" is fine; a real on* attribute inside a tag is not.
+        Assert.DoesNotMatch(@"<[^>]*\son[a-z]+\s*=", html);
+    }
+
+    [Fact]
     public async Task A_shared_note_does_not_serve_attacker_html()
     {
         // Stored XSS: the payload is saved in a note and served to whoever opens the public link.
