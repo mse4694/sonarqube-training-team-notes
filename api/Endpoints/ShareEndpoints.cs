@@ -1,4 +1,7 @@
+using System.Security.Cryptography;
+using System.Text.Json;
 using Dapper;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace TeamNotes.Api.Endpoints;
 
@@ -16,65 +19,88 @@ public static class ShareEndpoints
         app.MapGet("/api/share/{token}", ReadSharedAsync);
     }
 
-    // Lab 3 share link: the token comes from System.Random seeded with the note id, so the
-    // "secret" link of note N is the same for everybody and can be recomputed by anyone
-    // (new Random(N).Next()). It is only 8 hex chars long and never changes.
-    internal static string NewToken(int noteId) => new Random(noteId).Next().ToString("x8");
+    public const int DefaultLifetimeHours = 24;
+    public const int MaxLifetimeHours = 7 * 24;
 
-    // Lab 3 share link: no ownership/team check, so any signed-in user can mint a public link
-    // for any note id (including another team's), and no expiry is ever set.
+    // Fix: 32 bytes (256 bits) from the OS CSPRNG, base64url-encoded (43 chars). Every share gets
+    // a fresh token that cannot be derived from the note id or from earlier tokens.
+    internal static string NewToken() => WebEncoders.Base64UrlEncode(RandomNumberGenerator.GetBytes(32));
+
+    // Fix: only the author (or a team admin) of a note in the caller's own team may share it,
+    // and every link gets an expiry (default 24 h, max 7 days).
     private static async Task<IResult> CreateAsync(HttpContext ctx, Database db, int id)
     {
         var session = ApiHelpers.GetSession(ctx);
         if (session is null) return ApiHelpers.Unauthorized();
 
         await using var conn = await db.OpenConnectionAsync();
-        bool exists = await conn.ExecuteScalarAsync<bool>("SELECT EXISTS (SELECT 1 FROM notes WHERE id = @id)", new { id });
-        if (!exists) return Results.Json(new { error = "not found" }, statusCode: 404);
+        var note = await NotesEndpoints.FindTeamNoteAsync(conn, id, session);
+        if (note is null) return Results.Json(new { error = "not found" }, statusCode: 404);
+        if (!NotesEndpoints.CanModify(note, session)) return Results.Json(new { error = "forbidden" }, statusCode: 403);
 
-        string token = NewToken(id);
+        int hours = await ReadLifetimeHoursAsync(ctx);
         var share = await conn.QueryFirstAsync<ShareRow>(
-            @"INSERT INTO note_shares (note_id, token, created_by) VALUES (@id, @token, @userId)
-              ON CONFLICT (token) DO UPDATE SET revoked_at = NULL, created_at = now()
+            @"INSERT INTO note_shares (note_id, token, created_by, expires_at)
+              VALUES (@id, @token, @userId, now() + make_interval(hours => @hours))
               RETURNING id, note_id, token, created_by, created_at, expires_at, revoked_at",
-            new { id, token, userId = session.UserId });
+            new { id, token = NewToken(), userId = session.UserId, hours });
         return Results.Json(new { share = ToJson(share) }, statusCode: 201);
     }
 
-    // Lab 3 share link: lists the links (and their tokens) of any note id, no team check.
+    private static async Task<int> ReadLifetimeHoursAsync(HttpContext ctx)
+    {
+        if (ctx.Request.ContentLength is null or 0 || !ctx.Request.HasJsonContentType())
+        {
+            return DefaultLifetimeHours;
+        }
+        var body = await ctx.Request.ReadFromJsonAsync<Dictionary<string, JsonElement>>();
+        return body is not null && body.TryGetValue("expires_in_hours", out var h) && h.TryGetInt32(out int hours)
+            ? Math.Clamp(hours, 1, MaxLifetimeHours)
+            : DefaultLifetimeHours;
+    }
+
+    // Fix: links (and their tokens) are visible only to whoever may manage the note.
     private static async Task<IResult> ListAsync(HttpContext ctx, Database db, int id)
     {
         var session = ApiHelpers.GetSession(ctx);
         if (session is null) return ApiHelpers.Unauthorized();
 
         await using var conn = await db.OpenConnectionAsync();
+        var note = await NotesEndpoints.FindTeamNoteAsync(conn, id, session);
+        if (note is null) return Results.Json(new { error = "not found" }, statusCode: 404);
+        if (!NotesEndpoints.CanModify(note, session)) return Results.Json(new { error = "forbidden" }, statusCode: 403);
+
         var shares = await conn.QueryAsync<ShareRow>(
             "SELECT id, note_id, token, created_by, created_at, expires_at, revoked_at FROM note_shares WHERE note_id = @id ORDER BY id DESC",
             new { id });
         return Results.Json(new { shares = shares.Select(ToJson) });
     }
 
-    // Marks the links as revoked... but ReadSharedAsync never looks at revoked_at (see below).
+    // Fix: same owner/admin check as creating a link; ReadSharedAsync now honours revoked_at.
     private static async Task<IResult> RevokeAsync(HttpContext ctx, Database db, int id)
     {
         var session = ApiHelpers.GetSession(ctx);
         if (session is null) return ApiHelpers.Unauthorized();
 
         await using var conn = await db.OpenConnectionAsync();
+        var note = await NotesEndpoints.FindTeamNoteAsync(conn, id, session);
+        if (note is null) return Results.Json(new { error = "not found" }, statusCode: 404);
+        if (!NotesEndpoints.CanModify(note, session)) return Results.Json(new { error = "forbidden" }, statusCode: 403);
+
         int revoked = await conn.ExecuteAsync(
             "UPDATE note_shares SET revoked_at = now() WHERE note_id = @id AND revoked_at IS NULL", new { id });
         return Results.Json(new { revoked });
     }
 
-    // Public (no session). Lab 3 share link: expires_at / revoked_at are ignored, so a link
-    // works forever once it has been created, even after the author "revokes" it.
+    // Public (no session). Fix: a link works only while it is neither revoked nor expired
+    // (links without an expiry, e.g. created by an older build, count as expired).
     private static async Task<IResult> ReadSharedAsync(Database db, MarkdownRenderer markdown, string token)
     {
         await using var conn = await db.OpenConnectionAsync();
         var note = await conn.QueryFirstOrDefaultAsync<SharedNoteRow>(
             @"SELECT n.title, n.content, n.created_at, s.expires_at
               FROM note_shares s JOIN notes n ON n.id = s.note_id
-              WHERE s.token = @token",
+              WHERE s.token = @token AND s.revoked_at IS NULL AND s.expires_at > now()",
             new { token });
         if (note is null) return Results.Json(new { error = "not found" }, statusCode: 404);
 

@@ -61,12 +61,12 @@ public static class NotesEndpoints
     }
 
     // Object-level authorization: a note is only visible inside its own team (tenant).
-    private static async Task<NoteRow?> FindTeamNoteAsync(Npgsql.NpgsqlConnection conn, int id, Session session) =>
+    internal static async Task<NoteRow?> FindTeamNoteAsync(Npgsql.NpgsqlConnection conn, int id, Session session) =>
         await conn.QueryFirstOrDefaultAsync<NoteRow>(
             "SELECT * FROM notes WHERE id = @id AND team_id = @teamId", new { id, teamId = session.TeamId });
 
     // Only the author or a team admin may change / delete it.
-    private static bool CanModify(NoteRow note, Session session) =>
+    internal static bool CanModify(NoteRow note, Session session) =>
         note.owner_id == session.UserId || session.Role == "admin";
 
     private static async Task<IResult> GetAsync(HttpContext ctx, Database db, int id)
