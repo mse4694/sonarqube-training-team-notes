@@ -1048,3 +1048,15 @@ button:disabled {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ---- Audit log ------------------------------------------------------------ */
+
+.btn:hover {
+  background: var(--surface-muted);
+  border-color: #94a3b8;
+  text-decoration: none;
+}
+
+.table-empty {
+  padding: 20px;
+}

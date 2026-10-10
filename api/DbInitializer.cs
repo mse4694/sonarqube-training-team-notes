@@ -48,6 +48,16 @@ public static class DbInitializer
           revoked_at   TIMESTAMPTZ
         );
         CREATE INDEX IF NOT EXISTS api_keys_prefix_idx ON api_keys (prefix);
+        CREATE TABLE IF NOT EXISTS audit_log (
+          id          SERIAL PRIMARY KEY,
+          at          TIMESTAMPTZ NOT NULL DEFAULT now(),
+          actor_id    INT,
+          actor_email TEXT,
+          action      TEXT NOT NULL,
+          target      TEXT,
+          ip          TEXT,
+          detail      TEXT
+        );
         """;
 
     public static async Task EnsureCreatedAsync(Database db, AuthService auth)

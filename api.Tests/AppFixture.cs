@@ -1,6 +1,8 @@
 using Dapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using TeamNotes.Api;
 using Xunit;
 
@@ -11,12 +13,19 @@ public sealed class AppFixture : WebApplicationFactory<Program>
     public Database Database => Services.GetRequiredService<Database>();
     public AuthService Auth => Services.GetRequiredService<AuthService>();
 
+    /// <summary>Every log line the app writes (for the Lab 7 "no secrets in logs" tests).</summary>
+    public CapturedLogs Logs { get; } = new();
+
+    protected override void ConfigureWebHost(IWebHostBuilder builder) =>
+        builder.ConfigureLogging(logging => logging.AddProvider(Logs));
+
     public async Task ResetDbAsync()
     {
         await using var conn = await Database.OpenConnectionAsync();
         await conn.ExecuteAsync(DbInitializer.SchemaSql);
-        await conn.ExecuteAsync("TRUNCATE api_keys, note_shares, notes, users, teams RESTART IDENTITY CASCADE");
+        await conn.ExecuteAsync("TRUNCATE audit_log, api_keys, note_shares, notes, users, teams RESTART IDENTITY CASCADE");
         await DbInitializer.EnsureCreatedAsync(Database, Auth);
+        Logs.Clear();
     }
 
     public HttpClient NewClient() =>

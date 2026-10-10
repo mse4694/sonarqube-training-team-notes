@@ -33,7 +33,7 @@ public static class ApiKeyEndpoints
         return Results.Json(new { keys = rows.Select(ToJson) });
     }
 
-    private static async Task<IResult> CreateAsync(HttpContext ctx, ApiKeyService keys)
+    private static async Task<IResult> CreateAsync(HttpContext ctx, ApiKeyService keys, ILoggerFactory loggers)
     {
         var session = ApiHelpers.GetSession(ctx);
         if (session is null) return ApiHelpers.Unauthorized();
@@ -45,6 +45,8 @@ public static class ApiKeyEndpoints
         if (name.Length is 0 or > 60) return Results.Json(new { error = "name is required (max 60 chars)" }, statusCode: 400);
 
         var (row, key) = await keys.CreateAsync(session.UserId, name);
+        // Lab 7 logging: the new key itself ends up in the application log.
+        loggers.CreateLogger("TeamNotes.ApiKeys").LogInformation("API key {Key} created for {Email}", key, session.Email);
         return Results.Json(new
         {
             key,
