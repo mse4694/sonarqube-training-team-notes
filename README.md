@@ -177,8 +177,9 @@ SONAR_NET="--network sonarqube-lab_default"     # เฉพาะ local Server (
 # SonarQube Cloud: SONAR_HOST_URL=https://sonarcloud.io , SONAR_ORGANIZATION=<org key> , SONAR_NET=
 # Server อื่น: SONAR_HOST_URL=<URL จริง> , SONAR_NET=
 
-# 1) web coverage (lcov)
-docker run --rm -v "$PWD/web:/web" -w /web node:24-alpine sh -c "npm ci && (npm run test:coverage || true)"
+# 1) web coverage (lcov); node_modules อยู่ใน anonymous volume จึงไม่ทับ node_modules ของเครื่องเรา
+docker run --rm -v "$PWD/web:/web" -v /web/node_modules -w /web node:24-alpine \
+  sh -c "npm ci && (npm run test:coverage || true); chown -R $(id -u):$(id -g) coverage"
 
 # 2) PostgreSQL สำหรับ xUnit
 docker compose -f docker-compose.test.yml up -d test-db
@@ -189,9 +190,11 @@ docker run --rm --network team-notes-test_default $SONAR_NET \
   -e SONAR_TOKEN -e SONAR_HOST_URL -e SONAR_PROJECT_KEY -e SONAR_ORGANIZATION \
   -e DATABASE_URL=postgres://notes:notes@test-db:5432/notes \
   -e SESSION_SECRET=test-session-secret-0123456789-not-the-committed-one \
-  -e ASPNETCORE_ENVIRONMENT=Development -e UPLOADS_DIR=/src/uploads \
+  -e ASPNETCORE_ENVIRONMENT=Development -e UPLOADS_DIR=/src/uploads -e HOST_UID="$(id -u):$(id -g)" \
   mcr.microsoft.com/dotnet/sdk:10.0 bash -c '
     set -e
+    # container รันเป็น root: คืน owner ของไฟล์ที่ build/scan สร้างให้ user เราเมื่อจบ
+    trap "chown -R $HOST_UID /src/api /src/api.Tests /src/.sonarqube 2>/dev/null || true" EXIT
     dotnet tool install --global dotnet-sonarscanner && export PATH="$PATH:$HOME/.dotnet/tools"
     org=(); [ -n "$SONAR_ORGANIZATION" ] && org=(/o:"$SONAR_ORGANIZATION")
     dotnet sonarscanner begin /k:"$SONAR_PROJECT_KEY" "${org[@]}" \
