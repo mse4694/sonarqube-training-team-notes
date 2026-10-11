@@ -6,6 +6,7 @@
 #                SONAR_HOST_URL     (SonarQube Server URL; omit for SonarQube Cloud = https://sonarcloud.io)
 #     Variables: SONAR_PROJECT_KEY  (optional; default "<owner>_<repo>", the key SonarQube Cloud gives imported repos)
 #                SONAR_ORGANIZATION (SonarQube Cloud only; your organization key)
+#                SONAR_BRANCH_ANALYSIS (Server Developer+: "true" to analyze named branches; Cloud automatic)
 #                SONAR_QUALITYGATE_WAIT (optional; "false" = do not fail the job on a red Quality Gate)
 # SONAR_HOST_URL / SONAR_ORGANIZATION may also be set as variables instead of secrets.
 #
@@ -37,8 +38,17 @@ jobs:
       - id: check
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL || vars.SONAR_HOST_URL || 'https://sonarcloud.io' }}
+          SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION || vars.SONAR_ORGANIZATION || '' }}
+          SONAR_BRANCH_ANALYSIS: ${{ vars.SONAR_BRANCH_ANALYSIS || 'false' }}
+          SONAR_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           if [ -n "$SONAR_TOKEN" ]; then
+            if [ -z "$SONAR_ORGANIZATION" ] && [ "$SONAR_HOST_URL" != "https://sonarcloud.io" ] && [ "$SONAR_BRANCH_ANALYSIS" != "true" ] && { [ "$GITHUB_EVENT_NAME" = "pull_request" ] || [ "$GITHUB_REF_NAME" != "$SONAR_DEFAULT_BRANCH" ]; }; then
+              echo "enabled=false" >> "$GITHUB_OUTPUT"
+              echo "::notice title=Branch or PR analysis unavailable::Enable SONAR_BRANCH_ANALYSIS for a Server edition that supports PR analysis. Community Build supports main-branch scans only."
+              exit 0
+            fi
             echo "enabled=true" >> "$GITHUB_OUTPUT"
             echo "SONAR_TOKEN is set: the SonarQube scan will run." >> "$GITHUB_STEP_SUMMARY"
           else
@@ -76,6 +86,10 @@ jobs:
       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL || vars.SONAR_HOST_URL || 'https://sonarcloud.io' }}
       SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION || vars.SONAR_ORGANIZATION || '' }}
       SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY || format('{0}_{1}', github.repository_owner, github.event.repository.name) }}
+      SONAR_BRANCH_ANALYSIS: ${{ vars.SONAR_BRANCH_ANALYSIS || 'false' }}
+      SONAR_PR_NUMBER: ${{ github.event.pull_request.number || '' }}
+      SONAR_PR_HEAD: ${{ github.head_ref }}
+      SONAR_PR_BASE: ${{ github.base_ref }}
       SONAR_QUALITYGATE_WAIT: ${{ vars.SONAR_QUALITYGATE_WAIT || 'true' }}
       # Test-only settings, mirroring docker-compose.test.yml (fake training values, not secrets).
       DATABASE_URL: postgres://notes:notes@localhost:5432/notes
@@ -132,6 +146,15 @@ jobs:
           )
           if [ -n "$SONAR_ORGANIZATION" ]; then
             args+=(/o:"$SONAR_ORGANIZATION")
+          fi
+          # workflow_dispatch is not auto-detected as branch analysis by the scanner.
+          # Explicit scope also keeps PR analysis separate from its source branch.
+          if [ -n "$SONAR_PR_NUMBER" ]; then
+            args+=(/d:sonar.pullrequest.key="$SONAR_PR_NUMBER"
+                   /d:sonar.pullrequest.branch="$SONAR_PR_HEAD"
+                   /d:sonar.pullrequest.base="$SONAR_PR_BASE")
+          elif [ -n "$SONAR_ORGANIZATION" ] || [ "$SONAR_BRANCH_ANALYSIS" = "true" ]; then
+            args+=(/d:sonar.branch.name="$GITHUB_REF_NAME")
           fi
           echo "Project key: $SONAR_PROJECT_KEY  Host: $SONAR_HOST_URL  Organization: ${SONAR_ORGANIZATION:-<none>}"
           dotnet sonarscanner begin "${args[@]}"
