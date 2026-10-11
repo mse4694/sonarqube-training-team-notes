@@ -142,6 +142,7 @@ quality-gate wait. The scanner for .NET is driven by the `begin/end` arguments (
 | `SONAR_HOST_URL` | Secret หรือ Variable | SonarQube Server | เช่น `https://sonarqube.example.com` (ไม่ตั้ง = `https://sonarcloud.io`) |
 | `SONAR_ORGANIZATION` | Variable หรือ Secret | SonarQube Cloud | Organization Key |
 | `SONAR_PROJECT_KEY` | Variable | เมื่อ key ไม่ใช่ `<owner>_<repo>` | เช่น `team-notes` |
+| `SONAR_BRANCH_ANALYSIS` | Variable | Server Developer ขึ้นไป | `true` เพื่อส่งชื่อ branch ชัดเจน (Cloud ส่งให้อัตโนมัติ); Community ไม่ตั้ง |
 | `SONAR_QUALITYGATE_WAIT` | Variable | ไม่บังคับ | `false` = ไม่ให้ job fail เมื่อ Quality Gate แดง (default `true`) |
 
 ห้าม commit token ลงใน repo ใส่เป็น secret เท่านั้น
@@ -149,6 +150,8 @@ quality-gate wait. The scanner for .NET is driven by the `begin/end` arguments (
 ### 4) Run workflow
 
 - push commit ใดก็ได้ไปที่ `main` หรือ `solution` หรือเปิด Pull Request หรือไปที่ **Actions > SonarQube > Run workflow**
+- Server ที่ไม่เปิด `SONAR_BRANCH_ANALYSIS` จะข้ามการ scan ใน PR และ branch ที่ไม่ใช่ default (Community ไม่มี branch/PR analysis); ยัง scan main ผ่าน push/Run workflow ได้
+- workflow ส่งชื่อ branch ชัดเจนสำหรับ Cloud (รวม Run workflow บน `solution`); PR ส่ง key/head/base แยกจาก branch ปกติ
 - workflow จะ `npm ci` + Vitest (lcov) ของ `web`, เปิด PostgreSQL 17 เป็น service container แบบเดียวกับ `docker-compose.test.yml`,
   แล้ว `dotnet sonarscanner begin` > `dotnet build` > `dotnet test` (coverlet OpenCover) > `dotnet sonarscanner end`
 - test ที่ fail บน `main` เป็นความตั้งใจ step test ตั้ง `continue-on-error` ไว้เพื่อให้ scan และ coverage ยังเข้า SonarQube
@@ -162,7 +165,7 @@ quality-gate wait. The scanner for .NET is driven by the `begin/end` arguments (
   **Measures > Coverage** (C# จาก OpenCover, TypeScript จาก lcov)
 - scan ทั้ง `main` และ `solution` แล้วเทียบกัน: Community Build วิเคราะห์ได้แค่ branch เดียวต่อ project
   (branch analysis มีใน Server ตั้งแต่ Developer Edition และใน SonarQube Cloud ตาม plan) ถ้าใช้ไม่ได้ให้แยก project ต่อ branch
-  เช่นตั้ง `SONAR_PROJECT_KEY` เป็น `team-notes-solution` ก่อน run บน `solution`
+  เช่น scan local บน `solution` โดยตั้ง `SONAR_PROJECT_KEY` เป็น `team-notes-solution`; Actions ข้าม non-default branch บน Community เพื่อกันทับผล main
 
 ### Scan แบบ local ด้วย Docker (ไม่ต้องมี CI และไม่ต้องติดตั้ง .NET SDK)
 
