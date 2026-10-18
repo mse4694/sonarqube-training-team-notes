@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Workshop 10, before the AI agent edits anything: record SHA-256 hashes of every
+# file the agent must not change, then self-test the agent-control helper.
+# Later, scripts/voucher-verify checks the same hashes to prove only voucher.py changed.
+set -euo pipefail
+repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
+env_file="$repo_root/.lab-workspaces/voucher.env"
+stop() { echo "Stop: $*" >&2; exit 1; }
+
+[[ -f "$env_file" ]] || stop "$env_file not found; run ./scripts/voucher-workspace first (Workshop 8)"
+# shellcheck source=/dev/null
+source "$env_file"
+[[ -d "${WORKFLOW_DIR:-}" ]] || stop "WORKFLOW_DIR (${WORKFLOW_DIR:-unset}) is missing"
+cd "$WORKFLOW_DIR"
+
+readonly_files=(VoucherControlContract.md tests/test_redemption_contract.py
+  voucher_model.py scenario_support.py probes.py reference/*.py)
+for f in "${readonly_files[@]}"; do [[ -f "$f" ]] || stop "$WORKFLOW_DIR/$f is missing"; done
+
+if [[ -f readonly-inputs.sha256 ]]; then
+  # Re-hashing after the agent ran would hide a change; keep the first record.
+  echo "Keeping the hashes recorded earlier: $WORKFLOW_DIR/readonly-inputs.sha256"
+else
+  sha256sum "${readonly_files[@]}" > readonly-inputs.sha256
+  echo "Recorded read-only hashes: $WORKFLOW_DIR/readonly-inputs.sha256"
+fi
+cat readonly-inputs.sha256
+
+echo "Agent-control helper self-test:"
+"$LAB_TOOLS" python3 "$LAB_PACK_DIR/agent-control/selftest.py"

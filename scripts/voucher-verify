@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Workshop 10, after the AI agent patched voucher.py: the human checks the patch
+# with the frozen tests and hashes, and collects the evidence in a new report folder
+# (.lab-workspaces/voucher-report.XXXXXX, path saved to voucher-report.env).
+set -euo pipefail
+repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
+workspaces="$repo_root/.lab-workspaces"
+stop() { echo "Stop: $*" >&2; exit 1; }
+
+[[ -f "$workspaces/voucher.env" ]] || stop "$workspaces/voucher.env not found; run ./scripts/voucher-workspace first (Workshop 8)"
+# shellcheck source=/dev/null
+source "$workspaces/voucher.env"
+[[ -f "$WORKFLOW_DIR/readonly-inputs.sha256" ]] || stop "no recorded hashes; run ./scripts/voucher-freeze before the agent edits"
+
+REPORT_DIR=$(mktemp -d "$TRAINING_ROOT/.lab-workspaces/voucher-report.XXXXXX")
+cd "$WORKFLOW_DIR"
+# Paths go in as positional arguments: the host environment is not passed into the container.
+# Every check runs even if an earlier one fails, so the report folder is complete either way.
+status=0
+"$LAB_TOOLS" bash -c '
+  set -uo pipefail
+  LAB_PACK_DIR=$1
+  REPORT_DIR=$2
+  failed=0
+  echo "== 1. patch.diff (voucher.py before -> after)"
+  diff -u "$LAB_PACK_DIR/workflow-security/voucher.py" voucher.py > "$REPORT_DIR/patch.diff" || [ "$?" -eq 1 ] || failed=1
+  cat "$REPORT_DIR/patch.diff"
+  echo "== 2. readonly-check.txt (files the agent must not change)"
+  sha256sum -c readonly-inputs.sha256 > "$REPORT_DIR/readonly-check.txt" 2>&1 || failed=1
+  cat "$REPORT_DIR/readonly-check.txt"
+  echo "== 3. tests.log (frozen learner suite)"
+  python3 -m unittest discover -s tests -p test_redemption_contract.py -v > "$REPORT_DIR/tests.log" 2>&1 || failed=1
+  tail -n 4 "$REPORT_DIR/tests.log"
+  echo "== 4. checker.json (suite vs baseline, reference and mutants)"
+  python3 reference/check_contract.py \
+    --learner-tests tests/test_redemption_contract.py --expect-working secure > "$REPORT_DIR/checker.json" || failed=1
+  grep -E "\"(quality_passed|working_expectation_met|overall_passed)\"" "$REPORT_DIR/checker.json"
+  exit "$failed"
+' _ "$LAB_PACK_DIR" "$REPORT_DIR" || status=$?
+
+cp "$LAB_PACK_DIR/workflow-security/voucher.py" "$REPORT_DIR/voucher-before.py"
+cp voucher.py "$REPORT_DIR/voucher-after.py"
+cp readonly-inputs.sha256 "$REPORT_DIR/readonly-inputs.sha256"
+printf 'export REPORT_DIR=%q\n' "$REPORT_DIR" > "$workspaces/voucher-report.env"
+
+echo "Report folder: $REPORT_DIR (saved in .lab-workspaces/voucher-report.env)"
+if (( status )); then
+  echo "Some checks failed: read the files above, fix the cause, then run this script again." >&2
+fi
+exit "$status"
