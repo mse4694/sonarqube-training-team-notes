@@ -272,6 +272,22 @@
     "sha256": "fbdbef7f1e0696135a003de02f7289a6b50813abcbc705086a0712bbdb604587"
   },
   {
+    "path": "course-assets/learner-voucher-patch-report-checks-20261018.avif",
+    "sha256": "c57426335eb2315f6c2afa0a7234e11547f70c58c9b4855909212ea6d605b542"
+  },
+  {
+    "path": "course-assets/learner-voucher-patch-report-top-20261018.avif",
+    "sha256": "213c1f54f00134e7896b036e8841bfd5968807bcc1b1ead21c5635ce3f039046"
+  },
+  {
+    "path": "course-assets/learner-voucher-report-prompt-marked-20261018.avif",
+    "sha256": "308f84aaf1407454ba87b8f18f12ab967ec7502f53b56d6636adab2b1cc59d91"
+  },
+  {
+    "path": "course-assets/learner-voucher-report-response-20261018.avif",
+    "sha256": "60c2bd438c223b939b8ed9cfc801ab0b01cdb7f9e50b6775ab4f7441ff311ba4"
+  },
+  {
     "path": "course-assets/task-1-1-terminal-payload.png",
     "sha256": "38ed5f6eaec3436ccbf1a64ec50b5c2394c58108a5128868afc800582f7cc0c4"
   },
@@ -302,6 +318,62 @@
   {
     "path": "course-assets/task-3-3-terminal-password-probe.png",
     "sha256": "efd93c7abb35867dfebaa28d1b67bc8be597752fe80e2f7d002f2a030c8ca68b"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/AgentExecutionRecord.md",
+    "sha256": "941891c5c1d59ea237d43e0fa279d8a62c00245950f4f6b2a610cb1d49cbba7c"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/README.md",
+    "sha256": "da8c498d8b4107d8b1a12e11c3af55f66db7146ee2c96e86a18238fdcff9081c"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/checker.json",
+    "sha256": "4b2eed97334550899a1f3f061f800814f51650218ab4c3c8bd9cf50c14c65237"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/implementation-request.md",
+    "sha256": "ab184261713f106bd323899df37fe831731323e51a81fe9efb8a0da770c450b5"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/implementation-result.md",
+    "sha256": "829a17290754f312fca7e56afea14775e54a4cdd5c8f74ac0a957b2fe19e72a7"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/input-hashes.json",
+    "sha256": "f4efe7b2a75e63ad985dff1421e240e7f8d3f1cfbd48b3052d830fdebf3bcc7a"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/prompt.txt",
+    "sha256": "146ec771c83d2907d08d86ed6d5b1803cbe93b6c6762dbc5f31889ce5be03c72"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/provenance.json",
+    "sha256": "0b74ffd091929d714e6a37251310121e28678e715a1924cb0014164d14917c3d"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/readonly-inputs.json",
+    "sha256": "99c47df40dabbff8dee52028024af72c1afd6ab57cce9a6a93c534d3fdd8a1f8"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/report.html",
+    "sha256": "ca21eff916fc7248ad18f055eb5e48c5107025b3183999024cd3b97b06fe1c19"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/result.md",
+    "sha256": "01e0f9d868c98dd7b6cd302453a7a39ce9e606ca3d4978c9537bd952f802fe71"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/tests.log",
+    "sha256": "4542d311071e8bc626fb14bd23619cd0c2663524f78e3d33b502cefb9bd41a82"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/voucher-after.py",
+    "sha256": "20cb95ff4f13ee37706a0e5c220b4f294dc789a3b4968680902826623dcdf1e7"
+  },
+  {
+    "path": "course-assets/voucher-patch-report/voucher-before.py",
+    "sha256": "3a28f4141a80b0052b7a489d47aa616e23bbf5a1e2672e3053653cd6e8c964c1"
   },
   {
     "path": "forge_admin_jwt.py",
@@ -386,6 +458,10 @@
   {
     "path": "prompts/voucher-repair-plan.txt",
     "sha256": "d67994cf3f493b82b00ed379c030b7e0ff48a27558932b8c6f064242b787b122"
+  },
+  {
+    "path": "prompts/voucher-report.txt",
+    "sha256": "146ec771c83d2907d08d86ed6d5b1803cbe93b6c6762dbc5f31889ce5be03c72"
   },
   {
     "path": "report-evidence/README.md",

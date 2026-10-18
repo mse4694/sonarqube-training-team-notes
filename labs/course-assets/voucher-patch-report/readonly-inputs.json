@@ -1,0 +1,17 @@
+{
+  "README.md": "4447528e6cea84dcdf011fe9be88ca6dd827d7b24a706a9849c7a93f34f97acb",
+  "audit-result.md": "7a67dba279db5cd0d0b1230a86dcb1ae91b88fbb4972defd5793ef1b7ab0983d",
+  "scenario_support.py": "08e52aa94758bb71e4cb9afa4ba56b14a16d5d83bdfca4fd74979018b01aaa05",
+  "voucher_model.py": "8268a0106003d90f3b8f8fbba444edd3bcff11d26f413356ce7f692484eb2e4c",
+  "probes.py": "7d520212c7a35c046b722397ca51ac8023d250a0249a98a4b830011bcef230ee",
+  "revision-result.md": "ddfee706f2084f0681bc6b30c6f7898e897f9ab6674c71662e87c0e252041f13",
+  "reference/check_contract.py": "34bcddd42da3aa129423985d655f805a315549caab24be2ca1aea4d29fb659a6",
+  "reference/secure_voucher.py": "8fbdca39f88c18c9fd552721fdb4eef2340123ece8503e5178300345d9d548d3",
+  "reference/mutations.py": "312b251a3a32dc9d17228b0d7fb55170cfd9a64183739abc284d465b62fbd753",
+  "reference/contract_tests.py": "c08ad63de401fb8b5b8278a5785ed5f28c3e4c7a9ff2554580662cd6b74b28e9",
+  "reference/__init__.py": "adbbb56b88a59d11fe6d1912dfa47df15b3da5e6acedf929bdf464b17cfcbd8d",
+  "reference/observed_agent_patch.py": "b77e67a31aee848e3c2ee4991f28479b207865657845ea572ab28de87d9b4d0f",
+  "reference/vulnerable_voucher.py": "cfbc961d0314fd05ebf9fddd893f67c48a05a125238824694183383d5a2f88da",
+  "tests/starter.py": "370c94109fc56903595b603c82f7601928be408839bbacf17ae78a065b0d23e9",
+  "tests/test_redemption_contract.py": "62ba5ba228726dc75f2e916c71fe538e13e4214efe4d8b3540d40ab86b8574fe"
+}

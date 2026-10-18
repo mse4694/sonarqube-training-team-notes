@@ -1,0 +1,13 @@
+test_cancelled_voucher_is_rejected (test_redemption_contract.RedemptionContract.test_cancelled_voucher_is_rejected) ... ok
+test_concurrent_redemption_has_one_success (test_redemption_contract.RedemptionContract.test_concurrent_redemption_has_one_success) ... ok
+test_expired_state_is_rejected (test_redemption_contract.RedemptionContract.test_expired_state_is_rejected) ... ok
+test_expiry_deadline_is_rejected (test_redemption_contract.RedemptionContract.test_expiry_deadline_is_rejected) ... ok
+test_issued_voucher_is_rejected (test_redemption_contract.RedemptionContract.test_issued_voucher_is_rejected) ... ok
+test_same_actor_replay_is_rejected (test_redemption_contract.RedemptionContract.test_same_actor_replay_is_rejected) ... ok
+test_unknown_voucher_is_rejected (test_redemption_contract.RedemptionContract.test_unknown_voucher_is_rejected) ... ok
+test_valid_active_voucher_succeeds_once (test_redemption_contract.RedemptionContract.test_valid_active_voucher_succeeds_once) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.005s
+
+OK
