@@ -5,32 +5,43 @@ set -euo pipefail
 repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
 workspaces="$repo_root/.lab-workspaces"
 env_file="$workspaces/voucher.env"
+stop() { echo "Stop: $*; do not replace your work with a fresh fixture." >&2; exit 1; }
 
 if [[ -f "$env_file" ]]; then
   # shellcheck source=/dev/null
   source "$env_file"
-  if [[ ! -d "${WORKFLOW_DIR:-}" ]]; then
-    echo "Stop: $env_file points to a missing WORKFLOW_DIR; do not replace your work with a fresh fixture." >&2
-    exit 1
-  fi
+  [[ -d "${WORKFLOW_DIR:-}" ]] || stop "$env_file points to a missing WORKFLOW_DIR (${WORKFLOW_DIR:-unset})"
   echo "Keeping existing workspace: $WORKFLOW_DIR"
   exit 0
 fi
 
-mkdir -p "$workspaces"
-new_dir=$(mktemp -d "$workspaces/voucher.XXXXXX")
-cleanup() { rm -rf -- "$new_dir"; }
-trap 'cleanup; echo "Stop: could not prepare the workspace; do not replace your work with a fresh fixture." >&2' ERR
+# A workspace without its env file still holds learner work: never start over silently.
+shopt -s nullglob
+orphans=("$workspaces"/voucher.*/)
+if (( ${#orphans[@]} )); then
+  stop "found workspace(s) without $env_file: ${orphans[*]}; restore voucher.env or move them aside first"
+fi
 
 legacy_env="$HOME/.voucher-workflow.env"
+legacy_dir=''
 if [[ -f "$legacy_env" ]]; then
   # Carry over a workspace created by an older version of this lab.
   legacy_dir=$(
+    set +u
     # shellcheck source=/dev/null
     source "$legacy_env"
     printf '%s' "${WORKFLOW_DIR:-}"
   )
-  test -d "$legacy_dir"
+  [[ -d "$legacy_dir" ]] || stop "$legacy_env points to a missing WORKFLOW_DIR (${legacy_dir:-unset})"
+fi
+
+mkdir -p "$workspaces"
+new_dir=$(mktemp -d "$workspaces/voucher.XXXXXX")
+# Remove only the half-made new copy if anything fails or is interrupted.
+trap 'rm -rf -- "$new_dir"; stop "could not prepare the workspace"' ERR
+trap 'rm -rf -- "$new_dir"; exit 130' INT TERM
+
+if [[ -n "$legacy_dir" ]]; then
   cp -a "$legacy_dir/." "$new_dir/"
   echo "Copied existing workspace from $legacy_dir"
 else
@@ -40,5 +51,5 @@ fi
 printf 'export TRAINING_ROOT=%q\nexport LAB_PACK_DIR=%q\nexport LAB_TOOLS=%q\nexport WORKFLOW_DIR=%q\n' \
   "$repo_root" "$repo_root/labs" "$repo_root/scripts/lab-tools" "$new_dir" > "$env_file.tmp"
 mv "$env_file.tmp" "$env_file"
-trap - ERR
+trap - ERR INT TERM
 echo "Created workspace: $new_dir"

@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Prepare the candidate-review workspace that Workshop 11 uses for both activities, once.
+# Writes .lab-workspaces/candidate.env; later runs keep the existing workspace.
+set -euo pipefail
+repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
+workspaces="$repo_root/.lab-workspaces"
+env_file="$workspaces/candidate.env"
+stop() { echo "Stop: $*; do not replace your work with a fresh copy." >&2; exit 1; }
+
+if [[ -f "$env_file" ]]; then
+  # shellcheck source=/dev/null
+  source "$env_file"
+  [[ -d "${REVIEW_DIR:-}" ]] || stop "$env_file points to a missing REVIEW_DIR (${REVIEW_DIR:-unset})"
+  echo "Keeping existing workspace: $REVIEW_DIR"
+  exit 0
+fi
+
+# A workspace without its env file still holds learner work: never start over silently.
+shopt -s nullglob
+orphans=("$workspaces"/candidate-review.*/)
+if (( ${#orphans[@]} )); then
+  stop "found workspace(s) without $env_file: ${orphans[*]}; restore candidate.env or move them aside first"
+fi
+
+mkdir -p "$workspaces"
+new_dir=$(mktemp -d "$workspaces/candidate-review.XXXXXX")
+# Remove only the half-made new copy if anything fails or is interrupted.
+trap 'rm -rf -- "$new_dir"; stop "could not prepare the workspace"' ERR
+trap 'rm -rf -- "$new_dir"; exit 130' INT TERM
+
+cp -a "$repo_root/labs/candidate-review/." "$new_dir/"
+
+printf 'export REVIEW_DIR=%q\n' "$new_dir" > "$env_file.tmp"
+mv "$env_file.tmp" "$env_file"
+trap - ERR INT TERM
+echo "Created workspace: $new_dir"
