@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Prepare the single voucher workspace that Workshops 8-10 share, once.
+# Writes .lab-workspaces/voucher.env; later runs keep the existing workspace.
+set -euo pipefail
+repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
+workspaces="$repo_root/.lab-workspaces"
+env_file="$workspaces/voucher.env"
+
+if [[ -f "$env_file" ]]; then
+  # shellcheck source=/dev/null
+  source "$env_file"
+  if [[ ! -d "${WORKFLOW_DIR:-}" ]]; then
+    echo "Stop: $env_file points to a missing WORKFLOW_DIR; do not replace your work with a fresh fixture." >&2
+    exit 1
+  fi
+  echo "Keeping existing workspace: $WORKFLOW_DIR"
+  exit 0
+fi
+
+mkdir -p "$workspaces"
+new_dir=$(mktemp -d "$workspaces/voucher.XXXXXX")
+cleanup() { rm -rf -- "$new_dir"; }
+trap 'cleanup; echo "Stop: could not prepare the workspace; do not replace your work with a fresh fixture." >&2' ERR
+
+legacy_env="$HOME/.voucher-workflow.env"
+if [[ -f "$legacy_env" ]]; then
+  # Carry over a workspace created by an older version of this lab.
+  legacy_dir=$(
+    # shellcheck source=/dev/null
+    source "$legacy_env"
+    printf '%s' "${WORKFLOW_DIR:-}"
+  )
+  test -d "$legacy_dir"
+  cp -a "$legacy_dir/." "$new_dir/"
+  echo "Copied existing workspace from $legacy_dir"
+else
+  cp -a "$repo_root/labs/workflow-security/." "$new_dir/"
+fi
+
+printf 'export TRAINING_ROOT=%q\nexport LAB_PACK_DIR=%q\nexport LAB_TOOLS=%q\nexport WORKFLOW_DIR=%q\n' \
+  "$repo_root" "$repo_root/labs" "$repo_root/scripts/lab-tools" "$new_dir" > "$env_file.tmp"
+mv "$env_file.tmp" "$env_file"
+trap - ERR
+echo "Created workspace: $new_dir"
