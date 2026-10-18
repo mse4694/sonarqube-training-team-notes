@@ -20,3 +20,8 @@ next-env.d.ts
 
 # OS
 .DS_Store
+.lab-workspaces/
+# Cookie jar produced by the curl lab examples.
+/jar
+# Local output from the PasswordHasher exercise.
+/labs/password-storage/result.json

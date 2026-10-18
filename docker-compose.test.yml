@@ -1,44 +1,80 @@
-# Run the api.Tests xUnit suite against a sibling PostgreSQL on a compose network.
-# No docker-in-docker / Testcontainers needed:
+# รันชุดทดสอบ api.Tests (xUnit) โดยมี PostgreSQL สำหรับ test แยกจากฐานข้อมูลของแอป
+# tests กับ test-db ติดต่อกันผ่าน network ที่ Compose สร้างให้ ไม่ต้องใช้ Testcontainers
+# เริ่มจาก root ของ repo เดิม คำสั่งแรกสร้าง test-db และรัน tests แล้วลบ container ของ tests เมื่อจบ
 #   docker compose -f docker-compose.test.yml run --rm tests
+# คำสั่งนี้เก็บกวาด project ทดสอบ รวม volume cache ของมัน ไม่ใช่ project team-notes ของแอป
 #   docker compose -f docker-compose.test.yml down -v
+# ชื่อ project แยก container/network/volume ชุดนี้ออกจากแอปที่ใช้ชื่อ team-notes
 name: team-notes-test
 
+# services คือรายการ container ที่ทำงานร่วมกันในชุดทดสอบ
 services:
+  # ชื่อ test-db เป็น DNS hostname ที่ container tests ใช้เชื่อมต่อฐานข้อมูล
   test-db:
+    # ใช้ PostgreSQL 17 รุ่น Alpine เพื่อลดขนาด image
     image: postgres:17-alpine
+    # ตัวแปรเหล่านี้ใช้สร้างผู้ใช้และฐานข้อมูลตอนเริ่ม PostgreSQL ครั้งแรก
     environment:
+      # ชื่อผู้ใช้ฐานข้อมูลสำหรับ test เท่านั้น
       POSTGRES_USER: notes
+      # รหัสผ่านของฐานข้อมูลฝึก ไม่ใช่ credential ของระบบจริง
       POSTGRES_PASSWORD: notes
+      # ชื่อฐานข้อมูลที่ชุดทดสอบจะเชื่อมต่อ
       POSTGRES_DB: notes
+    # ตรวจว่าฐานข้อมูลรับ connection ได้แล้ว ก่อนอนุญาตให้ tests เริ่ม
     healthcheck:
+      # CMD-SHELL รันคำสั่งผ่าน shell; pg_isready ตรวจความพร้อมของ PostgreSQL
       test: ["CMD-SHELL", "pg_isready -U notes -d notes"]
+      # ตรวจซ้ำทุก 3 วินาที
       interval: 3s
+      # แต่ละครั้งรอผลได้ไม่เกิน 3 วินาที
       timeout: 3s
+      # ยอมให้ตรวจไม่ผ่านได้ 20 ครั้งก่อนถือว่า unhealthy
       retries: 20
+    # จำกัดหน่วยความจำของ container ฐานข้อมูลทดสอบ
     mem_limit: 256m
 
+  # container นี้มี .NET SDK และเป็นผู้รัน dotnet test
   tests:
+    # SDK ใช้ restore/build/test ได้ครบ จึงไม่ต้องลง .NET SDK บนเครื่องผู้เรียน
     image: mcr.microsoft.com/dotnet/sdk:10.0
+    # ให้คำสั่งทั้งหมดเริ่มจากโฟลเดอร์ /src ภายใน container
     working_dir: /src
+    # การตั้งค่าที่แอปและ test fixture อ่านระหว่างรัน
     environment:
+      # ใช้ชื่อ service test-db และ port ภายใน 5432 ไม่ใช่ localhost ของเครื่องผู้เรียน
       DATABASE_URL: postgres://notes:notes@test-db:5432/notes
-      # Needed by the `solution` branch (secrets come from env); harmless on `main`.
+      # secret ฝึกสำหรับ branch solution ซึ่งอ่านจาก env; main ไม่ได้ใช้ค่านี้แทน secret เดิม
       SESSION_SECRET: test-session-secret-0123456789-not-the-committed-one
+      # เลือก environment สำหรับการทดสอบตาม fixture ของโปรเจกต์
       ASPNETCORE_ENVIRONMENT: Development
+      # ตำแหน่งไฟล์ upload ที่ tests ใช้ ภายใต้ repo ที่ mount เข้ามา
       UPLOADS_DIR: /src/uploads
+      # เก็บ package ที่ restore ไว้ใน volume cache /nuget
       NUGET_PACKAGES: /nuget
+    # จับคู่โฟลเดอร์/volume ฝั่งเครื่องกับตำแหน่งภายใน container
     volumes:
+      # mount repo ปัจจุบันที่ /src แบบอ่าน/เขียน; ผล build และ coverage จึงออกมาที่ repo ได้
       - ./:/src
+      # ใช้ named volume เก็บ NuGet cache ข้ามการรัน ลดเวลาการดาวน์โหลดซ้ำ
       - nuget:/nuget
+    # รอ test-db healthy ก่อนเริ่มคำสั่ง ไม่ใช่เพียงรอให้ container ถูกสร้าง
     depends_on:
       test-db:
         condition: service_healthy
+    # จำกัด RAM ของ container ที่ build และรัน tests
     mem_limit: 2g
+    # > รวมบรรทัดด้านล่างเป็นคำสั่งเดียว; bash -lc เปิด shell เพื่อรัน dotnet test
+    # api.Tests/Api.Tests.csproj = project ทดสอบ, -c Release = build แบบ Release
+    # --collect = เก็บ code coverage; --settings = ใช้กติกาใน coverlet.runsettings
+    # --results-directory = เขียนผลที่ /src/coverage ซึ่งกลับมาอยู่ใน repo ฝั่งผู้เรียน
+    # --logger = แสดง log บน terminal ที่ระดับ normal
     command: >
       bash -lc "dotnet test api.Tests/Api.Tests.csproj -c Release
       --collect:'XPlat Code Coverage' --settings api.Tests/coverlet.runsettings
       --results-directory /src/coverage --logger 'console;verbosity=normal'"
 
+# ประกาศ named volume ที่ services อ้างถึง ไม่ใช่ bind mount ไปยัง path บนเครื่อง
 volumes:
+  # {} ใช้การตั้งค่า volume มาตรฐานของ Docker; ชื่อจริงมี prefix team-notes-test
   nuget: {}

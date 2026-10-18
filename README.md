@@ -6,6 +6,19 @@ data in **PostgreSQL** (raw SQL via Npgsql + Dapper, Markdown via Markdig). Ever
 
 > ⚠️ Every vulnerability here is intentional and every secret is **fake**. Do not deploy this.
 
+## Quick access: test accounts
+
+These public credentials are for the training project. They are also the defaults when starting a fresh test database/pgAdmin volume.
+
+| Login page | Email / username | Password |
+| --- | --- | --- |
+| Team Notes member: `http://localhost:3000/login` | `a@alpha.test` | `alpha-pass-123` |
+| Team Notes second team | `b@beta.test` | `beta-pass-123` |
+| Team Notes admin: same `/login` page, then `/admin` | `admin@alpha.test` | `admin-pass-123` |
+| **pgAdmin: `http://localhost:5050`** | **`admin@team-notes.test`** | **`pgadmin-pass-123`** |
+
+After pgAdmin login, open **Training → Team Notes**. Its PostgreSQL password is **`notes`** (database/user: `notes`, host: `db`, port: `5432`). The pgAdmin login and PostgreSQL login are different accounts. See [test account roles](#test-accounts) and [pgAdmin details](#pgadmin-เปิดดูฐานข้อมูลของ-team-notes) below.
+
 ## Branches & tags
 
 ตัวอย่างเอกสารประกอบหัวข้อ Secure Design & Threat Modeling: [Architecture Decision Records](docs/adr/README.md). ADR-0001 เป็นข้อเสนอเรื่อง team isolation ที่อิง source จริง; ยังไม่ได้แก้ baseline หรือรับรองผล security tests
@@ -53,6 +66,7 @@ The copied defaults start the `main` training app without further configuration:
 | Web | http://localhost:3000/login |
 | API health | http://localhost:8080/health |
 | PostgreSQL from the host | localhost:5433 |
+| pgAdmin web UI | http://localhost:5050 |
 
 Wait for the API and web build/startup to finish before logging in. Confirm readiness with:
 
@@ -63,21 +77,79 @@ curl --fail --silent --show-error --retry 30 --retry-delay 1 --retry-all-errors 
   http://127.0.0.1:3000/login > /dev/null
 ```
 
-Compose reads `DATABASE_URL`, `API_INTERNAL_URL`, `WEB_PORT`, `API_PORT` and `POSTGRES_PORT` from `.env`. The API's default database URL uses the Compose service name `db`; do not replace it with `localhost` for the bundled database. Change the three published ports if they are already occupied. `API_INTERNAL_URL` is used by the web image at build time as well as runtime, so rebuild with `docker compose up -d --build` after changing it. These HTTP ports bind to loopback only.
+Compose reads `DATABASE_URL`, `API_INTERNAL_URL`, `WEB_PORT`, `API_PORT`, `POSTGRES_PORT`, `PGADMIN_PORT`, `PGADMIN_DEFAULT_EMAIL` and `PGADMIN_DEFAULT_PASSWORD` from `.env`. The API's default database URL uses the Compose service name `db`; do not replace it with `localhost` for the bundled database. Change the published ports if they are already occupied. `API_INTERNAL_URL` is used by the web image at build time as well as runtime, so rebuild with `docker compose up -d --build` after changing it. These HTTP ports bind to loopback only.
 
-The web VS Code editor is sandboxed and may expose a Docker CLI without access to a Docker daemon. Run the commands on the machine that owns Docker; do not expose a host Docker socket just to run the editor. The repository and these commands are the same for a local clone.
+In the course's managed VS Code environment, select the isolated Docker sandbox before running the same Compose commands:
+
+```bash
+docker context use vscode-sandbox
+docker ps
+```
+
+This context connects to a private Docker daemon in an unprivileged LXC sandbox, separate from the VM's Docker daemon. A local clone can use its normal Docker context. Do not mount the VM's Docker socket into the editor.
 
 The seeded password hashes differ between `main` (MD5) and `solution` (PBKDF2).
 Use a separate Compose project/volume when comparing branches so existing work is retained.
 `docker compose down -v` deliberately deletes the current training database; use it only when you intend to reset that data.
 
-Training logins (all teams):
+## Test accounts
 
-| Email | Password | Team | Role |
-|---|---|---|---|
-| `a@alpha.test` | `alpha-pass-123` | alpha | member |
-| `b@beta.test` | `beta-pass-123` | beta | member |
-| `admin@alpha.test` | `admin-pass-123` | alpha | admin |
+Open `/login` in the running Team Notes app. These are deliberately public **training credentials**, created by [`api/DbInitializer.cs`](api/DbInitializer.cs) for the test database:
+
+| Account | Email / username | Password | Team | Role | Use in the labs |
+|---|---|---|---|---|---|
+| User A | `a@alpha.test` | `alpha-pass-123` | alpha | member | Normal member flow and reading alpha-team notes |
+| User B | `b@beta.test` | `beta-pass-123` | beta | member | Compare access from another team |
+| Admin | `admin@alpha.test` | `admin-pass-123` | alpha | admin | Open `/admin` and `/admin/audit` |
+
+The same three login credentials apply to `main` and `solution`; each branch stores its own password-hash format. Existing database data is preserved when Compose restarts. If a test account's password was changed, these defaults do not overwrite it. Use the password from that test run or restore the intended training database.
+
+Use these accounts only for this test project. Do not reuse these passwords in a real application.
+
+## Run lab commands through Docker
+
+Use the terminal in this existing checkout for Git and Docker commands. Run the
+lab's .NET, Python, Node.js and curl commands with the shared tools container:
+
+```bash
+./scripts/lab-tools dotnet --version
+./scripts/lab-tools python3 --version
+./scripts/lab-tools node --version
+./scripts/lab-tools curl --fail http://127.0.0.1:8080/health
+```
+
+The wrapper builds the tools image only when it is missing, then starts one
+persistent `lab-tools` container. Later commands reuse the running container
+with `exec` without rebuilding or starting it again. It preserves the checkout's
+absolute path/current directory and runs each command as the checkout owner.
+The existing API must be running; its network namespace keeps the
+lab's `127.0.0.1:8080` API URL usable from the tools container. A curl request to
+the web service from this container uses `http://web:3000`; the browser still
+uses the normal web URL. If Compose recreates the API, the next wrapper call
+recreates the tools container so it joins the current API's network namespace.
+A tools container started directly with a different workspace mount is also
+recreated to match the wrapper's checkout path before executing your command.
+An API stopped during startup produces an error; restore the app and retry.
+
+After changing the tools Dockerfile or entrypoint, explicitly rebuild and replace
+the tools container from the checkout root (this does not rebuild the app):
+
+```bash
+export LAB_REPO_DIR="$(pwd -P)"
+docker compose build lab-tools
+docker compose up -d --no-deps --no-build --force-recreate lab-tools
+```
+
+Use `docker compose stop lab-tools` to stop the idle tools container; the next
+wrapper command starts it again. Keep durable work inside the checkout or the
+NuGet cache volume, since recreating the container discards its writable layer.
+
+NuGet packages use a cache volume. Generated files belong to the mounted
+checkout's owner, and stdout contains only the requested command's output, so
+redirections such as `> result.json` work. No host .NET/Python/Node installation
+is required. Day 2 scratch work belongs in `.lab-workspaces/` inside the checkout
+so Docker can see it; that directory is ignored by Git. AI client applications
+and the Docker CLI run from the learner's terminal, not inside this tools image.
 
 ## Tests
 
@@ -88,8 +160,8 @@ docker compose -f docker-compose.test.yml down -v
 # only one lab, e.g. the share-link tests:
 docker compose -f docker-compose.test.yml run --rm tests \
   dotnet test api.Tests/Api.Tests.csproj --filter "FullyQualifiedName~Lab3ShareLink"
-# Web helper + XSS tests (Vitest):
-cd web && npm ci && npm test
+# Web helper + XSS tests (Vitest) in the reusable tools container:
+./scripts/lab-tools bash -c 'cd web && npm ci && npm test'
 ```
 
 On `main` the exploit-regression tests fail (the vulnerabilities are present); on `solution` they all pass.
@@ -306,3 +378,35 @@ curl -s -b "session=$TOKEN" -H 'content-type: application/json' -d '{"title":' h
 ## Course lab sources
 
 The course examples are included under [`labs/`](labs/README.md), covering the password probe, voucher workflow, Agent controls, candidate review and security-tool fixtures. Use the existing Team Notes checkout; no separate lab ZIP download is needed. See the directory READMEs for the one-time disposable workspace and the learner/instructor boundaries.
+
+
+## pgAdmin: เปิดดูฐานข้อมูลของ Team Notes
+
+Compose มี pgAdmin 4 แยกเป็น service `pgadmin` ใช้ official image `dpage/pgadmin4:9.18` ที่ pin ทั้ง version และ multi-platform digest ไว้ใน Compose ดู [official container documentation](https://www.pgadmin.org/docs/pgadmin4/9.18/container_deployment.html)
+
+ใช้ Docker context เดิมของโปรเจกต์ (ใน managed VS Code คือ `vscode-sandbox`) แล้วรันจาก root ของ repository:
+
+```bash
+docker compose config --quiet
+docker compose up -d pgadmin
+docker compose ps pgadmin
+```
+
+เมื่อใช้ Docker บนเครื่องของตนเอง เปิด `http://localhost:5050` ค่า port เปลี่ยนได้ด้วย `PGADMIN_PORT` และ bind เฉพาะ loopback ใน managed environment loopback นี้อยู่ใน **LXC ของ Docker daemon**; การเปิดจาก browser ต้องผ่าน owner preview/relay สำหรับ port 5050 ที่ผู้ดูแลเตรียมให้ ไม่เปลี่ยนไปใช้ Docker daemon หรือ socket ของ VM เพื่อเลี่ยงเส้นทางนี้
+
+| รายการ | ค่าตัวอย่างสำหรับแอปฝึก |
+| --- | --- |
+| pgAdmin login email | `admin@team-notes.test` |
+| pgAdmin login password | `pgadmin-pass-123` |
+| Server ที่ register ให้อัตโนมัติ | `Training > Team Notes` |
+| PostgreSQL host / port ภายใน Compose | `db` / `5432` |
+| Database / username | `notes` / `notes` |
+| PostgreSQL password เมื่อกดเชื่อมต่อ | `notes` |
+
+บัญชี pgAdmin ใช้เข้าหน้าเครื่องมือ ไม่ใช่บัญชี Team Notes และไม่ใช่ PostgreSQL user เมื่อคลิก server `Team Notes` ให้กรอก PostgreSQL password ของฐานข้อมูลฝึก ค่าข้างต้นเป็น **fake training credentials** เท่านั้น หากฐานข้อมูลเดิมเปลี่ยน password แล้วให้ใช้ค่าของฐานข้อมูลนั้น
+
+ค่า default อยู่ใน `.env.example` และ Compose fallback จึงไม่ต้องเขียนทับ `.env` เดิม เพิ่มหรือปรับเฉพาะ `PGADMIN_PORT`, `PGADMIN_DEFAULT_EMAIL`, `PGADMIN_DEFAULT_PASSWORD` ตามต้องการ ค่า `PGADMIN_CONFIG_ALLOW_SPECIAL_EMAIL_DOMAINS` อนุญาตเฉพาะ `.test` เพื่อให้บัญชีตัวอย่างเริ่มระบบได้ และปิด Postfix เพราะไม่ใช้บริการอีเมลในโจทย์นี้
+
+[pgadmin/servers.json](pgadmin/servers.json) mount แบบ read-only และเก็บเฉพาะ host/database/user ไม่เก็บ password รายการ server จะ import ตอนสร้าง configuration database ของ pgAdmin ครั้งแรกตาม [official server-import behavior](https://www.pgadmin.org/docs/pgadmin4/9.18/container_deployment.html#mapped-files-and-directories) หากมี volume เดิม การแก้ไฟล์หรือ default login จะไม่ reset บัญชี/รายการเดิม ให้แก้หรือ import ผ่าน UI โดยตั้งใจ ไม่ลบ volume ของ PostgreSQL เพื่อแก้การ login pgAdmin
+
+Volume `pgadmin-data` เก็บบัญชี การตั้งค่า และ session ของ pgAdmin แยกจาก `pgdata` ที่เก็บฐานข้อมูลแอป ไม่มีการ mount Docker socket หรือเพิ่มสิทธิ์ privileged ให้ pgAdmin และไม่ได้เพิ่มหน้าใหม่เข้า Team Notes UI

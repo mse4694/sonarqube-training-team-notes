@@ -2,28 +2,38 @@
 
 This standalone console demonstrates password-storage behavior in memory. It does not edit Team Notes, open a DB, reset seed data, start a server, or change the vulnerable `main` baseline needed by later Day1 labs.
 
-Prepare .NET10 SDK once before Day 1 Workshop 3, or use the Docker SDK alternative. The project uses the ASP.NET Core shared-framework reference supplied with the SDK, without a separate NuGet PackageReference. Record the loaded framework/Identity version from the output.
+Use the existing Team Notes checkout and its running API. Run the .NET SDK through
+`./scripts/lab-tools`; no host SDK installation or separate Docker command is
+needed. The wrapper provides a writable HOME and matches the checkout owner's
+UID/GID. The probe uses the ASP.NET Core shared-framework reference supplied
+with the SDK, without a separate NuGet PackageReference. Record the loaded
+framework/Identity version from its output.
 
-## Run from this example directory
+## Run from the existing checkout
+
+Start in a terminal anywhere inside the same Team Notes repository. The first
+command returns to its root; the inner shell changes only the tools process to
+`labs/password-storage`, leaving your terminal at the checkout root:
 
 ```bash
-dotnet --version
-dotnet restore Probe.csproj --ignore-failed-sources
-dotnet build Probe.csproj -c Release --no-restore
-dotnet bin/Release/net10.0/Probe.dll > result.json
+# Start inside the existing Team Notes checkout.
+cd "$(git rev-parse --show-toplevel)"
+./scripts/lab-tools bash -c '
+  set -eu
+  cd labs/password-storage
+  dotnet --version >&2
+  dotnet restore Probe.csproj --ignore-failed-sources >&2
+  dotnet build Probe.csproj -c Release --no-restore >&2
+  dotnet bin/Release/net10.0/Probe.dll > result.json
+'
 ```
 
-Docker alternative, with only this example directory mounted:
-
-```bash
-docker run --rm --network none --user "$(id -u):$(id -g)" \
-  -e DOTNET_CLI_TELEMETRY_OPTOUT=1 -e DOTNET_NOLOGO=1 -e DOTNET_CLI_HOME=/tmp \
-  -v "$PWD:/work" -w /work mcr.microsoft.com/dotnet/sdk:10.0 \
-  sh -c 'set -e; dotnet restore Probe.csproj --ignore-failed-sources >/dev/null; dotnet build Probe.csproj -c Release --no-restore >/dev/null; dotnet bin/Release/net10.0/Probe.dll' \
-  > result.json
-```
-
-The SDK image must be available before running the network-disabled command. Setup/build errors are not password-test results. The source lives at `labs/password-storage` in the existing Team Notes repository. Run within this standalone example directory; its build outputs stay here and the application and database remain unchanged.
+Open `labs/password-storage/result.json` in that checkout and read all seven
+checks. Restore/build diagnostics stay on stderr; the file contains the probe's
+JSON. Setup/build errors are not password-test results. The shared tools
+container uses the existing API's network namespace, but this probe does not
+call the API, open a database, or change Team Notes source/seed data. Keep the
+app and previous lab work; do not clone, reset or switch branches for this probe.
 
 ## Expected result
 

@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+lab_root="${LAB_WORKSPACE:?LAB_WORKSPACE is required}"
+lab_uid="$(stat -c %u -- "$lab_root")"
+lab_gid="$(stat -c %g -- "$lab_root")"
+lab_home="/tmp/lab-home-$lab_uid"
+install -d -m 700 -o "$lab_uid" -g "$lab_gid" "$lab_home"
+install -d -m 755 -o "$lab_uid" -g "$lab_gid" /nuget
+export HOME="$lab_home"
+umask 022
+# Match the mounted checkout's owner rather than creating root-owned output
+# on local Docker hosts. The LXC guest may legitimately own it as UID0.
+exec setpriv --no-new-privs --reuid "$lab_uid" --regid "$lab_gid" --clear-groups -- "$@"
