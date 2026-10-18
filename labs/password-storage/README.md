@@ -28,9 +28,25 @@ cd "$(git rev-parse --show-toplevel)"
 '
 ```
 
-Open `labs/password-storage/result.json` in that checkout and read all seven
-checks. Restore/build diagnostics stay on stderr; the file contains the probe's
-JSON. Setup/build errors are not password-test results. The shared tools
+The build log is not the probe result. `> result.json` saves the JSON to a file,
+so `Build succeeded` alone does not show whether the seven checks passed.
+Display the existing result through the same Docker tools container (no rebuild):
+
+```bash
+# รันที่ root ของ Team Notes checkout เดิม
+cd "$(git rev-parse --show-toplevel)"
+./scripts/lab-tools jq '{framework,identityAssemblyVersion,compatibilityMode,oldIterations,currentIterations,passedCount,totalCount,passed}' labs/password-storage/result.json
+./scripts/lab-tools jq -r '.checks[] | (if .Passed then "[PASS] " else "[FAIL] " end) + .Name + " => " + .Observed' labs/password-storage/result.json
+```
+
+The summary should contain `passedCount: 7`, `totalCount: 7`, `passed: true`,
+followed by seven `[PASS]` lines. The filter uses the actual case-sensitive
+fields `Name`, `Observed` and `Passed`; a failing check displays `[FAIL]`.
+`Failed` as an observed result for a wrong password is correct when the check
+expected rejection. The SDK version printed during build and the runtime
+`framework` in this JSON are different values and can differ from the reference
+screenshot. You can also open `labs/password-storage/result.json` in the editor.
+Restore/build diagnostics stay on stderr; the file contains only the probe JSON. Setup/build errors are not password-test results. The shared tools
 container uses the existing API's network namespace, but this probe does not
 call the API, open a database, or change Team Notes source/seed data. Keep the
 app and previous lab work; do not clone, reset or switch branches for this probe.
