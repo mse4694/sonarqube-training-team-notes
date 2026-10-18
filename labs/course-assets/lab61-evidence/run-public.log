@@ -1,0 +1,20 @@
+# SQLi fix: main-derived copy; only SearchAsync changed.
+$ # Original assertions: 3 SQLi tests + 6 HappyPath tests.
+$ export COMPOSE_PROJECT_NAME=sonarqube-lab61-proof-20261018
+$ set -o pipefail
+$ git diff --stat
+ api/Endpoints/NotesEndpoints.cs | 16 +++++-----------
+ 1 file changed, 5 insertions(+), 11 deletions(-)
+$ # Display test summary only; omit application logs containing training tokens.
+$ docker compose -f docker-compose.test.yml run --rm tests \
+>   bash -lc "dotnet test api.Tests/Api.Tests.csproj -c Release --filter 'FullyQualifiedName~Lab2SqlInjectionTests|FullyQualifiedName~HappyPath' " \
+>   2>&1 | grep -E 'Api.Tests ->|Test run for|Starting test execution|A total of|Passed!|Failed!|Test summary:|Build succeeded|Build FAILED'
+  Api.Tests -> /src/api.Tests/bin/Release/net10.0/Api.Tests.dll
+Test run for /src/api.Tests/bin/Release/net10.0/Api.Tests.dll (.NETCoreApp,Version=v10.0)
+A total of 1 test files matched the specified pattern.
+Passed!  - Failed:     0, Passed:     9, Skipped:     0, Total:     9, Duration: 379 ms - Api.Tests.dll (net10.0)
+$ test_status=$?; printf "Test command exit status: %s\n" "$test_status"
+Test command exit status: 0
+$ git diff --exit-code -- api.Tests; printf "Unchanged test files, diff exit status: %s\n" "$?"
+Unchanged test files, diff exit status: 0
+$ 

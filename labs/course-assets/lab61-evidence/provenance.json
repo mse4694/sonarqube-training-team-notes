@@ -1,0 +1,49 @@
+{
+  "baseCommit": "50112509d4b71d17ee6e6d2d3bc49eebd55b7a22",
+  "baseBranch": "main",
+  "composeProject": "sonarqube-lab61-proof-20261018",
+  "files": {
+    "api/Endpoints/NotesEndpoints.cs": "c52ba41ea4bb6abcc05458aff3e78f6a942c9ed9d2344d74d954bd6008edcf8a",
+    "api.Tests/Security/Lab2Tests.cs": "cce8aa9272ef2a9901153d11d9478bca8eb45369f572994bcd5b27ed0330aed7",
+    "api.Tests/HappyPath/HappyPathTests.cs": "cd2186605535dc423f879bd59e0c016794d7f161d73f2880609ee0ab94b7633a",
+    "api.Tests/Api.Tests.csproj": "2f169caba93f0a080cfe276a92f56d1cf9fe02f9ae23f0011f7cc9fa5c28e739",
+    "docker-compose.test.yml": "58acbb404380224697579996bfb6706400968e71447347190091c2cd7b6d6ee4"
+  },
+  "capturedAt": "2026-10-18T10:05:37.548543+00:00",
+  "runtime": "Docker29.6.1 in unprivileged LXC editor sidecar; not host Docker",
+  "baseCommand": "docker compose -f docker-compose.test.yml run --rm tests bash -lc \"dotnet test api.Tests/Api.Tests.csproj -c Release --filter 'FullyQualifiedName~Lab2SqlInjectionTests|FullyQualifiedName~HappyPath'\"",
+  "displayFilter": "2>&1 | grep -E 'Api.Tests ->|Test run for|Starting test execution|A total of|Passed!|Failed!|Test summary:|Build succeeded|Build FAILED'",
+  "pipefail": true,
+  "onlySourceChange": "api/Endpoints/NotesEndpoints.cs SearchAsync query block",
+  "unchangedTests": {
+    "api.Tests/Security/Lab2Tests.cs": {
+      "sha256": "cce8aa9272ef2a9901153d11d9478bca8eb45369f572994bcd5b27ed0330aed7",
+      "matchesBase": true
+    },
+    "api.Tests/HappyPath/HappyPathTests.cs": {
+      "sha256": "cd2186605535dc423f879bd59e0c016794d7f161d73f2880609ee0ab94b7633a",
+      "matchesBase": true
+    }
+  },
+  "result": {
+    "total": 9,
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "exitCode": 0,
+    "durationMs": 379
+  },
+  "capture": "Native xterm on Xvfb, ffmpeg x11grab1876x814; no synthetic terminal or raster text rewriting",
+  "rawLog": "First unfiltered run includes training tokens; private only, not included in publication",
+  "testCases": {
+    "SQLi": 3,
+    "HappyPath": 6
+  },
+  "assetSha256": "33b7971e5dc91d51b9073abcee3c7f45a445d13f3ef62a78b89398a80f56b8ac",
+  "cleanup": {
+    "composeProjectRemoved": "sonarqube-lab61-proof-20261018",
+    "worktreeRemoved": true,
+    "temporaryBranchCreated": false,
+    "captureDisplayStopped": true
+  }
+}

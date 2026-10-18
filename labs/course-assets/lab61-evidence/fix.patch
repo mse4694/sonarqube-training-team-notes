@@ -1,0 +1,28 @@
+diff --git a/api/Endpoints/NotesEndpoints.cs b/api/Endpoints/NotesEndpoints.cs
+index 59d4f27..796068e 100644
+--- a/api/Endpoints/NotesEndpoints.cs
++++ b/api/Endpoints/NotesEndpoints.cs
+@@ -53,18 +53,12 @@ public static class NotesEndpoints
+         if (session is null) return ApiHelpers.Unauthorized();
+ 
+         string q = ctx.Request.Query["q"].ToString();
+-        string sql =
+-            $"SELECT id, title, team_id FROM notes WHERE team_id = {session.TeamId} " +
+-            $"AND (title ILIKE '%{q}%' OR content ILIKE '%{q}%') ORDER BY id";
+-
+         await using var conn = await db.OpenConnectionAsync();
+-        await using var cmd = new NpgsqlCommand(sql, conn);
+-        await using var reader = await cmd.ExecuteReaderAsync();
+-        var results = new List<object>();
+-        while (await reader.ReadAsync())
+-        {
+-            results.Add(new { id = reader.GetInt32(0), title = reader.GetString(1), team_id = reader.GetInt32(2) });
+-        }
++        var results = await conn.QueryAsync<SearchRow>(
++            @"SELECT id, title, team_id FROM notes
++              WHERE team_id = @teamId AND (title ILIKE '%' || @q || '%' OR content ILIKE '%' || @q || '%')
++              ORDER BY id",
++            new { teamId = session.TeamId, q });
+         return Results.Json(new { results });
+     }
+ 
