@@ -1,0 +1,11 @@
+Continue in the same WORKFLOW_DIR with the final frozen learner-authored test suite and its recorded identity.
+Read VoucherControlContract.md, voucher.py, voucher_model.py,
+scenario_support.py, and tests/test_redemption_contract.py.
+Expected SHA256 of the frozen learner test file: <LEARNER_RECORDED_TEST_SHA256>
+The human must replace this placeholder with the previously recorded hash and confirm the file matches before approving edits. Do not change the recorded hash to fit a different file.
+The human has approved the preceding plan: require active/unexpired/unused state; keep the checkpoint outside the lock; recheck, consume, and append the event atomically under one lock.
+Implement that plan in voucher.py only. Preserve the public API and checkpoint.
+Do not read reference/, modify tests/model/helpers/contract, or run tests.
+The human will verify hashes, review the actual diff, and execute the unchanged suite.
+Record the actual control status. Use manual_review/native_not_tested only when no native adapter was available and the human approved manual review. Do not claim a native block without an observed tool event. If an installed native control failed, stop and request human repair or a read-only diff workflow with human application.
+Return a concise plan confirmation, the changed file, and the untested scope.

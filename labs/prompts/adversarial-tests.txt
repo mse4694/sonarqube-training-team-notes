@@ -1,0 +1,12 @@
+Perform adversarial security testing of the one-time voucher in the existing WORKFLOW_DIR.
+Read VoucherControlContract.md, voucher.py, voucher_model.py, scenario_support.py, probes.py, and tests/test_redemption_contract.py.
+Edit only tests/test_redemption_contract.py. Do not modify the engine, model, helpers, or contract, and do not read or copy reference/.
+Keep the two existing tests, implement the six TODO tests, and remove their six skips so all eight tests execute:
+- Cover same-actor replay, issued state, cancelled state, explicitly expired state, the exact expiry deadline, and concurrent redemption.
+- Use a fresh service for each test with NOW=10 and EXPIRES_AT=100. Explicitly expired state must be rejected even when its timestamp is still in the future.
+- Assert the result, receipt, state, and event count against INV1-INV6. Rejection must not add a receipt or event.
+- For the race, use concurrent_observation(self.SERVICE_TYPE). Require checkpoint_calls=2, no worker errors or unfinished workers, and exactly one success and one event. Do not require a particular winner.
+- Do not add skips or expectedFailure, weaken expectations to match the vulnerable engine, or use sleeps as race evidence.
+Run unittest discovery against the unchanged vulnerable working engine and explain which invariant each assertion failure violates.
+Return the test diff, test-to-invariant mapping, and actual executed/pass/fail/skip/error counts.
+Do not patch voucher.py to make the tests pass, and do not run the instructor reference checker on the human's behalf.

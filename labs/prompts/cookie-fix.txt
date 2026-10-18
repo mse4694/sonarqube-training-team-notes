@@ -1,0 +1,6 @@
+Human approved the preceding plan and one-file write scope.
+Fix api/Endpoints/AuthEndpoints.cs only so Day1CookieFlagTests passes.
+Keep the session guard, redirects and login contract; do not change tests.
+Do not hard-code test-only bypasses or change rules/issue status.
+Do not run tests/scans; the human will run the existing regression test.
+Report changed lines and explicitly state post_patch_not_analyzed.

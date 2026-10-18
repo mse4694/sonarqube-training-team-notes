@@ -1,0 +1,10 @@
+Read README.md, evidence.json, source-identity.json, AuthEndpoints.sonar.cs.txt,
+AuthEndpoints.learner-baseline.cs.txt and source-comparison.diff under labs/sonarcloud-issue/.
+Then inspect api/Endpoints/AuthEndpoints.cs and api.Tests/Security/Day1AuthTests.cs.
+Use only the exported SonarCloud evidence and local source; do not connect to SonarCloud or MCP.
+Trace S3330 from the recorded finding to the session cookie and explain its impact.
+The analyzed SCM SHA is unknown. Reconcile the reported and local code locations;
+do not claim that a matching cookie block proves the whole file, build or deployment matches.
+Propose a narrow patch and regression check that preserve the current login/local HTTP contract.
+Separate tool claims, source facts and unknowns. Do not edit or run tests/scans/network yet.
+Keep the plan concise. Any later local patch is post_patch_not_analyzed by SonarCloud.

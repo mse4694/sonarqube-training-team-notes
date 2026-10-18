@@ -9,7 +9,7 @@ SQL injection, password-hashing or Sonar setup exercise.
 
 Copy this folder ONCE to your own temporary `WORKFLOW_DIR`. Use that same folder
 for Business Logic & Workflow Security, Security Test Engineering and the Agent
-exercise. In Lab 9.2, the Agent may help write `tests/test_redemption_contract.py`
+exercise. In Lab 9.1, the Agent may help write `tests/test_redemption_contract.py`
 from the contract while the human reviews assertions and runs the suite. In
 Workshop 10, only `voucher.py` is editable; the completed tests and helpers stay
 read-only.
@@ -101,7 +101,7 @@ These are observed facts in a local model. Compare them with the contract to
 write the invariant/control gap. The probe itself does not declare the system
 secure or change the source file. Each CLI selection runs only that scenario.
 
-## Workshop 9, Lab 9.2: AI-assisted learner tests
+## Workshop 9, Lab 9.1: AI-assisted learner tests
 
 `tests/test_redemption_contract.py` contains TWO complete positive/control tests
 and SIX unfinished tests marked `@unittest.skip`. Use the reviewed contract to ask an AI Agent to draft the missing

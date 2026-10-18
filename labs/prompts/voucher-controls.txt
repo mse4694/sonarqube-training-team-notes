@@ -1,0 +1,4 @@
+Use the attached VoucherDFD and threats T1/T2 for the same Voucher case.
+Create VoucherControlContract.md and a risk ledger covering once-only/state/time/replay/atomic requirements, negative and positive predicates, priority, owner, response, residual risk, and the handoff to the supplied workflow fixture.
+Keep target controls as design proposals. Separate them from the fixture's code/actor/now/checkpoint, in-memory service, records, and events. Do not claim HTTP/auth/database proof. Repeated consumption must be rejected without another event.
+Save result.md, result.html, and VoucherControlContract.md.

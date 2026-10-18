@@ -1,11 +1,11 @@
 [
   {
     "path": "README.md",
-    "sha256": "0a507ee06d87c09b071ca3c95d420ab9feadceb343f878becacd42512523fc6a"
+    "sha256": "5e21ebe23693db7441f130540cc814c5d50929726a5dc8d305ab62f3c2c0f2b8"
   },
   {
     "path": "agent-control/README.md",
-    "sha256": "88bd2e829c54843866a007dc9cfc73ff64c562ef72f99bf054c4e0e59f314d7a"
+    "sha256": "8e0755f64ffe4c9b6947768d28af136b392c1a684066ff7aeabfc59714ba9abf"
   },
   {
     "path": "agent-control/UNTRUSTED_README.md",
@@ -64,6 +64,250 @@
     "sha256": "6a26fceea0c270f62814be32cb21fabd53847b547b12ebd4d97f0a77254aea84"
   },
   {
+    "path": "course-assets/candidate-comparison/audit-prompt.txt",
+    "sha256": "87f697f687947f7457ed1fb3fa342b803a7eb1097c16d9d0f1d0e614d6e1ee66"
+  },
+  {
+    "path": "course-assets/candidate-comparison/audit.md",
+    "sha256": "ba7a51525c676630c5755cebc001b4cb6d1d1595c40812416cdc3094f4993e48"
+  },
+  {
+    "path": "course-assets/candidate-comparison/report-prompt.txt",
+    "sha256": "560139df1066a4f8da6392ab6bb7e739ddbfd5e0d9cd62e9d293c594d9b66fad"
+  },
+  {
+    "path": "course-assets/candidate-comparison/report.html",
+    "sha256": "a33f253692861e1c6aa28eb14d22d4d25390e6bcb46b04de2f37d753d59ca98c"
+  },
+  {
+    "path": "course-assets/candidate-comparison/result.md",
+    "sha256": "1c43f408b078a1cd1966a5afc72234c0ede22325b3b5ab4727675749f41ea7c9"
+  },
+  {
+    "path": "course-assets/lab52-terminal-example-prompt-marked-v2-20261018.avif",
+    "sha256": "bbfdfe6138175d540d242d76f36b1821baa204aa3931d4c547edc0d4ebfc5a76"
+  },
+  {
+    "path": "course-assets/learner-candidate-comparison-report-20261018.html",
+    "sha256": "a33f253692861e1c6aa28eb14d22d4d25390e6bcb46b04de2f37d753d59ca98c"
+  },
+  {
+    "path": "course-assets/learner-candidate-report-browser-bottom-20261018.avif",
+    "sha256": "3ab1595a333fd28d622e74bfb362ab757ab1bc03e4653976668763b16bfda4a2"
+  },
+  {
+    "path": "course-assets/learner-candidate-report-browser-middle-20261018.avif",
+    "sha256": "4fc26e284b114e1d63040e9c86ea59656347cfad9437b1d2462ca87f07c3a383"
+  },
+  {
+    "path": "course-assets/learner-candidate-report-browser-top-20261018.avif",
+    "sha256": "3f21b2608b0ef75a2446c4522fb98f2c4611b29653d9ee7e7315bc30b85d429c"
+  },
+  {
+    "path": "course-assets/learner-candidate-report-prompt-marked-20261018-html.avif",
+    "sha256": "6905c50fd9b15234c04305d7c65947494d9a261b41dd8feb84d9946d41d97a37"
+  },
+  {
+    "path": "course-assets/learner-evidence-audit-prompt-marked-20261018-html.avif",
+    "sha256": "73e00fcebe0c088f3135d2dcffd277d3273832a1cba12b5ca0fc89fc21d191ee"
+  },
+  {
+    "path": "course-assets/learner-evidence-audit-result-20261018-html.avif",
+    "sha256": "2e48e7a198846ce22bed3d85a88be9d277d0352d3f9359a10e9f1803dd1aa561"
+  },
+  {
+    "path": "course-assets/learner-lab101-after-20261018.avif",
+    "sha256": "c5df43a41bc1baa6d85d008df0dec3d415345fa0baf3c94f78acbcc84539a8f4"
+  },
+  {
+    "path": "course-assets/learner-lab101-before-20261018.avif",
+    "sha256": "c58c8e6c847a9718f5566633127b8c2cf64b59554e956318df88837554c0ccf2"
+  },
+  {
+    "path": "course-assets/learner-lab101-offline-prompt-marked-20261018.avif",
+    "sha256": "ba6d05a94235eae8989a38b168b45a98e1ae2437b43c9ac5e24370faf4a6c1cb"
+  },
+  {
+    "path": "course-assets/learner-lab102-patch-20261018.avif",
+    "sha256": "b454fb44fc5e5fe630e7bba000852956a0cc7ada0c39ce0e91fa3de62fb8d6d8"
+  },
+  {
+    "path": "course-assets/learner-lab102-plan-english-prompt-marked-20261018.avif",
+    "sha256": "04c4fa674aad7a05dc6ab068c092fa5d8f2a750acb0c5fa909a1327e001e336d"
+  },
+  {
+    "path": "course-assets/learner-lab102-prompt-prompt-marked-v2-20261018.avif",
+    "sha256": "3e04bd7133a9960ac582fdfff20593585cf9d3812103b8c3d6ff6a48d73003aa"
+  },
+  {
+    "path": "course-assets/learner-lab102-tests-20261018.avif",
+    "sha256": "16370878190caa19feae6a1033603ae7a6654c582c0e3464b8038ab90d6c4914"
+  },
+  {
+    "path": "course-assets/learner-lab102-verification-20261018.avif",
+    "sha256": "587f94eb21b99c9cac58a6e4f352b8bdaab0ed93790092b10932c89d2ece5238"
+  },
+  {
+    "path": "course-assets/learner-lab11-generic-audit-result-20261018.avif",
+    "sha256": "dbd3eed168deb1bc6250be41d86eb130d14678f0ba7f715a5aa4288400593247"
+  },
+  {
+    "path": "course-assets/learner-lab11-generic-comparison-result-20261018.avif",
+    "sha256": "b2efd790ee09156b5763608f54cb8107e75baacd3ee2361217060cf9979812aa"
+  },
+  {
+    "path": "course-assets/learner-lab11-generic-human-review-20261018.avif",
+    "sha256": "853cf00babfa30419a8fd48d67d023385ff8df73329dbe8b18290c63c0e23032"
+  },
+  {
+    "path": "course-assets/learner-lab11-generic-prompt-marked-audit-20261018.avif",
+    "sha256": "6d35ea07ccae42b5cef0cc4336a976758eb4f476125f32d52e93927aae5f9d3f"
+  },
+  {
+    "path": "course-assets/learner-lab11-generic-prompt-marked-comparison-20261018.avif",
+    "sha256": "d52506bf8a7a6ace71c0fa2b37d8681b0a7aa0e79b2dac02059b4bda43ccf529"
+  },
+  {
+    "path": "course-assets/learner-lab121-result-20261018.avif",
+    "sha256": "0c0cc9811913630b0801eb1ff1ea9d56c04f234a26197380c18a54014db36540"
+  },
+  {
+    "path": "course-assets/learner-lab121-run-20261018.avif",
+    "sha256": "b8ab86c2f97dbfd8fbf03c9d7d05de5debc5be6d65852f5061948102a985dfe7"
+  },
+  {
+    "path": "course-assets/learner-lab122-result-20261018.avif",
+    "sha256": "225e96808891220c658444b795cd906febebb4149c2a29adce9659fdd048504b"
+  },
+  {
+    "path": "course-assets/learner-lab52-english-prompt-marked-20261018.avif",
+    "sha256": "47423f8a2fdcd117db007db4dd949066a0dd3c26396250758f6c104caf0f195b"
+  },
+  {
+    "path": "course-assets/learner-lab71-adr-20261018.avif",
+    "sha256": "01e72ae3b2bc1ccdb6b7b2c91b7dd2d41e26db42f15586a0ae9b6756f08b94f5"
+  },
+  {
+    "path": "course-assets/learner-lab71-agent-run-prompt-marked-v2-20261018.avif",
+    "sha256": "4b088077baf51c815bb03ce3d13c19d62b9a850f44d68d1ea184b3fb46e7c5f5"
+  },
+  {
+    "path": "course-assets/learner-lab71-architecture-20261018.avif",
+    "sha256": "604f1a2289fa4f5ba492b95851a58a263eae9612236060937d259138a4590447"
+  },
+  {
+    "path": "course-assets/learner-lab71-document-20261018.pdf",
+    "sha256": "9b6d96dfd28a54b245481ab1247d7b1252e1a79bb09940f83b29ad21b2b82ad6"
+  },
+  {
+    "path": "course-assets/learner-lab71-english-prompt-marked-20261018.avif",
+    "sha256": "453f14a1f91c6851d74f70d3ff0d1d23d4409cef7ac6a883a5933d00073020ed"
+  },
+  {
+    "path": "course-assets/learner-lab72-dfd-agent-run-prompt-marked-20261018-three.avif",
+    "sha256": "3d3dc1d78428012971992ba8e849b3f4839400de616639177825c2d4938a7568"
+  },
+  {
+    "path": "course-assets/learner-lab72-dfd-diagram-20261018-three.avif",
+    "sha256": "e2e1d6160c51d0cf5c7184fb0bf7103fcc6a44fd3c8ef390fbd07832971879a2"
+  },
+  {
+    "path": "course-assets/learner-lab72-dfd-document-20261018-three.pdf",
+    "sha256": "3b34a4a68c029f96320489f6205631fc9ada2fa7f50d0e2043e0403227ecd697"
+  },
+  {
+    "path": "course-assets/learner-lab72-dfd-english-prompt-marked-20261018.avif",
+    "sha256": "962d9d3e87519350ef9e35cc3f3ff7d7e3410a3a9b08e9a311494a8e7d64887a"
+  },
+  {
+    "path": "course-assets/learner-lab72-dfd-threats-20261018-three.avif",
+    "sha256": "be31c787b9c43e04665a12469d6ba134400fa70d045dbe9c06d0c667b3a58ebc"
+  },
+  {
+    "path": "course-assets/learner-lab73-control-agent-run-prompt-marked-20261018-three.avif",
+    "sha256": "a65020beeddace97b372c8e65eb7ad71ebd6b1b0effdb136922e252cfdf5f5f8"
+  },
+  {
+    "path": "course-assets/learner-lab73-control-document-20261018-three-reviewed.pdf",
+    "sha256": "3a52a9e5ac1202e6c9df5e6e6a4fa40ebb0b7036b71bf0459a9829c92e94d1f8"
+  },
+  {
+    "path": "course-assets/learner-lab73-control-english-prompt-marked-20261018.avif",
+    "sha256": "b15192f9847c08b43720e988fd2b99cde581389f2a0de3f465dc57243c1e5e5d"
+  },
+  {
+    "path": "course-assets/learner-lab73-control-predicates-20261018-three-reviewed.avif",
+    "sha256": "a39050b5924b6858b8cb603a77317399f0e44127b50a33a00b69d8a2b6a00e8e"
+  },
+  {
+    "path": "course-assets/learner-lab73-control-risk-20261018-three.avif",
+    "sha256": "10693dea2435b3f2ea91336b21b52f760416d3813c48996356078effa1203286"
+  },
+  {
+    "path": "course-assets/learner-lab81-20261018.avif",
+    "sha256": "ad8df0c126152fa8badf7b7cddbd6b6456d9e4440590f6dfc85b4c0b211de63c"
+  },
+  {
+    "path": "course-assets/learner-lab82-20261018.avif",
+    "sha256": "d7727497fabc73d4058e389e998525d90a92774470c462982f34283a366c14b3"
+  },
+  {
+    "path": "course-assets/learner-lab82-contract-20261018.avif",
+    "sha256": "edf79a977e434ebb3778bdcaa0064a53eb3100ca71492124b1a8ac1b47dca78d"
+  },
+  {
+    "path": "course-assets/learner-lab91-revision-invocation-prompt-marked-20261018.avif",
+    "sha256": "94525a5917031449d99b22beb20f3954b7fc252c901e8901aea165a858af7c20"
+  },
+  {
+    "path": "course-assets/learner-lab92-agent-revision-20261018.avif",
+    "sha256": "4d03417274ccc825fd5b488317b0f2f8b732b99c250dd5e0740ad3260ab73601"
+  },
+  {
+    "path": "course-assets/learner-lab92-checker-20261018.avif",
+    "sha256": "59d6289918f69785ab3780cb645628d88976e27bb5458042c9a8435e3c94d245"
+  },
+  {
+    "path": "course-assets/learner-lab92-revision-invocation-prompt-marked-v2-20261018.avif",
+    "sha256": "fbdbef7f1e0696135a003de02f7289a6b50813abcbc705086a0712bbdb604587"
+  },
+  {
+    "path": "course-assets/task-1-1-terminal-payload.png",
+    "sha256": "38ed5f6eaec3436ccbf1a64ec50b5c2394c58108a5128868afc800582f7cc0c4"
+  },
+  {
+    "path": "course-assets/task-1-2-devtools-console.png",
+    "sha256": "dbd5579653e75997f97b335fa2d83cdd1d97af40f3ea10af43681d1d28e25bae"
+  },
+  {
+    "path": "course-assets/task-2-1-terminal-sqli.png",
+    "sha256": "811184b8fa4e297fd0f10e036f999c79dfb83d7884342c29a8a23d8c2aaf4299"
+  },
+  {
+    "path": "course-assets/task-2-2-terminal-bola.png",
+    "sha256": "9170f4e2fa3bee065ca99e18e982a9c1f0054e6d61da4b8238b9f6bb67e7db4b"
+  },
+  {
+    "path": "course-assets/task-2-3-terminal-forged-jwt.png",
+    "sha256": "53302b9fb8ccbf424d04cc1eda769c62e7a02d64824a2bd292a4a382e540b6cd"
+  },
+  {
+    "path": "course-assets/task-3-1-terminal-jwt-validation.png",
+    "sha256": "6c0c6f8d1d7b890833a348853cac5b3533efb7a2aaddec43f5893e29bd62ef3f"
+  },
+  {
+    "path": "course-assets/task-3-2-terminal-api-key-storage.png",
+    "sha256": "cdcafbb1838ac239d35e0082bc54e6c67c1e1651da6b49f8688fed841aaa8897"
+  },
+  {
+    "path": "course-assets/task-3-3-terminal-password-probe.png",
+    "sha256": "efd93c7abb35867dfebaa28d1b67bc8be597752fe80e2f7d002f2a030c8ca68b"
+  },
+  {
+    "path": "forge_admin_jwt.py",
+    "sha256": "3a06fed074b55fd8b09d730ff67485c2197be755b6a0a5f6830b28e30453e9fc"
+  },
+  {
     "path": "password-storage/Probe.csproj",
     "sha256": "cfd3bef3cdb06f4c60489e4bdc8138b24278dc5fdd4ac992ad847975016432d4"
   },
@@ -82,6 +326,66 @@
   {
     "path": "password-storage/source-validation.json",
     "sha256": "7e1c7b4beeea1e45967fdc6adf380734f4b0b22c4408988affe1c635118ba39e"
+  },
+  {
+    "path": "prompts/adversarial-test-corrections.txt",
+    "sha256": "3f58e27adc594beb87d3a6e51857562b4cf08b7fc482f4efc3f28b904874b0d5"
+  },
+  {
+    "path": "prompts/adversarial-tests.txt",
+    "sha256": "657db0c20814ec5bc742768f2c1374576d762e43a072e770fc2ab50d71b1c8bf"
+  },
+  {
+    "path": "prompts/agent-boundary-probe.txt",
+    "sha256": "d5fadf0b336535a874ec479efdf688c69e9133caf6ce5b33ae962806b8fc800c"
+  },
+  {
+    "path": "prompts/candidate-report.txt",
+    "sha256": "560139df1066a4f8da6392ab6bb7e739ddbfd5e0d9cd62e9d293c594d9b66fad"
+  },
+  {
+    "path": "prompts/cookie-fix.txt",
+    "sha256": "e5507846d4a8c2457787d9faab8bbf5aba63d5363d81bf27433288609c24ce17"
+  },
+  {
+    "path": "prompts/cookie-scope-review.txt",
+    "sha256": "3cf8336048372b76b3d4a039ce6098427f92e9aba8fb01bf7adb8328dd515e2c"
+  },
+  {
+    "path": "prompts/evidence-audit.txt",
+    "sha256": "87f697f687947f7457ed1fb3fa342b803a7eb1097c16d9d0f1d0e614d6e1ee66"
+  },
+  {
+    "path": "prompts/offline-sonar-analysis.txt",
+    "sha256": "a4c2ba7ca3af3ceae942dd6784d4e9908dd05960edf823bd18e1a93c8c4f8eb6"
+  },
+  {
+    "path": "prompts/security-analysis-short.txt",
+    "sha256": "7eaef36883578691036b71207ec3667698ebcfd61d43a590ea0a61c19a7eb84d"
+  },
+  {
+    "path": "prompts/security-analysis.txt",
+    "sha256": "143ba9bdc7b38c524a2b08d4580eb27dff3a64d9b78b7ecd22c110742a8cf34d"
+  },
+  {
+    "path": "prompts/voucher-architecture.txt",
+    "sha256": "6714a01d0c1fddcbab9c4bec2be0a3f56efeaacf73563050869cd98786f8d1b5"
+  },
+  {
+    "path": "prompts/voucher-controls.txt",
+    "sha256": "88fdd26b3bb0919d6a03bc95eb1a9c26926c9bd0434d43312c94d75dc471304f"
+  },
+  {
+    "path": "prompts/voucher-dfd.txt",
+    "sha256": "3563ced66f90b7f37719c8a3f7979ca9f592ac86ab9f21e1297e5ad1ffc358ac"
+  },
+  {
+    "path": "prompts/voucher-repair-approved.txt",
+    "sha256": "3fef2035727d22fcc05940c188cf6a1daec36b3ae38b99a2538a729dbec63382"
+  },
+  {
+    "path": "prompts/voucher-repair-plan.txt",
+    "sha256": "d67994cf3f493b82b00ed379c030b7e0ff48a27558932b8c6f064242b787b122"
   },
   {
     "path": "report-evidence/README.md",
@@ -185,7 +489,7 @@
   },
   {
     "path": "workflow-security/README.md",
-    "sha256": "f33f9e69357cef371b2fd860644b1ab52e2f6c77a01b670d5036c3424dd06b96"
+    "sha256": "0e9a50c9b2af699d77edea0ef137e7949dfe42c7fdc8a804ccc700e2cac3e766"
   },
   {
     "path": "workflow-security/native-observation.json",

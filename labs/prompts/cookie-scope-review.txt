@@ -1,0 +1,5 @@
+Human diff review: Secure=true is outside the selected S3330 scope and can
+break this course's local HTTP login. Remove only that added Secure setting.
+Keep HttpOnly=true and SameSite=Lax; preserve existing behavior elsewhere.
+Do not edit any other file or tests. State S2092 remains out of scope.
+Do not run tests. Human will verify the same regression after your edit.

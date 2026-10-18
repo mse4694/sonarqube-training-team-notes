@@ -2,7 +2,7 @@
 
 This is a Python 3 training example for the disposable `workflow-security`
 workspace used continuously by Day 2 Workshops 8, 9 and 10. Workshop 8 produces the voucher
-state/invariant control contract; Lab 9.2 produces learner-owned regression tests.
+state/invariant control contract; Lab 9.1 produces learner-owned regression tests.
 Workshop 10 receives that same directory and those artifacts. It does not restart the
 exercise on Team Notes or create another vulnerability report.
 Maintain one `AgentExecutionRecord` for plan/policy/native probe/scope/tests.

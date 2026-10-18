@@ -1,0 +1,4 @@
+Requirement: a one-time voucher must be activated before redemption. Cancelled or expired vouchers cannot be redeemed, and successful redemption and its business event must occur at most once per voucher.
+Propose the Voucher architecture and a complete ADR covering activate/redeem/cancel, context/container views, ownership and trust assumptions, two quality scenarios, alternatives, the decision, trade-offs, constraints, and revisit conditions.
+Label all unimplemented parts as design proposals. The supplied workflow fixture is a single-process in-memory service, not evidence of HTTP, authentication, database, or deployment behavior.
+Do not invent execution results.

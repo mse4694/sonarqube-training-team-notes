@@ -1,0 +1,5 @@
+Apply the two scope-limited corrections found in the previous audit, only to tests/test_redemption_contract.py.
+1. Expiry at the deadline must reject with no receipt/event and zero redemption count. The post-rejection state may be active or expired; both honor this contract.
+2. Extend the existing replay test to attempt a different actor after the first success and assert rejection without changing receipt/events/state. Keep the same eight test method names and SERVICE_TYPE.
+Also update the stale module docstring so it no longer claims there are six unfinished tests.
+Do not modify voucher.py, helpers or any other files. Do not read reference/. Do not execute tests/build/server commands or use network. Report the exact changes; a human will run the existing checker independently.

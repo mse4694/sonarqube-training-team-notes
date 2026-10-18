@@ -8,6 +8,8 @@ data in **PostgreSQL** (raw SQL via Npgsql + Dapper, Markdown via Markdig). Ever
 
 ## Branches & tags
 
+ตัวอย่างเอกสารประกอบหัวข้อ Secure Design & Threat Modeling: [Architecture Decision Records](docs/adr/README.md). ADR-0001 เป็นข้อเสนอเรื่อง team isolation ที่อิง source จริง; ยังไม่ได้แก้ baseline หรือรับรองผล security tests
+
 | Ref | What |
 |---|---|
 | `main` | Vulnerable starter (the labs find these) |

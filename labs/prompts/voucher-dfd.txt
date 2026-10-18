@@ -1,0 +1,4 @@
+Use the attached Voucher architecture/ADR and action inventory as the context for the same case.
+Create a Voucher DFD with flow IDs, trust boundaries, owners, and code/actor/time/state/result data. Include threats T1/T2 with STRIDE categories, preconditions, impact, and missing evidence.
+Keep target architecture as a design proposal. The supplied workflow fixture accepts code/actor/now/checkpoint and uses an in-memory service, records, and events; it does not prove HTTP/auth/database behavior. Repeated consumption must be rejected without another event.
+Save result.md, result.html, and diagram.svg.
