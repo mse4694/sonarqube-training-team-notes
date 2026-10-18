@@ -1,0 +1,36 @@
+{
+  "capturedAt": "2026-10-18T09:48:35.952Z",
+  "startedAt": "2026-10-18T09:47:12.210Z",
+  "issueQuery": "GET /api/issues/search?componentKeys=mikelopster_sonarqube-training-team-notes&branch=master&impactSoftwareQualities=SECURITY&ps=500&p=1&additionalFields=_all",
+  "pagination": {
+    "security": {
+      "pageIndex": 1,
+      "pageSize": 500,
+      "total": 13
+    },
+    "legacyVulnerabilities": {
+      "pageIndex": 1,
+      "pageSize": 500,
+      "total": 13
+    },
+    "hotspots": {
+      "pageIndex": 1,
+      "pageSize": 500,
+      "total": 0
+    }
+  },
+  "distinctSecurityIssues": 13,
+  "hotspotCount": 0,
+  "ruleCount": 10,
+  "sourceFileCount": 10,
+  "analysisStableAcrossExport": true,
+  "filterCrossCheck": "Security-impact and legacy VULNERABILITY filters returned the same13 issue keys. All results fit in page1.",
+  "dependencyDetails": "Actual SCA risk and release API details exported; see dependencyRisks. Full package inventory remains unavailable beyond captured UI sample.",
+  "ruleCatalogTiming": "Rule definitions/standards were retrieved at current capture time; do not assume they are frozen to the analysis date.",
+  "warnings": [
+    "Initial rules/show requests returned400 because organization was required; each was retried successfully with the project organization.",
+    "Issue status and rule metadata are current API state for the recorded analysis source, not newly executed scans.",
+    "No runtime test, exploit, setting change or rescan performed."
+  ],
+  "supplementalFile": "supplemental.json"
+}

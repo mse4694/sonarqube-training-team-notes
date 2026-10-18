@@ -1,0 +1,818 @@
+{
+  "githubactions:S6505": {
+    "key": "githubactions:S6505",
+    "repo": "githubactions",
+    "name": "JavaScript package manager scripts should not be executed during installation",
+    "createdAt": "2025-12-04T15:25:12+0000",
+    "htmlDesc": "<p>When installing dependencies, some package managers will automatically execute scripts distributed along with the source code of packages.\nPost-install scripts, for example, are a common way to execute malicious code at install time whenever a package is compromised.</p>\n<h2>Why is this an issue?</h2>\n<p>When package managers execute installation scripts, they run arbitrary code distributed with third-party packages. A compromised package can use\nthis mechanism to execute malicious code on the build system, potentially stealing credentials, injecting backdoors, or otherwise compromising the\nsupply chain.</p>\n<h3>What is the potential impact?</h3>\n<p>If a dependency is compromised and its scripts are executed, an attacker can run arbitrary code with the permissions of the process performing the\ninstallation. This can lead to credential theft from the build environment, introduction of backdoors into the application, or lateral movement within\nCI/CD infrastructure.</p>\n<h2>How to fix it in npm</h2>\n<h3>Code examples</h3>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nsteps:\n  - run: npm install  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nsteps:\n  - run: npm install --ignore-scripts\n</pre>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"5\" data-diff-type=\"noncompliant\">\nsteps:\n  - run: npx some-package  # Noncompliant\n  - run: npm exec -- some-package  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<p>The <code>--ignore-scripts</code> flag must appear before the package name. For <code>npm exec</code>, also use <code>--</code> to separate npm\noptions from the executed command.</p>\n<pre data-diff-id=\"5\" data-diff-type=\"compliant\">\nsteps:\n  - run: npx --ignore-scripts some-package\n  - run: npm exec --ignore-scripts -- some-package\n</pre>\n<h2>Resources</h2>\n<h3>Articles &amp; blog posts</h3>\n<ul>\n  <li><a href=\"https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes/\">ESLint blog</a> - Postmortem for Malicious Packages\n  Published on July 12th, 2018</li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/506\">CWE-506 - Embedded Malicious Code</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/829\">CWE-829 - Inclusion of Functionality from Untrusted Control Sphere</a></li>\n</ul>",
+    "mdDesc": "<p>When installing dependencies, some package managers will automatically execute scripts distributed along with the source code of packages.\nPost-install scripts, for example, are a common way to execute malicious code at install time whenever a package is compromised.</p>\n<h2>Why is this an issue?</h2>\n<p>When package managers execute installation scripts, they run arbitrary code distributed with third-party packages. A compromised package can use\nthis mechanism to execute malicious code on the build system, potentially stealing credentials, injecting backdoors, or otherwise compromising the\nsupply chain.</p>\n<h3>What is the potential impact?</h3>\n<p>If a dependency is compromised and its scripts are executed, an attacker can run arbitrary code with the permissions of the process performing the\ninstallation. This can lead to credential theft from the build environment, introduction of backdoors into the application, or lateral movement within\nCI/CD infrastructure.</p>\n<h2>How to fix it in npm</h2>\n<h3>Code examples</h3>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nsteps:\n  - run: npm install  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nsteps:\n  - run: npm install --ignore-scripts\n</pre>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"5\" data-diff-type=\"noncompliant\">\nsteps:\n  - run: npx some-package  # Noncompliant\n  - run: npm exec -- some-package  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<p>The <code>--ignore-scripts</code> flag must appear before the package name. For <code>npm exec</code>, also use <code>--</code> to separate npm\noptions from the executed command.</p>\n<pre data-diff-id=\"5\" data-diff-type=\"compliant\">\nsteps:\n  - run: npx --ignore-scripts some-package\n  - run: npm exec --ignore-scripts -- some-package\n</pre>\n<h2>Resources</h2>\n<h3>Articles &amp; blog posts</h3>\n<ul>\n  <li><a href=\"https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes/\">ESLint blog</a> - Postmortem for Malicious Packages\n  Published on July 12th, 2018</li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/506\">CWE-506 - Embedded Malicious Code</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/829\">CWE-829 - Inclusion of Functionality from Untrusted Control Sphere</a></li>\n</ul>",
+    "severity": "MAJOR",
+    "status": "READY",
+    "isTemplate": false,
+    "tags": [],
+    "sysTags": [
+      "cwe",
+      "former-hotspot"
+    ],
+    "lang": "githubactions",
+    "langName": "GitHub Actions",
+    "params": [],
+    "defaultDebtRemFnType": "CONSTANT_ISSUE",
+    "defaultDebtRemFnOffset": "30min",
+    "debtOverloaded": false,
+    "debtRemFnType": "CONSTANT_ISSUE",
+    "debtRemFnOffset": "30min",
+    "type": "VULNERABILITY",
+    "defaultRemFnType": "CONSTANT_ISSUE",
+    "defaultRemFnBaseEffort": "30min",
+    "remFnType": "CONSTANT_ISSUE",
+    "remFnBaseEffort": "30min",
+    "remFnOverloaded": false,
+    "scope": "ALL",
+    "isExternal": false,
+    "descriptionSections": [
+      {
+        "key": "introduction",
+        "content": "<p>When installing dependencies, some package managers will automatically execute scripts distributed along with the source code of packages.\nPost-install scripts, for example, are a common way to execute malicious code at install time whenever a package is compromised.</p>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"2\" data-diff-type=\"noncompliant\">\nsteps:\n  - run: yarn install  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"2\" data-diff-type=\"compliant\">\nsteps:\n  - run: |\n      yarn install --ignore-scripts\n      # for yarn 2.x and later\n      YARN_ENABLE_SCRIPTS=false yarn install\n</pre>",
+        "context": {
+          "displayName": "Yarn",
+          "key": "yarn"
+        }
+      },
+      {
+        "key": "root_cause",
+        "content": "<p>When package managers execute installation scripts, they run arbitrary code distributed with third-party packages. A compromised package can use\nthis mechanism to execute malicious code on the build system, potentially stealing credentials, injecting backdoors, or otherwise compromising the\nsupply chain.</p>\n<h3>What is the potential impact?</h3>\n<p>If a dependency is compromised and its scripts are executed, an attacker can run arbitrary code with the permissions of the process performing the\ninstallation. This can lead to credential theft from the build environment, introduction of backdoors into the application, or lateral movement within\nCI/CD infrastructure.</p>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p>In versions prior to v10, pnpm runs lifecycle scripts by default. <a\nhref=\"https://socket.dev/blog/pnpm-10-0-0-blocks-lifecycle-scripts-by-default\">Starting from pnpm v10</a>, lifecycle scripts are blocked by default,\nmaking <code>pnpm install</code> safe without additional flags. Adding packages to <code>onlyBuiltDependencies</code> in\n<code>pnpm-workspace.yaml</code> explicitly opts them in to script execution and should be avoided for unaudited packages.</p>\n\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"3\" data-diff-type=\"noncompliant\">\nsteps:\n  - run: pnpm install  # Noncompliant (pnpm &lt; v10)\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"3\" data-diff-type=\"compliant\">\nsteps:\n  - run: pnpm install --ignore-scripts\n</pre>",
+        "context": {
+          "displayName": "PNPM",
+          "key": "pnpm"
+        }
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p><a href=\"https://bun.com/docs/pm/lifecycle#trusteddependencies\">Bun blocks lifecycle scripts by default</a> for most packages (opt-in model), but\nstill executes them for a built-in list of popular npm packages.</p>\n\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"4\" data-diff-type=\"noncompliant\">\nsteps:\n  - run: bun install  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"4\" data-diff-type=\"compliant\">\nsteps:\n  - run: bun install --ignore-scripts\n</pre>",
+        "context": {
+          "displayName": "Bun",
+          "key": "bun"
+        }
+      },
+      {
+        "key": "resources",
+        "content": "<h3>Articles &amp; blog posts</h3>\n<ul>\n  <li><a href=\"https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes/\">ESLint blog</a> - Postmortem for Malicious Packages\n  Published on July 12th, 2018</li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/506\">CWE-506 - Embedded Malicious Code</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/829\">CWE-829 - Inclusion of Functionality from Untrusted Control Sphere</a></li>\n</ul>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nsteps:\n  - run: npm install  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nsteps:\n  - run: npm install --ignore-scripts\n</pre>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"5\" data-diff-type=\"noncompliant\">\nsteps:\n  - run: npx some-package  # Noncompliant\n  - run: npm exec -- some-package  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<p>The <code>--ignore-scripts</code> flag must appear before the package name. For <code>npm exec</code>, also use <code>--</code> to separate npm\noptions from the executed command.</p>\n<pre data-diff-id=\"5\" data-diff-type=\"compliant\">\nsteps:\n  - run: npx --ignore-scripts some-package\n  - run: npm exec --ignore-scripts -- some-package\n</pre>",
+        "context": {
+          "displayName": "npm",
+          "key": "npm"
+        }
+      }
+    ],
+    "educationPrinciples": [],
+    "cleanCodeAttribute": "TRUSTWORTHY",
+    "cleanCodeAttributeCategory": "RESPONSIBLE",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "securityStandards": [
+      "cwe:506",
+      "cwe:829"
+    ],
+    "requiredEntitlements": []
+  },
+  "csharpsquid:S2068": {
+    "key": "csharpsquid:S2068",
+    "repo": "csharpsquid",
+    "name": "Credentials should not be hard-coded",
+    "createdAt": "2017-06-22T05:35:07+0000",
+    "htmlDesc": "<h2>Why is this an issue?</h2>\n<p>Hard-coding credentials in source code or binaries makes it easy for attackers to extract sensitive information, especially in distributed or\nopen-source applications. This practice exposes your application to significant security risks.</p>\n<p>This rule flags instances of hard-coded credentials used in database and LDAP connections. It looks for hard-coded credentials in connection\nstrings, and for variable names that match any of the patterns from the provided list.</p>\n<p>In the past, it has led to the following vulnerabilities:</p>\n<ul>\n  <li><a href=\"https://www.cve.org/CVERecord?id=CVE-2019-13466\">CVE-2019-13466</a></li>\n  <li><a href=\"https://www.cve.org/CVERecord?id=CVE-2018-15389\">CVE-2018-15389</a></li>\n</ul>\n<h3>Exceptions</h3>\n<ul>\n  <li>Issue is not raised when URI username and password are the same.</li>\n  <li>Issue is not raised when searched pattern is found in variable name and value.</li>\n</ul>\n<h2>How to fix it</h2>\n<p>Credentials should be stored in a configuration file that is not committed to the code repository, in a database, or managed by your cloud\nprovider’s secrets management service. If a password is exposed in the source code, it must be changed immediately.</p>\n<h3>Code Examples</h3>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nstring username = \"admin\";\nstring password = \"Admin123\"; // Noncompliant\nstring usernamePassword  = \"user=admin&amp;password=Admin123\"; // Noncompliant\nstring url = \"scheme://user:[REDACTED_EMAIL]\"; // Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nstring username = \"admin\";\nstring password = GetEncryptedPassword();\nstring usernamePassword = string.Format(\"user={0}&amp;password={1}\", GetEncryptedUsername(), GetEncryptedPassword());\nstring url = $\"scheme://{username}:{password}@domain.com\";\n\nstring url2 = \"http://guest:[REDACTED_EMAIL]\"; // Compliant\nconst string Password_Property = \"custom.password\"; // Compliant\n</pre>\n<h2>Resources</h2>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/\">Top 10 2021 Category A7 - Identification and\n  Authentication Failures</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa2-broken-authentication.md\">Top 10 2017 Category A2 - Broken\n  Authentication</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/798\">CWE-798 - Use of Hard-coded Credentials</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/259\">CWE-259 - Use of Hard-coded Password</a></li>\n  <li>Derived from FindSecBugs rule <a href=\"https://h3xstream.github.io/find-sec-bugs/bugs.htm#HARD_CODE_PASSWORD\">Hard Coded Password</a></li>\n</ul>",
+    "mdDesc": "<h2>Why is this an issue?</h2>\n<p>Hard-coding credentials in source code or binaries makes it easy for attackers to extract sensitive information, especially in distributed or\nopen-source applications. This practice exposes your application to significant security risks.</p>\n<p>This rule flags instances of hard-coded credentials used in database and LDAP connections. It looks for hard-coded credentials in connection\nstrings, and for variable names that match any of the patterns from the provided list.</p>\n<p>In the past, it has led to the following vulnerabilities:</p>\n<ul>\n  <li><a href=\"https://www.cve.org/CVERecord?id=CVE-2019-13466\">CVE-2019-13466</a></li>\n  <li><a href=\"https://www.cve.org/CVERecord?id=CVE-2018-15389\">CVE-2018-15389</a></li>\n</ul>\n<h3>Exceptions</h3>\n<ul>\n  <li>Issue is not raised when URI username and password are the same.</li>\n  <li>Issue is not raised when searched pattern is found in variable name and value.</li>\n</ul>\n<h2>How to fix it</h2>\n<p>Credentials should be stored in a configuration file that is not committed to the code repository, in a database, or managed by your cloud\nprovider’s secrets management service. If a password is exposed in the source code, it must be changed immediately.</p>\n<h3>Code Examples</h3>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nstring username = \"admin\";\nstring password = \"Admin123\"; // Noncompliant\nstring usernamePassword  = \"user=admin&amp;password=Admin123\"; // Noncompliant\nstring url = \"scheme://user:[REDACTED_EMAIL]\"; // Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nstring username = \"admin\";\nstring password = GetEncryptedPassword();\nstring usernamePassword = string.Format(\"user={0}&amp;password={1}\", GetEncryptedUsername(), GetEncryptedPassword());\nstring url = $\"scheme://{username}:{password}@domain.com\";\n\nstring url2 = \"http://guest:[REDACTED_EMAIL]\"; // Compliant\nconst string Password_Property = \"custom.password\"; // Compliant\n</pre>\n<h2>Resources</h2>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/\">Top 10 2021 Category A7 - Identification and\n  Authentication Failures</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa2-broken-authentication.md\">Top 10 2017 Category A2 - Broken\n  Authentication</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/798\">CWE-798 - Use of Hard-coded Credentials</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/259\">CWE-259 - Use of Hard-coded Password</a></li>\n  <li>Derived from FindSecBugs rule <a href=\"https://h3xstream.github.io/find-sec-bugs/bugs.htm#HARD_CODE_PASSWORD\">Hard Coded Password</a></li>\n</ul>",
+    "severity": "MAJOR",
+    "status": "READY",
+    "isTemplate": false,
+    "tags": [],
+    "sysTags": [
+      "cwe",
+      "former-hotspot",
+      "secret"
+    ],
+    "lang": "cs",
+    "langName": "C#",
+    "params": [
+      {
+        "key": "credentialWords",
+        "htmlDesc": "Comma separated list of words identifying potential credentials",
+        "defaultValue": "password, passwd, pwd, passphrase",
+        "type": "STRING"
+      }
+    ],
+    "defaultDebtRemFnType": "CONSTANT_ISSUE",
+    "defaultDebtRemFnOffset": "30min",
+    "debtOverloaded": false,
+    "debtRemFnType": "CONSTANT_ISSUE",
+    "debtRemFnOffset": "30min",
+    "type": "VULNERABILITY",
+    "defaultRemFnType": "CONSTANT_ISSUE",
+    "defaultRemFnBaseEffort": "30min",
+    "remFnType": "CONSTANT_ISSUE",
+    "remFnBaseEffort": "30min",
+    "remFnOverloaded": false,
+    "scope": "MAIN",
+    "isExternal": false,
+    "descriptionSections": [
+      {
+        "key": "root_cause",
+        "content": "<p>Hard-coding credentials in source code or binaries makes it easy for attackers to extract sensitive information, especially in distributed or\nopen-source applications. This practice exposes your application to significant security risks.</p>\n<p>This rule flags instances of hard-coded credentials used in database and LDAP connections. It looks for hard-coded credentials in connection\nstrings, and for variable names that match any of the patterns from the provided list.</p>\n<p>In the past, it has led to the following vulnerabilities:</p>\n<ul>\n  <li><a href=\"https://www.cve.org/CVERecord?id=CVE-2019-13466\">CVE-2019-13466</a></li>\n  <li><a href=\"https://www.cve.org/CVERecord?id=CVE-2018-15389\">CVE-2018-15389</a></li>\n</ul>\n<h3>Exceptions</h3>\n<ul>\n  <li>Issue is not raised when URI username and password are the same.</li>\n  <li>Issue is not raised when searched pattern is found in variable name and value.</li>\n</ul>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p>Credentials should be stored in a configuration file that is not committed to the code repository, in a database, or managed by your cloud\nprovider’s secrets management service. If a password is exposed in the source code, it must be changed immediately.</p>\n<h3>Code Examples</h3>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nstring username = \"admin\";\nstring password = \"Admin123\"; // Noncompliant\nstring usernamePassword  = \"user=admin&amp;password=Admin123\"; // Noncompliant\nstring url = \"scheme://user:[REDACTED_EMAIL]\"; // Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nstring username = \"admin\";\nstring password = GetEncryptedPassword();\nstring usernamePassword = string.Format(\"user={0}&amp;password={1}\", GetEncryptedUsername(), GetEncryptedPassword());\nstring url = $\"scheme://{username}:{password}@domain.com\";\n\nstring url2 = \"http://guest:[REDACTED_EMAIL]\"; // Compliant\nconst string Password_Property = \"custom.password\"; // Compliant\n</pre>"
+      },
+      {
+        "key": "resources",
+        "content": "<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/\">Top 10 2021 Category A7 - Identification and\n  Authentication Failures</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa2-broken-authentication.md\">Top 10 2017 Category A2 - Broken\n  Authentication</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/798\">CWE-798 - Use of Hard-coded Credentials</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/259\">CWE-259 - Use of Hard-coded Password</a></li>\n  <li>Derived from FindSecBugs rule <a href=\"https://h3xstream.github.io/find-sec-bugs/bugs.htm#HARD_CODE_PASSWORD\">Hard Coded Password</a></li>\n</ul>"
+      }
+    ],
+    "educationPrinciples": [],
+    "cleanCodeAttribute": "TRUSTWORTHY",
+    "cleanCodeAttributeCategory": "RESPONSIBLE",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "securityStandards": [
+      "cwe:259",
+      "cwe:798",
+      "owaspAsvs-4.0:2.10.4",
+      "owaspAsvs-4.0:3.5.2",
+      "owaspAsvs-4.0:6.4.1",
+      "owaspTop10-2021:a7",
+      "owaspTop10:a2",
+      "pciDss-3.2:6.5.10",
+      "pciDss-4.0:6.2.4"
+    ],
+    "requiredEntitlements": []
+  },
+  "secrets:S6698": {
+    "key": "secrets:S6698",
+    "repo": "secrets",
+    "name": "PostgreSQL database passwords should not be disclosed",
+    "createdAt": "2023-08-24T12:55:04+0000",
+    "htmlDesc": "<p>Secret leaks often occur when a sensitive piece of authentication data is stored with the source code of an application. Considering the source\ncode is intended to be deployed across multiple assets, including source code repositories or application hosting servers, the secrets might get\nexposed to an unintended audience.</p>\n<h2>Why is this an issue?</h2>\n<p>In most cases, trust boundaries are violated when a secret is exposed in a source code repository or an uncontrolled deployment environment.\nUnintended people who don’t need to know the secret might get access to it. They might then be able to use it to gain unwanted access to associated\nservices or resources.</p>\n<p>The trust issue can be more or less severe depending on the people’s role and entitlement.</p>\n<h3>What is the potential impact?</h3>\n<p>Passwords in PostgreSQL are used to authenticate users against the database engine. They are associated with user accounts that are granted\nspecific permissions over the database and its hosted data.</p>\n<p>If a PostgreSQL password leaks to an unintended audience, it can have serious consequences for the security of your database, the data stored\nwithin it, and the applications that rely on it.</p>\n<h4>Compromise of sensitive data</h4>\n<p>If the affected service is used to store or process personally identifiable information or other sensitive data, attackers knowing an\nauthentication secret could be able to access it. Depending on the type of data that is compromised, it could lead to privacy violations, identity\ntheft, financial loss, or other negative outcomes.</p>\n<p>In most cases, a company suffering a sensitive data compromise will face a reputational loss when the security issue is publicly disclosed.</p>\n<h4>Security downgrade</h4>\n<p>Applications relying on a PostgreSQL database instance can suffer a security downgrade if an access password is leaked to attackers. Depending on\nthe purposes the application uses the database for, consequences can range from low-severity issues, like defacement, to complete compromise.</p>\n<p>For example, if the PostgreSQL instance is used as part of the authentication process of an application, attackers with access to the database will\nlikely be able to bypass this security mechanism.</p>\n<h2>How to fix it</h2>\n<p><strong>Revoke the secret</strong></p>\n<p>Revoke any leaked secrets and remove them from the application source code.</p>\n<p>Before revoking the secret, ensure that no other applications or processes are using it. Other usages of the secret will also be impacted when the\nsecret is revoked.</p>\n<p><strong>Analyze recent secret use</strong></p>\n<p>When available, analyze authentication logs to identify any unintended or malicious use of the secret since its disclosure date. Doing this will\nallow determining if an attacker took advantage of the leaked secret and to what extent.</p>\n<p>This operation should be part of a global incident response process.</p>\n<p>By default, no connection information is logged by PostgreSQL server. The <code>log_connections</code> parameter must be set to <code>true</code>\nin the server configuration for this to happen.</p>\n<p><strong>Use a secret vault</strong></p>\n<p>A secret vault should be used to generate and store the new secret. This will ensure the secret’s security and prevent any further unexpected\ndisclosure.</p>\n<p>Depending on the development platform and the leaked secret type, multiple solutions are currently available.</p>\n<p><strong>Never hard-code secrets, not even the default values</strong></p>\n<p>It is important that you do not hard-code secrets, even default values.</p>\n<p>First, hard-coded default secrets are often short and can be easily compromised even by attackers who do not have access to the code base.</p>\n<p>Second, hard-coded default secrets can cause problems if they need to be changed or replaced.</p>\n<p>And most importantly, there is always the possibility to accidentally set default secrets for production services, which can lead to security\nvulnerabilities and make production insecure by default.</p>\n<p>To minimize these risks, it is recommended to apply the above strategies, even for the default settings.</p>\n<h3>Code examples</h3>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nuri = \"postgres://foouser:[REDACTED_EMAIL]/testdb\"\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nimport os\n\nuser = os.environ[\"PG_USER\"]\npassword = os.environ[\"PG_PASSWORD\"]\nuri = f\"postgres://{user}:{password}@example.com/testdb\"\n</pre>\n<h2>Resources</h2>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/\">Top 10 2021 Category A7 - Identification and\n  Authentication Failures</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa3-sensitive-data-disclosure.md\">Top 10 2017 Category A3 - Sensitive Data\n  Exposure</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/798\">CWE-798 - Use of Hard-coded Credentials</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/259\">CWE-259 - Use of Hard-coded Password</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222642\">Application Security and\n  Development: V-222642</a> - The application must not contain embedded authentication data.</li>\n</ul>\n<h3>Documentation</h3>\n<ul>\n  <li>PostgreSQL Documentation - <a href=\"https://www.postgresql.org/docs/15/client-authentication.html\">Client Authentication</a></li>\n  <li>PostgreSQL Documentation - <a href=\"https://www.postgresql.org/docs/current/runtime-config-logging.html\">Error Reporting and Logging</a></li>\n</ul>",
+    "mdDesc": "<p>Secret leaks often occur when a sensitive piece of authentication data is stored with the source code of an application. Considering the source\ncode is intended to be deployed across multiple assets, including source code repositories or application hosting servers, the secrets might get\nexposed to an unintended audience.</p>\n<h2>Why is this an issue?</h2>\n<p>In most cases, trust boundaries are violated when a secret is exposed in a source code repository or an uncontrolled deployment environment.\nUnintended people who don’t need to know the secret might get access to it. They might then be able to use it to gain unwanted access to associated\nservices or resources.</p>\n<p>The trust issue can be more or less severe depending on the people’s role and entitlement.</p>\n<h3>What is the potential impact?</h3>\n<p>Passwords in PostgreSQL are used to authenticate users against the database engine. They are associated with user accounts that are granted\nspecific permissions over the database and its hosted data.</p>\n<p>If a PostgreSQL password leaks to an unintended audience, it can have serious consequences for the security of your database, the data stored\nwithin it, and the applications that rely on it.</p>\n<h4>Compromise of sensitive data</h4>\n<p>If the affected service is used to store or process personally identifiable information or other sensitive data, attackers knowing an\nauthentication secret could be able to access it. Depending on the type of data that is compromised, it could lead to privacy violations, identity\ntheft, financial loss, or other negative outcomes.</p>\n<p>In most cases, a company suffering a sensitive data compromise will face a reputational loss when the security issue is publicly disclosed.</p>\n<h4>Security downgrade</h4>\n<p>Applications relying on a PostgreSQL database instance can suffer a security downgrade if an access password is leaked to attackers. Depending on\nthe purposes the application uses the database for, consequences can range from low-severity issues, like defacement, to complete compromise.</p>\n<p>For example, if the PostgreSQL instance is used as part of the authentication process of an application, attackers with access to the database will\nlikely be able to bypass this security mechanism.</p>\n<h2>How to fix it</h2>\n<p><strong>Revoke the secret</strong></p>\n<p>Revoke any leaked secrets and remove them from the application source code.</p>\n<p>Before revoking the secret, ensure that no other applications or processes are using it. Other usages of the secret will also be impacted when the\nsecret is revoked.</p>\n<p><strong>Analyze recent secret use</strong></p>\n<p>When available, analyze authentication logs to identify any unintended or malicious use of the secret since its disclosure date. Doing this will\nallow determining if an attacker took advantage of the leaked secret and to what extent.</p>\n<p>This operation should be part of a global incident response process.</p>\n<p>By default, no connection information is logged by PostgreSQL server. The <code>log_connections</code> parameter must be set to <code>true</code>\nin the server configuration for this to happen.</p>\n<p><strong>Use a secret vault</strong></p>\n<p>A secret vault should be used to generate and store the new secret. This will ensure the secret’s security and prevent any further unexpected\ndisclosure.</p>\n<p>Depending on the development platform and the leaked secret type, multiple solutions are currently available.</p>\n<p><strong>Never hard-code secrets, not even the default values</strong></p>\n<p>It is important that you do not hard-code secrets, even default values.</p>\n<p>First, hard-coded default secrets are often short and can be easily compromised even by attackers who do not have access to the code base.</p>\n<p>Second, hard-coded default secrets can cause problems if they need to be changed or replaced.</p>\n<p>And most importantly, there is always the possibility to accidentally set default secrets for production services, which can lead to security\nvulnerabilities and make production insecure by default.</p>\n<p>To minimize these risks, it is recommended to apply the above strategies, even for the default settings.</p>\n<h3>Code examples</h3>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nuri = \"postgres://foouser:[REDACTED_EMAIL]/testdb\"\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nimport os\n\nuser = os.environ[\"PG_USER\"]\npassword = os.environ[\"PG_PASSWORD\"]\nuri = f\"postgres://{user}:{password}@example.com/testdb\"\n</pre>\n<h2>Resources</h2>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/\">Top 10 2021 Category A7 - Identification and\n  Authentication Failures</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa3-sensitive-data-disclosure.md\">Top 10 2017 Category A3 - Sensitive Data\n  Exposure</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/798\">CWE-798 - Use of Hard-coded Credentials</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/259\">CWE-259 - Use of Hard-coded Password</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222642\">Application Security and\n  Development: V-222642</a> - The application must not contain embedded authentication data.</li>\n</ul>\n<h3>Documentation</h3>\n<ul>\n  <li>PostgreSQL Documentation - <a href=\"https://www.postgresql.org/docs/15/client-authentication.html\">Client Authentication</a></li>\n  <li>PostgreSQL Documentation - <a href=\"https://www.postgresql.org/docs/current/runtime-config-logging.html\">Error Reporting and Logging</a></li>\n</ul>",
+    "severity": "BLOCKER",
+    "status": "READY",
+    "isTemplate": false,
+    "tags": [],
+    "sysTags": [
+      "cwe",
+      "secret"
+    ],
+    "lang": "secrets",
+    "langName": "Secrets",
+    "params": [],
+    "defaultDebtRemFnType": "CONSTANT_ISSUE",
+    "defaultDebtRemFnOffset": "30min",
+    "debtOverloaded": false,
+    "debtRemFnType": "CONSTANT_ISSUE",
+    "debtRemFnOffset": "30min",
+    "type": "VULNERABILITY",
+    "defaultRemFnType": "CONSTANT_ISSUE",
+    "defaultRemFnBaseEffort": "30min",
+    "remFnType": "CONSTANT_ISSUE",
+    "remFnBaseEffort": "30min",
+    "remFnOverloaded": false,
+    "scope": "ALL",
+    "isExternal": false,
+    "descriptionSections": [
+      {
+        "key": "root_cause",
+        "content": "<p>In most cases, trust boundaries are violated when a secret is exposed in a source code repository or an uncontrolled deployment environment.\nUnintended people who don’t need to know the secret might get access to it. They might then be able to use it to gain unwanted access to associated\nservices or resources.</p>\n<p>The trust issue can be more or less severe depending on the people’s role and entitlement.</p>\n<h3>What is the potential impact?</h3>\n<p>Passwords in PostgreSQL are used to authenticate users against the database engine. They are associated with user accounts that are granted\nspecific permissions over the database and its hosted data.</p>\n<p>If a PostgreSQL password leaks to an unintended audience, it can have serious consequences for the security of your database, the data stored\nwithin it, and the applications that rely on it.</p>\n<h4>Compromise of sensitive data</h4>\n<p>If the affected service is used to store or process personally identifiable information or other sensitive data, attackers knowing an\nauthentication secret could be able to access it. Depending on the type of data that is compromised, it could lead to privacy violations, identity\ntheft, financial loss, or other negative outcomes.</p>\n<p>In most cases, a company suffering a sensitive data compromise will face a reputational loss when the security issue is publicly disclosed.</p>\n<h4>Security downgrade</h4>\n<p>Applications relying on a PostgreSQL database instance can suffer a security downgrade if an access password is leaked to attackers. Depending on\nthe purposes the application uses the database for, consequences can range from low-severity issues, like defacement, to complete compromise.</p>\n<p>For example, if the PostgreSQL instance is used as part of the authentication process of an application, attackers with access to the database will\nlikely be able to bypass this security mechanism.</p>"
+      },
+      {
+        "key": "introduction",
+        "content": "<p>Secret leaks often occur when a sensitive piece of authentication data is stored with the source code of an application. Considering the source\ncode is intended to be deployed across multiple assets, including source code repositories or application hosting servers, the secrets might get\nexposed to an unintended audience.</p>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p><strong>Revoke the secret</strong></p>\n<p>Revoke any leaked secrets and remove them from the application source code.</p>\n<p>Before revoking the secret, ensure that no other applications or processes are using it. Other usages of the secret will also be impacted when the\nsecret is revoked.</p>\n<p><strong>Analyze recent secret use</strong></p>\n<p>When available, analyze authentication logs to identify any unintended or malicious use of the secret since its disclosure date. Doing this will\nallow determining if an attacker took advantage of the leaked secret and to what extent.</p>\n<p>This operation should be part of a global incident response process.</p>\n<p>By default, no connection information is logged by PostgreSQL server. The <code>log_connections</code> parameter must be set to <code>true</code>\nin the server configuration for this to happen.</p>\n<p><strong>Use a secret vault</strong></p>\n<p>A secret vault should be used to generate and store the new secret. This will ensure the secret’s security and prevent any further unexpected\ndisclosure.</p>\n<p>Depending on the development platform and the leaked secret type, multiple solutions are currently available.</p>\n<p><strong>Never hard-code secrets, not even the default values</strong></p>\n<p>It is important that you do not hard-code secrets, even default values.</p>\n<p>First, hard-coded default secrets are often short and can be easily compromised even by attackers who do not have access to the code base.</p>\n<p>Second, hard-coded default secrets can cause problems if they need to be changed or replaced.</p>\n<p>And most importantly, there is always the possibility to accidentally set default secrets for production services, which can lead to security\nvulnerabilities and make production insecure by default.</p>\n<p>To minimize these risks, it is recommended to apply the above strategies, even for the default settings.</p>\n\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nuri = \"postgres://foouser:[REDACTED_EMAIL]/testdb\"\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nimport os\n\nuser = os.environ[\"PG_USER\"]\npassword = os.environ[\"PG_PASSWORD\"]\nuri = f\"postgres://{user}:{password}@example.com/testdb\"\n</pre>"
+      },
+      {
+        "key": "resources",
+        "content": "<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/\">Top 10 2021 Category A7 - Identification and\n  Authentication Failures</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa3-sensitive-data-disclosure.md\">Top 10 2017 Category A3 - Sensitive Data\n  Exposure</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/798\">CWE-798 - Use of Hard-coded Credentials</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/259\">CWE-259 - Use of Hard-coded Password</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222642\">Application Security and\n  Development: V-222642</a> - The application must not contain embedded authentication data.</li>\n</ul>\n<h3>Documentation</h3>\n<ul>\n  <li>PostgreSQL Documentation - <a href=\"https://www.postgresql.org/docs/15/client-authentication.html\">Client Authentication</a></li>\n  <li>PostgreSQL Documentation - <a href=\"https://www.postgresql.org/docs/current/runtime-config-logging.html\">Error Reporting and Logging</a></li>\n</ul>"
+      }
+    ],
+    "educationPrinciples": [],
+    "cleanCodeAttribute": "TRUSTWORTHY",
+    "cleanCodeAttributeCategory": "RESPONSIBLE",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "securityStandards": [
+      "cwe:259",
+      "cwe:798",
+      "owaspAsvs-4.0:2.10.4",
+      "owaspAsvs-4.0:3.5.2",
+      "owaspAsvs-4.0:6.4.1",
+      "owaspTop10-2021:a7",
+      "owaspTop10:a3",
+      "pciDss-3.2:6.5.10",
+      "pciDss-4.0:6.2.4",
+      "stig-ASD_V5R3:V-222642"
+    ],
+    "requiredEntitlements": []
+  },
+  "csharpsquid:S4790": {
+    "key": "csharpsquid:S4790",
+    "repo": "csharpsquid",
+    "name": "Weak hashing algorithms should not be used",
+    "createdAt": "2018-11-29T10:10:36+0000",
+    "htmlDesc": "<p>Using a weak hashing algorithm to protect sensitive data can compromise the security guarantees the hash is meant to provide.</p>\n<h2>Why is this an issue?</h2>\n<p>Cryptographic hash algorithms such as MD2, MD4, MD5, MD6, HAVAL-128, DSA (which uses SHA-1), RIPEMD, RIPEMD-128, RIPEMD-160, and SHA-1 are no\nlonger considered secure, because it is computationally feasible to find two different inputs that produce the same hash output — a collision. Message\nauthentication code (MAC) algorithms such as HMAC-MD5 or HMAC-SHA1 use these weak hash functions as building blocks and are likewise considered legacy\nalgorithms. When a weak hashing algorithm is used to protect sensitive data — such as storing passwords, generating security tokens, or verifying data\nintegrity — its weakness can be exploited to defeat that protection.</p>\n<h3>What is the potential impact?</h3>\n<h4>Breach of confidentiality</h4>\n<p>When weak hashing is used for password storage or security tokens, an attacker who obtains the hashed values can recover the original data more\neasily through brute force or precomputed (rainbow table) attacks.</p>\n<h4>Data integrity compromise</h4>\n<p>When weak hashing is used to verify the integrity of data or downloaded files, an attacker can craft a different input that produces the same hash,\nallowing them to substitute malicious content without detection.</p>\n<h2>How to fix it</h2>\n<p>To hash passwords or other sensitive data, use a slow, memory-hard algorithm specifically designed for that purpose. In order of preference:\n<code>Argon2</code>, <code>scrypt</code>, <code>bcrypt</code>, or <code>PBKDF2</code>. These algorithms make brute-force and rainbow-table attacks\ncomputationally expensive.</p>\n<p>For non-sensitive use cases such as data integrity or fingerprinting, use a modern cryptographic hash function such as <code>SHA-256</code>,\n<code>SHA-512</code>, or <code>SHA-3</code>.</p>\n<h3>Code examples</h3>\n<p>The following noncompliant example uses a weak hashing algorithm that is vulnerable to collision and preimage attacks.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nvar hashProvider1 = new MD5CryptoServiceProvider(); // Noncompliant\nvar hashProvider2 = (HashAlgorithm)CryptoConfig.CreateFromName(\"MD5\"); // Noncompliant\nvar hashProvider3 = new SHA1Managed(); // Noncompliant\nvar hashProvider4 = HashAlgorithm.Create(\"SHA1\"); // Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nvar hashProvider1 = SHA512.Create();\nvar hashProvider2 = (HashAlgorithm)CryptoConfig.CreateFromName(\"SHA512\");\nvar hashProvider3 = HashAlgorithm.Create(\"SHA512\");\n</pre>\n<h2>Resources</h2>\n<h3>Documentation</h3>\n<ul>\n  <li>OWASP CheatSheet - <a href=\"https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html\">Password Storage Cheat\n  Sheet</a></li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A02_2021-Cryptographic_Failures/\">Top 10 2021 Category A2 - Cryptographic Failures</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa3-sensitive-data-disclosure.md\">Top 10 2017 Category A3 - Sensitive Data\n  Exposure</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa6-security-misconfiguration.md\">Top 10 2017 Category A6 - Security\n  Misconfiguration</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/1240\">CWE-1240 - Use of a Risky Cryptographic Primitive</a></li>\n</ul>",
+    "mdDesc": "<p>Using a weak hashing algorithm to protect sensitive data can compromise the security guarantees the hash is meant to provide.</p>\n<h2>Why is this an issue?</h2>\n<p>Cryptographic hash algorithms such as MD2, MD4, MD5, MD6, HAVAL-128, DSA (which uses SHA-1), RIPEMD, RIPEMD-128, RIPEMD-160, and SHA-1 are no\nlonger considered secure, because it is computationally feasible to find two different inputs that produce the same hash output — a collision. Message\nauthentication code (MAC) algorithms such as HMAC-MD5 or HMAC-SHA1 use these weak hash functions as building blocks and are likewise considered legacy\nalgorithms. When a weak hashing algorithm is used to protect sensitive data — such as storing passwords, generating security tokens, or verifying data\nintegrity — its weakness can be exploited to defeat that protection.</p>\n<h3>What is the potential impact?</h3>\n<h4>Breach of confidentiality</h4>\n<p>When weak hashing is used for password storage or security tokens, an attacker who obtains the hashed values can recover the original data more\neasily through brute force or precomputed (rainbow table) attacks.</p>\n<h4>Data integrity compromise</h4>\n<p>When weak hashing is used to verify the integrity of data or downloaded files, an attacker can craft a different input that produces the same hash,\nallowing them to substitute malicious content without detection.</p>\n<h2>How to fix it</h2>\n<p>To hash passwords or other sensitive data, use a slow, memory-hard algorithm specifically designed for that purpose. In order of preference:\n<code>Argon2</code>, <code>scrypt</code>, <code>bcrypt</code>, or <code>PBKDF2</code>. These algorithms make brute-force and rainbow-table attacks\ncomputationally expensive.</p>\n<p>For non-sensitive use cases such as data integrity or fingerprinting, use a modern cryptographic hash function such as <code>SHA-256</code>,\n<code>SHA-512</code>, or <code>SHA-3</code>.</p>\n<h3>Code examples</h3>\n<p>The following noncompliant example uses a weak hashing algorithm that is vulnerable to collision and preimage attacks.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nvar hashProvider1 = new MD5CryptoServiceProvider(); // Noncompliant\nvar hashProvider2 = (HashAlgorithm)CryptoConfig.CreateFromName(\"MD5\"); // Noncompliant\nvar hashProvider3 = new SHA1Managed(); // Noncompliant\nvar hashProvider4 = HashAlgorithm.Create(\"SHA1\"); // Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nvar hashProvider1 = SHA512.Create();\nvar hashProvider2 = (HashAlgorithm)CryptoConfig.CreateFromName(\"SHA512\");\nvar hashProvider3 = HashAlgorithm.Create(\"SHA512\");\n</pre>\n<h2>Resources</h2>\n<h3>Documentation</h3>\n<ul>\n  <li>OWASP CheatSheet - <a href=\"https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html\">Password Storage Cheat\n  Sheet</a></li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A02_2021-Cryptographic_Failures/\">Top 10 2021 Category A2 - Cryptographic Failures</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa3-sensitive-data-disclosure.md\">Top 10 2017 Category A3 - Sensitive Data\n  Exposure</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa6-security-misconfiguration.md\">Top 10 2017 Category A6 - Security\n  Misconfiguration</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/1240\">CWE-1240 - Use of a Risky Cryptographic Primitive</a></li>\n</ul>",
+    "severity": "CRITICAL",
+    "status": "READY",
+    "isTemplate": false,
+    "tags": [],
+    "sysTags": [
+      "cryptography",
+      "cwe",
+      "former-hotspot"
+    ],
+    "lang": "cs",
+    "langName": "C#",
+    "params": [],
+    "defaultDebtRemFnType": "CONSTANT_ISSUE",
+    "defaultDebtRemFnOffset": "30min",
+    "debtOverloaded": false,
+    "debtRemFnType": "CONSTANT_ISSUE",
+    "debtRemFnOffset": "30min",
+    "type": "VULNERABILITY",
+    "defaultRemFnType": "CONSTANT_ISSUE",
+    "defaultRemFnBaseEffort": "30min",
+    "remFnType": "CONSTANT_ISSUE",
+    "remFnBaseEffort": "30min",
+    "remFnOverloaded": false,
+    "scope": "MAIN",
+    "isExternal": false,
+    "descriptionSections": [
+      {
+        "key": "introduction",
+        "content": "<p>Using a weak hashing algorithm to protect sensitive data can compromise the security guarantees the hash is meant to provide.</p>"
+      },
+      {
+        "key": "root_cause",
+        "content": "<p>Cryptographic hash algorithms such as MD2, MD4, MD5, MD6, HAVAL-128, DSA (which uses SHA-1), RIPEMD, RIPEMD-128, RIPEMD-160, and SHA-1 are no\nlonger considered secure, because it is computationally feasible to find two different inputs that produce the same hash output — a collision. Message\nauthentication code (MAC) algorithms such as HMAC-MD5 or HMAC-SHA1 use these weak hash functions as building blocks and are likewise considered legacy\nalgorithms. When a weak hashing algorithm is used to protect sensitive data — such as storing passwords, generating security tokens, or verifying data\nintegrity — its weakness can be exploited to defeat that protection.</p>\n<h3>What is the potential impact?</h3>\n<h4>Breach of confidentiality</h4>\n<p>When weak hashing is used for password storage or security tokens, an attacker who obtains the hashed values can recover the original data more\neasily through brute force or precomputed (rainbow table) attacks.</p>\n<h4>Data integrity compromise</h4>\n<p>When weak hashing is used to verify the integrity of data or downloaded files, an attacker can craft a different input that produces the same hash,\nallowing them to substitute malicious content without detection.</p>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p>To hash passwords or other sensitive data, use a slow, memory-hard algorithm specifically designed for that purpose. In order of preference:\n<code>Argon2</code>, <code>scrypt</code>, <code>bcrypt</code>, or <code>PBKDF2</code>. These algorithms make brute-force and rainbow-table attacks\ncomputationally expensive.</p>\n<p>For non-sensitive use cases such as data integrity or fingerprinting, use a modern cryptographic hash function such as <code>SHA-256</code>,\n<code>SHA-512</code>, or <code>SHA-3</code>.</p>\n\n<p>The following noncompliant example uses a weak hashing algorithm that is vulnerable to collision and preimage attacks.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nvar hashProvider1 = new MD5CryptoServiceProvider(); // Noncompliant\nvar hashProvider2 = (HashAlgorithm)CryptoConfig.CreateFromName(\"MD5\"); // Noncompliant\nvar hashProvider3 = new SHA1Managed(); // Noncompliant\nvar hashProvider4 = HashAlgorithm.Create(\"SHA1\"); // Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nvar hashProvider1 = SHA512.Create();\nvar hashProvider2 = (HashAlgorithm)CryptoConfig.CreateFromName(\"SHA512\");\nvar hashProvider3 = HashAlgorithm.Create(\"SHA512\");\n</pre>"
+      },
+      {
+        "key": "resources",
+        "content": "<h3>Documentation</h3>\n<ul>\n  <li>OWASP CheatSheet - <a href=\"https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html\">Password Storage Cheat\n  Sheet</a></li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A02_2021-Cryptographic_Failures/\">Top 10 2021 Category A2 - Cryptographic Failures</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa3-sensitive-data-disclosure.md\">Top 10 2017 Category A3 - Sensitive Data\n  Exposure</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa6-security-misconfiguration.md\">Top 10 2017 Category A6 - Security\n  Misconfiguration</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/1240\">CWE-1240 - Use of a Risky Cryptographic Primitive</a></li>\n</ul>"
+      }
+    ],
+    "educationPrinciples": [],
+    "cleanCodeAttribute": "TRUSTWORTHY",
+    "cleanCodeAttributeCategory": "RESPONSIBLE",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "HIGH"
+      }
+    ],
+    "securityStandards": [
+      "cwe:1240",
+      "owaspTop10-2021:a2",
+      "owaspTop10:a3",
+      "owaspTop10:a6",
+      "pciDss-3.2:3.4",
+      "pciDss-3.2:6.5.3",
+      "pciDss-3.2:6.5.4",
+      "pciDss-4.0:6.2.4"
+    ],
+    "requiredEntitlements": []
+  },
+  "csharpsquid:S3330": {
+    "key": "csharpsquid:S3330",
+    "repo": "csharpsquid",
+    "name": "Cookies should have the \"HttpOnly\" flag",
+    "createdAt": "2018-05-16T10:56:55+0000",
+    "htmlDesc": "<p>Setting the <code>HttpOnly</code> attribute on cookies prevents client-side scripts from reading their values, limiting the damage that cross-site\nscripting (XSS) attacks can cause.</p>\n<h2>Why is this an issue?</h2>\n<p>When a cookie is created without the <code>HttpOnly</code> attribute, or with it explicitly set to <code>false</code>, client-side scripts running\nin the browser can read the cookie’s value. By default, cookies are created with <code>HttpOnly</code> set to <code>false</code>, meaning they are\naccessible to browser scripts unless the developer explicitly enables this protection. Setting <code>HttpOnly</code> to <code>true</code> instructs\nthe browser to block script access to the cookie, limiting the damage from XSS attacks that attempt to steal session credentials.</p>\n<h3>What is the potential impact?</h3>\n<h4>Session hijacking and account takeover</h4>\n<p>The most common target of cookie theft is the session cookie used to authenticate a user. If an attacker can exploit an XSS vulnerability on a page\nwhere a session cookie is accessible to scripts, they can steal it and use it to impersonate the authenticated user without needing their credentials.\nThis can lead to unauthorized access to sensitive account data, account takeover, and potential privilege escalation within the application.</p>\n<h2>How to fix it</h2>\n<h3>Code examples</h3>\n<p>The following code creates a cookie without enabling the <code>HttpOnly</code> attribute.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\");\nmyCookie.HttpOnly = false; // Noncompliant: this cookie is created with the httponly flag set to false and so it can be stolen easily in case of XSS vulnerability\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\");\nmyCookie.HttpOnly = true;\n</pre>\n<h2>Resources</h2>\n<h3>Documentation</h3>\n<ul>\n  <li><a href=\"https://owasp.org/www-community/HttpOnly\">OWASP HttpOnly</a></li>\n  <li><a href=\"https://docs.microsoft.com/en-us/dotnet/api/system.web.httpcookie.httponly\">HttpCookie.HttpOnly Property - .NET</a></li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A05_2021-Security_Misconfiguration/\">Top 10 2021 Category A5 - Security Misconfiguration</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa7-xss.md\">Top 10 2017 Category A7 - Cross-Site Scripting (XSS)</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/1004\">CWE-1004 - Sensitive Cookie Without 'HttpOnly' Flag</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222575\">Application Security and\n  Development: V-222575</a> - The application must set the HTTPOnly flag on session cookies.</li>\n</ul>",
+    "mdDesc": "<p>Setting the <code>HttpOnly</code> attribute on cookies prevents client-side scripts from reading their values, limiting the damage that cross-site\nscripting (XSS) attacks can cause.</p>\n<h2>Why is this an issue?</h2>\n<p>When a cookie is created without the <code>HttpOnly</code> attribute, or with it explicitly set to <code>false</code>, client-side scripts running\nin the browser can read the cookie’s value. By default, cookies are created with <code>HttpOnly</code> set to <code>false</code>, meaning they are\naccessible to browser scripts unless the developer explicitly enables this protection. Setting <code>HttpOnly</code> to <code>true</code> instructs\nthe browser to block script access to the cookie, limiting the damage from XSS attacks that attempt to steal session credentials.</p>\n<h3>What is the potential impact?</h3>\n<h4>Session hijacking and account takeover</h4>\n<p>The most common target of cookie theft is the session cookie used to authenticate a user. If an attacker can exploit an XSS vulnerability on a page\nwhere a session cookie is accessible to scripts, they can steal it and use it to impersonate the authenticated user without needing their credentials.\nThis can lead to unauthorized access to sensitive account data, account takeover, and potential privilege escalation within the application.</p>\n<h2>How to fix it</h2>\n<h3>Code examples</h3>\n<p>The following code creates a cookie without enabling the <code>HttpOnly</code> attribute.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\");\nmyCookie.HttpOnly = false; // Noncompliant: this cookie is created with the httponly flag set to false and so it can be stolen easily in case of XSS vulnerability\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\");\nmyCookie.HttpOnly = true;\n</pre>\n<h2>Resources</h2>\n<h3>Documentation</h3>\n<ul>\n  <li><a href=\"https://owasp.org/www-community/HttpOnly\">OWASP HttpOnly</a></li>\n  <li><a href=\"https://docs.microsoft.com/en-us/dotnet/api/system.web.httpcookie.httponly\">HttpCookie.HttpOnly Property - .NET</a></li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A05_2021-Security_Misconfiguration/\">Top 10 2021 Category A5 - Security Misconfiguration</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa7-xss.md\">Top 10 2017 Category A7 - Cross-Site Scripting (XSS)</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/1004\">CWE-1004 - Sensitive Cookie Without 'HttpOnly' Flag</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222575\">Application Security and\n  Development: V-222575</a> - The application must set the HTTPOnly flag on session cookies.</li>\n</ul>",
+    "severity": "MINOR",
+    "status": "READY",
+    "isTemplate": false,
+    "tags": [],
+    "sysTags": [
+      "cwe",
+      "former-hotspot",
+      "privacy"
+    ],
+    "lang": "cs",
+    "langName": "C#",
+    "params": [],
+    "defaultDebtRemFnType": "CONSTANT_ISSUE",
+    "defaultDebtRemFnOffset": "10min",
+    "debtOverloaded": false,
+    "debtRemFnType": "CONSTANT_ISSUE",
+    "debtRemFnOffset": "10min",
+    "type": "VULNERABILITY",
+    "defaultRemFnType": "CONSTANT_ISSUE",
+    "defaultRemFnBaseEffort": "10min",
+    "remFnType": "CONSTANT_ISSUE",
+    "remFnBaseEffort": "10min",
+    "remFnOverloaded": false,
+    "scope": "MAIN",
+    "isExternal": false,
+    "descriptionSections": [
+      {
+        "key": "root_cause",
+        "content": "<p>When a cookie is created without the <code>HttpOnly</code> attribute, or with it explicitly set to <code>false</code>, client-side scripts running\nin the browser can read the cookie’s value. By default, cookies are created with <code>HttpOnly</code> set to <code>false</code>, meaning they are\naccessible to browser scripts unless the developer explicitly enables this protection. Setting <code>HttpOnly</code> to <code>true</code> instructs\nthe browser to block script access to the cookie, limiting the damage from XSS attacks that attempt to steal session credentials.</p>\n<h3>What is the potential impact?</h3>\n<h4>Session hijacking and account takeover</h4>\n<p>The most common target of cookie theft is the session cookie used to authenticate a user. If an attacker can exploit an XSS vulnerability on a page\nwhere a session cookie is accessible to scripts, they can steal it and use it to impersonate the authenticated user without needing their credentials.\nThis can lead to unauthorized access to sensitive account data, account takeover, and potential privilege escalation within the application.</p>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p>The following code creates a cookie without enabling the <code>HttpOnly</code> attribute.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\");\nmyCookie.HttpOnly = false; // Noncompliant: this cookie is created with the httponly flag set to false and so it can be stolen easily in case of XSS vulnerability\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\");\nmyCookie.HttpOnly = true;\n</pre>"
+      },
+      {
+        "key": "resources",
+        "content": "<h3>Documentation</h3>\n<ul>\n  <li><a href=\"https://owasp.org/www-community/HttpOnly\">OWASP HttpOnly</a></li>\n  <li><a href=\"https://docs.microsoft.com/en-us/dotnet/api/system.web.httpcookie.httponly\">HttpCookie.HttpOnly Property - .NET</a></li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A05_2021-Security_Misconfiguration/\">Top 10 2021 Category A5 - Security Misconfiguration</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa7-xss.md\">Top 10 2017 Category A7 - Cross-Site Scripting (XSS)</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/1004\">CWE-1004 - Sensitive Cookie Without 'HttpOnly' Flag</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222575\">Application Security and\n  Development: V-222575</a> - The application must set the HTTPOnly flag on session cookies.</li>\n</ul>"
+      },
+      {
+        "key": "introduction",
+        "content": "<p>Setting the <code>HttpOnly</code> attribute on cookies prevents client-side scripts from reading their values, limiting the damage that cross-site\nscripting (XSS) attacks can cause.</p>"
+      }
+    ],
+    "educationPrinciples": [],
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "LOW"
+      }
+    ],
+    "securityStandards": [
+      "cwe:1004",
+      "owaspAsvs-4.0:3.4.2",
+      "owaspTop10-2021:a5",
+      "owaspTop10:a7",
+      "pciDss-3.2:6.5.10",
+      "pciDss-4.0:6.2.4",
+      "stig-ASD_V5R3:V-222575"
+    ],
+    "requiredEntitlements": []
+  },
+  "csharpsquid:S2092": {
+    "key": "csharpsquid:S2092",
+    "repo": "csharpsquid",
+    "name": "Cookies should have the \"secure\" flag",
+    "createdAt": "2018-05-16T10:56:55+0000",
+    "htmlDesc": "<p>When a cookie is protected with the <code>secure</code> attribute set to <em>true</em> it will not be send by the browser over an unencrypted HTTP\nrequest and thus cannot be observed by an unauthorized person during a man-in-the-middle attack.</p>\n<h2>Why is this an issue?</h2>\n<p>When a cookie is created without the <code>secure</code> attribute set to <code>true</code>, browsers will transmit it over unencrypted HTTP\nconnections as well as HTTPS. An attacker who can observe or intercept network traffic—for example on a public Wi-Fi network—can read the cookie value\nin cleartext.</p>\n<h3>What is the potential impact?</h3>\n<h4>Session hijacking</h4>\n<p>If a session cookie is transmitted over an unencrypted HTTP connection, an attacker who can intercept the traffic can steal it. With a valid\nsession cookie, the attacker can impersonate the victim and gain full access to their account without knowing their password. Even on sites that\nprimarily use HTTPS, a single HTTP request containing the session cookie is enough to expose it.</p>\n<h2>How to fix it in ASP.NET</h2>\n<p>Set the <code>HttpCookie.Secure</code> property to <code>true</code> to prevent the cookie from being transmitted over unencrypted HTTP\nconnections. Alternatively, set <code>requireSSL=\"true\"</code> in the <code>&lt;httpCookies&gt;</code> element of the application’s\n<code>Web.config</code> file to enforce the secure flag globally.</p>\n<h3>Code examples</h3>\n<h4>Noncompliant code example</h4>\n<p>When the <code>HttpCookie.Secure</code> property is set to <code>false</code> then the cookie will be send during an unencrypted HTTP request:</p>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\");\nmyCookie.Secure = false; // Noncompliant\n</pre>\n<p>The <a href=\"https://docs.microsoft.com/en-us/dotnet/api/system.web.httpcookie.secure?view=netframework-4.8\">default value</a> of\n<code>Secure</code> flag is <code>false</code>, unless overwritten by an application’s configuration file:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"noncompliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\"); // Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<p>Set the <code>HttpCookie.Secure</code> property to <code>true</code>:</p>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\");\nmyCookie.Secure = true;\n</pre>\n<p>Or change the default flag values for the whole application by editing the <a\nhref=\"https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms228262(v=vs.100)\">Web.config configuration file</a>:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"compliant\">\n&lt;httpCookies httpOnlyCookies=\"true\" requireSSL=\"true\" /&gt;\n</pre>\n<ul>\n  <li>the <code>requireSSL</code> attribute corresponds programmatically to the <code>Secure</code> field.</li>\n  <li>the <code>httpOnlyCookies</code> attribute corresponds programmatically to the <code>httpOnly</code> field.</li>\n</ul>\n<h2>Resources</h2>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A04_2021-Insecure_Design/\">Top 10 2021 Category A4 - Insecure Design</a></li>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A05_2021-Security_Misconfiguration/\">Top 10 2021 Category A5 - Security Misconfiguration</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa3-sensitive-data-disclosure.md\">Top 10 2017 Category A3 - Sensitive Data\n  Exposure</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/311\">CWE-311 - Missing Encryption of Sensitive Data</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/315\">CWE-315 - Cleartext Storage of Sensitive Information in a Cookie</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/614\">CWE-614 - Sensitive Cookie in HTTPS Session Without 'Secure' Attribute</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222576\">Application Security and\n  Development: V-222576</a> - The application must set the secure flag on session cookies.</li>\n</ul>",
+    "mdDesc": "<p>When a cookie is protected with the <code>secure</code> attribute set to <em>true</em> it will not be send by the browser over an unencrypted HTTP\nrequest and thus cannot be observed by an unauthorized person during a man-in-the-middle attack.</p>\n<h2>Why is this an issue?</h2>\n<p>When a cookie is created without the <code>secure</code> attribute set to <code>true</code>, browsers will transmit it over unencrypted HTTP\nconnections as well as HTTPS. An attacker who can observe or intercept network traffic—for example on a public Wi-Fi network—can read the cookie value\nin cleartext.</p>\n<h3>What is the potential impact?</h3>\n<h4>Session hijacking</h4>\n<p>If a session cookie is transmitted over an unencrypted HTTP connection, an attacker who can intercept the traffic can steal it. With a valid\nsession cookie, the attacker can impersonate the victim and gain full access to their account without knowing their password. Even on sites that\nprimarily use HTTPS, a single HTTP request containing the session cookie is enough to expose it.</p>\n<h2>How to fix it in ASP.NET</h2>\n<p>Set the <code>HttpCookie.Secure</code> property to <code>true</code> to prevent the cookie from being transmitted over unencrypted HTTP\nconnections. Alternatively, set <code>requireSSL=\"true\"</code> in the <code>&lt;httpCookies&gt;</code> element of the application’s\n<code>Web.config</code> file to enforce the secure flag globally.</p>\n<h3>Code examples</h3>\n<h4>Noncompliant code example</h4>\n<p>When the <code>HttpCookie.Secure</code> property is set to <code>false</code> then the cookie will be send during an unencrypted HTTP request:</p>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\");\nmyCookie.Secure = false; // Noncompliant\n</pre>\n<p>The <a href=\"https://docs.microsoft.com/en-us/dotnet/api/system.web.httpcookie.secure?view=netframework-4.8\">default value</a> of\n<code>Secure</code> flag is <code>false</code>, unless overwritten by an application’s configuration file:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"noncompliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\"); // Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<p>Set the <code>HttpCookie.Secure</code> property to <code>true</code>:</p>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\");\nmyCookie.Secure = true;\n</pre>\n<p>Or change the default flag values for the whole application by editing the <a\nhref=\"https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms228262(v=vs.100)\">Web.config configuration file</a>:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"compliant\">\n&lt;httpCookies httpOnlyCookies=\"true\" requireSSL=\"true\" /&gt;\n</pre>\n<ul>\n  <li>the <code>requireSSL</code> attribute corresponds programmatically to the <code>Secure</code> field.</li>\n  <li>the <code>httpOnlyCookies</code> attribute corresponds programmatically to the <code>httpOnly</code> field.</li>\n</ul>\n<h2>Resources</h2>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A04_2021-Insecure_Design/\">Top 10 2021 Category A4 - Insecure Design</a></li>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A05_2021-Security_Misconfiguration/\">Top 10 2021 Category A5 - Security Misconfiguration</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa3-sensitive-data-disclosure.md\">Top 10 2017 Category A3 - Sensitive Data\n  Exposure</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/311\">CWE-311 - Missing Encryption of Sensitive Data</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/315\">CWE-315 - Cleartext Storage of Sensitive Information in a Cookie</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/614\">CWE-614 - Sensitive Cookie in HTTPS Session Without 'Secure' Attribute</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222576\">Application Security and\n  Development: V-222576</a> - The application must set the secure flag on session cookies.</li>\n</ul>",
+    "severity": "MINOR",
+    "status": "READY",
+    "isTemplate": false,
+    "tags": [],
+    "sysTags": [
+      "cwe",
+      "former-hotspot",
+      "privacy"
+    ],
+    "lang": "cs",
+    "langName": "C#",
+    "params": [],
+    "defaultDebtRemFnType": "CONSTANT_ISSUE",
+    "defaultDebtRemFnOffset": "5min",
+    "debtOverloaded": false,
+    "debtRemFnType": "CONSTANT_ISSUE",
+    "debtRemFnOffset": "5min",
+    "type": "VULNERABILITY",
+    "defaultRemFnType": "CONSTANT_ISSUE",
+    "defaultRemFnBaseEffort": "5min",
+    "remFnType": "CONSTANT_ISSUE",
+    "remFnBaseEffort": "5min",
+    "remFnOverloaded": false,
+    "scope": "MAIN",
+    "isExternal": false,
+    "descriptionSections": [
+      {
+        "key": "resources",
+        "content": "<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A04_2021-Insecure_Design/\">Top 10 2021 Category A4 - Insecure Design</a></li>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A05_2021-Security_Misconfiguration/\">Top 10 2021 Category A5 - Security Misconfiguration</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa3-sensitive-data-disclosure.md\">Top 10 2017 Category A3 - Sensitive Data\n  Exposure</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/311\">CWE-311 - Missing Encryption of Sensitive Data</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/315\">CWE-315 - Cleartext Storage of Sensitive Information in a Cookie</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/614\">CWE-614 - Sensitive Cookie in HTTPS Session Without 'Secure' Attribute</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222576\">Application Security and\n  Development: V-222576</a> - The application must set the secure flag on session cookies.</li>\n</ul>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p>Set the <code>HttpCookie.Secure</code> property to <code>true</code> to prevent the cookie from being transmitted over unencrypted HTTP\nconnections. Alternatively, set <code>requireSSL=\"true\"</code> in the <code>&lt;httpCookies&gt;</code> element of the application’s\n<code>Web.config</code> file to enforce the secure flag globally.</p>\n\n<h4>Noncompliant code example</h4>\n<p>When the <code>HttpCookie.Secure</code> property is set to <code>false</code> then the cookie will be send during an unencrypted HTTP request:</p>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\");\nmyCookie.Secure = false; // Noncompliant\n</pre>\n<p>The <a href=\"https://docs.microsoft.com/en-us/dotnet/api/system.web.httpcookie.secure?view=netframework-4.8\">default value</a> of\n<code>Secure</code> flag is <code>false</code>, unless overwritten by an application’s configuration file:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"noncompliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\"); // Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<p>Set the <code>HttpCookie.Secure</code> property to <code>true</code>:</p>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nHttpCookie myCookie = new HttpCookie(\"Sensitive cookie\");\nmyCookie.Secure = true;\n</pre>\n<p>Or change the default flag values for the whole application by editing the <a\nhref=\"https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-4.0/ms228262(v=vs.100)\">Web.config configuration file</a>:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"compliant\">\n&lt;httpCookies httpOnlyCookies=\"true\" requireSSL=\"true\" /&gt;\n</pre>\n<ul>\n  <li>the <code>requireSSL</code> attribute corresponds programmatically to the <code>Secure</code> field.</li>\n  <li>the <code>httpOnlyCookies</code> attribute corresponds programmatically to the <code>httpOnly</code> field.</li>\n</ul>",
+        "context": {
+          "displayName": "ASP.NET",
+          "key": "asp_net"
+        }
+      },
+      {
+        "key": "root_cause",
+        "content": "<p>When a cookie is created without the <code>secure</code> attribute set to <code>true</code>, browsers will transmit it over unencrypted HTTP\nconnections as well as HTTPS. An attacker who can observe or intercept network traffic—for example on a public Wi-Fi network—can read the cookie value\nin cleartext.</p>\n<h3>What is the potential impact?</h3>\n<h4>Session hijacking</h4>\n<p>If a session cookie is transmitted over an unencrypted HTTP connection, an attacker who can intercept the traffic can steal it. With a valid\nsession cookie, the attacker can impersonate the victim and gain full access to their account without knowing their password. Even on sites that\nprimarily use HTTPS, a single HTTP request containing the session cookie is enough to expose it.</p>"
+      },
+      {
+        "key": "introduction",
+        "content": "<p>When a cookie is protected with the <code>secure</code> attribute set to <em>true</em> it will not be send by the browser over an unencrypted HTTP\nrequest and thus cannot be observed by an unauthorized person during a man-in-the-middle attack.</p>"
+      }
+    ],
+    "educationPrinciples": [],
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "LOW"
+      }
+    ],
+    "securityStandards": [
+      "cwe:311",
+      "cwe:315",
+      "cwe:614",
+      "owaspAsvs-4.0:3.4.1",
+      "owaspAsvs-4.0:6.1.1",
+      "owaspAsvs-4.0:6.1.2",
+      "owaspAsvs-4.0:6.1.3",
+      "owaspTop10-2021:a4",
+      "owaspTop10-2021:a5",
+      "owaspTop10:a3",
+      "pciDss-3.2:6.5.10",
+      "pciDss-4.0:6.2.4",
+      "stig-ASD_V5R3:V-222576"
+    ],
+    "requiredEntitlements": []
+  },
+  "csharpsquid:S2077": {
+    "key": "csharpsquid:S2077",
+    "repo": "csharpsquid",
+    "name": "SQL queries should not be dynamically formatted",
+    "createdAt": "2018-11-29T10:10:36+0000",
+    "htmlDesc": "<p>Dynamically building SQL query strings can result in broken SQL syntax and open SQL injection attacks.</p>\n<h2>Why is this an issue?</h2>\n<p>When SQL queries are constructed by concatenating or formatting user-supplied values directly into the query string, the structure of the query\nitself can be altered by a malicious input. This rule flags calls to SQL execution functions where the query string is built using string\nconcatenation or format operators rather than parameterized queries or prepared statements. Unlike rule <a href='/organizations/mikelopster/rules?open=csharpsquid%3AS3649&rule_key=csharpsquid%3AS3649'>S3649</a>, this rule does not\nperform taint analysis — it flags all dynamically formatted SQL queries as a potential risk regardless of the data source.</p>\n<h3>What is the potential impact?</h3>\n<h4>SQL injection</h4>\n<p>If any part of a dynamically formatted query string originates from untrusted input, an attacker can manipulate the query to read, modify, or\ndelete data they should not have access to, bypass authentication checks, or in some configurations execute operating system commands.</p>\n<h2>How to fix it</h2>\n<h3>Code examples</h3>\n<p>The following code builds a SQL query by concatenating a value directly into the query string.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\npublic void Foo(DbContext context, string query, string param)\n{\n    string sensitiveQuery = string.Concat(query, param);\n    context.Database.ExecuteSqlCommand(sensitiveQuery); // Noncompliant\n    context.Query&lt;User&gt;().FromSql(sensitiveQuery); // Noncompliant\n\n    context.Database.ExecuteSqlCommand($\"SELECT * FROM mytable WHERE mycol={value}\", param); // Noncompliant: the FormattableString is evaluated and converted to RawSqlString\n    string query = $\"SELECT * FROM mytable WHERE mycol={param}\";\n    context.Database.ExecuteSqlCommand(query); // Noncompliant: the FormattableString has already been evaluated, it won't be converted to a parametrized query.\n}\n\npublic void Bar(SqlConnection connection, string param)\n{\n    SqlCommand command;\n    string sensitiveQuery = string.Format(\"INSERT INTO Users (name) VALUES (\\\"{0}\\\")\", param);\n    command = new SqlCommand(sensitiveQuery); // Noncompliant\n\n    command.CommandText = sensitiveQuery; // Noncompliant\n\n    SqlDataAdapter adapter;\n    adapter = new SqlDataAdapter(sensitiveQuery, connection); // Noncompliant\n}\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\npublic void Foo(DbContext context, string query, string param)\n{\n    context.Database.ExecuteSqlCommand(\"SELECT * FROM mytable WHERE mycol=@p0\", param); // Compliant, it's a parametrized safe query\n}\n</pre>\n<h2>Resources</h2>\n<h3>Articles &amp; blog posts</h3>\n<ul>\n  <li>Derived from FindSecBugs rules <a href=\"https://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JPA\">Potential SQL/JPQL Injection\n  (JPA)</a>, <a href=\"https://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JDO\">Potential SQL/JDOQL Injection (JDO)</a>, <a\n  href=\"https://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_HIBERNATE\">Potential SQL/HQL Injection (Hibernate)</a></li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A03_2021-Injection/\">Top 10 2021 Category A3 - Injection</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa1-injection.md\">Top 10 2017 Category A1 - Injection</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/89\">CWE-89 - Improper Neutralization of Special Elements used in an SQL Command</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/943\">CWE-943 - Improper Neutralization of Special Elements in Data Query Logic</a></li>\n</ul>",
+    "mdDesc": "<p>Dynamically building SQL query strings can result in broken SQL syntax and open SQL injection attacks.</p>\n<h2>Why is this an issue?</h2>\n<p>When SQL queries are constructed by concatenating or formatting user-supplied values directly into the query string, the structure of the query\nitself can be altered by a malicious input. This rule flags calls to SQL execution functions where the query string is built using string\nconcatenation or format operators rather than parameterized queries or prepared statements. Unlike rule {rule:csharpsquid:S3649}, this rule does not\nperform taint analysis — it flags all dynamically formatted SQL queries as a potential risk regardless of the data source.</p>\n<h3>What is the potential impact?</h3>\n<h4>SQL injection</h4>\n<p>If any part of a dynamically formatted query string originates from untrusted input, an attacker can manipulate the query to read, modify, or\ndelete data they should not have access to, bypass authentication checks, or in some configurations execute operating system commands.</p>\n<h2>How to fix it</h2>\n<h3>Code examples</h3>\n<p>The following code builds a SQL query by concatenating a value directly into the query string.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\npublic void Foo(DbContext context, string query, string param)\n{\n    string sensitiveQuery = string.Concat(query, param);\n    context.Database.ExecuteSqlCommand(sensitiveQuery); // Noncompliant\n    context.Query&lt;User&gt;().FromSql(sensitiveQuery); // Noncompliant\n\n    context.Database.ExecuteSqlCommand($\"SELECT * FROM mytable WHERE mycol={value}\", param); // Noncompliant: the FormattableString is evaluated and converted to RawSqlString\n    string query = $\"SELECT * FROM mytable WHERE mycol={param}\";\n    context.Database.ExecuteSqlCommand(query); // Noncompliant: the FormattableString has already been evaluated, it won't be converted to a parametrized query.\n}\n\npublic void Bar(SqlConnection connection, string param)\n{\n    SqlCommand command;\n    string sensitiveQuery = string.Format(\"INSERT INTO Users (name) VALUES (\\\"{0}\\\")\", param);\n    command = new SqlCommand(sensitiveQuery); // Noncompliant\n\n    command.CommandText = sensitiveQuery; // Noncompliant\n\n    SqlDataAdapter adapter;\n    adapter = new SqlDataAdapter(sensitiveQuery, connection); // Noncompliant\n}\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\npublic void Foo(DbContext context, string query, string param)\n{\n    context.Database.ExecuteSqlCommand(\"SELECT * FROM mytable WHERE mycol=@p0\", param); // Compliant, it's a parametrized safe query\n}\n</pre>\n<h2>Resources</h2>\n<h3>Articles &amp; blog posts</h3>\n<ul>\n  <li>Derived from FindSecBugs rules <a href=\"https://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JPA\">Potential SQL/JPQL Injection\n  (JPA)</a>, <a href=\"https://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JDO\">Potential SQL/JDOQL Injection (JDO)</a>, <a\n  href=\"https://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_HIBERNATE\">Potential SQL/HQL Injection (Hibernate)</a></li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A03_2021-Injection/\">Top 10 2021 Category A3 - Injection</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa1-injection.md\">Top 10 2017 Category A1 - Injection</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/89\">CWE-89 - Improper Neutralization of Special Elements used in an SQL Command</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/943\">CWE-943 - Improper Neutralization of Special Elements in Data Query Logic</a></li>\n</ul>",
+    "severity": "MAJOR",
+    "status": "READY",
+    "isTemplate": false,
+    "tags": [],
+    "sysTags": [
+      "bad-practice",
+      "cwe",
+      "former-hotspot",
+      "sql"
+    ],
+    "lang": "cs",
+    "langName": "C#",
+    "params": [],
+    "defaultDebtRemFnType": "CONSTANT_ISSUE",
+    "defaultDebtRemFnOffset": "20min",
+    "debtOverloaded": false,
+    "debtRemFnType": "CONSTANT_ISSUE",
+    "debtRemFnOffset": "20min",
+    "type": "VULNERABILITY",
+    "defaultRemFnType": "CONSTANT_ISSUE",
+    "defaultRemFnBaseEffort": "20min",
+    "remFnType": "CONSTANT_ISSUE",
+    "remFnBaseEffort": "20min",
+    "remFnOverloaded": false,
+    "scope": "MAIN",
+    "isExternal": false,
+    "descriptionSections": [
+      {
+        "key": "how_to_fix",
+        "content": "<p>The following code builds a SQL query by concatenating a value directly into the query string.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\npublic void Foo(DbContext context, string query, string param)\n{\n    string sensitiveQuery = string.Concat(query, param);\n    context.Database.ExecuteSqlCommand(sensitiveQuery); // Noncompliant\n    context.Query&lt;User&gt;().FromSql(sensitiveQuery); // Noncompliant\n\n    context.Database.ExecuteSqlCommand($\"SELECT * FROM mytable WHERE mycol={value}\", param); // Noncompliant: the FormattableString is evaluated and converted to RawSqlString\n    string query = $\"SELECT * FROM mytable WHERE mycol={param}\";\n    context.Database.ExecuteSqlCommand(query); // Noncompliant: the FormattableString has already been evaluated, it won't be converted to a parametrized query.\n}\n\npublic void Bar(SqlConnection connection, string param)\n{\n    SqlCommand command;\n    string sensitiveQuery = string.Format(\"INSERT INTO Users (name) VALUES (\\\"{0}\\\")\", param);\n    command = new SqlCommand(sensitiveQuery); // Noncompliant\n\n    command.CommandText = sensitiveQuery; // Noncompliant\n\n    SqlDataAdapter adapter;\n    adapter = new SqlDataAdapter(sensitiveQuery, connection); // Noncompliant\n}\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\npublic void Foo(DbContext context, string query, string param)\n{\n    context.Database.ExecuteSqlCommand(\"SELECT * FROM mytable WHERE mycol=@p0\", param); // Compliant, it's a parametrized safe query\n}\n</pre>"
+      },
+      {
+        "key": "introduction",
+        "content": "<p>Dynamically building SQL query strings can result in broken SQL syntax and open SQL injection attacks.</p>"
+      },
+      {
+        "key": "root_cause",
+        "content": "<p>When SQL queries are constructed by concatenating or formatting user-supplied values directly into the query string, the structure of the query\nitself can be altered by a malicious input. This rule flags calls to SQL execution functions where the query string is built using string\nconcatenation or format operators rather than parameterized queries or prepared statements. Unlike rule <a href='/organizations/mikelopster/rules?open=csharpsquid%3AS3649&rule_key=csharpsquid%3AS3649'>S3649</a>, this rule does not\nperform taint analysis — it flags all dynamically formatted SQL queries as a potential risk regardless of the data source.</p>\n<h3>What is the potential impact?</h3>\n<h4>SQL injection</h4>\n<p>If any part of a dynamically formatted query string originates from untrusted input, an attacker can manipulate the query to read, modify, or\ndelete data they should not have access to, bypass authentication checks, or in some configurations execute operating system commands.</p>"
+      },
+      {
+        "key": "resources",
+        "content": "<h3>Articles &amp; blog posts</h3>\n<ul>\n  <li>Derived from FindSecBugs rules <a href=\"https://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JPA\">Potential SQL/JPQL Injection\n  (JPA)</a>, <a href=\"https://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_JDO\">Potential SQL/JDOQL Injection (JDO)</a>, <a\n  href=\"https://h3xstream.github.io/find-sec-bugs/bugs.htm#SQL_INJECTION_HIBERNATE\">Potential SQL/HQL Injection (Hibernate)</a></li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A03_2021-Injection/\">Top 10 2021 Category A3 - Injection</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa1-injection.md\">Top 10 2017 Category A1 - Injection</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/89\">CWE-89 - Improper Neutralization of Special Elements used in an SQL Command</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/943\">CWE-943 - Improper Neutralization of Special Elements in Data Query Logic</a></li>\n</ul>"
+      }
+    ],
+    "educationPrinciples": [],
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "LOW"
+      },
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "securityStandards": [
+      "cwe:89",
+      "cwe:943",
+      "owaspAsvs-4.0:5.1.3",
+      "owaspAsvs-4.0:5.1.4",
+      "owaspAsvs-4.0:5.3.4",
+      "owaspAsvs-4.0:5.3.5",
+      "owaspTop10-2021:a3",
+      "owaspTop10:a1",
+      "pciDss-3.2:6.5.1",
+      "pciDss-4.0:6.2.4"
+    ],
+    "requiredEntitlements": []
+  },
+  "roslyn.sonaranalyzer.security.cs:S5144": {
+    "key": "roslyn.sonaranalyzer.security.cs:S5144",
+    "repo": "roslyn.sonaranalyzer.security.cs",
+    "name": "Server-side requests should not be vulnerable to forging attacks",
+    "createdAt": "2019-03-26T05:42:31+0000",
+    "htmlDesc": "<h2>Why is this an issue?</h2>\n<p>Server-Side Request Forgery (SSRF) occurs when attackers can coerce a server to perform arbitrary requests on their behalf.\n  <br></p>\n<p>An SSRF vulnerability can either be basic or blind, depending on whether the server’s fetched data is directly returned in the web application’s\nresponse.\n  <br>\n  The absence of the corresponding response for the coerced request on the application is not a barrier to exploitation and thus must be treated in\n  the same way as basic SSRF.</p>\n<h3>What is the potential impact?</h3>\n<p>SSRF usually results in unauthorized actions or data disclosure in the vulnerable application or on a different system it can reach. Conditional to\nwhat is reachable, remote command execution can be achieved, although it often requires chaining with further exploitations.</p>\n<p>Information disclosure is SSRF’s core outcome. Depending on the extracted data, an attacker can perform a variety of different actions that can\nrange from low to critical severity.</p>\n<p>Below are some real-world scenarios that illustrate some impacts of an attacker exploiting the vulnerability.</p>\n<h4>Local file read to host takeover</h4>\n<p>An attacker manipulates an application into performing a local request for a sensitive file, such as <code>~/.ssh/id_rsa</code>, by using the File\nURI scheme <code>file://</code>.\n  <br>\n  Once in possession of the SSH keys, the attacker establishes a remote connection to the system hosting the web application.</p>\n<h4>Internal Network Reconnaissance</h4>\n<p>An attacker enumerates internal accessible ports from the affected server or others to which the server can communicate by iterating over the port\nfield in the URL <code>http://127.0.0.1:{port}</code>.\n  <br>\n  Taking advantage of other supported URL schemas (dependent on the affected system), for example, <code>gopher://127.0.0.1:3306</code>, an attacker\n  would be able to connect to a database service and perform queries on it.</p>\n<h2>How to fix it in ASP.NET</h2>\n<h3>Code examples</h3>\n<p>The following code is vulnerable to SSRF as it performs an HTTP request to a URL defined by untrusted data.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nusing System.Web;\nusing System.Web.Mvc;\n\npublic class ExampleController: Controller\n{\n    [HttpGet]\n    public async Task&lt;IActionResult&gt; ImageFetch(string location)\n    {\n        await using Stream stream =\n            await client.GetStreamAsync(location); // Noncompliant\n        var exampleImage =\n            await JsonSerializer.DeserializeAsync&lt;ExampleImage&gt;(stream);\n\n        return Ok(exampleImage ?? new());\n    }\n}\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nusing System.Web;\nusing System.Web.Mvc;\n\npublic class ExampleController: Controller\n{\n    private readonly string[] allowedSchemes = { \"https\" };\n    private readonly string[] allowedDomains = { \"trusted1.example.com\", \"trusted2.example.com\" };\n\n    [HttpGet]\n    public async Task&lt;IActionResult&gt; ImageFetch(string location)\n    {\n        Uri uri = new Uri(location);\n\n        if (!(allowedDomains.Contains(uri.Host) &amp;&amp; allowedSchemes.Contains(uri.Scheme)))\n        {\n            return BadRequest();\n        }\n\n        await using Stream stream =\n            await client.GetStreamAsync(uri);\n        var exampleImage =\n            await JsonSerializer.DeserializeAsync&lt;ExampleImage&gt;(stream);\n\n        return Ok(exampleImage ?? new());\n    }\n}\n</pre>\n<h3>How does this work?</h3>\n<h4>Pre-Approved URLs</h4>\n<p>Create a list of authorized and secure URLs that you want the application to be able to request.\n  <br>\n  If a user input does not match an entry in this list, it should be rejected because it is considered unsafe.</p>\n<p><strong>Important note</strong>: The application must do validation on the server side. Not on client-side front-ends.</p>\n<h4>Blacklisting</h4>\n<p>While whitelisting URLs is the preferred approach to ensure only safe URLs are accessible, there are scenarios where blacklisting may be\nnecessary.</p>\n<p>If whitelisting is not feasible, blacklisting can serve as a partial defense against SSRF attacks, particularly when the objective is to block\naccess to internal resources or specific known malicious URLs.</p>\n<p>When implementing blacklisting, it is crucial to:</p>\n<ul>\n  <li>Comprehensively Check URLs: Ensure that the URL scheme, domain, and path are all scrutinized. This prevents attackers from circumventing the\n  blacklist by altering schemes or paths.</li>\n  <li>Understand Limitations: Recognize that blacklisting is not a foolproof solution. It should be part of a multi-layered security strategy to\n  effectively mitigate SSRF risks.</li>\n</ul>\n<p>By adhering to these guidelines, blacklisting can be a useful, albeit secondary, measure in protecting against SSRF attacks.</p>\n<h3>Pitfalls</h3>\n<h4>The trap of 'startsWith' and equivalents</h4>\n<p>When validating untrusted URLs by checking if they start with a trusted scheme and authority pair <code>scheme://authority</code>, <strong>ensure\nthat the validation string contains a path separator <code>/</code> as the last character</strong>.\n  <br></p>\n<p>If the validation string does not contain a terminating path separator, the SSRF vulnerability remains; only the exploitation technique\nchanges.</p>\n<p>Thus, a validation like <code>startsWith(\"https://sonarsource.com\")</code> can be exploited with the URL\n<code>https://sonarsource.com.malicious.example.com</code>.</p>\n<h4>Blacklist TOCTOU</h4>\n<p>When employing a blacklist to mitigate SSRF attacks, it is essential to guard against Time-Of-Check Time-Of-Use (TOCTOU) vulnerabilities in the\nvalidation logic.</p>\n<p>A common example of a TOCTOU vulnerability occurs when the domain name is resolved to an IP address for blacklist validation, but the hostname is\nresolved again later by the request library to make the actual request. An attacker could exploit DNS rebinding to change the IP address between these\ntwo resolutions and bypass the blacklist.</p>\n<p>To prevent this, ensure that the domain name is resolved to an IP address only once, and this IP address is used consistently throughout the\nvalidation and request process.</p>\n<h2>Resources</h2>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/\">Top 10 2021 Category A10 - Server-Side Request\n  Forgery (SSRF)</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa5-broken-access-control.md\">Top 10 2017 Category A5 - Broken Access\n  Control</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/20\">CWE-20 - Improper Input Validation</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/918\">CWE-918 - Server-Side Request Forgery (SSRF)</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222609\">Application Security and\n  Development: V-222609</a> - The application must not be subject to input handling vulnerabilities.</li>\n</ul>",
+    "mdDesc": "<h2>Why is this an issue?</h2>\n<p>Server-Side Request Forgery (SSRF) occurs when attackers can coerce a server to perform arbitrary requests on their behalf.\n  <br></p>\n<p>An SSRF vulnerability can either be basic or blind, depending on whether the server’s fetched data is directly returned in the web application’s\nresponse.\n  <br>\n  The absence of the corresponding response for the coerced request on the application is not a barrier to exploitation and thus must be treated in\n  the same way as basic SSRF.</p>\n<h3>What is the potential impact?</h3>\n<p>SSRF usually results in unauthorized actions or data disclosure in the vulnerable application or on a different system it can reach. Conditional to\nwhat is reachable, remote command execution can be achieved, although it often requires chaining with further exploitations.</p>\n<p>Information disclosure is SSRF’s core outcome. Depending on the extracted data, an attacker can perform a variety of different actions that can\nrange from low to critical severity.</p>\n<p>Below are some real-world scenarios that illustrate some impacts of an attacker exploiting the vulnerability.</p>\n<h4>Local file read to host takeover</h4>\n<p>An attacker manipulates an application into performing a local request for a sensitive file, such as <code>~/.ssh/id_rsa</code>, by using the File\nURI scheme <code>file://</code>.\n  <br>\n  Once in possession of the SSH keys, the attacker establishes a remote connection to the system hosting the web application.</p>\n<h4>Internal Network Reconnaissance</h4>\n<p>An attacker enumerates internal accessible ports from the affected server or others to which the server can communicate by iterating over the port\nfield in the URL <code>http://127.0.0.1:{port}</code>.\n  <br>\n  Taking advantage of other supported URL schemas (dependent on the affected system), for example, <code>gopher://127.0.0.1:3306</code>, an attacker\n  would be able to connect to a database service and perform queries on it.</p>\n<h2>How to fix it in ASP.NET</h2>\n<h3>Code examples</h3>\n<p>The following code is vulnerable to SSRF as it performs an HTTP request to a URL defined by untrusted data.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nusing System.Web;\nusing System.Web.Mvc;\n\npublic class ExampleController: Controller\n{\n    [HttpGet]\n    public async Task&lt;IActionResult&gt; ImageFetch(string location)\n    {\n        await using Stream stream =\n            await client.GetStreamAsync(location); // Noncompliant\n        var exampleImage =\n            await JsonSerializer.DeserializeAsync&lt;ExampleImage&gt;(stream);\n\n        return Ok(exampleImage ?? new());\n    }\n}\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nusing System.Web;\nusing System.Web.Mvc;\n\npublic class ExampleController: Controller\n{\n    private readonly string[] allowedSchemes = { \"https\" };\n    private readonly string[] allowedDomains = { \"trusted1.example.com\", \"trusted2.example.com\" };\n\n    [HttpGet]\n    public async Task&lt;IActionResult&gt; ImageFetch(string location)\n    {\n        Uri uri = new Uri(location);\n\n        if (!(allowedDomains.Contains(uri.Host) &amp;&amp; allowedSchemes.Contains(uri.Scheme)))\n        {\n            return BadRequest();\n        }\n\n        await using Stream stream =\n            await client.GetStreamAsync(uri);\n        var exampleImage =\n            await JsonSerializer.DeserializeAsync&lt;ExampleImage&gt;(stream);\n\n        return Ok(exampleImage ?? new());\n    }\n}\n</pre>\n<h3>How does this work?</h3>\n<h4>Pre-Approved URLs</h4>\n<p>Create a list of authorized and secure URLs that you want the application to be able to request.\n  <br>\n  If a user input does not match an entry in this list, it should be rejected because it is considered unsafe.</p>\n<p><strong>Important note</strong>: The application must do validation on the server side. Not on client-side front-ends.</p>\n<h4>Blacklisting</h4>\n<p>While whitelisting URLs is the preferred approach to ensure only safe URLs are accessible, there are scenarios where blacklisting may be\nnecessary.</p>\n<p>If whitelisting is not feasible, blacklisting can serve as a partial defense against SSRF attacks, particularly when the objective is to block\naccess to internal resources or specific known malicious URLs.</p>\n<p>When implementing blacklisting, it is crucial to:</p>\n<ul>\n  <li>Comprehensively Check URLs: Ensure that the URL scheme, domain, and path are all scrutinized. This prevents attackers from circumventing the\n  blacklist by altering schemes or paths.</li>\n  <li>Understand Limitations: Recognize that blacklisting is not a foolproof solution. It should be part of a multi-layered security strategy to\n  effectively mitigate SSRF risks.</li>\n</ul>\n<p>By adhering to these guidelines, blacklisting can be a useful, albeit secondary, measure in protecting against SSRF attacks.</p>\n<h3>Pitfalls</h3>\n<h4>The trap of 'startsWith' and equivalents</h4>\n<p>When validating untrusted URLs by checking if they start with a trusted scheme and authority pair <code>scheme://authority</code>, <strong>ensure\nthat the validation string contains a path separator <code>/</code> as the last character</strong>.\n  <br></p>\n<p>If the validation string does not contain a terminating path separator, the SSRF vulnerability remains; only the exploitation technique\nchanges.</p>\n<p>Thus, a validation like <code>startsWith(\"https://sonarsource.com\")</code> can be exploited with the URL\n<code>https://sonarsource.com.malicious.example.com</code>.</p>\n<h4>Blacklist TOCTOU</h4>\n<p>When employing a blacklist to mitigate SSRF attacks, it is essential to guard against Time-Of-Check Time-Of-Use (TOCTOU) vulnerabilities in the\nvalidation logic.</p>\n<p>A common example of a TOCTOU vulnerability occurs when the domain name is resolved to an IP address for blacklist validation, but the hostname is\nresolved again later by the request library to make the actual request. An attacker could exploit DNS rebinding to change the IP address between these\ntwo resolutions and bypass the blacklist.</p>\n<p>To prevent this, ensure that the domain name is resolved to an IP address only once, and this IP address is used consistently throughout the\nvalidation and request process.</p>\n<h2>Resources</h2>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/\">Top 10 2021 Category A10 - Server-Side Request\n  Forgery (SSRF)</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa5-broken-access-control.md\">Top 10 2017 Category A5 - Broken Access\n  Control</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/20\">CWE-20 - Improper Input Validation</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/918\">CWE-918 - Server-Side Request Forgery (SSRF)</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222609\">Application Security and\n  Development: V-222609</a> - The application must not be subject to input handling vulnerabilities.</li>\n</ul>",
+    "severity": "MAJOR",
+    "status": "READY",
+    "isTemplate": false,
+    "tags": [],
+    "sysTags": [
+      "cwe"
+    ],
+    "lang": "cs",
+    "langName": "C#",
+    "params": [],
+    "defaultDebtRemFnType": "CONSTANT_ISSUE",
+    "defaultDebtRemFnOffset": "30min",
+    "debtOverloaded": false,
+    "debtRemFnType": "CONSTANT_ISSUE",
+    "debtRemFnOffset": "30min",
+    "type": "VULNERABILITY",
+    "defaultRemFnType": "CONSTANT_ISSUE",
+    "defaultRemFnBaseEffort": "30min",
+    "remFnType": "CONSTANT_ISSUE",
+    "remFnBaseEffort": "30min",
+    "remFnOverloaded": false,
+    "scope": "MAIN",
+    "isExternal": false,
+    "descriptionSections": [
+      {
+        "key": "root_cause",
+        "content": "<p>Server-Side Request Forgery (SSRF) occurs when attackers can coerce a server to perform arbitrary requests on their behalf.\n  <br></p>\n<p>An SSRF vulnerability can either be basic or blind, depending on whether the server’s fetched data is directly returned in the web application’s\nresponse.\n  <br>\n  The absence of the corresponding response for the coerced request on the application is not a barrier to exploitation and thus must be treated in\n  the same way as basic SSRF.</p>\n<h3>What is the potential impact?</h3>\n<p>SSRF usually results in unauthorized actions or data disclosure in the vulnerable application or on a different system it can reach. Conditional to\nwhat is reachable, remote command execution can be achieved, although it often requires chaining with further exploitations.</p>\n<p>Information disclosure is SSRF’s core outcome. Depending on the extracted data, an attacker can perform a variety of different actions that can\nrange from low to critical severity.</p>\n<p>Below are some real-world scenarios that illustrate some impacts of an attacker exploiting the vulnerability.</p>\n<h4>Local file read to host takeover</h4>\n<p>An attacker manipulates an application into performing a local request for a sensitive file, such as <code>~/.ssh/id_rsa</code>, by using the File\nURI scheme <code>file://</code>.\n  <br>\n  Once in possession of the SSH keys, the attacker establishes a remote connection to the system hosting the web application.</p>\n<h4>Internal Network Reconnaissance</h4>\n<p>An attacker enumerates internal accessible ports from the affected server or others to which the server can communicate by iterating over the port\nfield in the URL <code>http://127.0.0.1:{port}</code>.\n  <br>\n  Taking advantage of other supported URL schemas (dependent on the affected system), for example, <code>gopher://127.0.0.1:3306</code>, an attacker\n  would be able to connect to a database service and perform queries on it.</p>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p>The following code is vulnerable to SSRF as it performs an HTTP request to a URL defined by untrusted data.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nusing System.Web;\nusing System.Web.Mvc;\n\npublic class ExampleController: Controller\n{\n    [HttpGet]\n    public async Task&lt;IActionResult&gt; ImageFetch(string location)\n    {\n        await using Stream stream =\n            await client.GetStreamAsync(location); // Noncompliant\n        var exampleImage =\n            await JsonSerializer.DeserializeAsync&lt;ExampleImage&gt;(stream);\n\n        return Ok(exampleImage ?? new());\n    }\n}\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nusing System.Web;\nusing System.Web.Mvc;\n\npublic class ExampleController: Controller\n{\n    private readonly string[] allowedSchemes = { \"https\" };\n    private readonly string[] allowedDomains = { \"trusted1.example.com\", \"trusted2.example.com\" };\n\n    [HttpGet]\n    public async Task&lt;IActionResult&gt; ImageFetch(string location)\n    {\n        Uri uri = new Uri(location);\n\n        if (!(allowedDomains.Contains(uri.Host) &amp;&amp; allowedSchemes.Contains(uri.Scheme)))\n        {\n            return BadRequest();\n        }\n\n        await using Stream stream =\n            await client.GetStreamAsync(uri);\n        var exampleImage =\n            await JsonSerializer.DeserializeAsync&lt;ExampleImage&gt;(stream);\n\n        return Ok(exampleImage ?? new());\n    }\n}\n</pre>\n<h3>How does this work?</h3>\n<h4>Pre-Approved URLs</h4>\n<p>Create a list of authorized and secure URLs that you want the application to be able to request.\n  <br>\n  If a user input does not match an entry in this list, it should be rejected because it is considered unsafe.</p>\n<p><strong>Important note</strong>: The application must do validation on the server side. Not on client-side front-ends.</p>\n<h4>Blacklisting</h4>\n<p>While whitelisting URLs is the preferred approach to ensure only safe URLs are accessible, there are scenarios where blacklisting may be\nnecessary.</p>\n<p>If whitelisting is not feasible, blacklisting can serve as a partial defense against SSRF attacks, particularly when the objective is to block\naccess to internal resources or specific known malicious URLs.</p>\n<p>When implementing blacklisting, it is crucial to:</p>\n<ul>\n  <li>Comprehensively Check URLs: Ensure that the URL scheme, domain, and path are all scrutinized. This prevents attackers from circumventing the\n  blacklist by altering schemes or paths.</li>\n  <li>Understand Limitations: Recognize that blacklisting is not a foolproof solution. It should be part of a multi-layered security strategy to\n  effectively mitigate SSRF risks.</li>\n</ul>\n<p>By adhering to these guidelines, blacklisting can be a useful, albeit secondary, measure in protecting against SSRF attacks.</p>\n<h3>Pitfalls</h3>\n<h4>The trap of 'startsWith' and equivalents</h4>\n<p>When validating untrusted URLs by checking if they start with a trusted scheme and authority pair <code>scheme://authority</code>, <strong>ensure\nthat the validation string contains a path separator <code>/</code> as the last character</strong>.\n  <br></p>\n<p>If the validation string does not contain a terminating path separator, the SSRF vulnerability remains; only the exploitation technique\nchanges.</p>\n<p>Thus, a validation like <code>startsWith(\"https://sonarsource.com\")</code> can be exploited with the URL\n<code>https://sonarsource.com.malicious.example.com</code>.</p>\n<h4>Blacklist TOCTOU</h4>\n<p>When employing a blacklist to mitigate SSRF attacks, it is essential to guard against Time-Of-Check Time-Of-Use (TOCTOU) vulnerabilities in the\nvalidation logic.</p>\n<p>A common example of a TOCTOU vulnerability occurs when the domain name is resolved to an IP address for blacklist validation, but the hostname is\nresolved again later by the request library to make the actual request. An attacker could exploit DNS rebinding to change the IP address between these\ntwo resolutions and bypass the blacklist.</p>\n<p>To prevent this, ensure that the domain name is resolved to an IP address only once, and this IP address is used consistently throughout the\nvalidation and request process.</p>",
+        "context": {
+          "displayName": "ASP.NET",
+          "key": "asp_net"
+        }
+      },
+      {
+        "key": "resources",
+        "content": "<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/\">Top 10 2021 Category A10 - Server-Side Request\n  Forgery (SSRF)</a></li>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa5-broken-access-control.md\">Top 10 2017 Category A5 - Broken Access\n  Control</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/20\">CWE-20 - Improper Input Validation</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/918\">CWE-918 - Server-Side Request Forgery (SSRF)</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222609\">Application Security and\n  Development: V-222609</a> - The application must not be subject to input handling vulnerabilities.</li>\n</ul>"
+      }
+    ],
+    "educationPrinciples": [
+      "never_trust_user_input",
+      "defense_in_depth"
+    ],
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "securityStandards": [
+      "cwe:20",
+      "cwe:918",
+      "owaspAsvs-4.0:12.6.1",
+      "owaspAsvs-4.0:5.1.3",
+      "owaspAsvs-4.0:5.1.4",
+      "owaspAsvs-4.0:5.2.6",
+      "owaspTop10-2021:a10",
+      "owaspTop10:a5",
+      "pciDss-3.2:6.5.1",
+      "pciDss-4.0:6.2.4",
+      "stig-ASD_V5R3:V-222609"
+    ],
+    "requiredEntitlements": []
+  },
+  "docker:S6505": {
+    "key": "docker:S6505",
+    "repo": "docker",
+    "name": "JavaScript package manager scripts should not be executed during installation",
+    "createdAt": "2023-03-30T08:38:36+0000",
+    "htmlDesc": "<p>When installing dependencies, some package managers will automatically execute scripts distributed along with the source code of packages.\nPost-install scripts, for example, are a common way to execute malicious code at install time whenever a package is compromised.</p>\n<h2>Why is this an issue?</h2>\n<p>When package managers execute installation scripts, they run arbitrary code distributed with third-party packages. A compromised package can use\nthis mechanism to execute malicious code on the build system, potentially stealing credentials, injecting backdoors, or otherwise compromising the\nsupply chain.</p>\n<h3>What is the potential impact?</h3>\n<p>If a dependency is compromised and its scripts are executed, an attacker can run arbitrary code with the permissions of the process performing the\ninstallation. This can lead to credential theft from the build environment, introduction of backdoors into the application, or lateral movement within\nCI/CD infrastructure.</p>\n<h2>How to fix it in npm</h2>\n<h3>Code examples</h3>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nFROM node:latest\n\nRUN npm install  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nFROM node:latest\n\nRUN npm install --ignore-scripts\n</pre>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"5\" data-diff-type=\"noncompliant\">\nFROM node:latest\n\nRUN npx some-package  # Noncompliant\nRUN npm exec -- some-package  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<p>The <code>--ignore-scripts</code> flag must appear before the package name. For <code>npm exec</code>, also use <code>--</code> to separate npm\noptions from the executed command.</p>\n<pre data-diff-id=\"5\" data-diff-type=\"compliant\">\nFROM node:latest\n\nRUN npx --ignore-scripts some-package\nRUN npm exec --ignore-scripts -- some-package\n</pre>\n<h2>Resources</h2>\n<h3>Articles &amp; blog posts</h3>\n<ul>\n  <li><a href=\"https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes/\">ESLint blog</a> - Postmortem for Malicious Packages\n  Published on July 12th, 2018</li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/506\">CWE-506 - Embedded Malicious Code</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/829\">CWE-829 - Inclusion of Functionality from Untrusted Control Sphere</a></li>\n</ul>",
+    "mdDesc": "<p>When installing dependencies, some package managers will automatically execute scripts distributed along with the source code of packages.\nPost-install scripts, for example, are a common way to execute malicious code at install time whenever a package is compromised.</p>\n<h2>Why is this an issue?</h2>\n<p>When package managers execute installation scripts, they run arbitrary code distributed with third-party packages. A compromised package can use\nthis mechanism to execute malicious code on the build system, potentially stealing credentials, injecting backdoors, or otherwise compromising the\nsupply chain.</p>\n<h3>What is the potential impact?</h3>\n<p>If a dependency is compromised and its scripts are executed, an attacker can run arbitrary code with the permissions of the process performing the\ninstallation. This can lead to credential theft from the build environment, introduction of backdoors into the application, or lateral movement within\nCI/CD infrastructure.</p>\n<h2>How to fix it in npm</h2>\n<h3>Code examples</h3>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nFROM node:latest\n\nRUN npm install  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nFROM node:latest\n\nRUN npm install --ignore-scripts\n</pre>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"5\" data-diff-type=\"noncompliant\">\nFROM node:latest\n\nRUN npx some-package  # Noncompliant\nRUN npm exec -- some-package  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<p>The <code>--ignore-scripts</code> flag must appear before the package name. For <code>npm exec</code>, also use <code>--</code> to separate npm\noptions from the executed command.</p>\n<pre data-diff-id=\"5\" data-diff-type=\"compliant\">\nFROM node:latest\n\nRUN npx --ignore-scripts some-package\nRUN npm exec --ignore-scripts -- some-package\n</pre>\n<h2>Resources</h2>\n<h3>Articles &amp; blog posts</h3>\n<ul>\n  <li><a href=\"https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes/\">ESLint blog</a> - Postmortem for Malicious Packages\n  Published on July 12th, 2018</li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/506\">CWE-506 - Embedded Malicious Code</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/829\">CWE-829 - Inclusion of Functionality from Untrusted Control Sphere</a></li>\n</ul>",
+    "severity": "MAJOR",
+    "status": "READY",
+    "isTemplate": false,
+    "tags": [],
+    "sysTags": [
+      "cwe",
+      "former-hotspot"
+    ],
+    "lang": "docker",
+    "langName": "Docker",
+    "params": [],
+    "defaultDebtRemFnType": "CONSTANT_ISSUE",
+    "defaultDebtRemFnOffset": "30min",
+    "debtOverloaded": false,
+    "debtRemFnType": "CONSTANT_ISSUE",
+    "debtRemFnOffset": "30min",
+    "type": "VULNERABILITY",
+    "defaultRemFnType": "CONSTANT_ISSUE",
+    "defaultRemFnBaseEffort": "30min",
+    "remFnType": "CONSTANT_ISSUE",
+    "remFnBaseEffort": "30min",
+    "remFnOverloaded": false,
+    "scope": "ALL",
+    "isExternal": false,
+    "descriptionSections": [
+      {
+        "key": "introduction",
+        "content": "<p>When installing dependencies, some package managers will automatically execute scripts distributed along with the source code of packages.\nPost-install scripts, for example, are a common way to execute malicious code at install time whenever a package is compromised.</p>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p><a href=\"https://bun.com/docs/pm/lifecycle#trusteddependencies\">Bun blocks lifecycle scripts by default</a> for most packages (opt-in model), but\nstill executes them for a built-in list of popular npm packages.</p>\n\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"4\" data-diff-type=\"noncompliant\">\nFROM node:latest\n\nRUN bun install  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"4\" data-diff-type=\"compliant\">\nFROM node:latest\n\nRUN bun install --ignore-scripts\n</pre>",
+        "context": {
+          "displayName": "Bun",
+          "key": "bun"
+        }
+      },
+      {
+        "key": "root_cause",
+        "content": "<p>When package managers execute installation scripts, they run arbitrary code distributed with third-party packages. A compromised package can use\nthis mechanism to execute malicious code on the build system, potentially stealing credentials, injecting backdoors, or otherwise compromising the\nsupply chain.</p>\n<h3>What is the potential impact?</h3>\n<p>If a dependency is compromised and its scripts are executed, an attacker can run arbitrary code with the permissions of the process performing the\ninstallation. This can lead to credential theft from the build environment, introduction of backdoors into the application, or lateral movement within\nCI/CD infrastructure.</p>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nFROM node:latest\n\nRUN npm install  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nFROM node:latest\n\nRUN npm install --ignore-scripts\n</pre>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"5\" data-diff-type=\"noncompliant\">\nFROM node:latest\n\nRUN npx some-package  # Noncompliant\nRUN npm exec -- some-package  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<p>The <code>--ignore-scripts</code> flag must appear before the package name. For <code>npm exec</code>, also use <code>--</code> to separate npm\noptions from the executed command.</p>\n<pre data-diff-id=\"5\" data-diff-type=\"compliant\">\nFROM node:latest\n\nRUN npx --ignore-scripts some-package\nRUN npm exec --ignore-scripts -- some-package\n</pre>",
+        "context": {
+          "displayName": "npm",
+          "key": "npm"
+        }
+      },
+      {
+        "key": "resources",
+        "content": "<h3>Articles &amp; blog posts</h3>\n<ul>\n  <li><a href=\"https://eslint.org/blog/2018/07/postmortem-for-malicious-package-publishes/\">ESLint blog</a> - Postmortem for Malicious Packages\n  Published on July 12th, 2018</li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/506\">CWE-506 - Embedded Malicious Code</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/829\">CWE-829 - Inclusion of Functionality from Untrusted Control Sphere</a></li>\n</ul>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p>In versions prior to v10, pnpm runs lifecycle scripts by default. <a\nhref=\"https://socket.dev/blog/pnpm-10-0-0-blocks-lifecycle-scripts-by-default\">Starting from pnpm v10</a>, lifecycle scripts are blocked by default,\nmaking <code>pnpm install</code> safe without additional flags. Adding packages to <code>onlyBuiltDependencies</code> in\n<code>pnpm-workspace.yaml</code> explicitly opts them in to script execution and should be avoided for unaudited packages.</p>\n\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"3\" data-diff-type=\"noncompliant\">\nFROM node:latest\n\n# pnpm &lt; v10: scripts run by default\nRUN pnpm install  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"3\" data-diff-type=\"compliant\">\nFROM node:latest\n\nRUN pnpm install --ignore-scripts\n</pre>",
+        "context": {
+          "displayName": "PNPM",
+          "key": "pnpm"
+        }
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"2\" data-diff-type=\"noncompliant\">\nFROM node:latest\n\nRUN yarn install  # Noncompliant\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"2\" data-diff-type=\"compliant\">\nFROM node:latest\n\nRUN yarn install --ignore-scripts\n# for yarn 2.x and later\nRUN YARN_ENABLE_SCRIPTS=false yarn install\n</pre>",
+        "context": {
+          "displayName": "Yarn",
+          "key": "yarn"
+        }
+      }
+    ],
+    "educationPrinciples": [],
+    "cleanCodeAttribute": "TRUSTWORTHY",
+    "cleanCodeAttributeCategory": "RESPONSIBLE",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "securityStandards": [
+      "cwe:506",
+      "cwe:829"
+    ],
+    "requiredEntitlements": []
+  },
+  "typescript:S5332": {
+    "key": "typescript:S5332",
+    "repo": "typescript",
+    "name": "Clear-text protocols should not be used",
+    "createdAt": "2020-12-28T10:03:21+0000",
+    "htmlDesc": "<p>Using clear-text protocols exposes data in transit to eavesdropping and man-in-the-middle attacks.</p>\n<h2>Why is this an issue?</h2>\n<p>An attacker who can observe network traffic — for example through a compromised network device, a position on the same network segment, or a cloud\nenvironment breach — can read, modify, or inject data sent over <code>ftp</code>, <code>telnet</code>, <code>http</code>, or unencrypted SMTP without\ndetection. This is true even on internal or isolated networks, where insider threats or lateral movement after an initial compromise can expose\nunencrypted traffic. This rule raises an issue when a clear-text protocol scheme is used or when encryption is explicitly disabled for a network\nconnection.</p>\n<h3>What is the potential impact?</h3>\n<h4>Sensitive data exposure</h4>\n<p>An attacker who can intercept network traffic can read all data transmitted over clear-text connections, including credentials, session tokens, API\nkeys, or personal data.</p>\n<h4>Data tampering</h4>\n<p>Because clear-text protocols provide no integrity protection, an attacker in a man-in-the-middle position can silently modify data in transit —\nredirecting users to malicious endpoints, injecting malicious content into responses, or altering commands sent to remote services.</p>\n<h2>How to fix it in Node.js</h2>\n<h3>Code examples</h3>\n<p>The following code uses a clear-text protocol or disables encryption for a network connection, leaving transmitted data exposed to\ninterception.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nurl = \"http://sonar.com\"; // Noncompliant\nurl = \"ftp://[REDACTED_EMAIL]\"; // Noncompliant\nurl = \"telnet://[REDACTED_EMAIL]\"; // Noncompliant\n</pre>\n<p>For <a href=\"https://nodemailer.com\">nodemailer</a>:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"noncompliant\">\nconst nodemailer = require(\"nodemailer\");\nlet transporter = nodemailer.createTransport({\n  secure: false, // Noncompliant\n  requireTLS: false // Noncompliant\n});\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nurl = \"https://sonar.com\";\nurl = \"sftp://[REDACTED_EMAIL]\";\nurl = \"ssh://[REDACTED_EMAIL]\";\n</pre>\n<p>For <a href=\"https://nodemailer.com\">nodemailer</a> one of the following options must be set:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"compliant\">\nconst nodemailer = require(\"nodemailer\");\nlet transporter = nodemailer.createTransport({\n  secure: true,\n  requireTLS: true\n});\n</pre>\n<h2>Resources</h2>\n<h3>Documentation</h3>\n<ul>\n  <li>AWS Documentation - <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html\">Listeners for\n  your Application Load Balancers</a></li>\n  <li>AWS Documentation - <a\n  href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesis-stream-streamencryption.html\">Stream Encryption</a></li>\n</ul>\n<h3>Articles &amp; blog posts</h3>\n<ul>\n  <li>Google - <a href=\"https://security.googleblog.com/2016/09/moving-towards-more-secure-web.html\">Moving towards more secure web</a></li>\n  <li>Mozilla - <a href=\"https://blog.mozilla.org/security/2015/04/30/deprecating-non-secure-http/\">Deprecating non secure http</a></li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa3-sensitive-data-disclosure.md\">Top 10 2017 Category A3 - Sensitive Data\n  Exposure</a></li>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A02_2021-Cryptographic_Failures/\">Top 10 2021 Category A2 - Cryptographic Failures</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/200\">CWE-200 - Exposure of Sensitive Information to an Unauthorized Actor</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/319\">CWE-319 - Cleartext Transmission of Sensitive Information</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222397\">Application Security and\n  Development: V-222397</a> - The application must implement cryptographic mechanisms to protect the integrity of remote access sessions.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222534\">Application Security and\n  Development: V-222534</a> - Service-Oriented Applications handling non-releasable data must authenticate endpoint devices via mutual SSL/TLS.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222562\">Application Security and\n  Development: V-222562</a> - Applications used for non-local maintenance must implement cryptographic mechanisms to protect the integrity of\n  maintenance and diagnostic communications.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222563\">Application Security and\n  Development: V-222563</a> - Applications used for non-local maintenance must implement cryptographic mechanisms to protect the confidentiality of\n  maintenance and diagnostic communications.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222577\">Application Security and\n  Development: V-222577</a> - The application must not expose session IDs.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222596\">Application Security and\n  Development: V-222596</a> - The application must protect the confidentiality and integrity of transmitted information.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222597\">Application Security and\n  Development: V-222597</a> - The application must implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect\n  changes to information during transmission.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222598\">Application Security and\n  Development: V-222598</a> - The application must maintain the confidentiality and integrity of information during preparation for transmission.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222599\">Application Security and\n  Development: V-222599</a> - The application must maintain the confidentiality and integrity of information during reception.</li>\n</ul>",
+    "mdDesc": "<p>Using clear-text protocols exposes data in transit to eavesdropping and man-in-the-middle attacks.</p>\n<h2>Why is this an issue?</h2>\n<p>An attacker who can observe network traffic — for example through a compromised network device, a position on the same network segment, or a cloud\nenvironment breach — can read, modify, or inject data sent over <code>ftp</code>, <code>telnet</code>, <code>http</code>, or unencrypted SMTP without\ndetection. This is true even on internal or isolated networks, where insider threats or lateral movement after an initial compromise can expose\nunencrypted traffic. This rule raises an issue when a clear-text protocol scheme is used or when encryption is explicitly disabled for a network\nconnection.</p>\n<h3>What is the potential impact?</h3>\n<h4>Sensitive data exposure</h4>\n<p>An attacker who can intercept network traffic can read all data transmitted over clear-text connections, including credentials, session tokens, API\nkeys, or personal data.</p>\n<h4>Data tampering</h4>\n<p>Because clear-text protocols provide no integrity protection, an attacker in a man-in-the-middle position can silently modify data in transit —\nredirecting users to malicious endpoints, injecting malicious content into responses, or altering commands sent to remote services.</p>\n<h2>How to fix it in Node.js</h2>\n<h3>Code examples</h3>\n<p>The following code uses a clear-text protocol or disables encryption for a network connection, leaving transmitted data exposed to\ninterception.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nurl = \"http://sonar.com\"; // Noncompliant\nurl = \"ftp://[REDACTED_EMAIL]\"; // Noncompliant\nurl = \"telnet://[REDACTED_EMAIL]\"; // Noncompliant\n</pre>\n<p>For <a href=\"https://nodemailer.com\">nodemailer</a>:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"noncompliant\">\nconst nodemailer = require(\"nodemailer\");\nlet transporter = nodemailer.createTransport({\n  secure: false, // Noncompliant\n  requireTLS: false // Noncompliant\n});\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nurl = \"https://sonar.com\";\nurl = \"sftp://[REDACTED_EMAIL]\";\nurl = \"ssh://[REDACTED_EMAIL]\";\n</pre>\n<p>For <a href=\"https://nodemailer.com\">nodemailer</a> one of the following options must be set:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"compliant\">\nconst nodemailer = require(\"nodemailer\");\nlet transporter = nodemailer.createTransport({\n  secure: true,\n  requireTLS: true\n});\n</pre>\n<h2>Resources</h2>\n<h3>Documentation</h3>\n<ul>\n  <li>AWS Documentation - <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html\">Listeners for\n  your Application Load Balancers</a></li>\n  <li>AWS Documentation - <a\n  href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesis-stream-streamencryption.html\">Stream Encryption</a></li>\n</ul>\n<h3>Articles &amp; blog posts</h3>\n<ul>\n  <li>Google - <a href=\"https://security.googleblog.com/2016/09/moving-towards-more-secure-web.html\">Moving towards more secure web</a></li>\n  <li>Mozilla - <a href=\"https://blog.mozilla.org/security/2015/04/30/deprecating-non-secure-http/\">Deprecating non secure http</a></li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa3-sensitive-data-disclosure.md\">Top 10 2017 Category A3 - Sensitive Data\n  Exposure</a></li>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A02_2021-Cryptographic_Failures/\">Top 10 2021 Category A2 - Cryptographic Failures</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/200\">CWE-200 - Exposure of Sensitive Information to an Unauthorized Actor</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/319\">CWE-319 - Cleartext Transmission of Sensitive Information</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222397\">Application Security and\n  Development: V-222397</a> - The application must implement cryptographic mechanisms to protect the integrity of remote access sessions.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222534\">Application Security and\n  Development: V-222534</a> - Service-Oriented Applications handling non-releasable data must authenticate endpoint devices via mutual SSL/TLS.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222562\">Application Security and\n  Development: V-222562</a> - Applications used for non-local maintenance must implement cryptographic mechanisms to protect the integrity of\n  maintenance and diagnostic communications.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222563\">Application Security and\n  Development: V-222563</a> - Applications used for non-local maintenance must implement cryptographic mechanisms to protect the confidentiality of\n  maintenance and diagnostic communications.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222577\">Application Security and\n  Development: V-222577</a> - The application must not expose session IDs.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222596\">Application Security and\n  Development: V-222596</a> - The application must protect the confidentiality and integrity of transmitted information.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222597\">Application Security and\n  Development: V-222597</a> - The application must implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect\n  changes to information during transmission.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222598\">Application Security and\n  Development: V-222598</a> - The application must maintain the confidentiality and integrity of information during preparation for transmission.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222599\">Application Security and\n  Development: V-222599</a> - The application must maintain the confidentiality and integrity of information during reception.</li>\n</ul>",
+    "severity": "MINOR",
+    "status": "READY",
+    "isTemplate": false,
+    "tags": [],
+    "sysTags": [
+      "cryptography",
+      "cwe",
+      "former-hotspot"
+    ],
+    "lang": "ts",
+    "langName": "TypeScript",
+    "params": [],
+    "defaultDebtRemFnType": "CONSTANT_ISSUE",
+    "defaultDebtRemFnOffset": "30min",
+    "debtOverloaded": false,
+    "debtRemFnType": "CONSTANT_ISSUE",
+    "debtRemFnOffset": "30min",
+    "type": "VULNERABILITY",
+    "defaultRemFnType": "CONSTANT_ISSUE",
+    "defaultRemFnBaseEffort": "30min",
+    "remFnType": "CONSTANT_ISSUE",
+    "remFnBaseEffort": "30min",
+    "remFnOverloaded": false,
+    "scope": "MAIN",
+    "isExternal": false,
+    "descriptionSections": [
+      {
+        "key": "resources",
+        "content": "<h3>Documentation</h3>\n<ul>\n  <li>AWS Documentation - <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html\">Listeners for\n  your Application Load Balancers</a></li>\n  <li>AWS Documentation - <a\n  href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-kinesis-stream-streamencryption.html\">Stream Encryption</a></li>\n</ul>\n<h3>Articles &amp; blog posts</h3>\n<ul>\n  <li>Google - <a href=\"https://security.googleblog.com/2016/09/moving-towards-more-secure-web.html\">Moving towards more secure web</a></li>\n  <li>Mozilla - <a href=\"https://blog.mozilla.org/security/2015/04/30/deprecating-non-secure-http/\">Deprecating non secure http</a></li>\n</ul>\n<h3>Standards</h3>\n<ul>\n  <li>OWASP - <a href=\"https://github.com/OWASP/Top10/blob/master/2017/en/0xa3-sensitive-data-disclosure.md\">Top 10 2017 Category A3 - Sensitive Data\n  Exposure</a></li>\n  <li>OWASP - <a href=\"https://owasp.org/Top10/A02_2021-Cryptographic_Failures/\">Top 10 2021 Category A2 - Cryptographic Failures</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/200\">CWE-200 - Exposure of Sensitive Information to an Unauthorized Actor</a></li>\n  <li>CWE - <a href=\"https://cwe.mitre.org/data/definitions/319\">CWE-319 - Cleartext Transmission of Sensitive Information</a></li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222397\">Application Security and\n  Development: V-222397</a> - The application must implement cryptographic mechanisms to protect the integrity of remote access sessions.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222534\">Application Security and\n  Development: V-222534</a> - Service-Oriented Applications handling non-releasable data must authenticate endpoint devices via mutual SSL/TLS.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222562\">Application Security and\n  Development: V-222562</a> - Applications used for non-local maintenance must implement cryptographic mechanisms to protect the integrity of\n  maintenance and diagnostic communications.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222563\">Application Security and\n  Development: V-222563</a> - Applications used for non-local maintenance must implement cryptographic mechanisms to protect the confidentiality of\n  maintenance and diagnostic communications.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222577\">Application Security and\n  Development: V-222577</a> - The application must not expose session IDs.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222596\">Application Security and\n  Development: V-222596</a> - The application must protect the confidentiality and integrity of transmitted information.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222597\">Application Security and\n  Development: V-222597</a> - The application must implement cryptographic mechanisms to prevent unauthorized disclosure of information and/or detect\n  changes to information during transmission.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222598\">Application Security and\n  Development: V-222598</a> - The application must maintain the confidentiality and integrity of information during preparation for transmission.</li>\n  <li>STIG Viewer - <a href=\"https://stigviewer.com/stigs/application_security_and_development/2024-12-06/finding/V-222599\">Application Security and\n  Development: V-222599</a> - The application must maintain the confidentiality and integrity of information during reception.</li>\n</ul>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p>The following code uses a clear-text protocol or disables encryption for a network connection, leaving transmitted data exposed to\ninterception.</p>\n<h4>Noncompliant code example</h4>\n<p>For <a href=\"https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_kinesis.CfnStream.html\">aws-cdk-lib.aws-kinesis.CfnStream</a>:</p>\n<pre data-diff-id=\"4\" data-diff-type=\"noncompliant\">\nimport { CfnStream } from 'aws-cdk-lib/aws-kinesis';\n\nnew CfnStream(this, 'example-cfnstream-implicit', undefined); // Noncompliant\n\nnew CfnStream(this, 'example-cfnstream-explicit', {\n  streamEncryption: undefined // Noncompliant\n});\n</pre>\n<p>For <a href=\"https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_kinesis.Stream.html\">aws-cdk-lib.aws-kinesis.Stream</a>:</p>\n<pre data-diff-id=\"5\" data-diff-type=\"noncompliant\">\nimport { Stream } from 'aws-cdk-lib/aws-kinesis';\n\nnew Stream(this, 'example-stream', {\n  encryption: StreamEncryption.UNENCRYPTED // Noncompliant\n});\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"4\" data-diff-type=\"compliant\">\nimport { CfnStream } from 'aws-cdk-lib/aws-kinesis';\n\nnew CfnStream(this, 'example-cfnstream-explicit', {\n  streamEncryption: {\n    encryptionType: encryptionType,\n    keyId: encryptionKey.keyId,\n  }\n});\n</pre>\n<pre data-diff-id=\"5\" data-diff-type=\"compliant\">\nimport { Stream } from 'aws-cdk-lib/aws-kinesis';\n\nnew Stream(this, 'example-stream');\n\nnew Stream(this, 'example-stream-selfmanaged', {\n  encryption: StreamEncryption.KMS,\n  encryptionKey: encryptionKey,\n});\n\nnew Stream(this, 'example-stream-managed', {\n  encryption: StreamEncryption.MANAGED\n});\n</pre>\n<h2>Exceptions</h2>\n<p>No issue is reported for the following cases:</p>\n<ul>\n  <li>URLs whose host resolves only within a private runtime environment and is not reachable from the public internet (including loopback and cloud\n  metadata hosts)</li>\n  <li>Well-known namespace URI authorities used in in XML, JSON-LD, RDF, or similar formats (for example, <code>www.w3.org</code>,\n  <code>schemas.android.com</code>, <code>schema.org</code>).</li>\n  <li>IANA-reserved documentation and test domains like <code>example.com</code>, <code>example.net</code>, <code>example.org</code> (RFC 6761). These\n  are almost always placeholders in source code, not real connection targets.</li>\n</ul>",
+        "context": {
+          "displayName": "AWS Kinesis",
+          "key": "aws_kinesis"
+        }
+      },
+      {
+        "key": "introduction",
+        "content": "<p>Using clear-text protocols exposes data in transit to eavesdropping and man-in-the-middle attacks.</p>"
+      },
+      {
+        "key": "root_cause",
+        "content": "<p>An attacker who can observe network traffic — for example through a compromised network device, a position on the same network segment, or a cloud\nenvironment breach — can read, modify, or inject data sent over <code>ftp</code>, <code>telnet</code>, <code>http</code>, or unencrypted SMTP without\ndetection. This is true even on internal or isolated networks, where insider threats or lateral movement after an initial compromise can expose\nunencrypted traffic. This rule raises an issue when a clear-text protocol scheme is used or when encryption is explicitly disabled for a network\nconnection.</p>\n<h3>What is the potential impact?</h3>\n<h4>Sensitive data exposure</h4>\n<p>An attacker who can intercept network traffic can read all data transmitted over clear-text connections, including credentials, session tokens, API\nkeys, or personal data.</p>\n<h4>Data tampering</h4>\n<p>Because clear-text protocols provide no integrity protection, an attacker in a man-in-the-middle position can silently modify data in transit —\nredirecting users to malicious endpoints, injecting malicious content into responses, or altering commands sent to remote services.</p>"
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p>The following code uses a clear-text protocol or disables encryption for a network connection, leaving transmitted data exposed to\ninterception.</p>\n<h4>Noncompliant code example</h4>\n<p>For <a\nhref=\"https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationLoadBalancer.html\">aws-cdk-lib.aws-elasticloadbalancingv2.ApplicationLoadBalancer</a>:</p>\n<pre data-diff-id=\"6\" data-diff-type=\"noncompliant\">\nimport { ApplicationLoadBalancer } from 'aws-cdk-lib/aws-elasticloadbalancingv2';\n\nconst alb = new ApplicationLoadBalancer(this, 'ALB', {\n  vpc: vpc,\n  internetFacing: true\n});\n\nalb.addListener('listener-http-default', {\n  port: 8080,\n  open: true\n}); // Noncompliant\n\nalb.addListener('listener-http-explicit', {\n  protocol: ApplicationProtocol.HTTP, // Noncompliant\n  port: 8080,\n  open: true\n});\n</pre>\n<h4>Compliant solution</h4>\n<p>For <a\nhref=\"https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_elasticloadbalancingv2.ApplicationLoadBalancer.html\">aws-cdk-lib.aws-elasticloadbalancingv2.ApplicationLoadBalancer</a>:</p>\n<pre data-diff-id=\"6\" data-diff-type=\"compliant\">\nimport { ApplicationLoadBalancer } from 'aws-cdk-lib/aws-elasticloadbalancingv2';\n\nconst alb = new ApplicationLoadBalancer(this, 'ALB', {\n  vpc: vpc,\n  internetFacing: true\n});\n\nalb.addListener('listener-https-explicit', {\n  protocol: ApplicationProtocol.HTTPS,\n  port: 8080,\n  open: true,\n  certificates: [certificate]\n});\n\nalb.addListener('listener-https-implicit', {\n  port: 8080,\n  open: true,\n  certificates: [certificate]\n});\n</pre>",
+        "context": {
+          "displayName": "AWS Elastic Load Balancing",
+          "key": "aws_elastic_load_balancing"
+        }
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p>The following code uses a clear-text protocol or disables encryption for a network connection, leaving transmitted data exposed to\ninterception.</p>\n<h4>Noncompliant code example</h4>\n<p>For <a\nhref=\"https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.aws_elasticache.CfnReplicationGroup.html\">aws-cdk-lib.aws-elasticache.CfnReplicationGroup</a>:</p>\n<pre data-diff-id=\"3\" data-diff-type=\"noncompliant\">\nimport { CfnReplicationGroup } from 'aws-cdk-lib/aws-elasticache';\n\nnew CfnReplicationGroup(this, 'example-implicit', {\n  replicationGroupDescription: 'exampleDescription'\n}); // Noncompliant\n\nnew CfnReplicationGroup(this, 'example-explicit', {\n  replicationGroupDescription: 'exampleDescription',\n  transitEncryptionEnabled: false // Noncompliant\n});\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"3\" data-diff-type=\"compliant\">\nimport { CfnReplicationGroup } from 'aws-cdk-lib/aws-elasticache';\n\nnew CfnReplicationGroup(this, 'example-explicit', {\n  replicationGroupDescription: 'example',\n  transitEncryptionEnabled: true\n});\n</pre>",
+        "context": {
+          "displayName": "Amazon ElastiCache",
+          "key": "amazon_elasticache"
+        }
+      },
+      {
+        "key": "how_to_fix",
+        "content": "<p>The following code uses a clear-text protocol or disables encryption for a network connection, leaving transmitted data exposed to\ninterception.</p>\n<h4>Noncompliant code example</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"noncompliant\">\nurl = \"http://sonar.com\"; // Noncompliant\nurl = \"ftp://[REDACTED_EMAIL]\"; // Noncompliant\nurl = \"telnet://[REDACTED_EMAIL]\"; // Noncompliant\n</pre>\n<p>For <a href=\"https://nodemailer.com\">nodemailer</a>:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"noncompliant\">\nconst nodemailer = require(\"nodemailer\");\nlet transporter = nodemailer.createTransport({\n  secure: false, // Noncompliant\n  requireTLS: false // Noncompliant\n});\n</pre>\n<h4>Compliant solution</h4>\n<pre data-diff-id=\"1\" data-diff-type=\"compliant\">\nurl = \"https://sonar.com\";\nurl = \"sftp://[REDACTED_EMAIL]\";\nurl = \"ssh://[REDACTED_EMAIL]\";\n</pre>\n<p>For <a href=\"https://nodemailer.com\">nodemailer</a> one of the following options must be set:</p>\n<pre data-diff-id=\"2\" data-diff-type=\"compliant\">\nconst nodemailer = require(\"nodemailer\");\nlet transporter = nodemailer.createTransport({\n  secure: true,\n  requireTLS: true\n});\n</pre>",
+        "context": {
+          "displayName": "Node.js",
+          "key": "node_js"
+        }
+      }
+    ],
+    "educationPrinciples": [],
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "LOW"
+      }
+    ],
+    "securityStandards": [
+      "cwe:200",
+      "cwe:319",
+      "owaspAsvs-4.0:1.9.1",
+      "owaspAsvs-4.0:9.1.1",
+      "owaspAsvs-4.0:9.2.2",
+      "owaspTop10-2021:a2",
+      "owaspTop10:a3",
+      "pciDss-3.2:4.1",
+      "pciDss-3.2:6.5.4",
+      "pciDss-4.0:4.2.1",
+      "pciDss-4.0:6.2.4",
+      "stig-ASD_V5R3:V-222397",
+      "stig-ASD_V5R3:V-222534",
+      "stig-ASD_V5R3:V-222562",
+      "stig-ASD_V5R3:V-222563",
+      "stig-ASD_V5R3:V-222577",
+      "stig-ASD_V5R3:V-222596",
+      "stig-ASD_V5R3:V-222597",
+      "stig-ASD_V5R3:V-222598",
+      "stig-ASD_V5R3:V-222599"
+    ],
+    "requiredEntitlements": []
+  }
+}

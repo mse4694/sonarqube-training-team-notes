@@ -1,0 +1,188 @@
+{
+  "capturedAt": "2026-10-18T09:52:41.122Z",
+  "analysisDate": "2026-10-16T18:39:20.125Z",
+  "analysisDateMeaning": "SCA analyses API updatedAt, not a Git commit or the core code analysis timestamp",
+  "status": "COMPLETED",
+  "analysisErrors": [
+    {
+      "id": "b04ed82e-c9a0-3f67-91a3-3d5fa487b017",
+      "code": "MISSING_LOCKFILE",
+      "path": "api.Tests/Api.Tests.csproj",
+      "message": "No lockfile was found for 'api.Tests/Api.Tests.csproj' (nuget)."
+    }
+  ],
+  "parsedFiles": [
+    "web/package-lock.json",
+    "web/package.json",
+    "api/project.assets.json",
+    "api/Api.csproj",
+    "api.Tests/Api.Tests.csproj"
+  ],
+  "total": 1,
+  "summary": "One OPEN HIGH dependency vulnerability recorded for Newtonsoft.Json12.0.3; API provides CVE/GHSA, version options and reachable source locations.",
+  "records": [
+    {
+      "id": "0ef118b9-0da3-4085-a4c6-e69dc0a1ea27",
+      "package": "Newtonsoft.Json",
+      "version": "12.0.3",
+      "packageUrl": "pkg:nuget/Newtonsoft.Json@12.0.3",
+      "packageManager": "NUGET",
+      "vulnerabilityId": "CVE-2024-21907",
+      "severity": "HIGH",
+      "originalSeverity": "HIGH",
+      "cvssScore": "7.5",
+      "status": "OPEN",
+      "createdAt": "2026-10-10T07:40:51.596Z",
+      "description": "Newtonsoft.Json before version 13.0.1 is affected by a mishandling of exceptional conditions vulnerability. Crafted data that is passed to the JsonConvert.DeserializeObject method may trigger a StackOverflow exception resulting in denial of service. Depending on the usage of the library, an unauthenticated and remote attacker may be able to cause the denial of service condition.",
+      "remediation": {
+        "recommendation": "upgrade",
+        "versionOptions": [
+          {
+            "version": "12.0.3",
+            "vulnerabilityIds": [
+              "CVE-2024-21907"
+            ],
+            "prerelease": false,
+            "fixLevel": "NONE",
+            "descriptionCode": "VERSION_IN_USE",
+            "alternativeReleaseSource": null
+          },
+          {
+            "version": "13.0.1",
+            "vulnerabilityIds": [],
+            "prerelease": false,
+            "fixLevel": "COMPLETE",
+            "descriptionCode": "NEAREST_COMPLETE",
+            "alternativeReleaseSource": null
+          },
+          {
+            "version": "13.0.4",
+            "vulnerabilityIds": [],
+            "prerelease": false,
+            "fixLevel": "COMPLETE",
+            "descriptionCode": "LATEST_STABLE",
+            "alternativeReleaseSource": null
+          },
+          {
+            "version": "14.0.1-beta2",
+            "vulnerabilityIds": [],
+            "prerelease": true,
+            "fixLevel": "COMPLETE",
+            "descriptionCode": "LATEST_PRERELEASE",
+            "alternativeReleaseSource": null
+          }
+        ],
+        "unaffectedVersions": ">= 13.0.1"
+      },
+      "affectedPaths": [
+        "api/Api.csproj",
+        "api/project.assets.json"
+      ],
+      "hasReachableLocations": true,
+      "reachableLocations": [
+        {
+          "signature": "Newtonsoft.Json.JsonConvert.DeserializeObject(string)",
+          "signatureType": "PUBLIC_CALLER",
+          "filePath": "api/Endpoints/PreviewEndpoints.cs",
+          "startLine": 43,
+          "startLineOffset": 29,
+          "endLine": 43,
+          "endLineOffset": 78
+        }
+      ],
+      "references": [
+        {
+          "id": "CVE-2024-21907",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-21907"
+        },
+        {
+          "id": "GHSA-5crp-9r3c-p9vr",
+          "url": "https://github.com/advisories/GHSA-5crp-9r3c-p9vr"
+        }
+      ],
+      "limitations": [
+        "Reachability locations are analyzer evidence, not a runtime exploit or proof of deployed package identity.",
+        "Version recommendations/EPSS are captured API metadata and not a completed upgrade, compatibility test or current live recommendation.",
+        "SCA status updatedAt differs from the core code-analysis date; no analyzed SCM commit was supplied."
+      ]
+    }
+  ],
+  "riskPagination": {
+    "pageIndex": 1,
+    "pageSize": 100,
+    "total": 1
+  },
+  "packageInventory": {
+    "availableSample": {
+      "releases": [
+        {
+          "id": "82c1797d-611f-4797-aaa3-e8b232b257c2",
+          "key": "82c1797d-611f-4797-aaa3-e8b232b257c2",
+          "branchId": "debe56b9-494a-46bc-ba28-4a7384973eff",
+          "branchUuid": "debe56b9-494a-46bc-ba28-4a7384973eff",
+          "packageUrl": "pkg:npm/assertion-error@2.0.1",
+          "packageManager": "NPM",
+          "packageName": "assertion-error",
+          "version": "2.0.1",
+          "licenseExpression": "MIT",
+          "known": true,
+          "knownPackage": true,
+          "newlyIntroduced": false,
+          "directSummary": false,
+          "scopeSummary": "development",
+          "productionScopeSummary": false,
+          "scopes": [
+            "development"
+          ],
+          "dependencyFilePaths": [
+            "web/package-lock.json"
+          ]
+        }
+      ],
+      "packageManagerCounts": [
+        {
+          "id": "NPM",
+          "packageManager": "NPM",
+          "releaseCount": 205
+        },
+        {
+          "id": "NUGET",
+          "packageManager": "NUGET",
+          "releaseCount": 16
+        }
+      ],
+      "branches": [
+        {
+          "id": "debe56b9-494a-46bc-ba28-4a7384973eff",
+          "uuid": "debe56b9-494a-46bc-ba28-4a7384973eff",
+          "key": "master",
+          "pullRequest": false,
+          "projectKey": "mikelopster_sonarqube-training-team-notes",
+          "projectName": "Team Notes (SonarQube Training)"
+        }
+      ],
+      "countWithoutFilters": 221,
+      "page": {
+        "pageIndex": 1,
+        "pageSize": 1,
+        "total": 221
+      }
+    },
+    "totalReported": 221,
+    "complete": false,
+    "directFullListingAttempt": {
+      "status": 403,
+      "reason": "API returned403 to direct browser-session fetch; no missing package rows inferred."
+    }
+  },
+  "sourceAvailability": [
+    {
+      "path": "api/Api.csproj",
+      "status": 404
+    },
+    {
+      "path": "api/project.assets.json",
+      "status": 404
+    }
+  ]
+}

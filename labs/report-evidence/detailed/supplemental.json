@@ -1,0 +1,4463 @@
+{
+  "metadata": {
+    "project": {
+      "component": {
+        "key": "mikelopster_sonarqube-training-team-notes",
+        "name": "Team Notes (SonarQube Training)",
+        "qualifier": "TRK",
+        "analysisDate": "2026-10-10T07:40:51+0000",
+        "tags": [],
+        "visibility": "private",
+        "version": "not provided"
+      },
+      "ancestors": []
+    },
+    "branches": {
+      "branches": [
+        {
+          "name": "solution",
+          "isMain": false,
+          "type": "SHORT",
+          "mergeBranch": "master",
+          "status": {
+            "qualityGateStatus": "ERROR",
+            "bugs": 1,
+            "vulnerabilities": 0,
+            "codeSmells": 3
+          },
+          "analysisDate": "2026-10-10T07:43:31+0000",
+          "branchId": "b274c9a3-be63-426f-bd4c-07558886ccd0",
+          "branchUuidV1": "AaEkxIbS3iHLfDFbc20d"
+        },
+        {
+          "name": "master",
+          "isMain": true,
+          "type": "LONG",
+          "status": {
+            "qualityGateStatus": "OK",
+            "bugs": 9,
+            "vulnerabilities": 13,
+            "codeSmells": 12
+          },
+          "analysisDate": "2026-10-10T07:40:51+0000",
+          "branchId": "debe56b9-494a-46bc-ba28-4a7384973eff",
+          "branchUuidV1": "AaEkwNOVqxZKWC9KsNnO"
+        }
+      ]
+    },
+    "coreAnalysesBefore": {
+      "paging": {
+        "pageIndex": 1,
+        "pageSize": 100,
+        "total": 1
+      },
+      "analyses": [
+        {
+          "key": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+          "date": "2026-10-10T07:40:51+0000",
+          "events": [
+            {
+              "key": "AaEkwyz2n3atgy46CG_o",
+              "category": "VERSION",
+              "name": "not provided"
+            }
+          ],
+          "projectVersion": "not provided",
+          "manualNewCodePeriodBaseline": false
+        }
+      ]
+    },
+    "coreAnalysesAfter": {
+      "paging": {
+        "pageIndex": 1,
+        "pageSize": 100,
+        "total": 1
+      },
+      "analyses": [
+        {
+          "key": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+          "date": "2026-10-10T07:40:51+0000",
+          "events": [
+            {
+              "key": "AaEkwyz2n3atgy46CG_o",
+              "category": "VERSION",
+              "name": "not provided"
+            }
+          ],
+          "projectVersion": "not provided",
+          "manualNewCodePeriodBaseline": false
+        }
+      ]
+    },
+    "qualityGate": {
+      "status": "NONE",
+      "conditions": [],
+      "periods": [],
+      "interpretation": "API returned NONE with no conditions; this is not a PASS assertion."
+    }
+  },
+  "securityMetrics": {
+    "capturedAt": "2026-10-18T09:52:41.122Z",
+    "scope": "branch master; Overall and New Code metric keys remain distinct",
+    "data": {
+      "component": {
+        "id": "AaEkwNOVqxZKWC9KsNnO",
+        "key": "mikelopster_sonarqube-training-team-notes",
+        "name": "Team Notes (SonarQube Training)",
+        "qualifier": "TRK",
+        "measures": [
+          {
+            "metric": "security_remediation_effort",
+            "value": "335",
+            "bestValue": false
+          },
+          {
+            "metric": "new_sca_severity_licensing",
+            "periods": [
+              {
+                "index": 1,
+                "value": "0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "sca_count_licensing",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "sca_count_vulnerability",
+            "value": "1",
+            "bestValue": false
+          },
+          {
+            "metric": "new_sca_rating_vulnerability",
+            "periods": [
+              {
+                "index": 1,
+                "value": "1.0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "sca_rating_vulnerability",
+            "value": "4.0",
+            "bestValue": false
+          },
+          {
+            "metric": "new_sca_severity_malware",
+            "periods": [
+              {
+                "index": 1,
+                "value": "0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "security_rating",
+            "value": "5.0",
+            "bestValue": false
+          },
+          {
+            "metric": "new_sca_rating_licensing",
+            "periods": [
+              {
+                "index": 1,
+                "value": "1.0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "new_sca_count_any_issue",
+            "periods": [
+              {
+                "index": 1,
+                "value": "0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "sca_severity_licensing",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "new_sca_severity_vulnerability",
+            "periods": [
+              {
+                "index": 1,
+                "value": "0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "new_sca_severity_any_security",
+            "periods": [
+              {
+                "index": 1,
+                "value": "0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "sca_severity_vulnerability",
+            "value": "20",
+            "bestValue": false
+          },
+          {
+            "metric": "new_sca_count_malware",
+            "periods": [
+              {
+                "index": 1,
+                "value": "0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "sca_severity_malware",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "sca_rating_any_security",
+            "value": "4.0",
+            "bestValue": false
+          },
+          {
+            "metric": "sca_rating_licensing",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "new_sca_rating_any_security",
+            "periods": [
+              {
+                "index": 1,
+                "value": "1.0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "sca_count_malware",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "sca_count_any_issue",
+            "value": "1",
+            "bestValue": false
+          },
+          {
+            "metric": "software_quality_security_issues",
+            "value": "13",
+            "bestValue": false
+          },
+          {
+            "metric": "new_sca_rating_any_issue",
+            "periods": [
+              {
+                "index": 1,
+                "value": "1.0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_issue_severity",
+            "value": "25",
+            "bestValue": false
+          },
+          {
+            "metric": "new_sca_severity_any_issue",
+            "periods": [
+              {
+                "index": 1,
+                "value": "0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "security_hotspots_reviewed_status",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "new_sca_count_vulnerability",
+            "periods": [
+              {
+                "index": 1,
+                "value": "0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "sca_rating_malware",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "new_sca_rating_malware",
+            "periods": [
+              {
+                "index": 1,
+                "value": "1.0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "sca_rating_any_issue",
+            "value": "4.0",
+            "bestValue": false
+          },
+          {
+            "metric": "security_issues",
+            "value": "{\"total\":13,\"HIGH\":1,\"MEDIUM\":6,\"LOW\":4,\"INFO\":0,\"BLOCKER\":2}"
+          },
+          {
+            "metric": "sca_severity_any_issue",
+            "value": "20",
+            "bestValue": false
+          },
+          {
+            "metric": "new_sca_count_any_security",
+            "periods": [
+              {
+                "index": 1,
+                "value": "0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_review_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "new_sca_count_licensing",
+            "periods": [
+              {
+                "index": 1,
+                "value": "0",
+                "bestValue": true
+              }
+            ]
+          },
+          {
+            "metric": "security_hotspots_to_review_status",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "13",
+            "bestValue": false
+          },
+          {
+            "metric": "sca_count_any_security",
+            "value": "1",
+            "bestValue": false
+          },
+          {
+            "metric": "sca_severity_any_security",
+            "value": "20",
+            "bestValue": false
+          }
+        ]
+      }
+    },
+    "definitions": [
+      {
+        "id": "458",
+        "key": "sca_count_any_issue",
+        "type": "INT",
+        "name": "Count of dependency risks",
+        "description": "Count of dependency risks",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "497",
+        "key": "sca_count_any_security",
+        "type": "INT",
+        "name": "Count of dependency security risks",
+        "description": "Count of dependency security risks",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "487",
+        "key": "sca_count_licensing",
+        "type": "INT",
+        "name": "Count of licensing risks",
+        "description": "Count of licensing risks",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "491",
+        "key": "sca_count_malware",
+        "type": "INT",
+        "name": "Count of malware risks",
+        "description": "Count of malware risks",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "459",
+        "key": "new_sca_count_any_issue",
+        "type": "INT",
+        "name": "Count of new dependency risks",
+        "description": "Count of new dependency risks",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "498",
+        "key": "new_sca_count_any_security",
+        "type": "INT",
+        "name": "Count of new dependency security risks",
+        "description": "Count of new dependency security risks",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "488",
+        "key": "new_sca_count_licensing",
+        "type": "INT",
+        "name": "Count of new licensing risks",
+        "description": "Count of new licensing risks",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "492",
+        "key": "new_sca_count_malware",
+        "type": "INT",
+        "name": "Count of new malware risks",
+        "description": "Count of new malware risks",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "486",
+        "key": "new_sca_count_vulnerability",
+        "type": "INT",
+        "name": "Count of new vulnerability dependency risks",
+        "description": "Count of new vulnerability dependency risks",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "485",
+        "key": "sca_count_vulnerability",
+        "type": "INT",
+        "name": "Count of vulnerability dependency risks",
+        "description": "Count of vulnerability dependency risks",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "462",
+        "key": "sca_rating_any_issue",
+        "type": "RATING",
+        "name": "Dependency risk rating",
+        "description": "Dependency risk rating",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "460",
+        "key": "sca_rating_licensing",
+        "type": "RATING",
+        "name": "Dependency risk rating for licenses",
+        "description": "Dependency risk rating for licenses",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "461",
+        "key": "new_sca_rating_licensing",
+        "type": "RATING",
+        "name": "Dependency risk rating for licenses on new code",
+        "description": "Dependency risk rating for licenses on new code",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "493",
+        "key": "sca_rating_malware",
+        "type": "RATING",
+        "name": "Dependency risk rating for malware",
+        "description": "Dependency risk rating for malware",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "494",
+        "key": "new_sca_rating_malware",
+        "type": "RATING",
+        "name": "Dependency risk rating for malware on new code",
+        "description": "Dependency risk rating for malware on new code",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "499",
+        "key": "sca_rating_any_security",
+        "type": "RATING",
+        "name": "Dependency risk rating for security",
+        "description": "Dependency risk rating for security",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "500",
+        "key": "new_sca_rating_any_security",
+        "type": "RATING",
+        "name": "Dependency risk rating for security on new code",
+        "description": "Dependency risk rating for security on new code",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "464",
+        "key": "sca_rating_vulnerability",
+        "type": "RATING",
+        "name": "Dependency risk rating for vulnerabilities",
+        "description": "Dependency risk rating for vulnerabilities",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "465",
+        "key": "new_sca_rating_vulnerability",
+        "type": "RATING",
+        "name": "Dependency risk rating for vulnerabilities on new code",
+        "description": "Dependency risk rating for vulnerabilities on new code",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "463",
+        "key": "new_sca_rating_any_issue",
+        "type": "RATING",
+        "name": "Dependency risk rating on new code",
+        "description": "Dependency risk rating on new code",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "351",
+        "key": "new_security_hotspots",
+        "type": "INT",
+        "name": "New Security Hotspots",
+        "description": "New Security Hotspots",
+        "domain": "SecurityReview",
+        "direction": -1,
+        "qualitative": true,
+        "hidden": false
+      },
+      {
+        "id": "428",
+        "key": "new_security_issues",
+        "type": "DATA",
+        "name": "New Security Issues",
+        "description": "New security issues",
+        "domain": "Security",
+        "direction": 0,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "565",
+        "key": "new_software_quality_security_issues",
+        "type": "INT",
+        "name": "New Security Issues",
+        "description": "Number of open issues impacting the Security software quality on new code",
+        "domain": "Security",
+        "direction": -1,
+        "qualitative": true,
+        "hidden": false
+      },
+      {
+        "id": "311",
+        "key": "new_vulnerabilities",
+        "type": "INT",
+        "name": "New Vulnerabilities",
+        "description": "New Vulnerabilities",
+        "domain": "Security",
+        "direction": -1,
+        "qualitative": true,
+        "hidden": false
+      },
+      {
+        "id": "350",
+        "key": "security_hotspots",
+        "type": "INT",
+        "name": "Security Hotspots",
+        "description": "Security Hotspots",
+        "domain": "SecurityReview",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "354",
+        "key": "security_hotspots_reviewed",
+        "type": "PERCENT",
+        "name": "Security Hotspots Reviewed",
+        "description": "Percentage of Security Hotspots Reviewed",
+        "domain": "SecurityReview",
+        "direction": 1,
+        "qualitative": true,
+        "hidden": false,
+        "decimalScale": 1
+      },
+      {
+        "id": "355",
+        "key": "new_security_hotspots_reviewed",
+        "type": "PERCENT",
+        "name": "Security Hotspots Reviewed on New Code",
+        "description": "Percentage of Security Hotspots Reviewed on New Code",
+        "domain": "SecurityReview",
+        "direction": 1,
+        "qualitative": true,
+        "hidden": false,
+        "decimalScale": 1
+      },
+      {
+        "id": "423",
+        "key": "security_issues",
+        "type": "DATA",
+        "name": "Security Issues",
+        "description": "Security issues",
+        "domain": "Security",
+        "direction": 0,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "564",
+        "key": "software_quality_security_issues",
+        "type": "INT",
+        "name": "Security Issues",
+        "description": "Number of open issues impacting the Security software quality",
+        "domain": "Security",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "519",
+        "key": "new_security_issue_severity",
+        "type": "INT",
+        "name": "Security Issue Severity on New Code",
+        "description": "Worst severity of new security issues",
+        "domain": "Security",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "558",
+        "key": "security_issue_severity",
+        "type": "INT",
+        "name": "Security Issue Severity on Overall Code",
+        "description": "Worst severity of security issues",
+        "domain": "Security",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "319",
+        "key": "security_rating",
+        "type": "RATING",
+        "name": "Security Rating",
+        "description": "Security rating",
+        "domain": "Security",
+        "direction": -1,
+        "qualitative": true,
+        "hidden": false
+      },
+      {
+        "id": "343",
+        "key": "new_security_rating",
+        "type": "RATING",
+        "name": "Security Rating on New Code",
+        "description": "Security rating on new code",
+        "domain": "Security",
+        "direction": -1,
+        "qualitative": true,
+        "hidden": false
+      },
+      {
+        "id": "317",
+        "key": "security_remediation_effort",
+        "type": "WORK_DUR",
+        "name": "Security Remediation Effort",
+        "description": "Security remediation effort",
+        "domain": "Security",
+        "direction": -1,
+        "qualitative": true,
+        "hidden": false
+      },
+      {
+        "id": "318",
+        "key": "new_security_remediation_effort",
+        "type": "WORK_DUR",
+        "name": "Security Remediation Effort on New Code",
+        "description": "Security remediation effort on new code",
+        "domain": "Security",
+        "direction": -1,
+        "qualitative": true,
+        "hidden": false
+      },
+      {
+        "id": "352",
+        "key": "security_review_rating",
+        "type": "RATING",
+        "name": "Security Review Rating",
+        "description": "Security Review Rating",
+        "domain": "SecurityReview",
+        "direction": -1,
+        "qualitative": true,
+        "hidden": false
+      },
+      {
+        "id": "353",
+        "key": "new_security_review_rating",
+        "type": "RATING",
+        "name": "Security Review Rating on New Code",
+        "description": "Security Review Rating on New Code",
+        "domain": "SecurityReview",
+        "direction": -1,
+        "qualitative": true,
+        "hidden": false
+      },
+      {
+        "id": "356",
+        "key": "security_hotspots_reviewed_status",
+        "type": "INT",
+        "name": "Security Review Reviewed Status",
+        "description": "Security Review Reviewed Status",
+        "domain": "SecurityReview",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": true
+      },
+      {
+        "id": "358",
+        "key": "new_security_hotspots_reviewed_status",
+        "type": "INT",
+        "name": "Security Review Reviewed Status on New Code",
+        "description": "Security Review Reviewed Status on New Code",
+        "domain": "SecurityReview",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": true
+      },
+      {
+        "id": "357",
+        "key": "security_hotspots_to_review_status",
+        "type": "INT",
+        "name": "Security Review To Review Status",
+        "description": "Security Review To Review Status",
+        "domain": "SecurityReview",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": true
+      },
+      {
+        "id": "359",
+        "key": "new_security_hotspots_to_review_status",
+        "type": "INT",
+        "name": "Security Review To Review Status on New Code",
+        "description": "Security Review To Review Status on New Code",
+        "domain": "SecurityReview",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": true
+      },
+      {
+        "id": "454",
+        "key": "sca_severity_any_issue",
+        "type": "INT",
+        "name": "Severity of a dependency risk",
+        "description": "Severity of a dependency risk",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "495",
+        "key": "sca_severity_any_security",
+        "type": "INT",
+        "name": "Severity of a dependency security risk",
+        "description": "Severity of a dependency security risk",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "452",
+        "key": "sca_severity_licensing",
+        "type": "INT",
+        "name": "Severity of a licensing dependency risk",
+        "description": "Severity of a licensing dependency risk",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "489",
+        "key": "sca_severity_malware",
+        "type": "INT",
+        "name": "Severity of a malware dependency risk",
+        "description": "Severity of a malware dependency risk",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "455",
+        "key": "new_sca_severity_any_issue",
+        "type": "INT",
+        "name": "Severity of a new dependency risk",
+        "description": "Severity of a new dependency risk",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "496",
+        "key": "new_sca_severity_any_security",
+        "type": "INT",
+        "name": "Severity of a new dependency security risk",
+        "description": "Severity of a new dependency security risk",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "453",
+        "key": "new_sca_severity_licensing",
+        "type": "INT",
+        "name": "Severity of a new licensing dependency risk",
+        "description": "Severity of a new licensing dependency risk",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "490",
+        "key": "new_sca_severity_malware",
+        "type": "INT",
+        "name": "Severity of a new malware dependency risk",
+        "description": "Severity of a new malware dependency risk",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "457",
+        "key": "new_sca_severity_vulnerability",
+        "type": "INT",
+        "name": "Severity of a new vulnerability dependency risk",
+        "description": "Severity of a new vulnerability dependency risk",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "456",
+        "key": "sca_severity_vulnerability",
+        "type": "INT",
+        "name": "Severity of a vulnerability dependency risk",
+        "description": "Severity of a vulnerability dependency risk",
+        "domain": "DependencyRisks",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "310",
+        "key": "vulnerabilities",
+        "type": "INT",
+        "name": "Vulnerabilities",
+        "description": "Vulnerabilities",
+        "domain": "Security",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      },
+      {
+        "id": "523",
+        "key": "new_vulnerabilities_severity",
+        "type": "INT",
+        "name": "Vulnerabilities Severity on New Code",
+        "description": "Worst severity of new vulnerability issues",
+        "domain": "Security",
+        "direction": -1,
+        "qualitative": false,
+        "hidden": false
+      }
+    ],
+    "requested": [
+      "sca_count_any_issue",
+      "sca_count_any_security",
+      "sca_count_licensing",
+      "sca_count_malware",
+      "new_sca_count_any_issue",
+      "new_sca_count_any_security",
+      "new_sca_count_licensing",
+      "new_sca_count_malware",
+      "new_sca_count_vulnerability",
+      "sca_count_vulnerability",
+      "sca_rating_any_issue",
+      "sca_rating_licensing",
+      "new_sca_rating_licensing",
+      "sca_rating_malware",
+      "new_sca_rating_malware",
+      "sca_rating_any_security",
+      "new_sca_rating_any_security",
+      "sca_rating_vulnerability",
+      "new_sca_rating_vulnerability",
+      "new_sca_rating_any_issue",
+      "new_security_hotspots",
+      "new_security_issues",
+      "new_software_quality_security_issues",
+      "new_vulnerabilities",
+      "security_hotspots",
+      "security_hotspots_reviewed",
+      "new_security_hotspots_reviewed",
+      "security_issues",
+      "software_quality_security_issues",
+      "new_security_issue_severity",
+      "security_issue_severity",
+      "security_rating",
+      "new_security_rating",
+      "security_remediation_effort",
+      "new_security_remediation_effort",
+      "security_review_rating",
+      "new_security_review_rating",
+      "security_hotspots_reviewed_status",
+      "new_security_hotspots_reviewed_status",
+      "security_hotspots_to_review_status",
+      "new_security_hotspots_to_review_status",
+      "sca_severity_any_issue",
+      "sca_severity_any_security",
+      "sca_severity_licensing",
+      "sca_severity_malware",
+      "new_sca_severity_any_issue",
+      "new_sca_severity_any_security",
+      "new_sca_severity_licensing",
+      "new_sca_severity_malware",
+      "new_sca_severity_vulnerability",
+      "sca_severity_vulnerability",
+      "vulnerabilities",
+      "new_vulnerabilities_severity"
+    ],
+    "notReturned": [
+      "new_security_hotspots",
+      "new_security_hotspots_reviewed",
+      "new_security_hotspots_reviewed_status",
+      "new_security_hotspots_to_review_status",
+      "new_security_issue_severity",
+      "new_security_issues",
+      "new_security_rating",
+      "new_security_remediation_effort",
+      "new_security_review_rating",
+      "new_software_quality_security_issues",
+      "new_vulnerabilities",
+      "new_vulnerabilities_severity"
+    ],
+    "note": "Missing metric keys are unavailable, not zero; encoded JSON metric values are preserved as returned."
+  },
+  "securityGroupings": {
+    "paging": {
+      "pageIndex": 1,
+      "pageSize": 500,
+      "total": 13
+    },
+    "distinctIssues": 13,
+    "facets": [
+      {
+        "property": "severities",
+        "values": [
+          {
+            "val": "MAJOR",
+            "count": 6
+          },
+          {
+            "val": "MINOR",
+            "count": 4
+          },
+          {
+            "val": "BLOCKER",
+            "count": 2
+          },
+          {
+            "val": "CRITICAL",
+            "count": 1
+          },
+          {
+            "val": "INFO",
+            "count": 0
+          }
+        ]
+      },
+      {
+        "property": "statuses",
+        "values": [
+          {
+            "val": "OPEN",
+            "count": 13
+          },
+          {
+            "val": "CONFIRMED",
+            "count": 0
+          },
+          {
+            "val": "REOPENED",
+            "count": 0
+          },
+          {
+            "val": "RESOLVED",
+            "count": 0
+          },
+          {
+            "val": "CLOSED",
+            "count": 0
+          }
+        ]
+      },
+      {
+        "property": "issueStatuses",
+        "values": [
+          {
+            "val": "OPEN",
+            "count": 13
+          },
+          {
+            "val": "CONFIRMED",
+            "count": 0
+          },
+          {
+            "val": "FALSE_POSITIVE",
+            "count": 0
+          },
+          {
+            "val": "ACCEPTED",
+            "count": 0
+          },
+          {
+            "val": "FIXED",
+            "count": 0
+          }
+        ]
+      },
+      {
+        "property": "owaspTop10",
+        "values": [
+          {
+            "val": "a3",
+            "count": 6
+          },
+          {
+            "val": "a2",
+            "count": 2
+          },
+          {
+            "val": "a1",
+            "count": 1
+          },
+          {
+            "val": "a5",
+            "count": 1
+          },
+          {
+            "val": "a6",
+            "count": 1
+          },
+          {
+            "val": "a7",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "property": "owaspTop10-2021",
+        "values": [
+          {
+            "val": "a7",
+            "count": 4
+          },
+          {
+            "val": "a2",
+            "count": 3
+          },
+          {
+            "val": "a5",
+            "count": 2
+          },
+          {
+            "val": "a10",
+            "count": 1
+          },
+          {
+            "val": "a3",
+            "count": 1
+          },
+          {
+            "val": "a4",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "property": "cwe",
+        "values": [
+          {
+            "val": "259",
+            "count": 4
+          },
+          {
+            "val": "798",
+            "count": 4
+          },
+          {
+            "val": "200",
+            "count": 2
+          },
+          {
+            "val": "319",
+            "count": 2
+          },
+          {
+            "val": "506",
+            "count": 2
+          },
+          {
+            "val": "829",
+            "count": 2
+          },
+          {
+            "val": "1004",
+            "count": 1
+          },
+          {
+            "val": "1240",
+            "count": 1
+          },
+          {
+            "val": "20",
+            "count": 1
+          },
+          {
+            "val": "311",
+            "count": 1
+          },
+          {
+            "val": "315",
+            "count": 1
+          },
+          {
+            "val": "614",
+            "count": 1
+          },
+          {
+            "val": "89",
+            "count": 1
+          },
+          {
+            "val": "918",
+            "count": 1
+          },
+          {
+            "val": "943",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "property": "sonarsourceSecurity",
+        "values": [
+          {
+            "val": "auth",
+            "count": 4
+          },
+          {
+            "val": "others",
+            "count": 4
+          },
+          {
+            "val": "encrypt-data",
+            "count": 2
+          },
+          {
+            "val": "insecure-conf",
+            "count": 1
+          },
+          {
+            "val": "sql-injection",
+            "count": 1
+          },
+          {
+            "val": "ssrf",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "property": "impactSeverities",
+        "values": [
+          {
+            "val": "HIGH",
+            "count": 1
+          },
+          {
+            "val": "MEDIUM",
+            "count": 6
+          },
+          {
+            "val": "LOW",
+            "count": 4
+          },
+          {
+            "val": "INFO",
+            "count": 0
+          },
+          {
+            "val": "BLOCKER",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "property": "owasp_masvs:urn:sonar-security-standard:owasp:masvs:v2",
+        "values": [
+          {
+            "val": "MASVS-AUTH",
+            "count": 6
+          },
+          {
+            "val": "MASVS-CODE",
+            "count": 7
+          },
+          {
+            "val": "MASVS-PLATFORM",
+            "count": 6
+          },
+          {
+            "val": "MASVS-RESILIENCE",
+            "count": 2
+          },
+          {
+            "val": "MASVS-CRYPTO",
+            "count": 1
+          },
+          {
+            "val": "MASVS-NETWORK",
+            "count": 3
+          },
+          {
+            "val": "MASVS-STORAGE",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "property": "owasp_mobile-top10:urn:sonar-security-standard:owasp:mobile-top10:2024",
+        "values": [
+          {
+            "val": "M05",
+            "count": 2
+          },
+          {
+            "val": "M10",
+            "count": 3
+          },
+          {
+            "val": "M02",
+            "count": 2
+          },
+          {
+            "val": "M01",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "property": "owasp_masvs:urn:sonar-security-standard:owasp:masvs:v1",
+        "values": [
+          {
+            "val": "MSTG-NETWORK",
+            "count": 3
+          },
+          {
+            "val": "MSTG-PLATFORM",
+            "count": 4
+          },
+          {
+            "val": "MSTG-RESILIENCE",
+            "count": 2
+          },
+          {
+            "val": "MSTG-CRYPTO",
+            "count": 1
+          },
+          {
+            "val": "MSTG-STORAGE",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "property": "owasp_asvs:urn:sonar-security-standard:owasp:asvs:4.0",
+        "values": [
+          {
+            "val": "12",
+            "count": 3
+          },
+          {
+            "val": "13",
+            "count": 1
+          },
+          {
+            "val": "14",
+            "count": 4
+          },
+          {
+            "val": "1",
+            "count": 2
+          },
+          {
+            "val": "2",
+            "count": 6
+          },
+          {
+            "val": "3",
+            "count": 6
+          },
+          {
+            "val": "5",
+            "count": 4
+          },
+          {
+            "val": "6",
+            "count": 5
+          },
+          {
+            "val": "7",
+            "count": 2
+          },
+          {
+            "val": "8",
+            "count": 2
+          },
+          {
+            "val": "9",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "property": "owasp_asvs:urn:sonar-security-standard:owasp:asvs:5.0",
+        "values": [
+          {
+            "val": "12",
+            "count": 2
+          },
+          {
+            "val": "13",
+            "count": 7
+          },
+          {
+            "val": "14",
+            "count": 3
+          },
+          {
+            "val": "15",
+            "count": 2
+          },
+          {
+            "val": "16",
+            "count": 2
+          },
+          {
+            "val": "1",
+            "count": 2
+          },
+          {
+            "val": "2",
+            "count": 2
+          },
+          {
+            "val": "3",
+            "count": 4
+          },
+          {
+            "val": "5",
+            "count": 2
+          },
+          {
+            "val": "7",
+            "count": 4
+          }
+        ]
+      },
+      {
+        "property": "pci_dss:urn:sonar-security-standard:pci:dss:4.0",
+        "values": [
+          {
+            "val": "4",
+            "count": 2
+          },
+          {
+            "val": "6",
+            "count": 11
+          }
+        ]
+      },
+      {
+        "property": "pci_dss:urn:sonar-security-standard:pci:dss:3.2",
+        "values": [
+          {
+            "val": "3",
+            "count": 1
+          },
+          {
+            "val": "4",
+            "count": 2
+          },
+          {
+            "val": "6",
+            "count": 11
+          }
+        ]
+      },
+      {
+        "property": "owasp_llm-top10:urn:sonar-security-standard:owasp:llm-top10:2025",
+        "values": []
+      },
+      {
+        "property": "sonar_standard:urn:sonar-security-standard:sonar:standard:unversioned",
+        "values": [
+          {
+            "val": "insecure-conf",
+            "count": 1
+          },
+          {
+            "val": "auth",
+            "count": 4
+          },
+          {
+            "val": "sql-injection",
+            "count": 1
+          },
+          {
+            "val": "others",
+            "count": 8
+          },
+          {
+            "val": "ssrf",
+            "count": 1
+          },
+          {
+            "val": "encrypt-data",
+            "count": 3
+          },
+          {
+            "val": "malicious-dependencies",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "property": "stig_asd:urn:sonar-security-standard:stig:asd:v5",
+        "values": [
+          {
+            "val": "V-222596",
+            "count": 2
+          },
+          {
+            "val": "V-222599",
+            "count": 2
+          },
+          {
+            "val": "V-222598",
+            "count": 2
+          },
+          {
+            "val": "V-222597",
+            "count": 2
+          },
+          {
+            "val": "V-222609",
+            "count": 2
+          },
+          {
+            "val": "V-222397",
+            "count": 2
+          },
+          {
+            "val": "V-222642",
+            "count": 2
+          },
+          {
+            "val": "V-222534",
+            "count": 2
+          },
+          {
+            "val": "V-222563",
+            "count": 2
+          },
+          {
+            "val": "V-222562",
+            "count": 2
+          },
+          {
+            "val": "V-222577",
+            "count": 2
+          },
+          {
+            "val": "V-222576",
+            "count": 1
+          },
+          {
+            "val": "V-222575",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "property": "owasp_mobile-top10:urn:sonar-security-standard:owasp:mobile-top10:2016",
+        "values": [
+          {
+            "val": "M03",
+            "count": 2
+          },
+          {
+            "val": "M05",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "property": "cwe_standard:urn:sonar-security-standard:cwe:standard:4.18",
+        "values": [
+          {
+            "val": "CWE-798",
+            "count": 4
+          },
+          {
+            "val": "CWE-315",
+            "count": 1
+          },
+          {
+            "val": "CWE-319",
+            "count": 2
+          },
+          {
+            "val": "CWE-311",
+            "count": 1
+          },
+          {
+            "val": "CWE-829",
+            "count": 2
+          },
+          {
+            "val": "CWE-614",
+            "count": 1
+          },
+          {
+            "val": "CWE-20",
+            "count": 1
+          },
+          {
+            "val": "CWE-1004",
+            "count": 1
+          },
+          {
+            "val": "CWE-1240",
+            "count": 1
+          },
+          {
+            "val": "CWE-259",
+            "count": 4
+          },
+          {
+            "val": "CWE-200",
+            "count": 2
+          },
+          {
+            "val": "CWE-89",
+            "count": 1
+          },
+          {
+            "val": "CWE-918",
+            "count": 1
+          },
+          {
+            "val": "CWE-943",
+            "count": 1
+          },
+          {
+            "val": "CWE-506",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "property": "cwe_top25:urn:sonar-security-standard:cwe:top25:2021",
+        "values": [
+          {
+            "val": "CWE-798",
+            "count": 4
+          },
+          {
+            "val": "CWE-89",
+            "count": 1
+          },
+          {
+            "val": "CWE-20",
+            "count": 1
+          },
+          {
+            "val": "CWE-200",
+            "count": 2
+          },
+          {
+            "val": "CWE-918",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "property": "cwe_top25:urn:sonar-security-standard:cwe:top25:2024",
+        "values": [
+          {
+            "val": "CWE-798",
+            "count": 4
+          },
+          {
+            "val": "CWE-89",
+            "count": 1
+          },
+          {
+            "val": "CWE-20",
+            "count": 1
+          },
+          {
+            "val": "CWE-200",
+            "count": 2
+          },
+          {
+            "val": "CWE-918",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "property": "wcag:2.1",
+        "values": []
+      },
+      {
+        "property": "cwe_top25:urn:sonar-security-standard:cwe:top25:2025",
+        "values": [
+          {
+            "val": "CWE-89",
+            "count": 1
+          },
+          {
+            "val": "CWE-20",
+            "count": 1
+          },
+          {
+            "val": "CWE-200",
+            "count": 2
+          },
+          {
+            "val": "CWE-918",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "property": "owasp_top10:urn:sonar-security-standard:owasp:top10:2017",
+        "values": [
+          {
+            "val": "A1",
+            "count": 1
+          },
+          {
+            "val": "A2",
+            "count": 2
+          },
+          {
+            "val": "A3",
+            "count": 6
+          },
+          {
+            "val": "A5",
+            "count": 1
+          },
+          {
+            "val": "A6",
+            "count": 1
+          },
+          {
+            "val": "A7",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "property": "wcag:2.0",
+        "values": []
+      },
+      {
+        "property": "stig_asd:urn:sonar-security-standard:stig:asd:v6",
+        "values": [
+          {
+            "val": "V-222596",
+            "count": 2
+          },
+          {
+            "val": "V-222599",
+            "count": 2
+          },
+          {
+            "val": "V-222598",
+            "count": 2
+          },
+          {
+            "val": "V-222597",
+            "count": 2
+          },
+          {
+            "val": "V-222609",
+            "count": 2
+          },
+          {
+            "val": "V-222397",
+            "count": 2
+          },
+          {
+            "val": "V-222642",
+            "count": 2
+          },
+          {
+            "val": "V-222534",
+            "count": 2
+          },
+          {
+            "val": "V-222563",
+            "count": 2
+          },
+          {
+            "val": "V-222562",
+            "count": 2
+          },
+          {
+            "val": "V-222577",
+            "count": 2
+          },
+          {
+            "val": "V-222576",
+            "count": 1
+          },
+          {
+            "val": "V-222575",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "property": "cwe_top25:urn:sonar-security-standard:cwe:top25:2022",
+        "values": [
+          {
+            "val": "CWE-798",
+            "count": 4
+          },
+          {
+            "val": "CWE-89",
+            "count": 1
+          },
+          {
+            "val": "CWE-20",
+            "count": 1
+          },
+          {
+            "val": "CWE-918",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "property": "cwe_top25:urn:sonar-security-standard:cwe:top25:2023",
+        "values": [
+          {
+            "val": "CWE-798",
+            "count": 4
+          },
+          {
+            "val": "CWE-89",
+            "count": 1
+          },
+          {
+            "val": "CWE-20",
+            "count": 1
+          },
+          {
+            "val": "CWE-918",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "property": "wcag:2.2",
+        "values": []
+      },
+      {
+        "property": "owasp_top10:urn:sonar-security-standard:owasp:top10:2025",
+        "values": [
+          {
+            "val": "A01",
+            "count": 3
+          },
+          {
+            "val": "A02",
+            "count": 2
+          },
+          {
+            "val": "A04",
+            "count": 3
+          },
+          {
+            "val": "A05",
+            "count": 2
+          },
+          {
+            "val": "A06",
+            "count": 1
+          },
+          {
+            "val": "A07",
+            "count": 4
+          },
+          {
+            "val": "A08",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "property": "casa_standard:urn:sonar-security-standard:casa:standard:unversioned",
+        "values": [
+          {
+            "val": "3",
+            "count": 6
+          },
+          {
+            "val": "5",
+            "count": 4
+          },
+          {
+            "val": "6",
+            "count": 1
+          },
+          {
+            "val": "8",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "property": "owasp_top10:urn:sonar-security-standard:owasp:top10:2021",
+        "values": [
+          {
+            "val": "A10",
+            "count": 1
+          },
+          {
+            "val": "A01",
+            "count": 2
+          },
+          {
+            "val": "A02",
+            "count": 7
+          },
+          {
+            "val": "A03",
+            "count": 2
+          },
+          {
+            "val": "A04",
+            "count": 1
+          },
+          {
+            "val": "A05",
+            "count": 2
+          },
+          {
+            "val": "A07",
+            "count": 4
+          },
+          {
+            "val": "A08",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "property": "misra:urn:sonar-compliance-standard:misra:2023",
+        "values": []
+      },
+      {
+        "property": "cra_standard:urn:sonar-security-standard:cra:standard:unversioned",
+        "values": [
+          {
+            "val": "1",
+            "count": 10
+          }
+        ]
+      },
+      {
+        "property": "rules",
+        "values": [
+          {
+            "val": "typescript:S5332",
+            "count": 2
+          },
+          {
+            "val": "secrets:S6698",
+            "count": 2
+          },
+          {
+            "val": "csharpsquid:S2068",
+            "count": 2
+          },
+          {
+            "val": "csharpsquid:S2092",
+            "count": 1
+          },
+          {
+            "val": "csharpsquid:S3330",
+            "count": 1
+          },
+          {
+            "val": "githubactions:S6505",
+            "count": 1
+          },
+          {
+            "val": "csharpsquid:S2077",
+            "count": 1
+          },
+          {
+            "val": "csharpsquid:S4790",
+            "count": 1
+          },
+          {
+            "val": "roslyn.sonaranalyzer.security.cs:S5144",
+            "count": 1
+          },
+          {
+            "val": "docker:S6505",
+            "count": 1
+          }
+        ]
+      }
+    ],
+    "note": "Categories may overlap. Do not sum category values into distinct issue counts."
+  },
+  "fileMeasures": {
+    "paging": {
+      "pageIndex": 1,
+      "pageSize": 500,
+      "total": 46
+    },
+    "baseComponent": {
+      "id": "AaEkwNOVqxZKWC9KsNnO",
+      "key": "mikelopster_sonarqube-training-team-notes",
+      "name": "Team Notes (SonarQube Training)",
+      "qualifier": "TRK",
+      "measures": [
+        {
+          "metric": "security_hotspots",
+          "value": "0",
+          "bestValue": true
+        },
+        {
+          "metric": "security_hotspots_reviewed",
+          "value": "100.0",
+          "bestValue": true
+        },
+        {
+          "metric": "security_rating",
+          "value": "5.0",
+          "bestValue": false
+        },
+        {
+          "metric": "vulnerabilities",
+          "value": "13",
+          "bestValue": false
+        }
+      ]
+    },
+    "components": [
+      {
+        "id": "AaEkwyMQn3atgy46CG_E",
+        "key": "mikelopster_sonarqube-training-team-notes:.github/workflows",
+        "name": ".github/workflows",
+        "qualifier": "DIR",
+        "path": ".github/workflows",
+        "measures": [
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "3.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "1",
+            "bestValue": false
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG_A",
+        "key": "mikelopster_sonarqube-training-team-notes:.gitlab-ci.yml",
+        "name": ".gitlab-ci.yml",
+        "qualifier": "FIL",
+        "path": ".gitlab-ci.yml",
+        "language": "yaml",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-w",
+        "key": "mikelopster_sonarqube-training-team-notes:web/app/notes/[id]",
+        "name": "[id]",
+        "qualifier": "DIR",
+        "path": "web/app/notes/[id]",
+        "measures": [
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-0",
+        "key": "mikelopster_sonarqube-training-team-notes:web/app/admin",
+        "name": "admin",
+        "qualifier": "DIR",
+        "path": "web/app/admin",
+        "measures": [
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-Z",
+        "key": "mikelopster_sonarqube-training-team-notes:api/Endpoints/AdminEndpoints.cs",
+        "name": "AdminEndpoints.cs",
+        "qualifier": "FIL",
+        "path": "api/Endpoints/AdminEndpoints.cs",
+        "language": "cs",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-n",
+        "key": "mikelopster_sonarqube-training-team-notes:api",
+        "name": "api",
+        "qualifier": "DIR",
+        "path": "api",
+        "measures": [
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "5.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "9",
+            "bestValue": false
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-q",
+        "key": "mikelopster_sonarqube-training-team-notes:web/tests/api.test.ts",
+        "name": "api.test.ts",
+        "qualifier": "UTS",
+        "path": "web/tests/api.test.ts",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-4",
+        "key": "mikelopster_sonarqube-training-team-notes:web/lib/api.ts",
+        "name": "api.ts",
+        "qualifier": "FIL",
+        "path": "web/lib/api.ts",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "2.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "1",
+            "bestValue": false
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-d",
+        "key": "mikelopster_sonarqube-training-team-notes:api/Endpoints/ApiHelpers.cs",
+        "name": "ApiHelpers.cs",
+        "qualifier": "FIL",
+        "path": "api/Endpoints/ApiHelpers.cs",
+        "language": "cs",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-3",
+        "key": "mikelopster_sonarqube-training-team-notes:web/app",
+        "name": "app",
+        "qualifier": "DIR",
+        "path": "web/app",
+        "measures": [
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-k",
+        "key": "mikelopster_sonarqube-training-team-notes:api/AppConfig.cs",
+        "name": "AppConfig.cs",
+        "qualifier": "FIL",
+        "path": "api/AppConfig.cs",
+        "language": "cs",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "5.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "2",
+            "bestValue": false
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-i",
+        "key": "mikelopster_sonarqube-training-team-notes:api/appsettings.json",
+        "name": "appsettings.json",
+        "qualifier": "FIL",
+        "path": "api/appsettings.json",
+        "language": "json",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "5.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "2",
+            "bestValue": false
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-X",
+        "key": "mikelopster_sonarqube-training-team-notes:api/Auth.cs",
+        "name": "Auth.cs",
+        "qualifier": "FIL",
+        "path": "api/Auth.cs",
+        "language": "cs",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "4.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "1",
+            "bestValue": false
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-b",
+        "key": "mikelopster_sonarqube-training-team-notes:api/Endpoints/AuthEndpoints.cs",
+        "name": "AuthEndpoints.cs",
+        "qualifier": "FIL",
+        "path": "api/Endpoints/AuthEndpoints.cs",
+        "language": "cs",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "2.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "2",
+            "bestValue": false
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-8",
+        "key": "mikelopster_sonarqube-training-team-notes:web/components",
+        "name": "components",
+        "qualifier": "DIR",
+        "path": "web/components",
+        "measures": [
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-l",
+        "key": "mikelopster_sonarqube-training-team-notes:api/Database.cs",
+        "name": "Database.cs",
+        "qualifier": "FIL",
+        "path": "api/Database.cs",
+        "language": "cs",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG_C",
+        "key": "mikelopster_sonarqube-training-team-notes:db",
+        "name": "db",
+        "qualifier": "DIR",
+        "path": "db",
+        "measures": [
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-j",
+        "key": "mikelopster_sonarqube-training-team-notes:api/DbInitializer.cs",
+        "name": "DbInitializer.cs",
+        "qualifier": "FIL",
+        "path": "api/DbInitializer.cs",
+        "language": "cs",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-o",
+        "key": "mikelopster_sonarqube-training-team-notes:web/Dockerfile",
+        "name": "Dockerfile",
+        "qualifier": "FIL",
+        "path": "web/Dockerfile",
+        "language": "docker",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "3.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "1",
+            "bestValue": false
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-h",
+        "key": "mikelopster_sonarqube-training-team-notes:api/Dockerfile",
+        "name": "Dockerfile",
+        "qualifier": "FIL",
+        "path": "api/Dockerfile",
+        "language": "docker",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-g",
+        "key": "mikelopster_sonarqube-training-team-notes:api/Endpoints",
+        "name": "Endpoints",
+        "qualifier": "DIR",
+        "path": "api/Endpoints",
+        "measures": [
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "3.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "4",
+            "bestValue": false
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-c",
+        "key": "mikelopster_sonarqube-training-team-notes:api/Endpoints/FilesEndpoints.cs",
+        "name": "FilesEndpoints.cs",
+        "qualifier": "FIL",
+        "path": "api/Endpoints/FilesEndpoints.cs",
+        "language": "cs",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG_B",
+        "key": "mikelopster_sonarqube-training-team-notes:db/init.sql",
+        "name": "init.sql",
+        "qualifier": "FIL",
+        "path": "db/init.sql",
+        "language": "plsql",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-t",
+        "key": "mikelopster_sonarqube-training-team-notes:web/app/layout.tsx",
+        "name": "layout.tsx",
+        "qualifier": "FIL",
+        "path": "web/app/layout.tsx",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-5",
+        "key": "mikelopster_sonarqube-training-team-notes:web/lib",
+        "name": "lib",
+        "qualifier": "DIR",
+        "path": "web/lib",
+        "measures": [
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "2.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "1",
+            "bestValue": false
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-2",
+        "key": "mikelopster_sonarqube-training-team-notes:web/app/login",
+        "name": "login",
+        "qualifier": "DIR",
+        "path": "web/app/login",
+        "measures": [
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-f",
+        "key": "mikelopster_sonarqube-training-team-notes:api/Endpoints/MeEndpoints.cs",
+        "name": "MeEndpoints.cs",
+        "qualifier": "FIL",
+        "path": "api/Endpoints/MeEndpoints.cs",
+        "language": "cs",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-e",
+        "key": "mikelopster_sonarqube-training-team-notes:api/Endpoints/Mutations.cs",
+        "name": "Mutations.cs",
+        "qualifier": "FIL",
+        "path": "api/Endpoints/Mutations.cs",
+        "language": "cs",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "3.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "1",
+            "bestValue": false
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-7",
+        "key": "mikelopster_sonarqube-training-team-notes:web/components/NewNoteForm.tsx",
+        "name": "NewNoteForm.tsx",
+        "qualifier": "FIL",
+        "path": "web/components/NewNoteForm.tsx",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-9",
+        "key": "mikelopster_sonarqube-training-team-notes:web/next.config.ts",
+        "name": "next.config.ts",
+        "qualifier": "FIL",
+        "path": "web/next.config.ts",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "2.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "1",
+            "bestValue": false
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-p",
+        "key": "mikelopster_sonarqube-training-team-notes:web/tests/note-body.test.tsx",
+        "name": "note-body.test.tsx",
+        "qualifier": "UTS",
+        "path": "web/tests/note-body.test.tsx",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-u",
+        "key": "mikelopster_sonarqube-training-team-notes:web/app/notes/[id]/NoteBody.tsx",
+        "name": "NoteBody.tsx",
+        "qualifier": "FIL",
+        "path": "web/app/notes/[id]/NoteBody.tsx",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-y",
+        "key": "mikelopster_sonarqube-training-team-notes:web/app/notes",
+        "name": "notes",
+        "qualifier": "DIR",
+        "path": "web/app/notes",
+        "measures": [
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-a",
+        "key": "mikelopster_sonarqube-training-team-notes:api/Endpoints/NotesEndpoints.cs",
+        "name": "NotesEndpoints.cs",
+        "qualifier": "FIL",
+        "path": "api/Endpoints/NotesEndpoints.cs",
+        "language": "cs",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-s",
+        "key": "mikelopster_sonarqube-training-team-notes:web/app/page.tsx",
+        "name": "page.tsx",
+        "qualifier": "FIL",
+        "path": "web/app/page.tsx",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-z",
+        "key": "mikelopster_sonarqube-training-team-notes:web/app/admin/page.tsx",
+        "name": "page.tsx",
+        "qualifier": "FIL",
+        "path": "web/app/admin/page.tsx",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-1",
+        "key": "mikelopster_sonarqube-training-team-notes:web/app/login/page.tsx",
+        "name": "page.tsx",
+        "qualifier": "FIL",
+        "path": "web/app/login/page.tsx",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-x",
+        "key": "mikelopster_sonarqube-training-team-notes:web/app/notes/page.tsx",
+        "name": "page.tsx",
+        "qualifier": "FIL",
+        "path": "web/app/notes/page.tsx",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-v",
+        "key": "mikelopster_sonarqube-training-team-notes:web/app/notes/[id]/page.tsx",
+        "name": "page.tsx",
+        "qualifier": "FIL",
+        "path": "web/app/notes/[id]/page.tsx",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-Y",
+        "key": "mikelopster_sonarqube-training-team-notes:api/Endpoints/PreviewEndpoints.cs",
+        "name": "PreviewEndpoints.cs",
+        "qualifier": "FIL",
+        "path": "api/Endpoints/PreviewEndpoints.cs",
+        "language": "cs",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "3.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "1",
+            "bestValue": false
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-m",
+        "key": "mikelopster_sonarqube-training-team-notes:api/Program.cs",
+        "name": "Program.cs",
+        "qualifier": "FIL",
+        "path": "api/Program.cs",
+        "language": "cs",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG_D",
+        "key": "mikelopster_sonarqube-training-team-notes:.github/workflows/sonarqube.yml",
+        "name": "sonarqube.yml",
+        "qualifier": "FIL",
+        "path": ".github/workflows/sonarqube.yml",
+        "language": "yaml",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "3.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "1",
+            "bestValue": false
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-r",
+        "key": "mikelopster_sonarqube-training-team-notes:web/tests",
+        "name": "tests",
+        "qualifier": "DIR",
+        "path": "web/tests",
+        "measures": [
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-6",
+        "key": "mikelopster_sonarqube-training-team-notes:web/components/TokenStash.tsx",
+        "name": "TokenStash.tsx",
+        "qualifier": "FIL",
+        "path": "web/components/TokenStash.tsx",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG--",
+        "key": "mikelopster_sonarqube-training-team-notes:web/vitest.config.mts",
+        "name": "vitest.config.mts",
+        "qualifier": "FIL",
+        "path": "web/vitest.config.mts",
+        "language": "ts",
+        "measures": [
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "1.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "0",
+            "bestValue": true
+          }
+        ]
+      },
+      {
+        "id": "AaEkwyMQn3atgy46CG-_",
+        "key": "mikelopster_sonarqube-training-team-notes:web",
+        "name": "web",
+        "qualifier": "DIR",
+        "path": "web",
+        "measures": [
+          {
+            "metric": "security_hotspots",
+            "value": "0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_hotspots_reviewed",
+            "value": "100.0",
+            "bestValue": true
+          },
+          {
+            "metric": "security_rating",
+            "value": "3.0",
+            "bestValue": false
+          },
+          {
+            "metric": "vulnerabilities",
+            "value": "3",
+            "bestValue": false
+          }
+        ]
+      }
+    ]
+  },
+  "dependencyRisks": {
+    "capturedAt": "2026-10-18T09:52:41.122Z",
+    "analysisDate": "2026-10-16T18:39:20.125Z",
+    "analysisDateMeaning": "SCA analyses API updatedAt, not a Git commit or the core code analysis timestamp",
+    "status": "COMPLETED",
+    "analysisErrors": [
+      {
+        "id": "b04ed82e-c9a0-3f67-91a3-3d5fa487b017",
+        "code": "MISSING_LOCKFILE",
+        "path": "api.Tests/Api.Tests.csproj",
+        "message": "No lockfile was found for 'api.Tests/Api.Tests.csproj' (nuget)."
+      }
+    ],
+    "parsedFiles": [
+      "web/package-lock.json",
+      "web/package.json",
+      "api/project.assets.json",
+      "api/Api.csproj",
+      "api.Tests/Api.Tests.csproj"
+    ],
+    "total": 1,
+    "summary": "One OPEN HIGH dependency vulnerability recorded for Newtonsoft.Json12.0.3; API provides CVE/GHSA, version options and reachable source locations.",
+    "records": [
+      {
+        "id": "0ef118b9-0da3-4085-a4c6-e69dc0a1ea27",
+        "package": "Newtonsoft.Json",
+        "version": "12.0.3",
+        "packageUrl": "pkg:nuget/Newtonsoft.Json@12.0.3",
+        "packageManager": "NUGET",
+        "vulnerabilityId": "CVE-2024-21907",
+        "severity": "HIGH",
+        "originalSeverity": "HIGH",
+        "cvssScore": "7.5",
+        "status": "OPEN",
+        "createdAt": "2026-10-10T07:40:51.596Z",
+        "description": "Newtonsoft.Json before version 13.0.1 is affected by a mishandling of exceptional conditions vulnerability. Crafted data that is passed to the JsonConvert.DeserializeObject method may trigger a StackOverflow exception resulting in denial of service. Depending on the usage of the library, an unauthenticated and remote attacker may be able to cause the denial of service condition.",
+        "remediation": {
+          "recommendation": "upgrade",
+          "versionOptions": [
+            {
+              "version": "12.0.3",
+              "vulnerabilityIds": [
+                "CVE-2024-21907"
+              ],
+              "prerelease": false,
+              "fixLevel": "NONE",
+              "descriptionCode": "VERSION_IN_USE",
+              "alternativeReleaseSource": null
+            },
+            {
+              "version": "13.0.1",
+              "vulnerabilityIds": [],
+              "prerelease": false,
+              "fixLevel": "COMPLETE",
+              "descriptionCode": "NEAREST_COMPLETE",
+              "alternativeReleaseSource": null
+            },
+            {
+              "version": "13.0.4",
+              "vulnerabilityIds": [],
+              "prerelease": false,
+              "fixLevel": "COMPLETE",
+              "descriptionCode": "LATEST_STABLE",
+              "alternativeReleaseSource": null
+            },
+            {
+              "version": "14.0.1-beta2",
+              "vulnerabilityIds": [],
+              "prerelease": true,
+              "fixLevel": "COMPLETE",
+              "descriptionCode": "LATEST_PRERELEASE",
+              "alternativeReleaseSource": null
+            }
+          ],
+          "unaffectedVersions": ">= 13.0.1"
+        },
+        "affectedPaths": [
+          "api/Api.csproj",
+          "api/project.assets.json"
+        ],
+        "hasReachableLocations": true,
+        "reachableLocations": [
+          {
+            "signature": "Newtonsoft.Json.JsonConvert.DeserializeObject(string)",
+            "signatureType": "PUBLIC_CALLER",
+            "filePath": "api/Endpoints/PreviewEndpoints.cs",
+            "startLine": 43,
+            "startLineOffset": 29,
+            "endLine": 43,
+            "endLineOffset": 78
+          }
+        ],
+        "references": [
+          {
+            "id": "CVE-2024-21907",
+            "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-21907"
+          },
+          {
+            "id": "GHSA-5crp-9r3c-p9vr",
+            "url": "https://github.com/advisories/GHSA-5crp-9r3c-p9vr"
+          }
+        ],
+        "limitations": [
+          "Reachability locations are analyzer evidence, not a runtime exploit or proof of deployed package identity.",
+          "Version recommendations/EPSS are captured API metadata and not a completed upgrade, compatibility test or current live recommendation.",
+          "SCA status updatedAt differs from the core code-analysis date; no analyzed SCM commit was supplied."
+        ]
+      }
+    ],
+    "riskPagination": {
+      "pageIndex": 1,
+      "pageSize": 100,
+      "total": 1
+    },
+    "packageInventory": {
+      "availableSample": {
+        "releases": [
+          {
+            "id": "82c1797d-611f-4797-aaa3-e8b232b257c2",
+            "key": "82c1797d-611f-4797-aaa3-e8b232b257c2",
+            "branchId": "debe56b9-494a-46bc-ba28-4a7384973eff",
+            "branchUuid": "debe56b9-494a-46bc-ba28-4a7384973eff",
+            "packageUrl": "pkg:npm/assertion-error@2.0.1",
+            "packageManager": "NPM",
+            "packageName": "assertion-error",
+            "version": "2.0.1",
+            "licenseExpression": "MIT",
+            "known": true,
+            "knownPackage": true,
+            "newlyIntroduced": false,
+            "directSummary": false,
+            "scopeSummary": "development",
+            "productionScopeSummary": false,
+            "scopes": [
+              "development"
+            ],
+            "dependencyFilePaths": [
+              "web/package-lock.json"
+            ]
+          }
+        ],
+        "packageManagerCounts": [
+          {
+            "id": "NPM",
+            "packageManager": "NPM",
+            "releaseCount": 205
+          },
+          {
+            "id": "NUGET",
+            "packageManager": "NUGET",
+            "releaseCount": 16
+          }
+        ],
+        "branches": [
+          {
+            "id": "debe56b9-494a-46bc-ba28-4a7384973eff",
+            "uuid": "debe56b9-494a-46bc-ba28-4a7384973eff",
+            "key": "master",
+            "pullRequest": false,
+            "projectKey": "mikelopster_sonarqube-training-team-notes",
+            "projectName": "Team Notes (SonarQube Training)"
+          }
+        ],
+        "countWithoutFilters": 221,
+        "page": {
+          "pageIndex": 1,
+          "pageSize": 1,
+          "total": 221
+        }
+      },
+      "totalReported": 221,
+      "complete": false,
+      "directFullListingAttempt": {
+        "status": 403,
+        "reason": "API returned403 to direct browser-session fetch; no missing package rows inferred."
+      }
+    },
+    "sourceAvailability": [
+      {
+        "path": "api/Api.csproj",
+        "status": 404
+      },
+      {
+        "path": "api/project.assets.json",
+        "status": 404
+      }
+    ]
+  },
+  "dependencyRiskDetail": {
+    "key": "0ef118b9-0da3-4085-a4c6-e69dc0a1ea27",
+    "severity": "HIGH",
+    "originalSeverity": "HIGH",
+    "manualSeverity": null,
+    "showIncreasedSeverityWarning": false,
+    "hasReachableLocations": true,
+    "release": {
+      "id": "212c61cb-772f-44a8-9e89-f2f9aec0a41f",
+      "key": "212c61cb-772f-44a8-9e89-f2f9aec0a41f",
+      "branchId": "debe56b9-494a-46bc-ba28-4a7384973eff",
+      "branchUuid": "debe56b9-494a-46bc-ba28-4a7384973eff",
+      "packageUrl": "pkg:nuget/Newtonsoft.Json@12.0.3",
+      "packageManager": "NUGET",
+      "packageName": "Newtonsoft.Json",
+      "version": "12.0.3",
+      "licenseExpression": "MIT",
+      "known": true,
+      "knownPackage": true,
+      "newlyIntroduced": false,
+      "directSummary": true,
+      "scopeSummary": "runtime",
+      "productionScopeSummary": true,
+      "scopes": [
+        "runtime"
+      ],
+      "dependencyFilePaths": [
+        "api/Api.csproj",
+        "api/project.assets.json"
+      ]
+    },
+    "type": "VULNERABILITY",
+    "quality": "SECURITY",
+    "status": "OPEN",
+    "createdAt": "2026-10-10T07:40:51.596Z",
+    "commentCount": 0,
+    "vulnerability": {
+      "vulnerabilityId": "CVE-2024-21907",
+      "reports": [
+        {
+          "id": "CVE-2024-21907",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-21907",
+          "type": "CVE",
+          "cvssScore": "7.5",
+          "cvssSeverity": "High",
+          "withdrawnAt": null
+        },
+        {
+          "id": "GHSA-5crp-9r3c-p9vr",
+          "url": "https://github.com/advisories/GHSA-5crp-9r3c-p9vr",
+          "type": "GHSA",
+          "cvssScore": "7.5",
+          "cvssSeverity": "High",
+          "withdrawnAt": null
+        }
+      ],
+      "description": "Newtonsoft.Json before version 13.0.1 is affected by a mishandling of exceptional conditions vulnerability. Crafted data that is passed to the JsonConvert.DeserializeObject method may trigger a StackOverflow exception resulting in denial of service. Depending on the usage of the library, an unauthenticated and remote attacker may be able to cause the denial of service condition.",
+      "epssPercentile": "0.98343",
+      "epssProbability": "0.32908",
+      "knownExploited": false,
+      "cweIds": [
+        "CWE-755"
+      ],
+      "cwes": [
+        {
+          "code": "CWE-755",
+          "name": "Improper Handling of Exceptional Conditions",
+          "description": "The product does not handle or incorrectly handles an exceptional condition."
+        }
+      ],
+      "publishedOn": "2024-01-03",
+      "affectedPackages": [
+        {
+          "purl": "pkg:nuget/Newtonsoft.Json",
+          "recommendation": "upgrade",
+          "recommendationDetails": null,
+          "versionOptions": [
+            {
+              "version": "12.0.3",
+              "vulnerabilityIds": [
+                "CVE-2024-21907"
+              ],
+              "prerelease": false,
+              "fixLevel": "NONE",
+              "descriptionCode": "VERSION_IN_USE",
+              "alternativeReleaseSource": null
+            },
+            {
+              "version": "13.0.1",
+              "vulnerabilityIds": [],
+              "prerelease": false,
+              "fixLevel": "COMPLETE",
+              "descriptionCode": "NEAREST_COMPLETE",
+              "alternativeReleaseSource": null
+            },
+            {
+              "version": "13.0.4",
+              "vulnerabilityIds": [],
+              "prerelease": false,
+              "fixLevel": "COMPLETE",
+              "descriptionCode": "LATEST_STABLE",
+              "alternativeReleaseSource": null
+            },
+            {
+              "version": "14.0.1-beta2",
+              "vulnerabilityIds": [],
+              "prerelease": true,
+              "fixLevel": "COMPLETE",
+              "descriptionCode": "LATEST_PRERELEASE",
+              "alternativeReleaseSource": null
+            }
+          ],
+          "affectedVersions": [
+            "3.5.8",
+            "4.0.1",
+            "4.0.2",
+            "4.0.3",
+            "4.0.4",
+            "4.0.5",
+            "4.0.6",
+            "4.0.7",
+            "4.0.8",
+            "4.5.1",
+            "4.5.2",
+            "4.5.3",
+            "4.5.4",
+            "4.5.5",
+            "4.5.6",
+            "4.5.7",
+            "4.5.8",
+            "4.5.9",
+            "4.5.10",
+            "4.5.11",
+            "5.0.1",
+            "5.0.2",
+            "5.0.3",
+            "5.0.4",
+            "5.0.5",
+            "5.0.6",
+            "5.0.7",
+            "5.0.8",
+            "6.0.1-beta1",
+            "6.0.1",
+            "6.0.2",
+            "6.0.3",
+            "6.0.4",
+            "6.0.5",
+            "6.0.6",
+            "6.0.7",
+            "6.0.8",
+            "7.0.1-beta1",
+            "7.0.1-beta2",
+            "7.0.1-beta3",
+            "7.0.1",
+            "8.0.1-beta1",
+            "8.0.1-beta2",
+            "8.0.1-beta3",
+            "8.0.1-beta4",
+            "8.0.1",
+            "8.0.2",
+            "8.0.3",
+            "8.0.4-beta1",
+            "9.0.1-beta1",
+            "9.0.1",
+            "9.0.2-beta1",
+            "9.0.2-beta2",
+            "10.0.1-beta1",
+            "10.0.1",
+            "10.0.2",
+            "10.0.3",
+            "11.0.1-beta1",
+            "11.0.1-beta2",
+            "11.0.1-beta3",
+            "11.0.1",
+            "11.0.2",
+            "12.0.1-beta1",
+            "12.0.1-beta2",
+            "12.0.1",
+            "12.0.2-beta1",
+            "12.0.2-beta2",
+            "12.0.2-beta3",
+            "12.0.2",
+            "12.0.3-beta1",
+            "12.0.3-beta2",
+            "12.0.3",
+            "13.0.1-beta1",
+            "13.0.1-beta2"
+          ],
+          "unaffectedVersions": ">= 13.0.1"
+        }
+      ],
+      "withdrawn": false,
+      "reachableLocations": [
+        {
+          "signature": "Newtonsoft.Json.JsonConvert.DeserializeObject(string)",
+          "signatureType": "PUBLIC_CALLER",
+          "filePath": "api/Endpoints/PreviewEndpoints.cs",
+          "startLine": 43,
+          "startLineOffset": 29,
+          "endLine": 43,
+          "endLineOffset": 78
+        }
+      ]
+    },
+    "spdxLicenseId": null,
+    "transitions": [
+      "ACCEPT",
+      "CONFIRM",
+      "SAFE"
+    ],
+    "actions": [
+      "SET_SEVERITY",
+      "ASSIGN",
+      "COMMENT"
+    ],
+    "branch": {
+      "uuid": "debe56b9-494a-46bc-ba28-4a7384973eff",
+      "key": "master",
+      "pullRequest": false,
+      "projectKey": "mikelopster_sonarqube-training-team-notes",
+      "projectName": "Team Notes (SonarQube Training)",
+      "legacyProjectUuid": "AaEkwNOVqxZKWC9KsNnO"
+    }
+  },
+  "dependencyReleaseDetail": {
+    "key": "212c61cb-772f-44a8-9e89-f2f9aec0a41f",
+    "branchId": "debe56b9-494a-46bc-ba28-4a7384973eff",
+    "branchUuid": "debe56b9-494a-46bc-ba28-4a7384973eff",
+    "packageUrl": "pkg:nuget/Newtonsoft.Json@12.0.3",
+    "packageManager": "NUGET",
+    "packageName": "Newtonsoft.Json",
+    "version": "12.0.3",
+    "licenseExpression": "MIT",
+    "known": true,
+    "knownPackage": true,
+    "newlyIntroduced": false,
+    "directSummary": true,
+    "scopeSummary": "runtime",
+    "productionScopeSummary": true,
+    "dependencies": [
+      {
+        "key": "89eb7426-c754-41fa-bbb0-84af87faa438",
+        "direct": true,
+        "scope": "runtime",
+        "productionScope": true,
+        "userDependencyFilePath": "api/Api.csproj",
+        "lockfileDependencyFilePath": "api/project.assets.json",
+        "chains": [
+          [
+            "pkg:nuget/Newtonsoft.Json@12.0.3"
+          ]
+        ],
+        "newlyIntroduced": false
+      }
+    ],
+    "issues": [
+      {
+        "key": "0ef118b9-0da3-4085-a4c6-e69dc0a1ea27",
+        "severity": "HIGH",
+        "showIncreasedSeverityWarning": false,
+        "type": "VULNERABILITY",
+        "quality": "SECURITY",
+        "createdAt": "2026-10-10T07:40:51.596Z",
+        "vulnerabilityId": "CVE-2024-21907",
+        "cweIds": [
+          "CWE-755"
+        ],
+        "cwes": [
+          {
+            "code": "CWE-755",
+            "name": "Improper Handling of Exceptional Conditions",
+            "description": "The product does not handle or incorrectly handles an exceptional condition."
+          }
+        ],
+        "cvssScore": "7.5",
+        "spdxLicenseId": null
+      }
+    ],
+    "branch": {
+      "id": "debe56b9-494a-46bc-ba28-4a7384973eff",
+      "uuid": "debe56b9-494a-46bc-ba28-4a7384973eff",
+      "key": "master",
+      "pullRequest": false,
+      "projectKey": "mikelopster_sonarqube-training-team-notes",
+      "projectName": "Team Notes (SonarQube Training)"
+    }
+  },
+  "requests": [
+    {
+      "name": "branches",
+      "path": "/api/project_branches/list?project=mikelopster_sonarqube-training-team-notes",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "202ee603a8ff202a84281595dca327b7ecfa421c02548d0edcee4136a2b29ac2",
+      "ms": 434,
+      "at": "2026-10-18T09:47:37.887Z"
+    },
+    {
+      "name": "analyses-before",
+      "path": "/api/project_analyses/search?project=mikelopster_sonarqube-training-team-notes&ps=100&p=1",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "d1e840a7cabb82c4f4aa9ebc460e6330357b8adeac3ef91155bc2e87f4be7d3a",
+      "ms": 376,
+      "at": "2026-10-18T09:47:38.263Z"
+    },
+    {
+      "name": "component",
+      "path": "/api/components/show?component=mikelopster_sonarqube-training-team-notes",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "0b9c17e579eec86b46ae168c5ffb72116f13752831ea7c945880f85b8a2fe537",
+      "ms": 389,
+      "at": "2026-10-18T09:47:38.652Z"
+    },
+    {
+      "name": "measures",
+      "path": "/api/measures/component?component=mikelopster_sonarqube-training-team-notes&metricKeys=security_rating,vulnerabilities,security_hotspots,security_hotspots_reviewed,alert_status,ncloc",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "395eec79bc84858939d97de39df4482abdedee741c1ffbd9181285c92b883fa5",
+      "ms": 389,
+      "at": "2026-10-18T09:47:39.041Z"
+    },
+    {
+      "name": "issues-security-page1",
+      "path": "/api/issues/search?componentKeys=mikelopster_sonarqube-training-team-notes&impactSoftwareQualities=SECURITY&ps=500&p=1&additionalFields=_all",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "135f90a12b11ab991c3b9f8399dfe5fcbd104b10cbc9c46bc4c9fa7d6ad08ee0",
+      "ms": 699,
+      "at": "2026-10-18T09:47:39.740Z"
+    },
+    {
+      "name": "issues-vulnerabilities-page1",
+      "path": "/api/issues/search?componentKeys=mikelopster_sonarqube-training-team-notes&types=VULNERABILITY&ps=500&p=1&additionalFields=_all",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "135f90a12b11ab991c3b9f8399dfe5fcbd104b10cbc9c46bc4c9fa7d6ad08ee0",
+      "ms": 664,
+      "at": "2026-10-18T09:47:40.405Z"
+    },
+    {
+      "name": "hotspots-page1",
+      "path": "/api/hotspots/search?projectKey=mikelopster_sonarqube-training-team-notes&ps=500&p=1",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "f0a611c778668c54b7776444d1e7c18908d5338e8524ecabb8276133674b5508",
+      "ms": 341,
+      "at": "2026-10-18T09:47:40.746Z"
+    },
+    {
+      "name": "rules/rule-1",
+      "path": "/api/rules/show?key=githubactions%3AS6505",
+      "status": 400,
+      "contentType": "application/json",
+      "sha256": "6c0dba426cba8bc15f288eea72fe6813bcb5892603d35728dfcbd64564dfb1ef",
+      "ms": 292,
+      "at": "2026-10-18T09:48:13.463Z"
+    },
+    {
+      "name": "rules/rule-2",
+      "path": "/api/rules/show?key=csharpsquid%3AS2068",
+      "status": 400,
+      "contentType": "application/json",
+      "sha256": "6c0dba426cba8bc15f288eea72fe6813bcb5892603d35728dfcbd64564dfb1ef",
+      "ms": 323,
+      "at": "2026-10-18T09:48:13.786Z"
+    },
+    {
+      "name": "rules/rule-3",
+      "path": "/api/rules/show?key=secrets%3AS6698",
+      "status": 400,
+      "contentType": "application/json",
+      "sha256": "6c0dba426cba8bc15f288eea72fe6813bcb5892603d35728dfcbd64564dfb1ef",
+      "ms": 293,
+      "at": "2026-10-18T09:48:14.079Z"
+    },
+    {
+      "name": "rules/rule-4",
+      "path": "/api/rules/show?key=csharpsquid%3AS4790",
+      "status": 400,
+      "contentType": "application/json",
+      "sha256": "6c0dba426cba8bc15f288eea72fe6813bcb5892603d35728dfcbd64564dfb1ef",
+      "ms": 305,
+      "at": "2026-10-18T09:48:14.384Z"
+    },
+    {
+      "name": "rules/rule-5",
+      "path": "/api/rules/show?key=csharpsquid%3AS3330",
+      "status": 400,
+      "contentType": "application/json",
+      "sha256": "6c0dba426cba8bc15f288eea72fe6813bcb5892603d35728dfcbd64564dfb1ef",
+      "ms": 293,
+      "at": "2026-10-18T09:48:14.677Z"
+    },
+    {
+      "name": "rules/rule-6",
+      "path": "/api/rules/show?key=csharpsquid%3AS2092",
+      "status": 400,
+      "contentType": "application/json",
+      "sha256": "6c0dba426cba8bc15f288eea72fe6813bcb5892603d35728dfcbd64564dfb1ef",
+      "ms": 306,
+      "at": "2026-10-18T09:48:14.983Z"
+    },
+    {
+      "name": "rules/rule-7",
+      "path": "/api/rules/show?key=csharpsquid%3AS2077",
+      "status": 400,
+      "contentType": "application/json",
+      "sha256": "6c0dba426cba8bc15f288eea72fe6813bcb5892603d35728dfcbd64564dfb1ef",
+      "ms": 288,
+      "at": "2026-10-18T09:48:15.271Z"
+    },
+    {
+      "name": "rules/rule-8",
+      "path": "/api/rules/show?key=roslyn.sonaranalyzer.security.cs%3AS5144",
+      "status": 400,
+      "contentType": "application/json",
+      "sha256": "6c0dba426cba8bc15f288eea72fe6813bcb5892603d35728dfcbd64564dfb1ef",
+      "ms": 291,
+      "at": "2026-10-18T09:48:15.562Z"
+    },
+    {
+      "name": "rules/rule-9",
+      "path": "/api/rules/show?key=docker%3AS6505",
+      "status": 400,
+      "contentType": "application/json",
+      "sha256": "6c0dba426cba8bc15f288eea72fe6813bcb5892603d35728dfcbd64564dfb1ef",
+      "ms": 306,
+      "at": "2026-10-18T09:48:15.868Z"
+    },
+    {
+      "name": "rules/rule-10",
+      "path": "/api/rules/show?key=typescript%3AS5332",
+      "status": 400,
+      "contentType": "application/json",
+      "sha256": "6c0dba426cba8bc15f288eea72fe6813bcb5892603d35728dfcbd64564dfb1ef",
+      "ms": 289,
+      "at": "2026-10-18T09:48:16.157Z"
+    },
+    {
+      "name": "sources/source-1",
+      "path": "/api/sources/raw?key=mikelopster_sonarqube-training-team-notes%3A.github%2Fworkflows%2Fsonarqube.yml&branch=master",
+      "status": 200,
+      "contentType": "text/plain",
+      "sha256": "872c78f32207267b52730cebd921972def6c51aabda5a1b493a041a61afc40ef",
+      "ms": 450,
+      "at": "2026-10-18T09:48:16.607Z"
+    },
+    {
+      "name": "sources/source-1-lines",
+      "path": "/api/sources/lines?key=mikelopster_sonarqube-training-team-notes%3A.github%2Fworkflows%2Fsonarqube.yml&branch=master&from=1&to=500",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "c5f65fa5e4781e7df15109dca36d725df6a3d1838d1330877bdd3ccd944c1300",
+      "ms": 474,
+      "at": "2026-10-18T09:48:17.081Z"
+    },
+    {
+      "name": "sources/source-2",
+      "path": "/api/sources/raw?key=mikelopster_sonarqube-training-team-notes%3Aapi%2FAppConfig.cs&branch=master",
+      "status": 200,
+      "contentType": "text/plain",
+      "sha256": "645dd26e14c260c48a1f0f64d5d289e985ec2c203df39a15da4c8ab1ad0f0387",
+      "ms": 457,
+      "at": "2026-10-18T09:48:17.538Z"
+    },
+    {
+      "name": "sources/source-2-lines",
+      "path": "/api/sources/lines?key=mikelopster_sonarqube-training-team-notes%3Aapi%2FAppConfig.cs&branch=master&from=1&to=500",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "cfdf36e10382b0a34d8d693112def1396d7465f3d4f4b78414f8b5b902a2ef0a",
+      "ms": 451,
+      "at": "2026-10-18T09:48:17.989Z"
+    },
+    {
+      "name": "sources/source-3",
+      "path": "/api/sources/raw?key=mikelopster_sonarqube-training-team-notes%3Aapi%2FAuth.cs&branch=master",
+      "status": 200,
+      "contentType": "text/plain",
+      "sha256": "613c2eb914ba9ad92d82d215c9ea5e20cc9ac4ff8de42afeac42f19d8faff948",
+      "ms": 354,
+      "at": "2026-10-18T09:48:18.343Z"
+    },
+    {
+      "name": "sources/source-3-lines",
+      "path": "/api/sources/lines?key=mikelopster_sonarqube-training-team-notes%3Aapi%2FAuth.cs&branch=master&from=1&to=500",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "15e1af89059850391e7a543853c5fda8ae3b967c58843d6929fe921dbfeb8bdb",
+      "ms": 515,
+      "at": "2026-10-18T09:48:18.858Z"
+    },
+    {
+      "name": "sources/source-4",
+      "path": "/api/sources/raw?key=mikelopster_sonarqube-training-team-notes%3Aapi%2FEndpoints%2FAuthEndpoints.cs&branch=master",
+      "status": 200,
+      "contentType": "text/plain",
+      "sha256": "18310475693c4cb410773fc048320bc0793ad060aa8b8ff74d0c269b00479a5e",
+      "ms": 339,
+      "at": "2026-10-18T09:48:19.197Z"
+    },
+    {
+      "name": "sources/source-4-lines",
+      "path": "/api/sources/lines?key=mikelopster_sonarqube-training-team-notes%3Aapi%2FEndpoints%2FAuthEndpoints.cs&branch=master&from=1&to=500",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "3c8a93e519b0343d22d207e7daaa5f8425802fb9eb3d0522193abde107e49f57",
+      "ms": 359,
+      "at": "2026-10-18T09:48:19.556Z"
+    },
+    {
+      "name": "sources/source-5",
+      "path": "/api/sources/raw?key=mikelopster_sonarqube-training-team-notes%3Aapi%2FEndpoints%2FMutations.cs&branch=master",
+      "status": 200,
+      "contentType": "text/plain",
+      "sha256": "a578059424d2cd225e589c6333bcbe8aac4430b71135be698256b14a78985800",
+      "ms": 352,
+      "at": "2026-10-18T09:48:19.908Z"
+    },
+    {
+      "name": "sources/source-5-lines",
+      "path": "/api/sources/lines?key=mikelopster_sonarqube-training-team-notes%3Aapi%2FEndpoints%2FMutations.cs&branch=master&from=1&to=500",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "bf50b5c82795f91ad2f0d630e1fb4b98fe2e0b1d396b0f192cc6aabd200f4700",
+      "ms": 463,
+      "at": "2026-10-18T09:48:20.371Z"
+    },
+    {
+      "name": "sources/source-6",
+      "path": "/api/sources/raw?key=mikelopster_sonarqube-training-team-notes%3Aapi%2FEndpoints%2FPreviewEndpoints.cs&branch=master",
+      "status": 200,
+      "contentType": "text/plain",
+      "sha256": "8b9fcafaee8dccb8be92c6282c22a8c09925340c9306e653c7ba71680061a746",
+      "ms": 350,
+      "at": "2026-10-18T09:48:20.721Z"
+    },
+    {
+      "name": "sources/source-6-lines",
+      "path": "/api/sources/lines?key=mikelopster_sonarqube-training-team-notes%3Aapi%2FEndpoints%2FPreviewEndpoints.cs&branch=master&from=1&to=500",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "b41bc1d221fcb1a012a9c47ddc5335f8eeba185dde3027d4cf8156bf88f7526d",
+      "ms": 507,
+      "at": "2026-10-18T09:48:21.228Z"
+    },
+    {
+      "name": "sources/source-7",
+      "path": "/api/sources/raw?key=mikelopster_sonarqube-training-team-notes%3Aapi%2Fappsettings.json&branch=master",
+      "status": 200,
+      "contentType": "text/plain",
+      "sha256": "efe85509d9ded8498a8ab8aeb4efe255896d308f858ac3c5be8724042fb013ea",
+      "ms": 431,
+      "at": "2026-10-18T09:48:21.659Z"
+    },
+    {
+      "name": "sources/source-7-lines",
+      "path": "/api/sources/lines?key=mikelopster_sonarqube-training-team-notes%3Aapi%2Fappsettings.json&branch=master&from=1&to=500",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "c82eee6f9a35becd24836a6655a387454fbf0d7b7d8f914a00633bfba88dcf3b",
+      "ms": 329,
+      "at": "2026-10-18T09:48:21.988Z"
+    },
+    {
+      "name": "sources/source-8",
+      "path": "/api/sources/raw?key=mikelopster_sonarqube-training-team-notes%3Aweb%2FDockerfile&branch=master",
+      "status": 200,
+      "contentType": "text/plain",
+      "sha256": "8fed2a994af32d83003db28bbb947978f4ba8f9503bd72c8d07fb8e95a5e58f7",
+      "ms": 399,
+      "at": "2026-10-18T09:48:22.387Z"
+    },
+    {
+      "name": "sources/source-8-lines",
+      "path": "/api/sources/lines?key=mikelopster_sonarqube-training-team-notes%3Aweb%2FDockerfile&branch=master&from=1&to=500",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "e623c80b5b4af088e97df25cd220ee341208d1296ee1228c34f02d3417f2b681",
+      "ms": 340,
+      "at": "2026-10-18T09:48:22.727Z"
+    },
+    {
+      "name": "sources/source-9",
+      "path": "/api/sources/raw?key=mikelopster_sonarqube-training-team-notes%3Aweb%2Flib%2Fapi.ts&branch=master",
+      "status": 200,
+      "contentType": "text/plain",
+      "sha256": "19ba15dffe337271e9d3a754c3346c0d07f61eafe641ec07a09a61a06e5ac522",
+      "ms": 361,
+      "at": "2026-10-18T09:48:23.088Z"
+    },
+    {
+      "name": "sources/source-9-lines",
+      "path": "/api/sources/lines?key=mikelopster_sonarqube-training-team-notes%3Aweb%2Flib%2Fapi.ts&branch=master&from=1&to=500",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "450bbac85e67a64109f59ccc6025d059c90988bd69699db34623d54cabd941be",
+      "ms": 488,
+      "at": "2026-10-18T09:48:23.576Z"
+    },
+    {
+      "name": "sources/source-10",
+      "path": "/api/sources/raw?key=mikelopster_sonarqube-training-team-notes%3Aweb%2Fnext.config.ts&branch=master",
+      "status": 200,
+      "contentType": "text/plain",
+      "sha256": "67d3a149ab53857474a4b2c0ccac45614f61bd9efd9bc3bc83b2deaeeafb21a5",
+      "ms": 370,
+      "at": "2026-10-18T09:48:23.946Z"
+    },
+    {
+      "name": "sources/source-10-lines",
+      "path": "/api/sources/lines?key=mikelopster_sonarqube-training-team-notes%3Aweb%2Fnext.config.ts&branch=master&from=1&to=500",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "f456b6d1c8ec2b7f543adda29c0db93c3d7757c7eddfa574d42b40bfc7002d6f",
+      "ms": 399,
+      "at": "2026-10-18T09:48:24.345Z"
+    },
+    {
+      "name": "issues-master-page1",
+      "path": "/api/issues/search?componentKeys=mikelopster_sonarqube-training-team-notes&branch=master&impactSoftwareQualities=SECURITY&ps=500&p=1&additionalFields=_all",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "135f90a12b11ab991c3b9f8399dfe5fcbd104b10cbc9c46bc4c9fa7d6ad08ee0",
+      "ms": 634,
+      "at": "2026-10-18T09:48:24.979Z"
+    },
+    {
+      "name": "hotspots-master-page1",
+      "path": "/api/hotspots/search?projectKey=mikelopster_sonarqube-training-team-notes&branch=master&ps=500&p=1",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "f0a611c778668c54b7776444d1e7c18908d5338e8524ecabb8276133674b5508",
+      "ms": 365,
+      "at": "2026-10-18T09:48:25.344Z"
+    },
+    {
+      "name": "analyses-after",
+      "path": "/api/project_analyses/search?project=mikelopster_sonarqube-training-team-notes&branch=master&ps=100&p=1",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "d1e840a7cabb82c4f4aa9ebc460e6330357b8adeac3ef91155bc2e87f4be7d3a",
+      "ms": 295,
+      "at": "2026-10-18T09:48:25.639Z"
+    },
+    {
+      "name": "rules/rule-1-org",
+      "path": "/api/rules/show?key=githubactions%3AS6505&organization=mikelopster",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "da8c88708af171ecacfe980ce6c285ec41fc53202527012983a5e38dadc60909",
+      "ms": 376,
+      "at": "2026-10-18T09:48:32.891Z"
+    },
+    {
+      "name": "rules/rule-2-org",
+      "path": "/api/rules/show?key=csharpsquid%3AS2068&organization=mikelopster",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "d1c8dad14a230fefab2cc36ef92644adc644b503dd526c8700f773f2a8081195",
+      "ms": 416,
+      "at": "2026-10-18T09:48:33.307Z"
+    },
+    {
+      "name": "rules/rule-3-org",
+      "path": "/api/rules/show?key=secrets%3AS6698&organization=mikelopster",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "f1f53d9e078bace39f628fb87a48627ad32b33c0be28f9aa28a6f30239857449",
+      "ms": 404,
+      "at": "2026-10-18T09:48:33.712Z"
+    },
+    {
+      "name": "rules/rule-4-org",
+      "path": "/api/rules/show?key=csharpsquid%3AS4790&organization=mikelopster",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "41b81cc18de28799d1fd4257305bfd287c2c3825629aa9bc99a6832c28eaf3ea",
+      "ms": 301,
+      "at": "2026-10-18T09:48:34.013Z"
+    },
+    {
+      "name": "rules/rule-5-org",
+      "path": "/api/rules/show?key=csharpsquid%3AS3330&organization=mikelopster",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "acfc77ee1b9e94390e0328695e3ce04bb41eed726b018cb4a9ad6f1360a03014",
+      "ms": 303,
+      "at": "2026-10-18T09:48:34.316Z"
+    },
+    {
+      "name": "rules/rule-6-org",
+      "path": "/api/rules/show?key=csharpsquid%3AS2092&organization=mikelopster",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "4def39200fd8326fd260e912d0032a1f656adbd4942b5192e5e0564eb4541eb0",
+      "ms": 342,
+      "at": "2026-10-18T09:48:34.658Z"
+    },
+    {
+      "name": "rules/rule-7-org",
+      "path": "/api/rules/show?key=csharpsquid%3AS2077&organization=mikelopster",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "466eed2c1372d62cfd7ede55adde1ab452a5c5c1e14da49cffe700e1c5ed2282",
+      "ms": 377,
+      "at": "2026-10-18T09:48:35.035Z"
+    },
+    {
+      "name": "rules/rule-8-org",
+      "path": "/api/rules/show?key=roslyn.sonaranalyzer.security.cs%3AS5144&organization=mikelopster",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "921e1f0d6634109e503329baf44b5907155b4d776b51331abc49b9a09270975b",
+      "ms": 301,
+      "at": "2026-10-18T09:48:35.336Z"
+    },
+    {
+      "name": "rules/rule-9-org",
+      "path": "/api/rules/show?key=docker%3AS6505&organization=mikelopster",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "5f02b3ca9bf0cd0df5255b202a99ea074fe1f528f54baac30090446712862e64",
+      "ms": 308,
+      "at": "2026-10-18T09:48:35.644Z"
+    },
+    {
+      "name": "rules/rule-10-org",
+      "path": "/api/rules/show?key=typescript%3AS5332&organization=mikelopster",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "d1e38a114a3063087e6106dfe565ab69b9b8118142910655d941ac10edca89b4",
+      "ms": 308,
+      "at": "2026-10-18T09:48:35.952Z"
+    },
+    {
+      "name": "quality-gate",
+      "path": "/api/qualitygates/project_status?analysisId=651e6e22-465a-40ac-8548-6e8c7bad1e10",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "4fe16c6997b8c25aff275c39d939f32fdf177ff348bfcfd62b1a19dc40a58caf",
+      "ms": 340,
+      "at": "2026-10-18T09:50:25.239Z"
+    },
+    {
+      "name": "metrics-catalog",
+      "path": "/api/metrics/search?ps=500&p=1",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "e3b50c039a3fbae8fdadd8be44526bab24d13e600def65646f327bb9938ad26b",
+      "ms": 304,
+      "at": "2026-10-18T09:50:25.543Z"
+    },
+    {
+      "name": "webservices-catalog",
+      "path": "/api/webservices/list",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "f4ddbbd4be491b3841ea971f925d810a8e9365baa740cf44f8c396f6d088609c",
+      "ms": 390,
+      "at": "2026-10-18T09:50:25.933Z"
+    },
+    {
+      "name": "security-metrics",
+      "path": "/api/measures/component?component=mikelopster_sonarqube-training-team-notes&branch=master&metricKeys=sca_count_any_issue,sca_count_any_security,sca_count_licensing,sca_count_malware,new_sca_count_any_issue,new_sca_count_any_security,new_sca_count_licensing,new_sca_count_malware,new_sca_count_vulnerability,sca_count_vulnerability,sca_rating_any_issue,sca_rating_licensing,new_sca_rating_licensing,sca_rating_malware,new_sca_rating_malware,sca_rating_any_security,new_sca_rating_any_security,sca_rating_vulnerability,new_sca_rating_vulnerability,new_sca_rating_any_issue,new_security_hotspots,new_security_issues,new_software_quality_security_issues,new_vulnerabilities,security_hotspots,security_hotspots_reviewed,new_security_hotspots_reviewed,security_issues,software_quality_security_issues,new_security_issue_severity,security_issue_severity,security_rating,new_security_rating,security_remediation_effort,new_security_remediation_effort,security_review_rating,new_security_review_rating,security_hotspots_reviewed_status,new_security_hotspots_reviewed_status,security_hotspots_to_review_status,new_security_hotspots_to_review_status,sca_severity_any_issue,sca_severity_any_security,sca_severity_licensing,sca_severity_malware,new_sca_severity_any_issue,new_sca_severity_any_security,new_sca_severity_licensing,new_sca_severity_malware,new_sca_severity_vulnerability,sca_severity_vulnerability,vulnerabilities,new_vulnerabilities_severity",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "4ba89a72d8e4e701c7d7fd271aee7531e8e2d05d27b3059f0eed7ca90026fc46",
+      "ms": 484,
+      "at": "2026-10-18T09:50:58.257Z"
+    },
+    {
+      "name": "security-file-measures",
+      "path": "/api/measures/component_tree?component=mikelopster_sonarqube-training-team-notes&branch=master&metricKeys=security_rating,vulnerabilities,security_hotspots,security_hotspots_reviewed&ps=500&p=1",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "649423916c68c1403b4d70a87cd5fba19a47e6bb1a02edd8c688619264626cc5",
+      "ms": 422,
+      "at": "2026-10-18T09:50:58.679Z"
+    },
+    {
+      "name": "security-groupings",
+      "path": "/api/issues/search?componentKeys=mikelopster_sonarqube-training-team-notes&branch=master&impactSoftwareQualities=SECURITY&ps=500&p=1&facets=severities,statuses,issueStatuses,rules,owaspTop10,owaspTop10-2021,cwe,sonarsourceSecurity,impactSeverities,complianceStandards",
+      "status": 200,
+      "contentType": "application/json",
+      "sha256": "2e4aaf8bfc412a1fdee7f0763c7dc22080ed32d9ac23e31d1a0cc10794ff865f",
+      "ms": 579,
+      "at": "2026-10-18T09:50:59.258Z"
+    },
+    {
+      "name": "dependency-releases-page1",
+      "path": "https://api.sonarcloud.io/sca/releases?branchKey=master&projectKey=mikelopster_sonarqube-training-team-notes&pageSize=100&pageIndex=1",
+      "status": 403,
+      "contentType": "application/json",
+      "sha256": "e7234073111cc390efd0d6d8b6c1732674f207293b753cac6e0f1628fa871876",
+      "ms": 613,
+      "at": "2026-10-18T09:52:40.532Z"
+    },
+    {
+      "name": "dependency-project-source",
+      "path": "/api/sources/raw?key=mikelopster_sonarqube-training-team-notes%3Aapi%2FApi.csproj&branch=master",
+      "status": 404,
+      "contentType": "application/json",
+      "sha256": "ddb64d9c43ebd9ae8775eec9f180a79f9c30c52a3acb50bbda8e57c692a4c6b3",
+      "ms": 294,
+      "at": "2026-10-18T09:52:40.826Z"
+    },
+    {
+      "name": "dependency-assets-source",
+      "path": "/api/sources/raw?key=mikelopster_sonarqube-training-team-notes%3Aapi%2Fproject.assets.json&branch=master",
+      "status": 404,
+      "contentType": "application/json",
+      "sha256": "26bde1eb0fe9331687482d0e973ed3d60efcaa9dd982dfeed6a91b6ab0771c08",
+      "ms": 294,
+      "at": "2026-10-18T09:52:41.122Z"
+    }
+  ],
+  "availabilityLimits": [
+    "Full dependency package listing requested through the observed endpoint returned403; UI sample and aggregate221 are preserved separately.",
+    "Source API returned404 for api/Api.csproj and api/project.assets.json, so no analyzed source snapshot is claimed for those two paths."
+  ]
+}

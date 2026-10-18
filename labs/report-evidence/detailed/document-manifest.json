@@ -1,0 +1,70 @@
+{
+  "kind": "custom-sonarcloud-evidence-dossier-not-native-pdf",
+  "nativePdfPreserved": true,
+  "originalAnalysisId": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+  "originalAnalysisDate": "2026-10-10T07:40:51+0000",
+  "apiCapture": "2026-10-18T09:48:35.952Z",
+  "scaUpdatedAt": "2026-10-16T18:39:20.125Z",
+  "files": [
+    {
+      "file": "security-evidence-detailed.html",
+      "bytes": 84629,
+      "sha256": "1b44ffc3f6d3a06e106f68cc59f04a017dbe3b9a215c2791329368c0611653af"
+    },
+    {
+      "file": "security-evidence-detailed.pdf",
+      "bytes": 228911,
+      "sha256": "2c5ab57e1ee42a0cf5696580d094e03a50b3c8538eb97703cdbf43999f2a306e"
+    },
+    {
+      "file": "page-index.json",
+      "bytes": 390,
+      "sha256": "17bd59b790bd02678b5a544f40085032b21f6d6ede71b6ada0ddc7cf66142402"
+    }
+  ],
+  "pdfPages": 39,
+  "issues": 13,
+  "rules": 10,
+  "sourceFiles": 10,
+  "dependencyRisks": 1,
+  "hotspots": 0,
+  "sourceFilesToPublish": [
+    "detailed/bundle.json",
+    "detailed/collection.json",
+    "detailed/dependency-risks.json",
+    "detailed/hotspots.json",
+    "detailed/issues.json",
+    "detailed/omitted-fields.json",
+    "detailed/project-metadata.json",
+    "detailed/rules.json",
+    "detailed/scope.json",
+    "detailed/security-groupings.json",
+    "detailed/security-metrics.json",
+    "detailed/source-manifest.json",
+    "detailed/sources/.github/workflows/sonarqube.yml",
+    "detailed/sources/api/AppConfig.cs",
+    "detailed/sources/api/Auth.cs",
+    "detailed/sources/api/Endpoints/AuthEndpoints.cs",
+    "detailed/sources/api/Endpoints/Mutations.cs",
+    "detailed/sources/api/Endpoints/PreviewEndpoints.cs",
+    "detailed/sources/api/appsettings.json",
+    "detailed/sources/web/Dockerfile",
+    "detailed/sources/web/lib/api.ts",
+    "detailed/sources/web/next.config.ts",
+    "detailed/supplemental.json"
+  ],
+  "validation": {
+    "sourceHashes": "10 published hashes matched",
+    "issueRanges": "13 ranges present in supplied sources",
+    "privacy": "no email values or private project hyperlinks in HTML",
+    "activeContent": "no scripts/handlers/forms/frames/external assets",
+    "rendererTests": "4 passed",
+    "pageIndex": "settled against actual PDF text"
+  },
+  "notes": [
+    "Original security-report.pdf, findings.json and scope.json remain unchanged.",
+    "No runtime tests, exploits, upgrades or rescans were performed by report rendering.",
+    "Only normalized, sanitized candidate data belongs under detailed/. Do not copy raw private responses or lab-private-url-inventory.json."
+  ],
+  "supplementCapturedAt": "2026-10-18T09:52:41.122Z"
+}

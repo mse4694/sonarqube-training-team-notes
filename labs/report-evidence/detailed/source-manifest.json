@@ -1,0 +1,92 @@
+[
+  {
+    "component": "mikelopster_sonarqube-training-team-notes:.github/workflows/sonarqube.yml",
+    "path": ".github/workflows/sonarqube.yml",
+    "sha256": "872c78f32207267b52730cebd921972def6c51aabda5a1b493a041a61afc40ef",
+    "publicationSha256": "872c78f32207267b52730cebd921972def6c51aabda5a1b493a041a61afc40ef",
+    "redactedLines": [],
+    "lineCount": 66
+  },
+  {
+    "component": "mikelopster_sonarqube-training-team-notes:api/AppConfig.cs",
+    "path": "api/AppConfig.cs",
+    "sha256": "645dd26e14c260c48a1f0f64d5d289e985ec2c203df39a15da4c8ab1ad0f0387",
+    "publicationSha256": "a1ce736977d9268d91d200153af48ed30330fb7841b2f89f744aa6a6f73ef04c",
+    "redactedLines": [
+      12,
+      15,
+      20,
+      21
+    ],
+    "lineCount": 55
+  },
+  {
+    "component": "mikelopster_sonarqube-training-team-notes:api/Auth.cs",
+    "path": "api/Auth.cs",
+    "sha256": "613c2eb914ba9ad92d82d215c9ea5e20cc9ac4ff8de42afeac42f19d8faff948",
+    "publicationSha256": "613c2eb914ba9ad92d82d215c9ea5e20cc9ac4ff8de42afeac42f19d8faff948",
+    "redactedLines": [],
+    "lineCount": 95
+  },
+  {
+    "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/AuthEndpoints.cs",
+    "path": "api/Endpoints/AuthEndpoints.cs",
+    "sha256": "18310475693c4cb410773fc048320bc0793ad060aa8b8ff74d0c269b00479a5e",
+    "publicationSha256": "18310475693c4cb410773fc048320bc0793ad060aa8b8ff74d0c269b00479a5e",
+    "redactedLines": [],
+    "lineCount": 49
+  },
+  {
+    "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/Mutations.cs",
+    "path": "api/Endpoints/Mutations.cs",
+    "sha256": "a578059424d2cd225e589c6333bcbe8aac4430b71135be698256b14a78985800",
+    "publicationSha256": "a578059424d2cd225e589c6333bcbe8aac4430b71135be698256b14a78985800",
+    "redactedLines": [],
+    "lineCount": 67
+  },
+  {
+    "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/PreviewEndpoints.cs",
+    "path": "api/Endpoints/PreviewEndpoints.cs",
+    "sha256": "8b9fcafaee8dccb8be92c6282c22a8c09925340c9306e653c7ba71680061a746",
+    "publicationSha256": "8b9fcafaee8dccb8be92c6282c22a8c09925340c9306e653c7ba71680061a746",
+    "redactedLines": [],
+    "lineCount": 56
+  },
+  {
+    "component": "mikelopster_sonarqube-training-team-notes:api/appsettings.json",
+    "path": "api/appsettings.json",
+    "sha256": "efe85509d9ded8498a8ab8aeb4efe255896d308f858ac3c5be8724042fb013ea",
+    "publicationSha256": "214eb1516627da4b71c1ccd9ce43748668e1273834c78821ff9bbfbe46f713f4",
+    "redactedLines": [
+      11,
+      14,
+      19,
+      20
+    ],
+    "lineCount": 23
+  },
+  {
+    "component": "mikelopster_sonarqube-training-team-notes:web/Dockerfile",
+    "path": "web/Dockerfile",
+    "sha256": "8fed2a994af32d83003db28bbb947978f4ba8f9503bd72c8d07fb8e95a5e58f7",
+    "publicationSha256": "8fed2a994af32d83003db28bbb947978f4ba8f9503bd72c8d07fb8e95a5e58f7",
+    "redactedLines": [],
+    "lineCount": 31
+  },
+  {
+    "component": "mikelopster_sonarqube-training-team-notes:web/lib/api.ts",
+    "path": "web/lib/api.ts",
+    "sha256": "19ba15dffe337271e9d3a754c3346c0d07f61eafe641ec07a09a61a06e5ac522",
+    "publicationSha256": "19ba15dffe337271e9d3a754c3346c0d07f61eafe641ec07a09a61a06e5ac522",
+    "redactedLines": [],
+    "lineCount": 18
+  },
+  {
+    "component": "mikelopster_sonarqube-training-team-notes:web/next.config.ts",
+    "path": "web/next.config.ts",
+    "sha256": "67d3a149ab53857474a4b2c0ccac45614f61bd9efd9bc3bc83b2deaeeafb21a5",
+    "publicationSha256": "67d3a149ab53857474a4b2c0ccac45614f61bd9efd9bc3bc83b2deaeeafb21a5",
+    "redactedLines": [],
+    "lineCount": 15
+  }
+]

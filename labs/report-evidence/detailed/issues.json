@@ -1,0 +1,791 @@
+[
+  {
+    "key": "AaEkwytqn3atgy46CG_m",
+    "rule": "githubactions:S6505",
+    "severity": "MAJOR",
+    "component": "mikelopster_sonarqube-training-team-notes:.github/workflows/sonarqube.yml",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 32,
+    "hash": "3bb70db01b3e23cab823a7fe45401ed8",
+    "textRange": {
+      "startLine": 32,
+      "endLine": 32,
+      "startOffset": 13,
+      "endOffset": 19
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Omitting \"--ignore-scripts\" allows lifecycle scripts to run during package installation.",
+    "effort": "30min",
+    "debt": "30min",
+    "tags": [
+      "cwe",
+      "former-hotspot"
+    ],
+    "transitions": [
+      "accept",
+      "confirm",
+      "resolve",
+      "falsepositive",
+      "wontfix"
+    ],
+    "actions": [
+      "set_type",
+      "set_tags",
+      "comment",
+      "set_severity",
+      "assign"
+    ],
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "ruleDescriptionContextKey": "npm",
+    "cleanCodeAttribute": "TRUSTWORTHY",
+    "cleanCodeAttributeCategory": "RESPONSIBLE",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "Team Notes (SonarQube Training)",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AaEkwyskn3atgy46CG_Y",
+    "rule": "csharpsquid:S2068",
+    "severity": "MAJOR",
+    "component": "mikelopster_sonarqube-training-team-notes:api/AppConfig.cs",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 11,
+    "hash": "a806e561bcd8e284e449217e89bd797f",
+    "textRange": {
+      "startLine": 11,
+      "endLine": 12,
+      "startOffset": 24,
+      "endOffset": 72
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Review this hard-coded URI, which may contain a credential.",
+    "effort": "30min",
+    "debt": "30min",
+    "tags": [
+      "cwe",
+      "former-hotspot",
+      "secret"
+    ],
+    "transitions": [
+      "accept",
+      "confirm",
+      "resolve",
+      "falsepositive",
+      "wontfix"
+    ],
+    "actions": [
+      "set_type",
+      "set_tags",
+      "comment",
+      "set_severity",
+      "assign"
+    ],
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "cleanCodeAttribute": "TRUSTWORTHY",
+    "cleanCodeAttributeCategory": "RESPONSIBLE",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "Team Notes (SonarQube Training)",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AaEkwyskn3atgy46CG_W",
+    "rule": "secrets:S6698",
+    "severity": "BLOCKER",
+    "component": "mikelopster_sonarqube-training-team-notes:api/AppConfig.cs",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 12,
+    "hash": "d3ceee4cf61542f83572b56875633dfe",
+    "textRange": {
+      "startLine": 12,
+      "endLine": 12,
+      "startOffset": 26,
+      "endOffset": 40
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Make sure this PostgreSQL password gets changed and removed from the code.",
+    "effort": "30min",
+    "debt": "30min",
+    "tags": [
+      "cwe",
+      "secret"
+    ],
+    "transitions": [
+      "accept",
+      "confirm",
+      "resolve",
+      "falsepositive",
+      "wontfix"
+    ],
+    "actions": [
+      "set_type",
+      "set_tags",
+      "comment",
+      "set_severity",
+      "assign"
+    ],
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "cleanCodeAttribute": "TRUSTWORTHY",
+    "cleanCodeAttributeCategory": "RESPONSIBLE",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "Team Notes (SonarQube Training)",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AaEkwyq6n3atgy46CG_F",
+    "rule": "csharpsquid:S4790",
+    "severity": "CRITICAL",
+    "component": "mikelopster_sonarqube-training-team-notes:api/Auth.cs",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 21,
+    "hash": "487f6f64e32b6036e045497a7c8cf1f9",
+    "textRange": {
+      "startLine": 21,
+      "endLine": 21,
+      "startOffset": 24,
+      "endOffset": 70
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Use a stronger hashing algorithm.",
+    "effort": "30min",
+    "debt": "30min",
+    "tags": [
+      "cryptography",
+      "cwe",
+      "former-hotspot"
+    ],
+    "transitions": [
+      "accept",
+      "confirm",
+      "resolve",
+      "falsepositive",
+      "wontfix"
+    ],
+    "actions": [
+      "set_type",
+      "set_tags",
+      "comment",
+      "set_severity",
+      "assign"
+    ],
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "cleanCodeAttribute": "TRUSTWORTHY",
+    "cleanCodeAttributeCategory": "RESPONSIBLE",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "HIGH"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "Team Notes (SonarQube Training)",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AaEkwyrvn3atgy46CG_O",
+    "rule": "csharpsquid:S3330",
+    "severity": "MINOR",
+    "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/AuthEndpoints.cs",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 35,
+    "hash": "bd6b4697d81d1f5b23d25d1374ddaeaa",
+    "textRange": {
+      "startLine": 35,
+      "endLine": 39,
+      "startOffset": 70,
+      "endOffset": 9
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Set the 'HttpOnly' flag on this cookie.",
+    "effort": "10min",
+    "debt": "10min",
+    "tags": [
+      "cwe",
+      "former-hotspot",
+      "privacy"
+    ],
+    "transitions": [
+      "accept",
+      "confirm",
+      "resolve",
+      "falsepositive",
+      "wontfix"
+    ],
+    "actions": [
+      "set_type",
+      "set_tags",
+      "comment",
+      "set_severity",
+      "assign"
+    ],
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "Team Notes (SonarQube Training)",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AaEkwyrvn3atgy46CG_P",
+    "rule": "csharpsquid:S2092",
+    "severity": "MINOR",
+    "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/AuthEndpoints.cs",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 35,
+    "hash": "bd6b4697d81d1f5b23d25d1374ddaeaa",
+    "textRange": {
+      "startLine": 35,
+      "endLine": 39,
+      "startOffset": 70,
+      "endOffset": 9
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Set the 'Secure' flag on this cookie.",
+    "effort": "5min",
+    "debt": "5min",
+    "tags": [
+      "cwe",
+      "former-hotspot",
+      "privacy"
+    ],
+    "transitions": [
+      "accept",
+      "confirm",
+      "resolve",
+      "falsepositive",
+      "wontfix"
+    ],
+    "actions": [
+      "set_type",
+      "set_tags",
+      "comment",
+      "set_severity",
+      "assign"
+    ],
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "Team Notes (SonarQube Training)",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AaEkwysMn3atgy46CG_S",
+    "rule": "csharpsquid:S2077",
+    "severity": "MAJOR",
+    "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/Mutations.cs",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 42,
+    "hash": "1a0f114a5d71fa1fa28c13a541860be2",
+    "textRange": {
+      "startLine": 42,
+      "endLine": 42,
+      "startOffset": 26,
+      "endOffset": 63
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/Mutations.cs",
+            "textRange": {
+              "startLine": 41,
+              "endLine": 41,
+              "startOffset": 15,
+              "endOffset": 18
+            },
+            "msg": "SQL Query is dynamically formatted and assigned to sql."
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Use a parameterized query instead of string formatting.",
+    "effort": "20min",
+    "debt": "20min",
+    "tags": [
+      "bad-practice",
+      "cwe",
+      "former-hotspot",
+      "sql"
+    ],
+    "transitions": [
+      "accept",
+      "confirm",
+      "resolve",
+      "falsepositive",
+      "wontfix"
+    ],
+    "actions": [
+      "set_type",
+      "set_tags",
+      "comment",
+      "set_severity",
+      "assign"
+    ],
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "MAINTAINABILITY",
+        "severity": "LOW"
+      },
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "Team Notes (SonarQube Training)",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AaEkwyrXn3atgy46CG_H",
+    "rule": "roslyn.sonaranalyzer.security.cs:S5144",
+    "severity": "MAJOR",
+    "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/PreviewEndpoints.cs",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 33,
+    "hash": "69896ce151f10b217cec4f399e1ebe12",
+    "textRange": {
+      "startLine": 33,
+      "endLine": 33,
+      "startOffset": 28,
+      "endOffset": 46
+    },
+    "flows": [
+      {
+        "locations": [
+          {
+            "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/PreviewEndpoints.cs",
+            "textRange": {
+              "startLine": 33,
+              "endLine": 33,
+              "startOffset": 28,
+              "endOffset": 46
+            },
+            "msg": "Sink: this invocation is not safe; a malicious value can be used as argument"
+          },
+          {
+            "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/PreviewEndpoints.cs",
+            "textRange": {
+              "startLine": 27,
+              "endLine": 27,
+              "startOffset": 16,
+              "endOffset": 57
+            },
+            "msg": "A malicious value can be assigned to variable ‘url’"
+          },
+          {
+            "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/PreviewEndpoints.cs",
+            "textRange": {
+              "startLine": 27,
+              "endLine": 27,
+              "startOffset": 22,
+              "endOffset": 57
+            },
+            "msg": "This invocation can propagate malicious content to its return value"
+          },
+          {
+            "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/PreviewEndpoints.cs",
+            "textRange": {
+              "startLine": 27,
+              "endLine": 27,
+              "startOffset": 22,
+              "endOffset": 46
+            },
+            "msg": "This invocation can propagate malicious content to its return value"
+          },
+          {
+            "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/PreviewEndpoints.cs",
+            "textRange": {
+              "startLine": 27,
+              "endLine": 27,
+              "startOffset": 22,
+              "endOffset": 39
+            },
+            "msg": "Source: a user can craft an HTTP request with malicious content"
+          }
+        ]
+      }
+    ],
+    "status": "OPEN",
+    "message": "Server-Side Request Forgery via unsanitized user input in PreviewEndpoints.PreviewAsync()",
+    "effort": "30min",
+    "debt": "30min",
+    "tags": [
+      "cwe"
+    ],
+    "transitions": [
+      "accept",
+      "confirm",
+      "resolve",
+      "falsepositive",
+      "wontfix"
+    ],
+    "actions": [
+      "set_type",
+      "set_tags",
+      "comment",
+      "set_severity",
+      "assign"
+    ],
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "ruleDescriptionContextKey": "asp_net",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "Team Notes (SonarQube Training)",
+    "internalTags": [
+      "taint"
+    ],
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AaEkwysdn3atgy46CG_U",
+    "rule": "secrets:S6698",
+    "severity": "BLOCKER",
+    "component": "mikelopster_sonarqube-training-team-notes:api/appsettings.json",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 11,
+    "hash": "f343fa81bdc051fc21ea518e96228009",
+    "textRange": {
+      "startLine": 11,
+      "endLine": 11,
+      "startOffset": 33,
+      "endOffset": 47
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Make sure this PostgreSQL password gets changed and removed from the code.",
+    "effort": "30min",
+    "debt": "30min",
+    "tags": [
+      "cwe",
+      "secret"
+    ],
+    "transitions": [
+      "accept",
+      "confirm",
+      "resolve",
+      "falsepositive",
+      "wontfix"
+    ],
+    "actions": [
+      "set_type",
+      "set_tags",
+      "comment",
+      "set_severity",
+      "assign"
+    ],
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "cleanCodeAttribute": "TRUSTWORTHY",
+    "cleanCodeAttributeCategory": "RESPONSIBLE",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "BLOCKER"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "Team Notes (SonarQube Training)",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AaEkwysdn3atgy46CG_V",
+    "rule": "csharpsquid:S2068",
+    "severity": "MAJOR",
+    "component": "mikelopster_sonarqube-training-team-notes:api/appsettings.json",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 11,
+    "hash": "f343fa81bdc051fc21ea518e96228009",
+    "textRange": {
+      "startLine": 11,
+      "endLine": 11,
+      "startOffset": 16,
+      "endOffset": 78
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Review this hard-coded URI, which may contain a credential.",
+    "effort": "30min",
+    "debt": "30min",
+    "tags": [
+      "cwe",
+      "former-hotspot",
+      "secret"
+    ],
+    "transitions": [
+      "accept",
+      "confirm",
+      "resolve",
+      "falsepositive",
+      "wontfix"
+    ],
+    "actions": [
+      "set_type",
+      "set_tags",
+      "comment",
+      "set_severity",
+      "assign"
+    ],
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "cleanCodeAttribute": "TRUSTWORTHY",
+    "cleanCodeAttributeCategory": "RESPONSIBLE",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "Team Notes (SonarQube Training)",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AaEkwys4n3atgy46CG_e",
+    "rule": "docker:S6505",
+    "severity": "MAJOR",
+    "component": "mikelopster_sonarqube-training-team-notes:web/Dockerfile",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 7,
+    "hash": "78647f454d93b59294c34ca1f3ed714a",
+    "textRange": {
+      "startLine": 7,
+      "endLine": 7,
+      "startOffset": 4,
+      "endOffset": 10
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Omitting \"--ignore-scripts\" allows lifecycle scripts to run during package installation.",
+    "effort": "30min",
+    "debt": "30min",
+    "tags": [
+      "cwe",
+      "former-hotspot"
+    ],
+    "transitions": [
+      "accept",
+      "confirm",
+      "resolve",
+      "falsepositive",
+      "wontfix"
+    ],
+    "actions": [
+      "set_type",
+      "set_tags",
+      "comment",
+      "set_severity",
+      "assign"
+    ],
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "ruleDescriptionContextKey": "npm",
+    "cleanCodeAttribute": "TRUSTWORTHY",
+    "cleanCodeAttributeCategory": "RESPONSIBLE",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "MEDIUM"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "Team Notes (SonarQube Training)",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AaEkwytWn3atgy46CG_i",
+    "rule": "typescript:S5332",
+    "severity": "MINOR",
+    "component": "mikelopster_sonarqube-training-team-notes:web/lib/api.ts",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 3,
+    "hash": "a96f8b1a3f74b8138f0095702bb76d7e",
+    "textRange": {
+      "startLine": 3,
+      "endLine": 3,
+      "startOffset": 60,
+      "endOffset": 77
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Using http protocol is insecure. Use https instead.",
+    "effort": "30min",
+    "debt": "30min",
+    "tags": [
+      "cryptography",
+      "cwe",
+      "former-hotspot"
+    ],
+    "transitions": [
+      "accept",
+      "confirm",
+      "resolve",
+      "falsepositive",
+      "wontfix"
+    ],
+    "actions": [
+      "set_type",
+      "set_tags",
+      "comment",
+      "set_severity",
+      "assign"
+    ],
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "Team Notes (SonarQube Training)",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "lastChangeSource": "ANALYSIS"
+  },
+  {
+    "key": "AaEkwytjn3atgy46CG_k",
+    "rule": "typescript:S5332",
+    "severity": "MINOR",
+    "component": "mikelopster_sonarqube-training-team-notes:web/next.config.ts",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 5,
+    "hash": "489ed568afa4e12356151e565e5d8ade",
+    "textRange": {
+      "startLine": 5,
+      "endLine": 5,
+      "startOffset": 53,
+      "endOffset": 70
+    },
+    "flows": [],
+    "status": "OPEN",
+    "message": "Using http protocol is insecure. Use https instead.",
+    "effort": "30min",
+    "debt": "30min",
+    "tags": [
+      "cryptography",
+      "cwe",
+      "former-hotspot"
+    ],
+    "transitions": [
+      "accept",
+      "confirm",
+      "resolve",
+      "falsepositive",
+      "wontfix"
+    ],
+    "actions": [
+      "set_type",
+      "set_tags",
+      "comment",
+      "set_severity",
+      "assign"
+    ],
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "projectName": "Team Notes (SonarQube Training)",
+    "internalTags": [],
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "lastChangeSource": "ANALYSIS"
+  }
+]

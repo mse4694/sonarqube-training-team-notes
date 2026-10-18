@@ -1,0 +1,97 @@
+{
+  "project": {
+    "component": {
+      "key": "mikelopster_sonarqube-training-team-notes",
+      "name": "Team Notes (SonarQube Training)",
+      "qualifier": "TRK",
+      "analysisDate": "2026-10-10T07:40:51+0000",
+      "tags": [],
+      "visibility": "private",
+      "version": "not provided"
+    },
+    "ancestors": []
+  },
+  "branches": {
+    "branches": [
+      {
+        "name": "solution",
+        "isMain": false,
+        "type": "SHORT",
+        "mergeBranch": "master",
+        "status": {
+          "qualityGateStatus": "ERROR",
+          "bugs": 1,
+          "vulnerabilities": 0,
+          "codeSmells": 3
+        },
+        "analysisDate": "2026-10-10T07:43:31+0000",
+        "branchId": "b274c9a3-be63-426f-bd4c-07558886ccd0",
+        "branchUuidV1": "AaEkxIbS3iHLfDFbc20d"
+      },
+      {
+        "name": "master",
+        "isMain": true,
+        "type": "LONG",
+        "status": {
+          "qualityGateStatus": "OK",
+          "bugs": 9,
+          "vulnerabilities": 13,
+          "codeSmells": 12
+        },
+        "analysisDate": "2026-10-10T07:40:51+0000",
+        "branchId": "debe56b9-494a-46bc-ba28-4a7384973eff",
+        "branchUuidV1": "AaEkwNOVqxZKWC9KsNnO"
+      }
+    ]
+  },
+  "coreAnalysesBefore": {
+    "paging": {
+      "pageIndex": 1,
+      "pageSize": 100,
+      "total": 1
+    },
+    "analyses": [
+      {
+        "key": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+        "date": "2026-10-10T07:40:51+0000",
+        "events": [
+          {
+            "key": "AaEkwyz2n3atgy46CG_o",
+            "category": "VERSION",
+            "name": "not provided"
+          }
+        ],
+        "projectVersion": "not provided",
+        "manualNewCodePeriodBaseline": false
+      }
+    ]
+  },
+  "coreAnalysesAfter": {
+    "paging": {
+      "pageIndex": 1,
+      "pageSize": 100,
+      "total": 1
+    },
+    "analyses": [
+      {
+        "key": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+        "date": "2026-10-10T07:40:51+0000",
+        "events": [
+          {
+            "key": "AaEkwyz2n3atgy46CG_o",
+            "category": "VERSION",
+            "name": "not provided"
+          }
+        ],
+        "projectVersion": "not provided",
+        "manualNewCodePeriodBaseline": false
+      }
+    ]
+  },
+  "qualityGate": {
+    "status": "NONE",
+    "conditions": [],
+    "periods": [],
+    "interpretation": "API returned NONE with no conditions; this is not a PASS assertion."
+  }
+}

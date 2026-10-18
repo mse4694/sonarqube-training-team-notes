@@ -1,0 +1,950 @@
+{
+  "capturedAt": "2026-10-18T09:52:41.122Z",
+  "scope": "branch master; Overall and New Code metric keys remain distinct",
+  "data": {
+    "component": {
+      "id": "AaEkwNOVqxZKWC9KsNnO",
+      "key": "mikelopster_sonarqube-training-team-notes",
+      "name": "Team Notes (SonarQube Training)",
+      "qualifier": "TRK",
+      "measures": [
+        {
+          "metric": "security_remediation_effort",
+          "value": "335",
+          "bestValue": false
+        },
+        {
+          "metric": "new_sca_severity_licensing",
+          "periods": [
+            {
+              "index": 1,
+              "value": "0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "sca_count_licensing",
+          "value": "0",
+          "bestValue": true
+        },
+        {
+          "metric": "sca_count_vulnerability",
+          "value": "1",
+          "bestValue": false
+        },
+        {
+          "metric": "new_sca_rating_vulnerability",
+          "periods": [
+            {
+              "index": 1,
+              "value": "1.0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "sca_rating_vulnerability",
+          "value": "4.0",
+          "bestValue": false
+        },
+        {
+          "metric": "new_sca_severity_malware",
+          "periods": [
+            {
+              "index": 1,
+              "value": "0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "security_rating",
+          "value": "5.0",
+          "bestValue": false
+        },
+        {
+          "metric": "new_sca_rating_licensing",
+          "periods": [
+            {
+              "index": 1,
+              "value": "1.0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "new_sca_count_any_issue",
+          "periods": [
+            {
+              "index": 1,
+              "value": "0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "sca_severity_licensing",
+          "value": "0",
+          "bestValue": true
+        },
+        {
+          "metric": "new_sca_severity_vulnerability",
+          "periods": [
+            {
+              "index": 1,
+              "value": "0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "new_sca_severity_any_security",
+          "periods": [
+            {
+              "index": 1,
+              "value": "0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "sca_severity_vulnerability",
+          "value": "20",
+          "bestValue": false
+        },
+        {
+          "metric": "new_sca_count_malware",
+          "periods": [
+            {
+              "index": 1,
+              "value": "0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "sca_severity_malware",
+          "value": "0",
+          "bestValue": true
+        },
+        {
+          "metric": "sca_rating_any_security",
+          "value": "4.0",
+          "bestValue": false
+        },
+        {
+          "metric": "sca_rating_licensing",
+          "value": "1.0",
+          "bestValue": true
+        },
+        {
+          "metric": "new_sca_rating_any_security",
+          "periods": [
+            {
+              "index": 1,
+              "value": "1.0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "sca_count_malware",
+          "value": "0",
+          "bestValue": true
+        },
+        {
+          "metric": "sca_count_any_issue",
+          "value": "1",
+          "bestValue": false
+        },
+        {
+          "metric": "software_quality_security_issues",
+          "value": "13",
+          "bestValue": false
+        },
+        {
+          "metric": "new_sca_rating_any_issue",
+          "periods": [
+            {
+              "index": 1,
+              "value": "1.0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "security_hotspots_reviewed",
+          "value": "100.0",
+          "bestValue": true
+        },
+        {
+          "metric": "security_issue_severity",
+          "value": "25",
+          "bestValue": false
+        },
+        {
+          "metric": "new_sca_severity_any_issue",
+          "periods": [
+            {
+              "index": 1,
+              "value": "0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "security_hotspots_reviewed_status",
+          "value": "0",
+          "bestValue": true
+        },
+        {
+          "metric": "new_sca_count_vulnerability",
+          "periods": [
+            {
+              "index": 1,
+              "value": "0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "sca_rating_malware",
+          "value": "1.0",
+          "bestValue": true
+        },
+        {
+          "metric": "new_sca_rating_malware",
+          "periods": [
+            {
+              "index": 1,
+              "value": "1.0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "sca_rating_any_issue",
+          "value": "4.0",
+          "bestValue": false
+        },
+        {
+          "metric": "security_issues",
+          "value": "{\"total\":13,\"HIGH\":1,\"MEDIUM\":6,\"LOW\":4,\"INFO\":0,\"BLOCKER\":2}"
+        },
+        {
+          "metric": "sca_severity_any_issue",
+          "value": "20",
+          "bestValue": false
+        },
+        {
+          "metric": "new_sca_count_any_security",
+          "periods": [
+            {
+              "index": 1,
+              "value": "0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "security_hotspots",
+          "value": "0",
+          "bestValue": true
+        },
+        {
+          "metric": "security_review_rating",
+          "value": "1.0",
+          "bestValue": true
+        },
+        {
+          "metric": "new_sca_count_licensing",
+          "periods": [
+            {
+              "index": 1,
+              "value": "0",
+              "bestValue": true
+            }
+          ]
+        },
+        {
+          "metric": "security_hotspots_to_review_status",
+          "value": "0",
+          "bestValue": true
+        },
+        {
+          "metric": "vulnerabilities",
+          "value": "13",
+          "bestValue": false
+        },
+        {
+          "metric": "sca_count_any_security",
+          "value": "1",
+          "bestValue": false
+        },
+        {
+          "metric": "sca_severity_any_security",
+          "value": "20",
+          "bestValue": false
+        }
+      ]
+    }
+  },
+  "definitions": [
+    {
+      "id": "458",
+      "key": "sca_count_any_issue",
+      "type": "INT",
+      "name": "Count of dependency risks",
+      "description": "Count of dependency risks",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "497",
+      "key": "sca_count_any_security",
+      "type": "INT",
+      "name": "Count of dependency security risks",
+      "description": "Count of dependency security risks",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "487",
+      "key": "sca_count_licensing",
+      "type": "INT",
+      "name": "Count of licensing risks",
+      "description": "Count of licensing risks",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "491",
+      "key": "sca_count_malware",
+      "type": "INT",
+      "name": "Count of malware risks",
+      "description": "Count of malware risks",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "459",
+      "key": "new_sca_count_any_issue",
+      "type": "INT",
+      "name": "Count of new dependency risks",
+      "description": "Count of new dependency risks",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "498",
+      "key": "new_sca_count_any_security",
+      "type": "INT",
+      "name": "Count of new dependency security risks",
+      "description": "Count of new dependency security risks",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "488",
+      "key": "new_sca_count_licensing",
+      "type": "INT",
+      "name": "Count of new licensing risks",
+      "description": "Count of new licensing risks",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "492",
+      "key": "new_sca_count_malware",
+      "type": "INT",
+      "name": "Count of new malware risks",
+      "description": "Count of new malware risks",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "486",
+      "key": "new_sca_count_vulnerability",
+      "type": "INT",
+      "name": "Count of new vulnerability dependency risks",
+      "description": "Count of new vulnerability dependency risks",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "485",
+      "key": "sca_count_vulnerability",
+      "type": "INT",
+      "name": "Count of vulnerability dependency risks",
+      "description": "Count of vulnerability dependency risks",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "462",
+      "key": "sca_rating_any_issue",
+      "type": "RATING",
+      "name": "Dependency risk rating",
+      "description": "Dependency risk rating",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "460",
+      "key": "sca_rating_licensing",
+      "type": "RATING",
+      "name": "Dependency risk rating for licenses",
+      "description": "Dependency risk rating for licenses",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "461",
+      "key": "new_sca_rating_licensing",
+      "type": "RATING",
+      "name": "Dependency risk rating for licenses on new code",
+      "description": "Dependency risk rating for licenses on new code",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "493",
+      "key": "sca_rating_malware",
+      "type": "RATING",
+      "name": "Dependency risk rating for malware",
+      "description": "Dependency risk rating for malware",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "494",
+      "key": "new_sca_rating_malware",
+      "type": "RATING",
+      "name": "Dependency risk rating for malware on new code",
+      "description": "Dependency risk rating for malware on new code",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "499",
+      "key": "sca_rating_any_security",
+      "type": "RATING",
+      "name": "Dependency risk rating for security",
+      "description": "Dependency risk rating for security",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "500",
+      "key": "new_sca_rating_any_security",
+      "type": "RATING",
+      "name": "Dependency risk rating for security on new code",
+      "description": "Dependency risk rating for security on new code",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "464",
+      "key": "sca_rating_vulnerability",
+      "type": "RATING",
+      "name": "Dependency risk rating for vulnerabilities",
+      "description": "Dependency risk rating for vulnerabilities",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "465",
+      "key": "new_sca_rating_vulnerability",
+      "type": "RATING",
+      "name": "Dependency risk rating for vulnerabilities on new code",
+      "description": "Dependency risk rating for vulnerabilities on new code",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "463",
+      "key": "new_sca_rating_any_issue",
+      "type": "RATING",
+      "name": "Dependency risk rating on new code",
+      "description": "Dependency risk rating on new code",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "351",
+      "key": "new_security_hotspots",
+      "type": "INT",
+      "name": "New Security Hotspots",
+      "description": "New Security Hotspots",
+      "domain": "SecurityReview",
+      "direction": -1,
+      "qualitative": true,
+      "hidden": false
+    },
+    {
+      "id": "428",
+      "key": "new_security_issues",
+      "type": "DATA",
+      "name": "New Security Issues",
+      "description": "New security issues",
+      "domain": "Security",
+      "direction": 0,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "565",
+      "key": "new_software_quality_security_issues",
+      "type": "INT",
+      "name": "New Security Issues",
+      "description": "Number of open issues impacting the Security software quality on new code",
+      "domain": "Security",
+      "direction": -1,
+      "qualitative": true,
+      "hidden": false
+    },
+    {
+      "id": "311",
+      "key": "new_vulnerabilities",
+      "type": "INT",
+      "name": "New Vulnerabilities",
+      "description": "New Vulnerabilities",
+      "domain": "Security",
+      "direction": -1,
+      "qualitative": true,
+      "hidden": false
+    },
+    {
+      "id": "350",
+      "key": "security_hotspots",
+      "type": "INT",
+      "name": "Security Hotspots",
+      "description": "Security Hotspots",
+      "domain": "SecurityReview",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "354",
+      "key": "security_hotspots_reviewed",
+      "type": "PERCENT",
+      "name": "Security Hotspots Reviewed",
+      "description": "Percentage of Security Hotspots Reviewed",
+      "domain": "SecurityReview",
+      "direction": 1,
+      "qualitative": true,
+      "hidden": false,
+      "decimalScale": 1
+    },
+    {
+      "id": "355",
+      "key": "new_security_hotspots_reviewed",
+      "type": "PERCENT",
+      "name": "Security Hotspots Reviewed on New Code",
+      "description": "Percentage of Security Hotspots Reviewed on New Code",
+      "domain": "SecurityReview",
+      "direction": 1,
+      "qualitative": true,
+      "hidden": false,
+      "decimalScale": 1
+    },
+    {
+      "id": "423",
+      "key": "security_issues",
+      "type": "DATA",
+      "name": "Security Issues",
+      "description": "Security issues",
+      "domain": "Security",
+      "direction": 0,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "564",
+      "key": "software_quality_security_issues",
+      "type": "INT",
+      "name": "Security Issues",
+      "description": "Number of open issues impacting the Security software quality",
+      "domain": "Security",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "519",
+      "key": "new_security_issue_severity",
+      "type": "INT",
+      "name": "Security Issue Severity on New Code",
+      "description": "Worst severity of new security issues",
+      "domain": "Security",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "558",
+      "key": "security_issue_severity",
+      "type": "INT",
+      "name": "Security Issue Severity on Overall Code",
+      "description": "Worst severity of security issues",
+      "domain": "Security",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "319",
+      "key": "security_rating",
+      "type": "RATING",
+      "name": "Security Rating",
+      "description": "Security rating",
+      "domain": "Security",
+      "direction": -1,
+      "qualitative": true,
+      "hidden": false
+    },
+    {
+      "id": "343",
+      "key": "new_security_rating",
+      "type": "RATING",
+      "name": "Security Rating on New Code",
+      "description": "Security rating on new code",
+      "domain": "Security",
+      "direction": -1,
+      "qualitative": true,
+      "hidden": false
+    },
+    {
+      "id": "317",
+      "key": "security_remediation_effort",
+      "type": "WORK_DUR",
+      "name": "Security Remediation Effort",
+      "description": "Security remediation effort",
+      "domain": "Security",
+      "direction": -1,
+      "qualitative": true,
+      "hidden": false
+    },
+    {
+      "id": "318",
+      "key": "new_security_remediation_effort",
+      "type": "WORK_DUR",
+      "name": "Security Remediation Effort on New Code",
+      "description": "Security remediation effort on new code",
+      "domain": "Security",
+      "direction": -1,
+      "qualitative": true,
+      "hidden": false
+    },
+    {
+      "id": "352",
+      "key": "security_review_rating",
+      "type": "RATING",
+      "name": "Security Review Rating",
+      "description": "Security Review Rating",
+      "domain": "SecurityReview",
+      "direction": -1,
+      "qualitative": true,
+      "hidden": false
+    },
+    {
+      "id": "353",
+      "key": "new_security_review_rating",
+      "type": "RATING",
+      "name": "Security Review Rating on New Code",
+      "description": "Security Review Rating on New Code",
+      "domain": "SecurityReview",
+      "direction": -1,
+      "qualitative": true,
+      "hidden": false
+    },
+    {
+      "id": "356",
+      "key": "security_hotspots_reviewed_status",
+      "type": "INT",
+      "name": "Security Review Reviewed Status",
+      "description": "Security Review Reviewed Status",
+      "domain": "SecurityReview",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": true
+    },
+    {
+      "id": "358",
+      "key": "new_security_hotspots_reviewed_status",
+      "type": "INT",
+      "name": "Security Review Reviewed Status on New Code",
+      "description": "Security Review Reviewed Status on New Code",
+      "domain": "SecurityReview",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": true
+    },
+    {
+      "id": "357",
+      "key": "security_hotspots_to_review_status",
+      "type": "INT",
+      "name": "Security Review To Review Status",
+      "description": "Security Review To Review Status",
+      "domain": "SecurityReview",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": true
+    },
+    {
+      "id": "359",
+      "key": "new_security_hotspots_to_review_status",
+      "type": "INT",
+      "name": "Security Review To Review Status on New Code",
+      "description": "Security Review To Review Status on New Code",
+      "domain": "SecurityReview",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": true
+    },
+    {
+      "id": "454",
+      "key": "sca_severity_any_issue",
+      "type": "INT",
+      "name": "Severity of a dependency risk",
+      "description": "Severity of a dependency risk",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "495",
+      "key": "sca_severity_any_security",
+      "type": "INT",
+      "name": "Severity of a dependency security risk",
+      "description": "Severity of a dependency security risk",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "452",
+      "key": "sca_severity_licensing",
+      "type": "INT",
+      "name": "Severity of a licensing dependency risk",
+      "description": "Severity of a licensing dependency risk",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "489",
+      "key": "sca_severity_malware",
+      "type": "INT",
+      "name": "Severity of a malware dependency risk",
+      "description": "Severity of a malware dependency risk",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "455",
+      "key": "new_sca_severity_any_issue",
+      "type": "INT",
+      "name": "Severity of a new dependency risk",
+      "description": "Severity of a new dependency risk",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "496",
+      "key": "new_sca_severity_any_security",
+      "type": "INT",
+      "name": "Severity of a new dependency security risk",
+      "description": "Severity of a new dependency security risk",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "453",
+      "key": "new_sca_severity_licensing",
+      "type": "INT",
+      "name": "Severity of a new licensing dependency risk",
+      "description": "Severity of a new licensing dependency risk",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "490",
+      "key": "new_sca_severity_malware",
+      "type": "INT",
+      "name": "Severity of a new malware dependency risk",
+      "description": "Severity of a new malware dependency risk",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "457",
+      "key": "new_sca_severity_vulnerability",
+      "type": "INT",
+      "name": "Severity of a new vulnerability dependency risk",
+      "description": "Severity of a new vulnerability dependency risk",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "456",
+      "key": "sca_severity_vulnerability",
+      "type": "INT",
+      "name": "Severity of a vulnerability dependency risk",
+      "description": "Severity of a vulnerability dependency risk",
+      "domain": "DependencyRisks",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "310",
+      "key": "vulnerabilities",
+      "type": "INT",
+      "name": "Vulnerabilities",
+      "description": "Vulnerabilities",
+      "domain": "Security",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    },
+    {
+      "id": "523",
+      "key": "new_vulnerabilities_severity",
+      "type": "INT",
+      "name": "Vulnerabilities Severity on New Code",
+      "description": "Worst severity of new vulnerability issues",
+      "domain": "Security",
+      "direction": -1,
+      "qualitative": false,
+      "hidden": false
+    }
+  ],
+  "requested": [
+    "sca_count_any_issue",
+    "sca_count_any_security",
+    "sca_count_licensing",
+    "sca_count_malware",
+    "new_sca_count_any_issue",
+    "new_sca_count_any_security",
+    "new_sca_count_licensing",
+    "new_sca_count_malware",
+    "new_sca_count_vulnerability",
+    "sca_count_vulnerability",
+    "sca_rating_any_issue",
+    "sca_rating_licensing",
+    "new_sca_rating_licensing",
+    "sca_rating_malware",
+    "new_sca_rating_malware",
+    "sca_rating_any_security",
+    "new_sca_rating_any_security",
+    "sca_rating_vulnerability",
+    "new_sca_rating_vulnerability",
+    "new_sca_rating_any_issue",
+    "new_security_hotspots",
+    "new_security_issues",
+    "new_software_quality_security_issues",
+    "new_vulnerabilities",
+    "security_hotspots",
+    "security_hotspots_reviewed",
+    "new_security_hotspots_reviewed",
+    "security_issues",
+    "software_quality_security_issues",
+    "new_security_issue_severity",
+    "security_issue_severity",
+    "security_rating",
+    "new_security_rating",
+    "security_remediation_effort",
+    "new_security_remediation_effort",
+    "security_review_rating",
+    "new_security_review_rating",
+    "security_hotspots_reviewed_status",
+    "new_security_hotspots_reviewed_status",
+    "security_hotspots_to_review_status",
+    "new_security_hotspots_to_review_status",
+    "sca_severity_any_issue",
+    "sca_severity_any_security",
+    "sca_severity_licensing",
+    "sca_severity_malware",
+    "new_sca_severity_any_issue",
+    "new_sca_severity_any_security",
+    "new_sca_severity_licensing",
+    "new_sca_severity_malware",
+    "new_sca_severity_vulnerability",
+    "sca_severity_vulnerability",
+    "vulnerabilities",
+    "new_vulnerabilities_severity"
+  ],
+  "notReturned": [
+    "new_security_hotspots",
+    "new_security_hotspots_reviewed",
+    "new_security_hotspots_reviewed_status",
+    "new_security_hotspots_to_review_status",
+    "new_security_issue_severity",
+    "new_security_issues",
+    "new_security_rating",
+    "new_security_remediation_effort",
+    "new_security_review_rating",
+    "new_software_quality_security_issues",
+    "new_vulnerabilities",
+    "new_vulnerabilities_severity"
+  ],
+  "note": "Missing metric keys are unavailable, not zero; encoded JSON metric values are preserved as returned."
+}

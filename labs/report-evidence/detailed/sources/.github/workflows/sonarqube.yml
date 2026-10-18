@@ -1,0 +1,66 @@
+name: SonarQube
+
+on:
+  push:
+    branches: [main, solution]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build-test-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0 # full history: better blame + new-code detection
+
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: "10.0.x"
+
+      # SonarScanner for .NET runs on the JVM.
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      # ---- web: unit tests + lcov coverage -----------------------------------
+      - run: npm ci
+        working-directory: web
+      # XSS tests fail on `main` by design; keep going so lcov is still produced and imported.
+      - run: npm run test:coverage
+        working-directory: web
+        continue-on-error: true
+
+      # ---- SonarScanner for .NET: begin -> build -> test -> end --------------
+      - run: dotnet tool install --global dotnet-sonarscanner
+
+      - name: SonarQube begin
+        run: >
+          dotnet sonarscanner begin
+          /k:"team-notes"
+          /d:sonar.host.url="${{ vars.SONAR_HOST_URL }}"
+          /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          /d:sonar.cs.opencover.reportsPaths="api.Tests/coverage/**/coverage.opencover.xml"
+          /d:sonar.javascript.lcov.reportPaths="web/coverage/lcov.info"
+          /d:sonar.exclusions="**/bin/**,**/obj/**,web/node_modules/**,web/.next/**,**/coverage/**"
+          /d:sonar.qualitygate.wait="true"
+
+      # Security tests fail on `main` by design; keep going so the scan still runs + imports coverage.
+      # `dotnet test` compiles both api/ and api.Tests/ under the scanner's MSBuild hook.
+      - name: Unit tests with OpenCover coverage
+        continue-on-error: true
+        env:
+          UPLOADS_DIR: ${{ github.workspace }}/uploads
+        run: >
+          dotnet test api.Tests/Api.Tests.csproj -c Release
+          --collect:"XPlat Code Coverage" --settings api.Tests/coverlet.runsettings
+          --results-directory ${{ github.workspace }}/api.Tests/coverage
+
+      - name: SonarQube end (uploads + waits for the Quality Gate)
+        run: dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+

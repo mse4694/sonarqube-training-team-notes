@@ -1,0 +1,998 @@
+{
+  "paging": {
+    "pageIndex": 1,
+    "pageSize": 500,
+    "total": 13
+  },
+  "distinctIssues": 13,
+  "facets": [
+    {
+      "property": "severities",
+      "values": [
+        {
+          "val": "MAJOR",
+          "count": 6
+        },
+        {
+          "val": "MINOR",
+          "count": 4
+        },
+        {
+          "val": "BLOCKER",
+          "count": 2
+        },
+        {
+          "val": "CRITICAL",
+          "count": 1
+        },
+        {
+          "val": "INFO",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "property": "statuses",
+      "values": [
+        {
+          "val": "OPEN",
+          "count": 13
+        },
+        {
+          "val": "CONFIRMED",
+          "count": 0
+        },
+        {
+          "val": "REOPENED",
+          "count": 0
+        },
+        {
+          "val": "RESOLVED",
+          "count": 0
+        },
+        {
+          "val": "CLOSED",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "property": "issueStatuses",
+      "values": [
+        {
+          "val": "OPEN",
+          "count": 13
+        },
+        {
+          "val": "CONFIRMED",
+          "count": 0
+        },
+        {
+          "val": "FALSE_POSITIVE",
+          "count": 0
+        },
+        {
+          "val": "ACCEPTED",
+          "count": 0
+        },
+        {
+          "val": "FIXED",
+          "count": 0
+        }
+      ]
+    },
+    {
+      "property": "owaspTop10",
+      "values": [
+        {
+          "val": "a3",
+          "count": 6
+        },
+        {
+          "val": "a2",
+          "count": 2
+        },
+        {
+          "val": "a1",
+          "count": 1
+        },
+        {
+          "val": "a5",
+          "count": 1
+        },
+        {
+          "val": "a6",
+          "count": 1
+        },
+        {
+          "val": "a7",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "property": "owaspTop10-2021",
+      "values": [
+        {
+          "val": "a7",
+          "count": 4
+        },
+        {
+          "val": "a2",
+          "count": 3
+        },
+        {
+          "val": "a5",
+          "count": 2
+        },
+        {
+          "val": "a10",
+          "count": 1
+        },
+        {
+          "val": "a3",
+          "count": 1
+        },
+        {
+          "val": "a4",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "property": "cwe",
+      "values": [
+        {
+          "val": "259",
+          "count": 4
+        },
+        {
+          "val": "798",
+          "count": 4
+        },
+        {
+          "val": "200",
+          "count": 2
+        },
+        {
+          "val": "319",
+          "count": 2
+        },
+        {
+          "val": "506",
+          "count": 2
+        },
+        {
+          "val": "829",
+          "count": 2
+        },
+        {
+          "val": "1004",
+          "count": 1
+        },
+        {
+          "val": "1240",
+          "count": 1
+        },
+        {
+          "val": "20",
+          "count": 1
+        },
+        {
+          "val": "311",
+          "count": 1
+        },
+        {
+          "val": "315",
+          "count": 1
+        },
+        {
+          "val": "614",
+          "count": 1
+        },
+        {
+          "val": "89",
+          "count": 1
+        },
+        {
+          "val": "918",
+          "count": 1
+        },
+        {
+          "val": "943",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "property": "sonarsourceSecurity",
+      "values": [
+        {
+          "val": "auth",
+          "count": 4
+        },
+        {
+          "val": "others",
+          "count": 4
+        },
+        {
+          "val": "encrypt-data",
+          "count": 2
+        },
+        {
+          "val": "insecure-conf",
+          "count": 1
+        },
+        {
+          "val": "sql-injection",
+          "count": 1
+        },
+        {
+          "val": "ssrf",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "property": "impactSeverities",
+      "values": [
+        {
+          "val": "HIGH",
+          "count": 1
+        },
+        {
+          "val": "MEDIUM",
+          "count": 6
+        },
+        {
+          "val": "LOW",
+          "count": 4
+        },
+        {
+          "val": "INFO",
+          "count": 0
+        },
+        {
+          "val": "BLOCKER",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "property": "owasp_masvs:urn:sonar-security-standard:owasp:masvs:v2",
+      "values": [
+        {
+          "val": "MASVS-AUTH",
+          "count": 6
+        },
+        {
+          "val": "MASVS-CODE",
+          "count": 7
+        },
+        {
+          "val": "MASVS-PLATFORM",
+          "count": 6
+        },
+        {
+          "val": "MASVS-RESILIENCE",
+          "count": 2
+        },
+        {
+          "val": "MASVS-CRYPTO",
+          "count": 1
+        },
+        {
+          "val": "MASVS-NETWORK",
+          "count": 3
+        },
+        {
+          "val": "MASVS-STORAGE",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "property": "owasp_mobile-top10:urn:sonar-security-standard:owasp:mobile-top10:2024",
+      "values": [
+        {
+          "val": "M05",
+          "count": 2
+        },
+        {
+          "val": "M10",
+          "count": 3
+        },
+        {
+          "val": "M02",
+          "count": 2
+        },
+        {
+          "val": "M01",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "property": "owasp_masvs:urn:sonar-security-standard:owasp:masvs:v1",
+      "values": [
+        {
+          "val": "MSTG-NETWORK",
+          "count": 3
+        },
+        {
+          "val": "MSTG-PLATFORM",
+          "count": 4
+        },
+        {
+          "val": "MSTG-RESILIENCE",
+          "count": 2
+        },
+        {
+          "val": "MSTG-CRYPTO",
+          "count": 1
+        },
+        {
+          "val": "MSTG-STORAGE",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "property": "owasp_asvs:urn:sonar-security-standard:owasp:asvs:4.0",
+      "values": [
+        {
+          "val": "12",
+          "count": 3
+        },
+        {
+          "val": "13",
+          "count": 1
+        },
+        {
+          "val": "14",
+          "count": 4
+        },
+        {
+          "val": "1",
+          "count": 2
+        },
+        {
+          "val": "2",
+          "count": 6
+        },
+        {
+          "val": "3",
+          "count": 6
+        },
+        {
+          "val": "5",
+          "count": 4
+        },
+        {
+          "val": "6",
+          "count": 5
+        },
+        {
+          "val": "7",
+          "count": 2
+        },
+        {
+          "val": "8",
+          "count": 2
+        },
+        {
+          "val": "9",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "property": "owasp_asvs:urn:sonar-security-standard:owasp:asvs:5.0",
+      "values": [
+        {
+          "val": "12",
+          "count": 2
+        },
+        {
+          "val": "13",
+          "count": 7
+        },
+        {
+          "val": "14",
+          "count": 3
+        },
+        {
+          "val": "15",
+          "count": 2
+        },
+        {
+          "val": "16",
+          "count": 2
+        },
+        {
+          "val": "1",
+          "count": 2
+        },
+        {
+          "val": "2",
+          "count": 2
+        },
+        {
+          "val": "3",
+          "count": 4
+        },
+        {
+          "val": "5",
+          "count": 2
+        },
+        {
+          "val": "7",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "property": "pci_dss:urn:sonar-security-standard:pci:dss:4.0",
+      "values": [
+        {
+          "val": "4",
+          "count": 2
+        },
+        {
+          "val": "6",
+          "count": 11
+        }
+      ]
+    },
+    {
+      "property": "pci_dss:urn:sonar-security-standard:pci:dss:3.2",
+      "values": [
+        {
+          "val": "3",
+          "count": 1
+        },
+        {
+          "val": "4",
+          "count": 2
+        },
+        {
+          "val": "6",
+          "count": 11
+        }
+      ]
+    },
+    {
+      "property": "owasp_llm-top10:urn:sonar-security-standard:owasp:llm-top10:2025",
+      "values": []
+    },
+    {
+      "property": "sonar_standard:urn:sonar-security-standard:sonar:standard:unversioned",
+      "values": [
+        {
+          "val": "insecure-conf",
+          "count": 1
+        },
+        {
+          "val": "auth",
+          "count": 4
+        },
+        {
+          "val": "sql-injection",
+          "count": 1
+        },
+        {
+          "val": "others",
+          "count": 8
+        },
+        {
+          "val": "ssrf",
+          "count": 1
+        },
+        {
+          "val": "encrypt-data",
+          "count": 3
+        },
+        {
+          "val": "malicious-dependencies",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "property": "stig_asd:urn:sonar-security-standard:stig:asd:v5",
+      "values": [
+        {
+          "val": "V-222596",
+          "count": 2
+        },
+        {
+          "val": "V-222599",
+          "count": 2
+        },
+        {
+          "val": "V-222598",
+          "count": 2
+        },
+        {
+          "val": "V-222597",
+          "count": 2
+        },
+        {
+          "val": "V-222609",
+          "count": 2
+        },
+        {
+          "val": "V-222397",
+          "count": 2
+        },
+        {
+          "val": "V-222642",
+          "count": 2
+        },
+        {
+          "val": "V-222534",
+          "count": 2
+        },
+        {
+          "val": "V-222563",
+          "count": 2
+        },
+        {
+          "val": "V-222562",
+          "count": 2
+        },
+        {
+          "val": "V-222577",
+          "count": 2
+        },
+        {
+          "val": "V-222576",
+          "count": 1
+        },
+        {
+          "val": "V-222575",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "property": "owasp_mobile-top10:urn:sonar-security-standard:owasp:mobile-top10:2016",
+      "values": [
+        {
+          "val": "M03",
+          "count": 2
+        },
+        {
+          "val": "M05",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "property": "cwe_standard:urn:sonar-security-standard:cwe:standard:4.18",
+      "values": [
+        {
+          "val": "CWE-798",
+          "count": 4
+        },
+        {
+          "val": "CWE-315",
+          "count": 1
+        },
+        {
+          "val": "CWE-319",
+          "count": 2
+        },
+        {
+          "val": "CWE-311",
+          "count": 1
+        },
+        {
+          "val": "CWE-829",
+          "count": 2
+        },
+        {
+          "val": "CWE-614",
+          "count": 1
+        },
+        {
+          "val": "CWE-20",
+          "count": 1
+        },
+        {
+          "val": "CWE-1004",
+          "count": 1
+        },
+        {
+          "val": "CWE-1240",
+          "count": 1
+        },
+        {
+          "val": "CWE-259",
+          "count": 4
+        },
+        {
+          "val": "CWE-200",
+          "count": 2
+        },
+        {
+          "val": "CWE-89",
+          "count": 1
+        },
+        {
+          "val": "CWE-918",
+          "count": 1
+        },
+        {
+          "val": "CWE-943",
+          "count": 1
+        },
+        {
+          "val": "CWE-506",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "property": "cwe_top25:urn:sonar-security-standard:cwe:top25:2021",
+      "values": [
+        {
+          "val": "CWE-798",
+          "count": 4
+        },
+        {
+          "val": "CWE-89",
+          "count": 1
+        },
+        {
+          "val": "CWE-20",
+          "count": 1
+        },
+        {
+          "val": "CWE-200",
+          "count": 2
+        },
+        {
+          "val": "CWE-918",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "property": "cwe_top25:urn:sonar-security-standard:cwe:top25:2024",
+      "values": [
+        {
+          "val": "CWE-798",
+          "count": 4
+        },
+        {
+          "val": "CWE-89",
+          "count": 1
+        },
+        {
+          "val": "CWE-20",
+          "count": 1
+        },
+        {
+          "val": "CWE-200",
+          "count": 2
+        },
+        {
+          "val": "CWE-918",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "property": "wcag:2.1",
+      "values": []
+    },
+    {
+      "property": "cwe_top25:urn:sonar-security-standard:cwe:top25:2025",
+      "values": [
+        {
+          "val": "CWE-89",
+          "count": 1
+        },
+        {
+          "val": "CWE-20",
+          "count": 1
+        },
+        {
+          "val": "CWE-200",
+          "count": 2
+        },
+        {
+          "val": "CWE-918",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "property": "owasp_top10:urn:sonar-security-standard:owasp:top10:2017",
+      "values": [
+        {
+          "val": "A1",
+          "count": 1
+        },
+        {
+          "val": "A2",
+          "count": 2
+        },
+        {
+          "val": "A3",
+          "count": 6
+        },
+        {
+          "val": "A5",
+          "count": 1
+        },
+        {
+          "val": "A6",
+          "count": 1
+        },
+        {
+          "val": "A7",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "property": "wcag:2.0",
+      "values": []
+    },
+    {
+      "property": "stig_asd:urn:sonar-security-standard:stig:asd:v6",
+      "values": [
+        {
+          "val": "V-222596",
+          "count": 2
+        },
+        {
+          "val": "V-222599",
+          "count": 2
+        },
+        {
+          "val": "V-222598",
+          "count": 2
+        },
+        {
+          "val": "V-222597",
+          "count": 2
+        },
+        {
+          "val": "V-222609",
+          "count": 2
+        },
+        {
+          "val": "V-222397",
+          "count": 2
+        },
+        {
+          "val": "V-222642",
+          "count": 2
+        },
+        {
+          "val": "V-222534",
+          "count": 2
+        },
+        {
+          "val": "V-222563",
+          "count": 2
+        },
+        {
+          "val": "V-222562",
+          "count": 2
+        },
+        {
+          "val": "V-222577",
+          "count": 2
+        },
+        {
+          "val": "V-222576",
+          "count": 1
+        },
+        {
+          "val": "V-222575",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "property": "cwe_top25:urn:sonar-security-standard:cwe:top25:2022",
+      "values": [
+        {
+          "val": "CWE-798",
+          "count": 4
+        },
+        {
+          "val": "CWE-89",
+          "count": 1
+        },
+        {
+          "val": "CWE-20",
+          "count": 1
+        },
+        {
+          "val": "CWE-918",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "property": "cwe_top25:urn:sonar-security-standard:cwe:top25:2023",
+      "values": [
+        {
+          "val": "CWE-798",
+          "count": 4
+        },
+        {
+          "val": "CWE-89",
+          "count": 1
+        },
+        {
+          "val": "CWE-20",
+          "count": 1
+        },
+        {
+          "val": "CWE-918",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "property": "wcag:2.2",
+      "values": []
+    },
+    {
+      "property": "owasp_top10:urn:sonar-security-standard:owasp:top10:2025",
+      "values": [
+        {
+          "val": "A01",
+          "count": 3
+        },
+        {
+          "val": "A02",
+          "count": 2
+        },
+        {
+          "val": "A04",
+          "count": 3
+        },
+        {
+          "val": "A05",
+          "count": 2
+        },
+        {
+          "val": "A06",
+          "count": 1
+        },
+        {
+          "val": "A07",
+          "count": 4
+        },
+        {
+          "val": "A08",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "property": "casa_standard:urn:sonar-security-standard:casa:standard:unversioned",
+      "values": [
+        {
+          "val": "3",
+          "count": 6
+        },
+        {
+          "val": "5",
+          "count": 4
+        },
+        {
+          "val": "6",
+          "count": 1
+        },
+        {
+          "val": "8",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "property": "owasp_top10:urn:sonar-security-standard:owasp:top10:2021",
+      "values": [
+        {
+          "val": "A10",
+          "count": 1
+        },
+        {
+          "val": "A01",
+          "count": 2
+        },
+        {
+          "val": "A02",
+          "count": 7
+        },
+        {
+          "val": "A03",
+          "count": 2
+        },
+        {
+          "val": "A04",
+          "count": 1
+        },
+        {
+          "val": "A05",
+          "count": 2
+        },
+        {
+          "val": "A07",
+          "count": 4
+        },
+        {
+          "val": "A08",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "property": "misra:urn:sonar-compliance-standard:misra:2023",
+      "values": []
+    },
+    {
+      "property": "cra_standard:urn:sonar-security-standard:cra:standard:unversioned",
+      "values": [
+        {
+          "val": "1",
+          "count": 10
+        }
+      ]
+    },
+    {
+      "property": "rules",
+      "values": [
+        {
+          "val": "typescript:S5332",
+          "count": 2
+        },
+        {
+          "val": "secrets:S6698",
+          "count": 2
+        },
+        {
+          "val": "csharpsquid:S2068",
+          "count": 2
+        },
+        {
+          "val": "csharpsquid:S2092",
+          "count": 1
+        },
+        {
+          "val": "csharpsquid:S3330",
+          "count": 1
+        },
+        {
+          "val": "githubactions:S6505",
+          "count": 1
+        },
+        {
+          "val": "csharpsquid:S2077",
+          "count": 1
+        },
+        {
+          "val": "csharpsquid:S4790",
+          "count": 1
+        },
+        {
+          "val": "roslyn.sonaranalyzer.security.cs:S5144",
+          "count": 1
+        },
+        {
+          "val": "docker:S6505",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "note": "Categories may overlap. Do not sum category values into distinct issue counts."
+}
