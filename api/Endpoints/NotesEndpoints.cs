@@ -45,26 +45,19 @@ public static class NotesEndpoints
         return Results.Json(new { note }, statusCode: 201);
     }
 
-    // Lab 2 SQL injection: the query text is built by string interpolation, so a crafted `q`
-    // (e.g. `zzz') OR 1=1 --`) escapes the string literal and reads other tenants' rows.
+    // Lab 6: bind search input and the session's team separately from SQL syntax.
     private static async Task<IResult> SearchAsync(HttpContext ctx, Database db)
     {
         var session = ApiHelpers.GetSession(ctx);
         if (session is null) return ApiHelpers.Unauthorized();
 
         string q = ctx.Request.Query["q"].ToString();
-        string sql =
-            $"SELECT id, title, team_id FROM notes WHERE team_id = {session.TeamId} " +
-            $"AND (title ILIKE '%{q}%' OR content ILIKE '%{q}%') ORDER BY id";
-
         await using var conn = await db.OpenConnectionAsync();
-        await using var cmd = new NpgsqlCommand(sql, conn);
-        await using var reader = await cmd.ExecuteReaderAsync();
-        var results = new List<object>();
-        while (await reader.ReadAsync())
-        {
-            results.Add(new { id = reader.GetInt32(0), title = reader.GetString(1), team_id = reader.GetInt32(2) });
-        }
+        var results = await conn.QueryAsync<SearchRow>(
+            @"SELECT id, title, team_id FROM notes
+              WHERE team_id = @teamId AND (title ILIKE '%' || @q || '%' OR content ILIKE '%' || @q || '%')
+              ORDER BY id",
+            new { teamId = session.TeamId, q });
         return Results.Json(new { results });
     }
 
