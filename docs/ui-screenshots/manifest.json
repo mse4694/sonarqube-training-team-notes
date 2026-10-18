@@ -1,0 +1,133 @@
+{
+  "kind": "actual-browser-ui-captures",
+  "captureDate": "2026-10-18",
+  "timezone": "Asia/Bangkok",
+  "context": {
+    "application": "Team Notes",
+    "environment": "isolated Docker Compose stack and disposable test database",
+    "origin": "http://127.0.0.1:23000",
+    "browser": "Chromium via Playwright",
+    "viewport": {
+      "width": 1440,
+      "height": 1050
+    },
+    "deviceScaleFactor": 1,
+    "accounts": "Seeded classroom member/admin; public share opened in separate unauthenticated context",
+    "content": "Includes temporary smoke-test notes; no production data",
+    "cookiesSerialized": false,
+    "imagesEdited": false
+  },
+  "pageCount": 7,
+  "rootRedirect": {
+    "route": "/",
+    "destination": "/notes",
+    "hasOwnScreen": false
+  },
+  "screenshots": [
+    {
+      "number": 1,
+      "route": "/login",
+      "filename": "01-login.png",
+      "sha256": "d499fa4d2b3aa4ae607abaf6237dec0d2aefbd3ecefb580aebe5c5adac9ce0b8",
+      "width": 1440,
+      "height": 1050,
+      "capturedAt": "2026-10-18T14:39:56.807680+07:00",
+      "diagramCrop": {
+        "x": 210,
+        "y": 0,
+        "width": 1020,
+        "height": 570
+      }
+    },
+    {
+      "number": 2,
+      "route": "/notes",
+      "filename": "02-notes.png",
+      "sha256": "787dff690ac056146f3af4c82e4fd70f9bac8cfab2977b2a0b8a4345abe0f0e2",
+      "width": 1440,
+      "height": 1050,
+      "capturedAt": "2026-10-18T14:39:57.003680+07:00",
+      "diagramCrop": {
+        "x": 210,
+        "y": 0,
+        "width": 1020,
+        "height": 770
+      }
+    },
+    {
+      "number": 3,
+      "route": "/notes/[id]",
+      "filename": "03-note-detail.png",
+      "sha256": "e30abdf828a8a90168ea198ecfc56a77c54d9051c2ed89a31b410b034b379b0e",
+      "width": 1440,
+      "height": 1050,
+      "capturedAt": "2026-10-18T14:39:57.203680+07:00",
+      "diagramCrop": {
+        "x": 210,
+        "y": 0,
+        "width": 1020,
+        "height": 570
+      }
+    },
+    {
+      "number": 4,
+      "route": "/settings",
+      "filename": "04-settings.png",
+      "sha256": "52fa6615a2719624febff298f4032554362e757664a82274187828e3c562dbc2",
+      "width": 1440,
+      "height": 1050,
+      "capturedAt": "2026-10-18T14:39:57.651680+07:00",
+      "diagramCrop": {
+        "x": 210,
+        "y": 0,
+        "width": 1020,
+        "height": 430
+      }
+    },
+    {
+      "number": 5,
+      "route": "/admin",
+      "filename": "05-admin-users.png",
+      "sha256": "5f058db578bfcfb48da46b320523c420b6fd0f311cd8db196766f2e4b217c7c4",
+      "width": 1440,
+      "height": 1050,
+      "capturedAt": "2026-10-18T14:39:58.087680+07:00",
+      "diagramCrop": {
+        "x": 210,
+        "y": 0,
+        "width": 1020,
+        "height": 550
+      }
+    },
+    {
+      "number": 6,
+      "route": "/admin/audit",
+      "filename": "06-audit-log.png",
+      "sha256": "cd595b11e9b3def4c350e120bf7c6dd9c8d44534cf8ecdbe12f0969917913660",
+      "width": 1440,
+      "height": 1050,
+      "capturedAt": "2026-10-18T14:39:58.171680+07:00",
+      "diagramCrop": {
+        "x": 210,
+        "y": 0,
+        "width": 1020,
+        "height": 310
+      }
+    },
+    {
+      "number": 7,
+      "route": "/share/[token]",
+      "filename": "07-public-share.png",
+      "sha256": "0e18ce7d9795ff26205b346579b9d4c88ef1d081dad4defddb2aeebf2093c3ee",
+      "width": 1440,
+      "height": 1050,
+      "capturedAt": "2026-10-18T14:39:57.551680+07:00",
+      "diagramCrop": {
+        "x": 210,
+        "y": 0,
+        "width": 1020,
+        "height": 420
+      }
+    }
+  ]
+}

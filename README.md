@@ -30,15 +30,46 @@ data in **PostgreSQL** (raw SQL via Npgsql + Dapper, Markdown via Markdig). Ever
 | Profile + personal API keys (`X-Api-Key` header) | `/settings` | `GET/PUT /api/me`, `GET/POST /api/me/api-keys`, `DELETE /api/me/api-keys/{id}` |
 | Admin: users + audit log | `/admin`, `/admin/audit` | `GET /api/admin/users`, `GET /api/admin/audit` |
 
+## UI Flow
+
+See [the UI Flow diagram and page inventory](docs/ui-flow.md): **7 rendered screens + the root redirect**, with navigation, forms, public share links and admin-menu behavior. [Open the full-size SVG](docs/ui-flow.svg).
+
 ## Run it
 
+Run these commands from this repository's root on a machine with Docker Engine/Desktop and Docker Compose v2 or later. No host Node.js, .NET SDK or PostgreSQL installation is needed.
+
 ```bash
+# First run only; preserve an existing .env.
 cp .env.example .env
-docker compose up -d --build       # web http://localhost:3000 , api http://localhost:8080
+docker compose config --quiet
+docker compose up -d --build
+docker compose ps
 ```
 
-Switching branches with an existing database volume is fine for the app tables, but the seeded
-password hashes differ (MD5 on `main`, PBKDF2 on `solution`): run `docker compose down -v` first.
+The copied defaults start the `main` training app without further configuration:
+
+| Service | URL / address |
+| --- | --- |
+| Web | http://localhost:3000/login |
+| API health | http://localhost:8080/health |
+| PostgreSQL from the host | localhost:5433 |
+
+Wait for the API and web build/startup to finish before logging in. Confirm readiness with:
+
+```bash
+curl --fail --silent --show-error --retry 30 --retry-delay 1 --retry-all-errors \
+  http://127.0.0.1:8080/health
+curl --fail --silent --show-error --retry 30 --retry-delay 1 --retry-all-errors \
+  http://127.0.0.1:3000/login > /dev/null
+```
+
+Compose reads `DATABASE_URL`, `API_INTERNAL_URL`, `WEB_PORT`, `API_PORT` and `POSTGRES_PORT` from `.env`. The API's default database URL uses the Compose service name `db`; do not replace it with `localhost` for the bundled database. Change the three published ports if they are already occupied. `API_INTERNAL_URL` is used by the web image at build time as well as runtime, so rebuild with `docker compose up -d --build` after changing it. These HTTP ports bind to loopback only.
+
+The web VS Code editor is sandboxed and may expose a Docker CLI without access to a Docker daemon. Run the commands on the machine that owns Docker; do not expose a host Docker socket just to run the editor. The repository and these commands are the same for a local clone.
+
+The seeded password hashes differ between `main` (MD5) and `solution` (PBKDF2).
+Use a separate Compose project/volume when comparing branches so existing work is retained.
+`docker compose down -v` deliberately deletes the current training database; use it only when you intend to reset that data.
 
 Training logins (all teams):
 
