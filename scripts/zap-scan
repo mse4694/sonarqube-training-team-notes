@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# Workshop 12: run a ZAP baseline (spider + passive scan, no active attack) against
+# the running Team Notes web service and keep zap.json / zap.html in a new folder
+# .lab-workspaces/security-tools.XXXXXX/zap (path saved to .lab-workspaces/zap.env).
+set -euo pipefail
+repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
+workspaces="$repo_root/.lab-workspaces"
+lab_tools="$repo_root/scripts/lab-tools"
+target="http://web:3000/login"
+zap_image="ghcr.io/zaproxy/zaproxy:stable"
+stop() { echo "Stop: $*" >&2; exit 1; }
+cd "$repo_root"
+
+# lab-tools shares the api container's network, so it reaches the web service by name.
+login_http=$("$lab_tools" curl --connect-timeout 5 --max-time 15 -sS -o /dev/null -w '%{http_code}' "$target") || login_http=connection_error
+echo "login HTTP $login_http ($target)"
+[[ "$login_http" == 200 ]] || stop "start the existing Team Notes app (docker compose up -d) until login returns HTTP 200, then run this again"
+
+docker pull -q "$zap_image" >/dev/null
+echo "ZAP image: $(docker image inspect --format '{{index .RepoDigests 0}}' "$zap_image")"
+web_id=$(docker compose --project-directory "$repo_root" -f "$repo_root/docker-compose.yml" ps -q web)
+[[ -n "$web_id" ]] || stop "the web service is not running"
+web_net=$(docker inspect --format '{{range $name, $cfg := .NetworkSettings.Networks}}{{$name}}{{"\n"}}{{end}}' "$web_id" | head -n 1)
+
+mkdir -p "$workspaces"
+TOOLS_DIR=$(mktemp -d "$workspaces/security-tools.XXXXXX")
+mkdir -p "$TOOLS_DIR/zap"
+chmod 777 "$TOOLS_DIR/zap" # the ZAP container writes as its own user; dedicated report folder only
+printf 'export TOOLS_DIR=%q\n' "$TOOLS_DIR" > "$workspaces/zap.env"
+echo "Target: $target (network $web_net, no login session)"
+
+zap_exit=0
+# Only the report folder is mounted: no Docker socket, credentials or source.
+docker run --rm --network "$web_net" -v "$TOOLS_DIR/zap:/zap/wrk:rw" \
+  "$zap_image" zap-baseline.py -t "$target" -m 1 -T 5 -J zap.json -r zap.html || zap_exit=$?
+
+case "$zap_exit" in
+  0) meaning="no WARN/FAIL in this scope" ;;
+  1) meaning="at least one FAIL" ;;
+  2) meaning="WARN only, no FAIL (a scan result, not an error)" ;;
+  3) meaning="ZAP could not complete the scan" ;;
+  *) meaning="Docker could not start ZAP" ;;
+esac
+echo "ZAP exit=$zap_exit: $meaning"
+echo "Reports: $TOOLS_DIR/zap/zap.json and zap.html (saved in .lab-workspaces/zap.env)"
+(( zap_exit <= 2 )) && [[ -s "$TOOLS_DIR/zap/zap.json" ]] || stop "no usable report; fix the setup and run again (do not read this as zero findings)"
