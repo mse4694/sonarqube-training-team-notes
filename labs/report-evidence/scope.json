@@ -1,0 +1,44 @@
+{
+  "project": "Team Notes (SonarQube Training)",
+  "projectKey": "mikelopster_sonarqube-training-team-notes",
+  "reportUrl": "https://sonarcloud.io/project/security_reports?id=mikelopster_sonarqube-training-team-notes",
+  "capturedAt": "2026-10-18T03:44:34.355Z",
+  "pdfGeneratedAt": "2026-10-18T03:44:00Z",
+  "lastAnalysisAt": "2026-10-10T07:40:51+0000",
+  "analysisId": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+  "branchLabelInSonarCloud": "master",
+  "commitSha": null,
+  "commitShaEvidence": "Not supplied by the downloaded PDF or project_analyses response. Do not assume the current main checkout matches.",
+  "pdfSha256": "9299a50dd43f368acee48f04657ce79deec83e5a6243bb07cec03c8421486e48",
+  "scope": "Overall Code; New Code security count is unavailable (-), not zero.",
+  "pdfPages": {
+    "overview": 1,
+    "sonar": [
+      2,
+      3,
+      4
+    ],
+    "owaspTop10_2025": [
+      5,
+      6
+    ],
+    "cweTop25_2024": [
+      7,
+      8,
+      9
+    ],
+    "definitions": 10
+  },
+  "observedCounts": {
+    "overviewOpenSecurityIssues": 13,
+    "sonarCategoryTotal": 20,
+    "owasp2025CategoryTotal": 17,
+    "dependencyRisks": 1,
+    "hotspotsToReview": 0
+  },
+  "limits": [
+    "Different report sections use category mappings. Do not equate their totals with distinct issue IDs.",
+    "No tests, exploit attempts, rescan or remediation were performed to produce this teaching package.",
+    "Server source snapshots are evidence from the analysis UI, not proof of deployed code or runtime reachability."
+  ]
+}

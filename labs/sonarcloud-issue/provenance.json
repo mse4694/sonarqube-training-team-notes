@@ -1,0 +1,32 @@
+{
+  "exportedAt": "2026-10-18T06:14:47.740656+00:00",
+  "method": "Read-only SonarCloud API calls from a newly created tab in the owner-authenticated Chromium; own tab closed after export. Actual UI screenshots cropped to issue panel.",
+  "endpoints": [
+    "/api/issues/search?issues=AaEkwyrvn3atgy46CG_O&additionalFields=_all",
+    "/api/sources/raw?key=mikelopster_sonarqube-training-team-notes:api/Endpoints/AuthEndpoints.cs",
+    "/api/rules/show?key=csharpsquid:S3330&organization=mikelopster",
+    "/api/project_analyses/search?project=mikelopster_sonarqube-training-team-notes&ps=3",
+    "/api/project_branches/list?project=mikelopster_sonarqube-training-team-notes"
+  ],
+  "screenshots": {
+    "issue-source.png": {
+      "crop": {
+        "x": 540,
+        "y": 176,
+        "width": 899,
+        "height": 625
+      },
+      "tab": "Where is the issue?"
+    },
+    "rule-context.png": {
+      "crop": {
+        "x": 540,
+        "y": 176,
+        "width": 899,
+        "height": 625
+      },
+      "tab": "Why is this an issue?"
+    }
+  },
+  "sanitization": "Only project-specific finding/source/rule/analysis metadata is distributed. Raw API responses, user/account data and full browser captures remain outside this learner directory."
+}

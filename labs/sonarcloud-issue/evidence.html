@@ -1,0 +1,84 @@
+<!doctype html><html><meta charset="utf-8"><title>Lab 10.1: exported SonarCloud evidence</title><style>@page{size:A4;margin:14mm}*{box-sizing:border-box}body{font:10pt Arial,sans-serif;color:#182330;margin:0}h1{font-size:20pt;color:#163b5a}h2{font-size:15pt;border-bottom:1pt solid #a4b5c5;padding-bottom:3mm}table{border-collapse:collapse;width:100%;font-size:9pt}th,td{border-bottom:.3pt solid #ced9e3;text-align:left;vertical-align:top;padding:2mm}th{width:35mm}p{line-height:1.4}.capture{width:100%;height:auto;border:.3pt solid #ced9e3}.page{break-after:page}.page:last-child{break-after:auto}pre{font:8pt/1.35 monospace;white-space:pre-wrap;overflow-wrap:anywhere}.note{border-left:3pt solid #d87725;padding-left:3mm}.hash{font:8pt monospace;overflow-wrap:anywhere}.small{font-size:8pt;color:#526577}</style><body><section class="page"><h1>Lab 10.1: Offline SonarCloud evidence</h1><p>Teacher-provided snapshot. No SonarCloud account or network connection is required to analyze these files.</p><table><tr><th>Project</th><td>mikelopster_sonarqube-training-team-notes</td></tr><tr><th>Branch</th><td>master (main branch label in this Sonar project)</td></tr><tr><th>Issue / rule</th><td>AaEkwyrvn3atgy46CG_O / csharpsquid:S3330</td></tr><tr><th>Status / classification</th><td>OPEN / VULNERABILITY / security impact LOW</td></tr><tr><th>Analysis ID</th><td>651e6e22-465a-40ac-8548-6e8c7bad1e10</td></tr><tr><th>Analysis date</th><td>2026-10-10T07:40:51+0000</td></tr><tr><th>Analysis SCM SHA</th><td>UNKNOWN (not exposed by the inspected API)</td></tr><tr><th>Exported</th><td>2026-10-18T06:14:47.740656+00:00</td></tr></table><h2>Actual issue view and affected source</h2><img class="capture" src="issue-source.png"><p class="small">Cropped from the authenticated issue page. Account navigation was excluded; the finding/source pixels were not rewritten.</p></section><section class="page"><h2>Actual rule context</h2><img class="capture" src="rule-context.png"><p>Rule identity: <b>Cookies should have the &quot;HttpOnly&quot; flag</b> (csharpsquid:S3330). Refer to rule-context.json for the exported classification and standards.</p><p class="note">This rule highlights cookie confidentiality from browser scripts. The presence of a finding does not by itself prove a successful exploit or establish the security of the whole application.</p><p>No patch or tests were executed to build this evidence packet.</p></section><section class="page"><h2>Source exported from SonarCloud</h2><p>mikelopster_sonarqube-training-team-notes:api/Endpoints/AuthEndpoints.cs</p><p class="hash">Raw SHA256: 18310475693c4cb410773fc048320bc0793ad060aa8b8ff74d0c269b00479a5e<br>Normalized SHA256: 235986974225f31169c701da73fa0f1a96fe4bdf80756652907d40746972b0fe</p><pre>01  using Dapper;
+02  
+03  namespace TeamNotes.Api.Endpoints;
+04  
+05  public static class AuthEndpoints
+06  {
+07      public static void MapAuth(this IEndpointRouteBuilder app)
+08      {
+09          app.MapPost(&quot;/api/auth/login&quot;, LoginAsync);
+10          app.MapPost(&quot;/api/auth/logout&quot;, Logout);
+11      }
+12  
+13      private static async Task&lt;IResult&gt; LoginAsync(HttpContext ctx, Database db, AuthService auth)
+14      {
+15          var form = await ctx.Request.ReadFormAsync();
+16          string email = form[&quot;email&quot;].ToString();
+17          string password = form[&quot;password&quot;].ToString();
+18          // Lab 2 open redirect: &quot;next&quot; is sent straight to the Location header, no same-site check.
+19          string next = string.IsNullOrEmpty(form[&quot;next&quot;].ToString()) ? &quot;/notes&quot; : form[&quot;next&quot;].ToString();
+20  
+21          await using var conn = await db.OpenConnectionAsync();
+22          var user = await conn.QueryFirstOrDefaultAsync&lt;UserRow&gt;(
+23              &quot;SELECT id, email, display_name, password_hash, role, team_id FROM users WHERE email = @email&quot;,
+24              new { email });
+25  
+26          if (user is null || !auth.VerifyPassword(password, user.password_hash))
+27          {
+28              return ApiHelpers.SeeOther(&quot;/login?error=1&quot;);
+29          }
+30  
+31          string token = auth.CreateSessionToken(new Session(user.id, user.team_id, user.role, user.email));
+32  
+33          // Day 1 vuln: the session cookie is not HttpOnly, not Secure and has no SameSite, so
+34          // client-side JS (an XSS payload) can read it and it rides along on cross-site requests.
+35          ctx.Response.Cookies.Append(AuthService.SessionCookie, token, new CookieOptions
+36          {
+37              Path = &quot;/&quot;,
+38              HttpOnly = false,
+39          });
+40          return ApiHelpers.SeeOther(next);
+41      }
+42  
+43      private static IResult Logout(HttpContext ctx)
+44      {
+45          ctx.Response.Cookies.Delete(AuthService.SessionCookie);
+46          return ApiHelpers.SeeOther(&quot;/login&quot;);
+47      }
+48  }
+49  </pre></section><section class="page"><h2>Compare with the learner repository baseline</h2><p>Observed repository revision: <span class="hash">158536e0ec903fc7fa297adcf81116b923280878</span>. This is not asserted to be the Sonar analyzed SCM revision.</p><p class="note">Whole-file match: <b>NO</b>. The cookie block matches exactly: Sonar lines 35–39 correspond to learner lines 41–45. Logging-related changes outside that block remain visible in the diff below.</p><p class="hash">Learner raw SHA256: 838b94964f4d01dab07b9ef027066f68a73996e506e89a89e86b03ddb4ccd66d<br>Matching cookie block SHA256: b8e8d895181948def21f497b42f525dc392a12c7a407ea0c966380c06ce332b7</p><pre>--- SonarCloud exported AuthEndpoints.cs
++++ Learner baseline 158536e0ec90 AuthEndpoints.cs
+@@ -10,7 +10,7 @@
+         app.MapPost(&quot;/api/auth/logout&quot;, Logout);
+     }
+ 
+-    private static async Task&lt;IResult&gt; LoginAsync(HttpContext ctx, Database db, AuthService auth)
++    private static async Task&lt;IResult&gt; LoginAsync(HttpContext ctx, Database db, AuthService auth, ILoggerFactory loggers)
+     {
+         var form = await ctx.Request.ReadFormAsync();
+         string email = form[&quot;email&quot;].ToString();
+@@ -23,12 +23,18 @@
+             &quot;SELECT id, email, display_name, password_hash, role, team_id FROM users WHERE email = @email&quot;,
+             new { email });
+ 
++        // Lab 7 logging: &quot;debug&quot; log lines left in production write the typed password and the
++        // issued session token into the application log, and nothing is recorded in audit_log,
++        // so an attack leaves no security trail while the logs themselves leak credentials.
++        var log = loggers.CreateLogger(&quot;TeamNotes.Auth&quot;);
+         if (user is null || !auth.VerifyPassword(password, user.password_hash))
+         {
++            log.LogWarning(&quot;Login failed for {Email} with password {Password}&quot;, email, password);
+             return ApiHelpers.SeeOther(&quot;/login?error=1&quot;);
+         }
+ 
+         string token = auth.CreateSessionToken(new Session(user.id, user.team_id, user.role, user.email));
++        log.LogInformation(&quot;Login ok for {Email}, session token {Token}&quot;, email, token);
+ 
+         // Day 1 vuln: the session cookie is not HttpOnly, not Secure and has no SameSite, so
+         // client-side JS (an XSS payload) can read it and it rides along on cross-site requests.
+@@ -46,4 +52,3 @@
+         return ApiHelpers.SeeOther(&quot;/login&quot;);
+     }
+ }
+-
+</pre><p>Scope: source-level evidence for one finding. Build, dependencies, deployment, runtime exploitability and post-patch analysis are not verified by this file/block comparison.</p></section></body></html>

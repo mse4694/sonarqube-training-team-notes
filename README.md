@@ -269,3 +269,7 @@ for i in $(seq 1 8); do curl -s -o /dev/null -w "%{http_code} " \
 # Lab 7 errors: malformed JSON
 curl -s -b "session=$TOKEN" -H 'content-type: application/json' -d '{"title":' http://localhost:8080/api/notes
 ```
+
+## Course lab sources
+
+The course examples are included under [`labs/`](labs/README.md), covering the password probe, voucher workflow, Agent controls, candidate review and security-tool fixtures. Use the existing Team Notes checkout; no separate lab ZIP download is needed. See the directory READMEs for the one-time disposable workspace and the learner/instructor boundaries.

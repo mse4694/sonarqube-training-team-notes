@@ -1,0 +1,43 @@
+{
+  "case": "Newtonsoft.Json example evidence audit",
+  "source_repository": "mikelopster/sonarqube-training-team-notes",
+  "source_revision": "158536e0ec903fc7fa297adcf81116b923280878",
+  "declaration": {
+    "file": "api/Api.csproj",
+    "package": "Newtonsoft.Json",
+    "version": "12.0.3",
+    "evidence_type": "source declaration",
+    "sha256": "23090c80a01a42aca993b4cbbb81be76b21c3b3b3cfabf65b0304dc5a45d0ede"
+  },
+  "cached_resolution_observed": {
+    "file": "api/obj/project.assets.json",
+    "package": "Newtonsoft.Json",
+    "version": "13.0.3",
+    "evidence_type": "local cached resolution",
+    "matched_source_build_provenance": "not established; do not claim this is main/runtime resolution",
+    "sha256": "613b246bc6fc7508083dd29a128dd5bfc880ebc830cd6bb4d85c33104793afc8"
+  },
+  "advisory": {
+    "id": "GHSA-5crp-9r3c-p9vr",
+    "url": "https://github.com/advisories/GHSA-5crp-9r3c-p9vr",
+    "checked_date": "2026-10-11",
+    "affected_range": "<13.0.1",
+    "patched_version": "13.0.1",
+    "impact_category": "availability / exceptional nested JSON handling"
+  },
+  "callsite": {
+    "file": "api/Endpoints/PreviewEndpoints.cs",
+    "source": "url query -> HTTP response -> JSON-LD",
+    "api": "JsonConvert.DeserializeObject",
+    "line": 43,
+    "evidence_type": "manual source observation; not scanner reachability or exploit result"
+  },
+  "not_observed": [
+    "matched main build resolution",
+    "Sonar SCA/reachability for this example",
+    "SBOM artifact",
+    "runtime exploit or successful upgrade",
+    "compatibility test",
+    "production deployment context"
+  ]
+}

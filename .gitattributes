@@ -1,0 +1,6 @@
+labs/**/*.pdf binary
+# Keep exported evidence byte-for-byte, including meaningful diff context and source EOFs.
+labs/report-evidence/code-snapshot/** whitespace=-blank-at-eof
+labs/sonarcloud-issue/AuthEndpoints.sonar.cs.txt whitespace=-blank-at-eof
+labs/sonarcloud-issue/source-comparison.diff whitespace=-blank-at-eol
+labs/sonarcloud-issue/evidence.html whitespace=-blank-at-eol

@@ -1,0 +1,6 @@
+rules:
+  - id: training-auth-header-log
+    languages: [javascript]
+    severity: WARNING
+    message: Direct Authorization-header logging violates this training policy.
+    pattern: console.$METHOD(..., $REQ.headers.authorization, ...)

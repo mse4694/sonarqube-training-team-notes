@@ -1,0 +1,210 @@
+{
+  "kind": "observed_instructor_fixture_validation",
+  "python_version": "3.11.2",
+  "scope": "one-process in-memory observation, race isolated in owned fork child; no DB/network/app service",
+  "source_sha256": {
+    "voucher.py": "3a28f4141a80b0052b7a489d47aa616e23bbf5a1e2672e3053653cd6e8c964c1",
+    "voucher_model.py": "8268a0106003d90f3b8f8fbba444edd3bcff11d26f413356ce7f692484eb2e4c",
+    "scenario_support.py": "08e52aa94758bb71e4cb9afa4ba56b14a16d5d83bdfca4fd74979018b01aaa05",
+    "probes.py": "7d520212c7a35c046b722397ca51ac8023d250a0249a98a4b830011bcef230ee",
+    "tests/test_redemption_contract.py": "370c94109fc56903595b603c82f7601928be408839bbacf17ae78a065b0d23e9",
+    "reference/check_contract.py": "34bcddd42da3aa129423985d655f805a315549caab24be2ca1aea4d29fb659a6",
+    "reference/contract_tests.py": "c08ad63de401fb8b5b8278a5785ed5f28c3e4c7a9ff2554580662cd6b74b28e9",
+    "reference/secure_voucher.py": "8fbdca39f88c18c9fd552721fdb4eef2340123ece8503e5178300345d9d548d3",
+    "reference/vulnerable_voucher.py": "cfbc961d0314fd05ebf9fddd893f67c48a05a125238824694183383d5a2f88da",
+    "reference/mutations.py": "312b251a3a32dc9d17228b0d7fb55170cfd9a64183739abc284d465b62fbd753"
+  },
+  "checks": {
+    "manual_baseline": {
+      "replay_effects": 2,
+      "race_successes": 2,
+      "race_effects": 2
+    },
+    "manual_reference": {
+      "replay_effects": 1,
+      "race_successes": 1,
+      "race_effects": 1
+    },
+    "provided_contract": {
+      "baseline": {
+        "discovered": 8,
+        "executed": 8,
+        "passed": 2,
+        "failed": 6,
+        "errors": 0,
+        "skipped": 0,
+        "expected_failures": 0,
+        "unexpected_successes": 0,
+        "failure_names": [
+          "test_cancelled_voucher_is_rejected",
+          "test_concurrent_redemption_has_one_success",
+          "test_expired_state_is_rejected",
+          "test_expiry_deadline_is_rejected",
+          "test_issued_voucher_is_rejected",
+          "test_same_actor_replay_is_rejected"
+        ],
+        "error_names": [],
+        "skip_names": [],
+        "expected_failure_names": [],
+        "unexpected_success_names": []
+      },
+      "reference": {
+        "discovered": 8,
+        "executed": 8,
+        "passed": 8,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0,
+        "expected_failures": 0,
+        "unexpected_successes": 0,
+        "failure_names": [],
+        "error_names": [],
+        "skip_names": [],
+        "expected_failure_names": [],
+        "unexpected_success_names": []
+      },
+      "missing_state_guard": {
+        "discovered": 8,
+        "executed": 8,
+        "passed": 5,
+        "failed": 3,
+        "errors": 0,
+        "skipped": 0,
+        "expected_failures": 0,
+        "unexpected_successes": 0,
+        "failure_names": [
+          "test_cancelled_voucher_is_rejected",
+          "test_expired_state_is_rejected",
+          "test_issued_voucher_is_rejected"
+        ],
+        "error_names": [],
+        "skip_names": [],
+        "expected_failure_names": [],
+        "unexpected_success_names": []
+      },
+      "missing_expiry_guard": {
+        "discovered": 8,
+        "executed": 8,
+        "passed": 7,
+        "failed": 1,
+        "errors": 0,
+        "skipped": 0,
+        "expected_failures": 0,
+        "unexpected_successes": 0,
+        "failure_names": [
+          "test_expiry_deadline_is_rejected"
+        ],
+        "error_names": [],
+        "skip_names": [],
+        "expected_failure_names": [],
+        "unexpected_success_names": []
+      },
+      "replay_allowed": {
+        "discovered": 8,
+        "executed": 8,
+        "passed": 7,
+        "failed": 1,
+        "errors": 0,
+        "skipped": 0,
+        "expected_failures": 0,
+        "unexpected_successes": 0,
+        "failure_names": [
+          "test_same_actor_replay_is_rejected"
+        ],
+        "error_names": [],
+        "skip_names": [],
+        "expected_failure_names": [],
+        "unexpected_success_names": []
+      },
+      "non_atomic_transition": {
+        "discovered": 8,
+        "executed": 8,
+        "passed": 7,
+        "failed": 1,
+        "errors": 0,
+        "skipped": 0,
+        "expected_failures": 0,
+        "unexpected_successes": 0,
+        "failure_names": [
+          "test_concurrent_redemption_has_one_success"
+        ],
+        "error_names": [],
+        "skip_names": [],
+        "expected_failure_names": [],
+        "unexpected_success_names": []
+      },
+      "skips_checkpoint": {
+        "discovered": 8,
+        "executed": 8,
+        "passed": 7,
+        "failed": 1,
+        "errors": 0,
+        "skipped": 0,
+        "expected_failures": 0,
+        "unexpected_successes": 0,
+        "failure_names": [
+          "test_concurrent_redemption_has_one_success"
+        ],
+        "error_names": [],
+        "skip_names": [],
+        "expected_failure_names": [],
+        "unexpected_success_names": []
+      },
+      "working": {
+        "discovered": 8,
+        "executed": 8,
+        "passed": 2,
+        "failed": 6,
+        "errors": 0,
+        "skipped": 0,
+        "expected_failures": 0,
+        "unexpected_successes": 0,
+        "failure_names": [
+          "test_cancelled_voucher_is_rejected",
+          "test_concurrent_redemption_has_one_success",
+          "test_expired_state_is_rejected",
+          "test_expiry_deadline_is_rejected",
+          "test_issued_voucher_is_rejected",
+          "test_same_actor_replay_is_rejected"
+        ],
+        "error_names": [],
+        "skip_names": [],
+        "expected_failure_names": [],
+        "unexpected_success_names": []
+      }
+    },
+    "starter": {
+      "discovered": 8,
+      "executed": 2,
+      "passed": 2,
+      "skipped": 6,
+      "not_completed_contract": true
+    },
+    "race_repetitions": "30 synchronized overlaps checked by Bun unit; winner intentionally unspecified",
+    "race_deadlock_regression": {
+      "status": "observed",
+      "cli_exit": 1,
+      "classification": "inconclusive",
+      "deadline_seconds": 5,
+      "owned_child_reaped": true,
+      "method": "Bun unit copied a deadlocking patch into its own temporary fixture; complete observation was terminated by owned child deadline"
+    },
+    "expected_failure_regression": {
+      "status": "observed",
+      "positive_unexpected_success_rejected": true,
+      "negative_expected_failure_rejected": true,
+      "method": "Bun unit applied expectedFailure to unknown and replay contract cases in a temporary fixture; both check_contract runs exit1"
+    }
+  },
+  "limits": "reference/provided tests are not learner authored; native observation is recorded separately; no distributed/persistence/authentication claim",
+  "harness_validation": {
+    "recorded_at": "2026-10-11T11:29:52.985299+00:00",
+    "unit_tests": 7,
+    "assertions": 75,
+    "failures": 0,
+    "command": "bun test tests/unit/sonarqube-workflow-fixture.test.ts",
+    "provided_contract_command": "python3 -B reference/check_contract.py --expect-working vulnerable",
+    "provided_contract_exit": 0,
+    "platform_requirement": "Python 3.10+ fork on Linux/macOS/WSL"
+  }
+}

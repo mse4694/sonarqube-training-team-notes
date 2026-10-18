@@ -1,0 +1,106 @@
+{
+  "kind": "offline_sonarcloud_evidence",
+  "identity": {
+    "projectKey": "mikelopster_sonarqube-training-team-notes",
+    "projectName": "Team Notes (SonarQube Training)",
+    "branch": "master",
+    "branchIsMain": true,
+    "analysisId": "651e6e22-465a-40ac-8548-6e8c7bad1e10",
+    "analysisDate": "2026-10-10T07:40:51+0000",
+    "analyzedScmRevision": null,
+    "analyzedScmRevisionStatus": "Not exposed by the inspected analysis response. No SCM SHA is inferred.",
+    "exportedAt": "2026-10-18T06:14:47.740656+00:00",
+    "sourceFile": "api/Endpoints/AuthEndpoints.cs",
+    "normalization": "UTF-8 text; CRLF converted to LF; trailing LF characters removed. No other whitespace changed.",
+    "sonarSource": {
+      "sha256Raw": "18310475693c4cb410773fc048320bc0793ad060aa8b8ff74d0c269b00479a5e",
+      "sha256Normalized": "235986974225f31169c701da73fa0f1a96fe4bdf80756652907d40746972b0fe",
+      "issueRange": [
+        35,
+        39
+      ]
+    },
+    "learnerBaseline": {
+      "observedGitRevision": "158536e0ec903fc7fa297adcf81116b923280878",
+      "sha256Raw": "838b94964f4d01dab07b9ef027066f68a73996e506e89a89e86b03ddb4ccd66d",
+      "sha256Normalized": "b994d9f1dc0fb1d81c91db4b6359321f04c0c1520631e757b296ac7ac259c4ba",
+      "matchingIssueRange": [
+        41,
+        45
+      ],
+      "gitFileStatus": "clean at observation"
+    },
+    "wholeFileMatches": false,
+    "reportedCookieBlock": {
+      "matchesExactly": true,
+      "sha256": "b8e8d895181948def21f497b42f525dc392a12c7a407ea0c966380c06ce332b7",
+      "sonarLines": [
+        35,
+        39
+      ],
+      "learnerLines": [
+        41,
+        45
+      ]
+    },
+    "limits": [
+      "The SonarCloud file and learner baseline differ outside the cookie block: the learner baseline includes an ILoggerFactory argument and password/token logging statements.",
+      "Exact matching of the cookie block supports locating this finding only. It does not establish equivalence of the whole file, build, dependencies, deployment or runtime.",
+      "The issue was OPEN at export. No patch, regression-test execution or post-patch Sonar analysis was performed while exporting this packet."
+    ]
+  },
+  "issue": {
+    "key": "AaEkwyrvn3atgy46CG_O",
+    "rule": "csharpsquid:S3330",
+    "severity": "MINOR",
+    "component": "mikelopster_sonarqube-training-team-notes:api/Endpoints/AuthEndpoints.cs",
+    "project": "mikelopster_sonarqube-training-team-notes",
+    "line": 35,
+    "textRange": {
+      "startLine": 35,
+      "endLine": 39,
+      "startOffset": 70,
+      "endOffset": 9
+    },
+    "status": "OPEN",
+    "message": "Set the 'HttpOnly' flag on this cookie.",
+    "creationDate": "2026-10-10T07:40:51+0000",
+    "updateDate": "2026-10-10T07:40:51+0000",
+    "type": "VULNERABILITY",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "LOW"
+      }
+    ],
+    "issueStatus": "OPEN",
+    "lastChangeAnalysisUuid": "651e6e22-465a-40ac-8548-6e8c7bad1e10"
+  },
+  "rule": {
+    "key": "csharpsquid:S3330",
+    "name": "Cookies should have the \"HttpOnly\" flag",
+    "lang": "cs",
+    "langName": "C#",
+    "severity": "MINOR",
+    "status": "READY",
+    "type": "VULNERABILITY",
+    "tags": [],
+    "cleanCodeAttribute": "COMPLETE",
+    "cleanCodeAttributeCategory": "INTENTIONAL",
+    "impacts": [
+      {
+        "softwareQuality": "SECURITY",
+        "severity": "LOW"
+      }
+    ],
+    "securityStandards": [
+      "cwe:1004",
+      "owaspAsvs-4.0:3.4.2",
+      "owaspTop10-2021:a5",
+      "owaspTop10:a7",
+      "pciDss-3.2:6.5.10",
+      "pciDss-4.0:6.2.4",
+      "stig-ASD_V5R3:V-222575"
+    ]
+  }
+}

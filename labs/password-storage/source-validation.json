@@ -1,0 +1,22 @@
+{
+  "recorded_at": "2026-10-11T18:08:04.452141+07:00",
+  "scope": "Actual standalone in-memory probe; no Team Notes application/DB mutation",
+  "sdk_image": "mcr.microsoft.com/dotnet/sdk:10.0",
+  "sdk_image_id": "e70cdb7f80b0",
+  "network": "none",
+  "framework": ".NET 10.0.12",
+  "identity_informational_version": "10.0.12+95017c711e6afc1085133d440e42b4bd78155701",
+  "command": "docker run --rm --network none --user \"$(id -u):$(id -g)\" -e DOTNET_CLI_TELEMETRY_OPTOUT=1 -e DOTNET_NOLOGO=1 -e DOTNET_CLI_HOME=/tmp -v \"<temporary-copy-of-example>:/work\" -w /work mcr.microsoft.com/dotnet/sdk:10.0 sh -c 'set -e; dotnet restore Probe.csproj --ignore-failed-sources >/dev/null; dotnet build Probe.csproj -c Release --no-restore >/dev/null; dotnet bin/Release/net10.0/Probe.dll'",
+  "exit_code": 0,
+  "passed": 7,
+  "total": 7,
+  "sha256": {
+    "Probe.csproj": "cfd3bef3cdb06f4c60489e4bdc8138b24278dc5fdd4ac992ad847975016432d4",
+    "Program.cs": "d8767ff13bdf8c3cf7de6f68ae1f6200d706b223d5bdfa340860b3d6b319d57b",
+    "provided-evidence.json": "21ba5583233b40dc88fc6650a9dfade0eb85bb562a7b5daf16c97f2d71830cef"
+  },
+  "limitations": [
+    "Reference probe, not production migration/login/reset-flow implementation",
+    "No Team Notes file, application DB/seed, Docker volume or main branch changed"
+  ]
+}

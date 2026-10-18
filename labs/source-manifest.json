@@ -1,0 +1,246 @@
+[
+  {
+    "path": "README.md",
+    "sha256": "0a507ee06d87c09b071ca3c95d420ab9feadceb343f878becacd42512523fc6a"
+  },
+  {
+    "path": "agent-control/README.md",
+    "sha256": "88bd2e829c54843866a007dc9cfc73ff64c562ef72f99bf054c4e0e59f314d7a"
+  },
+  {
+    "path": "agent-control/UNTRUSTED_README.md",
+    "sha256": "8c546edc3d80ae3cf6f71ab6f589efe7acd4daf09958942f9b575b3f5496c70f"
+  },
+  {
+    "path": "agent-control/guard.py",
+    "sha256": "0cbd10397df31b2488781f21cd46fb5507e564d2d1fbc4b096acc788ff8a011b"
+  },
+  {
+    "path": "agent-control/selftest.py",
+    "sha256": "600bf96e25e9b11809d49545cac5c71722a7bf1e24f8976c9d86ea70c7b34f02"
+  },
+  {
+    "path": "agent-control/settings.example.json",
+    "sha256": "055dc4ceb7e30cd40eb1dbfccc18d60f9c27c55d842ebc10083f6f432dc3e8e4"
+  },
+  {
+    "path": "candidate-review/CandidateA.cs",
+    "sha256": "c4d264fe9c2c8f30efe44c462b21323491f4698b3fe809a275d116c6fe9c0145"
+  },
+  {
+    "path": "candidate-review/CandidateB.cs",
+    "sha256": "e573a56dc56cf30f7f869445e50ec181cf07ae9f9f52cc75f4cc7cc0cf3fe4af"
+  },
+  {
+    "path": "candidate-review/Probe.csproj",
+    "sha256": "fc916395fa5019ca501fe445ad77abde6cd41d64a55500bc80fcc9678dedba13"
+  },
+  {
+    "path": "candidate-review/Program.cs",
+    "sha256": "63505c804c50e69e81e673ff33c9a73f0245e2f26e1f5bbc137c8d0d5af6ba3b"
+  },
+  {
+    "path": "candidate-review/README.md",
+    "sha256": "9dfe239d22750f8a27eca5e6970e36fdb789ff4753292efa7c6fa5a3af479d09"
+  },
+  {
+    "path": "candidate-review/dependency-evidence.json",
+    "sha256": "2009bb8505f047079dfb3f4a5e20140c75b50637f5940efd3b57ea2f3a803a1e"
+  },
+  {
+    "path": "candidate-review/provided-evidence-provenance.json",
+    "sha256": "885f5985cc683cd249f4405f87d0e035ce44bdeb8553b0c37740fd861041808f"
+  },
+  {
+    "path": "candidate-review/provided-evidence.json",
+    "sha256": "6d663573f789e853e644842634762d6bae79955e238396ca5c9d17fed61418a9"
+  },
+  {
+    "path": "candidate-review/review-prompt.txt",
+    "sha256": "b781f7cae251a33fd2c7886baa4c5ac511b305921fe4e750982cf9d6a9a66887"
+  },
+  {
+    "path": "candidate-review/source-validation.json",
+    "sha256": "6a26fceea0c270f62814be32cb21fabd53847b547b12ebd4d97f0a77254aea84"
+  },
+  {
+    "path": "password-storage/Probe.csproj",
+    "sha256": "cfd3bef3cdb06f4c60489e4bdc8138b24278dc5fdd4ac992ad847975016432d4"
+  },
+  {
+    "path": "password-storage/Program.cs",
+    "sha256": "d8767ff13bdf8c3cf7de6f68ae1f6200d706b223d5bdfa340860b3d6b319d57b"
+  },
+  {
+    "path": "password-storage/README.md",
+    "sha256": "49bef32d6e841ff730d2c4a3fa6e112902baa3369ca38327b099970c4bfb0e3e"
+  },
+  {
+    "path": "password-storage/provided-evidence.json",
+    "sha256": "21ba5583233b40dc88fc6650a9dfade0eb85bb562a7b5daf16c97f2d71830cef"
+  },
+  {
+    "path": "password-storage/source-validation.json",
+    "sha256": "7e1c7b4beeea1e45967fdc6adf380734f4b0b22c4408988affe1c635118ba39e"
+  },
+  {
+    "path": "report-evidence/README.md",
+    "sha256": "bc34299bd40d9909373fcd9a027d56f8786cf649ade5110158e1ddfa3f231abc"
+  },
+  {
+    "path": "report-evidence/code-snapshot/api/Endpoints/Mutations.cs",
+    "sha256": "a578059424d2cd225e589c6333bcbe8aac4430b71135be698256b14a78985800"
+  },
+  {
+    "path": "report-evidence/code-snapshot/api/Endpoints/PreviewEndpoints.cs",
+    "sha256": "8b9fcafaee8dccb8be92c6282c22a8c09925340c9306e653c7ba71680061a746"
+  },
+  {
+    "path": "report-evidence/findings.json",
+    "sha256": "e092e04433a5728d4ad5b4e939cf4ad529e1fe8741a3f2e64aa23317ee0ab0ab"
+  },
+  {
+    "path": "report-evidence/scope.json",
+    "sha256": "fd4374fb598aac34e1b5b9ca2314ead3b95d3b5bccc0caecd5584951db16f245"
+  },
+  {
+    "path": "report-evidence/security-report.pdf",
+    "sha256": "9299a50dd43f368acee48f04657ce79deec83e5a6243bb07cec03c8421486e48"
+  },
+  {
+    "path": "security-tools/README.md",
+    "sha256": "1a13db9dedae65905cffd63f2c00da698f41c96c23a8a082526002002fc711f8"
+  },
+  {
+    "path": "security-tools/config/bad/Dockerfile",
+    "sha256": "4fa69cf96dee36390da62c91aee1e44bbe2bff9dfc3db9ea59f837ac9b4d2661"
+  },
+  {
+    "path": "security-tools/config/good/Dockerfile",
+    "sha256": "e59f0d82d4be059945fb0013f34fb014be19d7eefcfe60d840179728aea6ac11"
+  },
+  {
+    "path": "security-tools/run-tls-fixture.sh",
+    "sha256": "648f8597e9a222ee5bf40f948a669017262572aaf32ac396bf44656212621d0f"
+  },
+  {
+    "path": "security-tools/semgrep/auth-header-log.js",
+    "sha256": "52e4566823286f81ffc8bff99e1cb55b9cb4857c786edeb2554943f54f857e8e"
+  },
+  {
+    "path": "security-tools/semgrep/auth-header-log.yml",
+    "sha256": "7105842b96451a845f5a2d77f10bf28935206442d5c7d1facd109cad3963cdae"
+  },
+  {
+    "path": "sonarcloud-issue/AuthEndpoints.learner-baseline.cs.txt",
+    "sha256": "838b94964f4d01dab07b9ef027066f68a73996e506e89a89e86b03ddb4ccd66d"
+  },
+  {
+    "path": "sonarcloud-issue/AuthEndpoints.sonar.cs.txt",
+    "sha256": "18310475693c4cb410773fc048320bc0793ad060aa8b8ff74d0c269b00479a5e"
+  },
+  {
+    "path": "sonarcloud-issue/README.md",
+    "sha256": "8386333923bad91bcbff70de7a866cbe8a40c7ff481a3a4f31e708acb841b946"
+  },
+  {
+    "path": "sonarcloud-issue/analysis-prompt.txt",
+    "sha256": "a4c2ba7ca3af3ceae942dd6784d4e9908dd05960edf823bd18e1a93c8c4f8eb6"
+  },
+  {
+    "path": "sonarcloud-issue/evidence.html",
+    "sha256": "15fbc2ca3b32c1cee280b94c545dfb77c0609e0bfb142f44127864a1baa1f9f5"
+  },
+  {
+    "path": "sonarcloud-issue/evidence.json",
+    "sha256": "421423bd75a986781d1079b9f898b483b551059f09429131e7010805b9c7efd8"
+  },
+  {
+    "path": "sonarcloud-issue/issue-source.png",
+    "sha256": "946aa0e2aa7b2fba46d8601d0569ea0ac7defca7da0e9a2635df1046bfba886e"
+  },
+  {
+    "path": "sonarcloud-issue/provenance.json",
+    "sha256": "e1e960bb6620df11038440564f6e7815b510d53ba04d63654f1adb0d9ee5d9aa"
+  },
+  {
+    "path": "sonarcloud-issue/rule-context.json",
+    "sha256": "ff21a7bdf75d2ba07a9066b8384b401773ac1620f039632ea1d27ebf0098add0"
+  },
+  {
+    "path": "sonarcloud-issue/rule-context.png",
+    "sha256": "deb930a7f35b650d69b12a870e00d2aa9f620d869cad39e3c3fc37a072cc8c8d"
+  },
+  {
+    "path": "sonarcloud-issue/sonarcloud-issue-evidence.pdf",
+    "sha256": "617b69daa0e0a0b7632f8c37ef07cccd2567275fee937a275c54bd9146cffc60"
+  },
+  {
+    "path": "sonarcloud-issue/source-comparison.diff",
+    "sha256": "ade4f07fd842c30d3cdfc9a2078a40724037090d966d2fcfdbf555c0d7a2c219"
+  },
+  {
+    "path": "sonarcloud-issue/source-identity.json",
+    "sha256": "6b063ac8e55f309918dde13f66c9f4987ed289ab734d80927dbb628448603412"
+  },
+  {
+    "path": "workflow-security/README.md",
+    "sha256": "f33f9e69357cef371b2fd860644b1ab52e2f6c77a01b670d5036c3424dd06b96"
+  },
+  {
+    "path": "workflow-security/native-observation.json",
+    "sha256": "c5302ef353d9e41eba577c4eb8b09fe72be824cbf07101940f2efd3615209e00"
+  },
+  {
+    "path": "workflow-security/probes.py",
+    "sha256": "7d520212c7a35c046b722397ca51ac8023d250a0249a98a4b830011bcef230ee"
+  },
+  {
+    "path": "workflow-security/reference/__init__.py",
+    "sha256": "adbbb56b88a59d11fe6d1912dfa47df15b3da5e6acedf929bdf464b17cfcbd8d"
+  },
+  {
+    "path": "workflow-security/reference/check_contract.py",
+    "sha256": "34bcddd42da3aa129423985d655f805a315549caab24be2ca1aea4d29fb659a6"
+  },
+  {
+    "path": "workflow-security/reference/contract_tests.py",
+    "sha256": "c08ad63de401fb8b5b8278a5785ed5f28c3e4c7a9ff2554580662cd6b74b28e9"
+  },
+  {
+    "path": "workflow-security/reference/mutations.py",
+    "sha256": "312b251a3a32dc9d17228b0d7fb55170cfd9a64183739abc284d465b62fbd753"
+  },
+  {
+    "path": "workflow-security/reference/observed_agent_patch.py",
+    "sha256": "b77e67a31aee848e3c2ee4991f28479b207865657845ea572ab28de87d9b4d0f"
+  },
+  {
+    "path": "workflow-security/reference/secure_voucher.py",
+    "sha256": "8fbdca39f88c18c9fd552721fdb4eef2340123ece8503e5178300345d9d548d3"
+  },
+  {
+    "path": "workflow-security/reference/vulnerable_voucher.py",
+    "sha256": "cfbc961d0314fd05ebf9fddd893f67c48a05a125238824694183383d5a2f88da"
+  },
+  {
+    "path": "workflow-security/scenario_support.py",
+    "sha256": "08e52aa94758bb71e4cb9afa4ba56b14a16d5d83bdfca4fd74979018b01aaa05"
+  },
+  {
+    "path": "workflow-security/tests/test_redemption_contract.py",
+    "sha256": "370c94109fc56903595b603c82f7601928be408839bbacf17ae78a065b0d23e9"
+  },
+  {
+    "path": "workflow-security/validation.json",
+    "sha256": "40e1946b7193d90f56a5a58494e0d5b317b6ddef5cb5f0a2c6d1a02a164e6c68"
+  },
+  {
+    "path": "workflow-security/voucher.py",
+    "sha256": "3a28f4141a80b0052b7a489d47aa616e23bbf5a1e2672e3053653cd6e8c964c1"
+  },
+  {
+    "path": "workflow-security/voucher_model.py",
+    "sha256": "8268a0106003d90f3b8f8fbba444edd3bcff11d26f413356ce7f692484eb2e4c"
+  }
+]

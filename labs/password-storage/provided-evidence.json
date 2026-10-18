@@ -1,0 +1,62 @@
+{
+  "scope": "In-memory PasswordHasher verification and work-factor upgrade only",
+  "framework": ".NET 10.0.12",
+  "identityAssemblyVersion": "10.0.0.0",
+  "identityInformationalVersion": "10.0.12\u002B95017c711e6afc1085133d440e42b4bd78155701",
+  "compatibilityMode": "IdentityV3",
+  "frameworkDefaultIterations": 100000,
+  "oldIterations": 100000,
+  "currentIterations": 220000,
+  "checks": [
+    {
+      "Name": "fresh_hashes_differ",
+      "Expected": "True",
+      "Observed": "True",
+      "Passed": true
+    },
+    {
+      "Name": "correct_password",
+      "Expected": "Success",
+      "Observed": "Success",
+      "Passed": true
+    },
+    {
+      "Name": "wrong_password",
+      "Expected": "Failed",
+      "Observed": "Failed",
+      "Passed": true
+    },
+    {
+      "Name": "malformed_hashes_rejected",
+      "Expected": "True",
+      "Observed": "True",
+      "Passed": true
+    },
+    {
+      "Name": "lower_cost_hash",
+      "Expected": "SuccessRehashNeeded",
+      "Observed": "SuccessRehashNeeded",
+      "Passed": true
+    },
+    {
+      "Name": "upgraded_hash",
+      "Expected": "Success",
+      "Observed": "Success",
+      "Passed": true
+    },
+    {
+      "Name": "raw_md5_not_supported",
+      "Expected": "Failed",
+      "Observed": "Failed",
+      "Passed": true
+    }
+  ],
+  "passedCount": 7,
+  "totalCount": 7,
+  "passed": true,
+  "limitations": [
+    "No application, database, authentication session or seed data was changed.",
+    "No MD5 compatibility branch, persistent migration or password reset flow was implemented.",
+    "Iteration counts are explicit exercise policies, not a hardware benchmark or universal setting."
+  ]
+}
