@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Training PreToolUse path guard for a coding agent. Exit 0 = continue normal permissions, 2 = block. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>AgentControl</RootNamespace>
+    <AssemblyName>AgentGuard</AssemblyName>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <!-- LibraryImport (hard-link count) generates marshalling code. -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+</Project>

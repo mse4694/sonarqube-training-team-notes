@@ -27,18 +27,18 @@
 
 ## ข้อมูลที่ fixture มีจริง
 
-อ่าน [voucher_model.py](voucher_model.py) และ [Business contract ใน README](README.md#business-contract) เพื่อแยกแบบจำลองที่มีจริงออกจากระบบที่เสนอ
+อ่าน [Voucher/VoucherModel.cs](Voucher/VoucherModel.cs) และ [Business contract ใน README](README.md#business-contract) เพื่อแยกแบบจำลองที่มีจริงออกจากระบบที่เสนอ
 
 | ข้อมูล | ความหมายในแบบจำลอง |
 | --- | --- |
-| `Voucher.code` | รหัสคูปองที่ใช้ค้นหารายการ |
-| `Voucher.expires_at` | เวลาเส้นตายแบบจำนวนเต็ม ไม่ใช่ timezone/ระบบนาฬิกา production |
-| `Voucher.state` | `issued`, `active`, `cancelled`, `expired` หรือ `used` |
-| `Voucher.redeemed_by` | ค่า actor เมื่อใช้สิทธิ์สำเร็จ ไม่ใช่หลักฐานว่า actor ผ่าน authentication |
-| `Redemption` | ผลลัพธ์ `ok`, `reason`, `receipt_id`, `actor` |
-| `snapshot().redemption_count` และ `events()` | จำนวนผลสำเร็จที่คำนวณจาก events และรายการ effects จำลอง |
+| `Voucher.Code` | รหัสคูปองที่ใช้ค้นหารายการ |
+| `Voucher.ExpiresAt` | เวลาเส้นตายแบบจำนวนเต็ม ไม่ใช่ timezone/ระบบนาฬิกา production |
+| `Voucher.State` | `issued`, `active`, `cancelled`, `expired` หรือ `used` |
+| `Voucher.RedeemedBy` | ค่า actor เมื่อใช้สิทธิ์สำเร็จ ไม่ใช่หลักฐานว่า actor ผ่าน authentication |
+| `Redemption` | ผลลัพธ์ `Ok`, `Reason`, `ReceiptId`, `Actor` (ใน JSON ของ probes คือ `ok`, `reason`, `receipt_id`, `actor`) |
+| `Snapshot().RedemptionCount` และ `Events()` | จำนวนผลสำเร็จที่คำนวณจาก events และรายการ effects จำลอง |
 
-ภายหลังจะใช้ `VoucherService` ใน [voucher.py](voucher.py) เป็น **single-process in-memory fixture ที่จงใจมีช่องโหว่** สำหรับสังเกตว่าพฤติกรรมต่างจากกติกาข้างต้นอย่างไร อย่าใช้ implementation ตั้งต้นเป็นคำตอบที่ถูกต้องของ contract
+ภายหลังจะใช้ `VoucherService` ใน [Voucher/VoucherService.cs](Voucher/VoucherService.cs) (C# / .NET 10) เป็น **single-process in-memory fixture ที่จงใจมีช่องโหว่** สำหรับสังเกตว่าพฤติกรรมต่างจากกติกาข้างต้นอย่างไร อย่าใช้ implementation ตั้งต้นเป็นคำตอบที่ถูกต้องของ contract
 
 `actor` เป็นสตริงจำลอง ส่วน `now` เป็นนาฬิกาทดสอบที่ควบคุมได้ เช่น 10 และเส้นตาย 100 ค่า `checkpoint` เป็นจุดนัดหมายของ test เพื่อสร้าง concurrency ไม่ใช่ input ของผู้ใช้ในระบบจริง ไม่มี HTTP, authentication, durable database หรือ distributed transaction ที่ fixture พิสูจน์ให้แล้ว
 

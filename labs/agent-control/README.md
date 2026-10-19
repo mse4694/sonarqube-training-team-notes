@@ -1,6 +1,6 @@
 # Workshop 10: observe an agent control, then review one scoped patch
 
-This is a Python 3 training example for the disposable `workflow-security`
+This is a C# (.NET 10) training example for the disposable `workflow-security`
 workspace used continuously by Day 2 Workshops 8, 9 and 10. Workshop 8 produces the voucher
 state/invariant control contract; Lab 9.1 produces learner-owned regression tests.
 Workshop 10 receives that same directory and those artifacts. It does not restart the
@@ -9,32 +9,59 @@ Maintain one `AgentExecutionRecord` for plan/policy/native probe/scope/tests.
 Workshop 11 reuses the method/record format with its own evidence, never the voucher
 results as Markdown or dependency proof.
 
-The helper does not run an agent, copy itself into a project, edit source,
-contact a service or contain a credential. `guard.py` reads a hook event and
-exits 0 (continue normal permissions) or 2 (block). It permits only the existing,
-non-linked `voucher.py`, resolved under `CLAUDE_PROJECT_DIR`. Learner tests,
-manual probes, instructor reference files and `.claude` configuration are not
-editable by the agent. Native permissions also deny reading `reference/**`
-so instructor solutions are not supplied to the coding task. Malformed input is blocked; NotebookEdit is excluded.
+| Path | What it is |
+| --- | --- |
+| `Guard/` | `AgentGuard`: reads one PreToolUse hook event on stdin, exits 0 (continue normal permissions) or 2 (block) |
+| `SelfTest/` | Direct helper tests that run the built `AgentGuard.dll` against a temporary fake project |
+| `settings.example.json` | Hook entry and deny rules to merge into the workspace's `.claude/settings.local.json` |
+| `UNTRUSTED_README.md` | Deliberately hostile repository text for the refusal observation |
+
+The guard does not run an agent, copy itself into a project, edit source,
+start a process, contact a service or contain a credential. It permits only the existing,
+non-linked `Voucher/VoucherService.cs`, resolved under `CLAUDE_PROJECT_DIR`
+(every symbolic link on the path is followed first, so a link cannot smuggle another file in, and the
+path must also name that file when `..` is collapsed lexically, as Windows and the agent do).
+Learner tests, the model and helpers, the probes, instructor reference files and `.claude`
+configuration are not editable by the agent. Native permissions also deny reading `reference/**`
+so instructor solutions are not supplied to the coding task. Malformed input, duplicate JSON keys,
+inputs over 1 MB, hard-linked targets and anything that is not a regular file are blocked; NotebookEdit and
+MultiEdit are routed to the guard and blocked. Paths are compared exactly (on Windows, a differently cased
+path is blocked rather than guessed).
 
 ## 1. Direct helper check: human terminal, not native evidence
 
-Run `python3 labs/agent-control/selftest.py` from the existing Team Notes
-repository root. Its tests create their own temporary
-fake project. A passing result validates helper decisions only; it does not
+From the existing Team Notes repository root:
+
+```bash
+./scripts/lab-tools dotnet run --project labs/agent-control/SelfTest
+```
+
+`./scripts/voucher-freeze` runs the same self-test. Its 34 cases create their own temporary
+fake project. A passing result validates the helper's decisions only; it does not
 show that an agent loaded the hook or that a native permission blocked a call.
 
 ## 2. Register the native control — human setup only
 
 If using Claude Code, record `claude --version`. The example's `onFailure`
 setting requires v2.1.295 or later; use a supported version or an equivalent
-native adapter and verify its failure behavior. Python 3 must be available to
-the hook process. The version label is a documented prerequisite, not an
-assertion about the learner's installed runtime.
+native adapter and verify its failure behavior. The hook process runs on the machine where
+the agent runs, so that machine needs the .NET 10 runtime (`dotnet --list-runtimes`). The
+version label is a documented prerequisite, not an assertion about the learner's installed runtime.
 
-In your same disposable workflow workspace, manually place `guard.py` at
-`.claude/hooks/guard.py`. Review `settings.example.json` and **merge** its hook
-entry and deny rules into the workspace's existing `.claude/settings.local.json`.
+Build the guard into your same disposable workflow workspace (the tools container sees the
+checkout at the same path, so the output lands where the agent runs):
+
+```bash
+source .lab-workspaces/voucher.env
+./scripts/lab-tools dotnet publish labs/agent-control/Guard -c Release -o "$WORKFLOW_DIR/.claude/hooks/guard"
+```
+
+Without a .NET runtime on that machine, publish a self-contained build for it instead (for
+example `-r win-x64 --self-contained -p:PublishSingleFile=true`) and point the hook `command`
+at the produced `AgentGuard` executable with no `args`.
+
+Review `settings.example.json` and **merge** its hook entry and deny rules into the
+workspace's existing `.claude/settings.local.json`.
 Do not replace a settings file or remove existing hooks, permissions or managed
 policy. If the workspace has no file, the example can be used as a starting config.
 Leave the control active while the agent works. Inspect the resulting native
@@ -78,14 +105,14 @@ a forbidden marker or disable the guard is deliberately not task policy.
   work, repair the control as the human, and repeat the benign probe. Record
   the failed configuration. Never call the failed probe a pass.
 - Inspect native permission/config evidence for Bash and protected settings.
-  A direct script invocation cannot prove either native permission rule.
+  A direct helper invocation cannot prove either native permission rule.
   No need to alter a real settings file to test it.
 
 After the native probe, approve one scoped plan and let the agent edit only
-`voucher.py`. Review the diff as the human and run the SAME learner contract
+`Voucher/VoucherService.cs`. Review the diff as the human and run the SAME learner contract
 tests and manual scenarios from W8/W9 without removing assertions or changing
 fixtures. The instructor reference is for checking tests, not a source file
-for the agent to copy. This separate Python fixture has no Sonar project;
+for the agent to copy. This separate C# fixture has no Sonar project;
 Team Notes or historical Sonar results are method context, not its scan result. A fresh commit/CI/rescan is optional extension work, not a W10 requirement.
 Optional SonarQube MCP context or analysis must be labelled with actual project/branch/file
 context and observed tool output; unavailable integration is `not_tested`.

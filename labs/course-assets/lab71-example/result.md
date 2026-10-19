@@ -6,7 +6,7 @@
 
 สมมติ Team Notes ต้องการเพิ่มคูปองรับสิทธิ์เข้าร่วมกิจกรรมภายในหนึ่งครั้ง แต่ละใบมีรหัสและเวลาหมดอายุ ผู้ถือรหัสใช้สิทธิ์ได้เมื่อเปิดใช้งานแล้ว การรับสิทธิ์สำเร็จแทนด้วย receipt และ business event หนึ่งรายการ ไม่มีการจ่ายเงินจริง
 
-เอกสารนี้เสนอ architecture เท่านั้น ยังไม่มีหน้าจอ Voucher, HTTP endpoint หรือตาราง Voucher ใน Team Notes ให้ทดลอง รายละเอียดต้นทางคือ [VOUCHER_SCENARIO.md](../../workflow-security/VOUCHER_SCENARIO.md), [business contract](../../workflow-security/README.md#business-contract) และ [voucher_model.py](../../workflow-security/voucher_model.py)
+เอกสารนี้เสนอ architecture เท่านั้น ยังไม่มีหน้าจอ Voucher, HTTP endpoint หรือตาราง Voucher ใน Team Notes ให้ทดลอง รายละเอียดต้นทางคือ [VOUCHER_SCENARIO.md](../../workflow-security/VOUCHER_SCENARIO.md), [business contract](../../workflow-security/README.md#business-contract) และ [Voucher/VoucherModel.cs](../../workflow-security/Voucher/VoucherModel.cs)
 
 **กติกาที่ต้องรักษา:** รับ `redeem` เฉพาะ `active` และ `now < expires_at` ต้อง activate ก่อนใช้ สำเร็จได้ไม่เกินหนึ่งครั้งและเพิ่ม redemption event ไม่เกินหนึ่งรายการต่อคูปอง แม้มีคำขอซ้ำหรือพร้อมกัน
 

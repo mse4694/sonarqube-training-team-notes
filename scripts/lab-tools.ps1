@@ -3,7 +3,7 @@
 # Run it from inside the Team Notes checkout, with the app already started (docker compose up -d).
 # The checkout is mounted at the same /c/... path that Git Bash uses, so this wrapper and
 # ./scripts/lab-tools in Git Bash share one lab-tools container. Works on Windows PowerShell 5.1
-# and PowerShell 7. Piped input is forwarded to the command (for example JSON for python3 -c).
+# and PowerShell 7. Piped input is forwarded to the command (for example JSON for jq).
 # Quote a literal -- ('--'): PowerShell itself removes a bare -- before the script sees it.
 # Continue, not Stop: Windows PowerShell 5.1 hosts (ISE, VS Code) turn native stderr into errors.
 $ErrorActionPreference = 'Continue'
@@ -36,8 +36,9 @@ function ConvertTo-ContainerPath([string]$Path) {
 
 # Windows PowerShell 5.1 (and 7.0-7.2) rebuild a native command line that drops or splits quotes
 # inside arguments (JSON bodies, jq filters). The command and its arguments therefore travel as
-# base64 JSON in LAB_ARGV, and python3 in the tools image starts them exactly as typed.
-$launcher = "import os,json,base64;a=json.loads(base64.b64decode(os.environ.pop('LAB_ARGV')));os.execvp(a[0],a)"
+# base64 JSON in LAB_ARGV, and node in the tools image starts them exactly as typed (stdin,
+# stdout and stderr are inherited; the command's exit code, or 128+signal, is returned).
+$launcher = "const a=JSON.parse(Buffer.from(process.env.LAB_ARGV,'base64').toString('utf8'));delete process.env.LAB_ARGV;const r=require('child_process').spawnSync(a[0],a.slice(1),{stdio:'inherit'});if(r.error){console.error(String(r.error.message));process.exit(127)}process.exit(r.status===null?128+(require('os').constants.signals[r.signal]||0):r.status)"
 function ConvertTo-LabArgv([object[]]$Values) {
   $json = ConvertTo-Json -InputObject @($Values | ForEach-Object { [string]$_ }) -Compress
   return [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($json))
@@ -109,7 +110,7 @@ try {
   # exec does not run an image's ENTRYPOINT. Invoke it explicitly for each command
   # so HOME, UID/GID and no-new-privileges match the mounted checkout owner.
   $execArgs = @($compose) + @('exec', '-T', '-e', ('LAB_ARGV=' + (ConvertTo-LabArgv $args)), '--workdir', $containerCwd,
-    'lab-tools', '/usr/local/bin/lab-tools-entrypoint', 'python3', '-c', $launcher)
+    'lab-tools', '/usr/local/bin/lab-tools-entrypoint', 'node', '-e', $launcher)
   if ($MyInvocation.ExpectingInput) { $input | & docker @execArgs } else { & docker @execArgs }
   exit $LASTEXITCODE
 } finally {

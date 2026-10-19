@@ -11,6 +11,10 @@ if [[ -f "$env_file" ]]; then
   # shellcheck source=/dev/null
   source "$env_file"
   [[ -d "${WORKFLOW_DIR:-}" ]] || stop "$env_file points to a missing WORKFLOW_DIR (${WORKFLOW_DIR:-unset})"
+  if [[ ! -f "$WORKFLOW_DIR/Voucher/VoucherService.cs" ]]; then
+    # The voucher labs moved from Python to C#; an older Python copy cannot run the current steps.
+    stop "$WORKFLOW_DIR is an older Python voucher workspace; move it and $env_file aside, then run this again"
+  fi
   echo "Keeping existing workspace: $WORKFLOW_DIR"
   exit 0
 fi
@@ -33,6 +37,7 @@ if [[ -f "$legacy_env" ]]; then
     printf '%s' "${WORKFLOW_DIR:-}"
   )
   [[ -d "$legacy_dir" ]] || stop "$legacy_env points to a missing WORKFLOW_DIR (${legacy_dir:-unset})"
+  [[ -f "$legacy_dir/Voucher/VoucherService.cs" ]] || stop "$legacy_env points to an older Python voucher workspace; move $legacy_env aside to start the C# fixture"
 fi
 
 mkdir -p "$workspaces"
@@ -45,7 +50,8 @@ if [[ -n "$legacy_dir" ]]; then
   cp -a "$legacy_dir/." "$new_dir/"
   echo "Copied existing workspace from $legacy_dir"
 else
-  cp -a "$repo_root/labs/workflow-security/." "$new_dir/"
+  # Copy the source only: build output (bin/obj) from another checkout path must not come along.
+  tar -C "$repo_root/labs/workflow-security" --exclude=bin --exclude=obj -cf - . | tar -C "$new_dir" -xf -
 fi
 
 printf 'export TRAINING_ROOT=%q\nexport LAB_PACK_DIR=%q\nexport LAB_TOOLS=%q\nexport WORKFLOW_DIR=%q\n' \

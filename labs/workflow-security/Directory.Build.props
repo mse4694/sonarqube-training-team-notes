@@ -1,0 +1,18 @@
+<Project>
+  <!-- Shared settings for the voucher fixture. Probes can compile a comparison engine;
+       each engine gets its own obj/bin so switching never reuses another engine's build. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <VoucherEngine Condition="'$(VoucherEngine)' == ''">working</VoucherEngine>
+    <BaseIntermediateOutputPath Condition="'$(VoucherEngine)' != 'working'">obj/$(VoucherEngine)/</BaseIntermediateOutputPath>
+    <BaseOutputPath Condition="'$(VoucherEngine)' != 'working'">bin/$(VoucherEngine)/</BaseOutputPath>
+    <!-- Stack traces show /workflow/tests/... instead of each learner's full checkout path. -->
+    <PathMap>$(MSBuildThisFileDirectory)=/workflow/</PathMap>
+    <!-- Never compile another engine's generated files. -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);bin/**;obj/**</DefaultItemExcludes>
+  </PropertyGroup>
+</Project>

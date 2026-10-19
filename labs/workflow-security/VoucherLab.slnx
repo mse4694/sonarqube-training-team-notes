@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Voucher/Voucher.csproj" />
+  <Project Path="Probes/Probes.csproj" />
+  <Project Path="tests/RedemptionContract.Tests.csproj" />
+</Solution>

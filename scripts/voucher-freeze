@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Workshop 10, before the AI agent edits anything: record SHA-256 hashes of every
-# file the agent must not change, then self-test the agent-control helper.
-# Later, scripts/voucher-verify checks the same hashes to prove only voucher.py changed.
-# The record is kept outside WORKFLOW_DIR, where the agent works, as
-# .lab-workspaces/<workspace>.readonly.sha256.
+# file the agent must not change, then self-test the agent-control guard.
+# Later, scripts/voucher-verify checks the same hashes to prove only
+# Voucher/VoucherService.cs changed. The record is kept outside WORKFLOW_DIR, where the
+# agent works, as .lab-workspaces/<workspace>.readonly.sha256.
 set -euo pipefail
 repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
 env_file="$repo_root/.lab-workspaces/voucher.env"
@@ -13,12 +13,19 @@ stop() { echo "Stop: $*" >&2; exit 1; }
 # shellcheck source=/dev/null
 source "$env_file"
 [[ -d "${WORKFLOW_DIR:-}" ]] || stop "WORKFLOW_DIR (${WORKFLOW_DIR:-unset}) is missing"
+[[ -f "$WORKFLOW_DIR/Voucher/VoucherService.cs" ]] || stop "$WORKFLOW_DIR is not a C# voucher workspace; rerun ./scripts/voucher-workspace"
 record="$repo_root/.lab-workspaces/$(basename -- "$WORKFLOW_DIR").readonly.sha256"
 cd "$WORKFLOW_DIR"
 
-readonly_files=(VoucherControlContract.md tests/test_redemption_contract.py
-  voucher_model.py scenario_support.py probes.py reference/*.py)
-for f in "${readonly_files[@]}"; do [[ -f "$f" ]] || stop "$WORKFLOW_DIR/$f is missing"; done
+# Every file except Voucher/VoucherService.cs (and this record's copy), whatever its extension:
+# contract, learner tests, model, helpers, probes, project files, docs and the instructor reference.
+# voucher-verify also reports any file ADDED after this point, since a new .cs/.props file would be
+# compiled or imported without changing a recorded one. Build output and agent config are skipped.
+readonly_files=()
+while IFS= read -r -d '' f; do readonly_files+=("${f#./}"); done < <(
+  find . \( -name bin -o -name obj -o -name .claude -o -name .training-agent-control \) -prune -o \
+    -type f ! -path ./Voucher/VoucherService.cs ! -path ./readonly-inputs.sha256 -print0 | sort -z)
+[[ " ${readonly_files[*]} " == *" VoucherControlContract.md "* ]] || stop "$WORKFLOW_DIR/VoucherControlContract.md is missing"
 
 if [[ -f "$record" ]]; then
   # Re-hashing after the agent ran would hide a change; keep the first record.
@@ -31,5 +38,5 @@ fi
 cp "$record" readonly-inputs.sha256  # copy for the report; verify checks the record outside WORKFLOW_DIR
 cat "$record"
 
-echo "Agent-control helper self-test:"
-"$LAB_TOOLS" python3 "$LAB_PACK_DIR/agent-control/selftest.py"
+echo "Agent-control guard self-test:"
+"$LAB_TOOLS" dotnet run --project "$LAB_PACK_DIR/agent-control/SelfTest"

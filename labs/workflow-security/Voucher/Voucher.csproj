@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- The working voucher engine plus its read-only model and observation helpers. -->
+  <PropertyGroup>
+    <RootNamespace>VoucherLab</RootNamespace>
+    <AssemblyName>VoucherLab</AssemblyName>
+  </PropertyGroup>
+</Project>

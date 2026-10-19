@@ -1,5 +1,6 @@
-Apply the two scope-limited corrections found in the previous audit, only to tests/test_redemption_contract.py.
-1. Expiry at the deadline must reject with no receipt/event and zero redemption count. The post-rejection state may be active or expired; both honor this contract.
-2. Extend the existing replay test to attempt a different actor after the first success and assert rejection without changing receipt/events/state. Keep the same eight test method names and SERVICE_TYPE.
-Also update the stale module docstring so it no longer claims there are six unfinished tests.
-Do not modify voucher.py, helpers or any other files. Do not read reference/. Do not execute tests/build/server commands or use network. Report the exact changes; a human will run the existing checker independently.
+Apply only the scope-limited corrections from the checker result I pasted below, and only to tests/RedemptionContractTests.cs.
+For each mutant that survived (failed = 0) or each test counted under errors, add or fix the assertion that should detect it, using the invariant named in VoucherControlContract.md.
+Expiry at the deadline must reject with no receipt/event; the post-rejection state may be active or expired, both honor this contract.
+Keep the same eight test method names and the NewService helper. Do not add Skip or catch assertion failures.
+Do not modify Voucher/VoucherService.cs, helpers or any other file. Do not read reference/. Do not run tests, builds or the checker.
+Report the exact changes; a human will run the existing checker independently.

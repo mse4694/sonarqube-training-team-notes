@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Direct helper tests of the built guard; no native agent runs, no repository modifications. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>guard-selftest</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Build the guard next to this program so the tests run the real AgentGuard.dll as a process. -->
+    <ProjectReference Include="../Guard/AgentGuard.csproj" />
+  </ItemGroup>
+</Project>

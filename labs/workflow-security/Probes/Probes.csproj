@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Manual observations of the voucher engine.
+       Default: the working Voucher/VoucherService.cs (what learners and the Agent change).
+       Instructor comparison: add -p:VoucherEngine=baseline or -p:VoucherEngine=reference to dotnet run. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>VoucherLab.Probes</RootNamespace>
+    <AssemblyName>voucher-probes</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(VoucherEngine)' == 'working'">
+    <ProjectReference Include="../Voucher/Voucher.csproj" />
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>VoucherEngineFile</_Parameter1>
+      <_Parameter2>Voucher/VoucherService.cs</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(VoucherEngine)' != 'working'">
+    <Compile Include="../Voucher/VoucherModel.cs" Link="Engine/VoucherModel.cs" />
+    <Compile Include="../Voucher/ScenarioSupport.cs" Link="Engine/ScenarioSupport.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(VoucherEngine)' == 'baseline'">
+    <Compile Include="../reference/Engines/VulnerableVoucherService.cs" Link="Engine/VoucherService.cs" />
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>VoucherEngineFile</_Parameter1>
+      <_Parameter2>reference/Engines/VulnerableVoucherService.cs</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+  <ItemGroup Condition="'$(VoucherEngine)' == 'reference'">
+    <Compile Include="../reference/Engines/SecureVoucherBase.cs" Link="Engine/SecureVoucherBase.cs" />
+    <Compile Include="../reference/Engines/SecureVoucherService.cs" Link="Engine/VoucherService.cs" />
+    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+      <_Parameter1>VoucherEngineFile</_Parameter1>
+      <_Parameter2>reference/Engines/SecureVoucherService.cs</_Parameter2>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <Target Name="RejectUnknownEngine" BeforeTargets="Build"
+          Condition="'$(VoucherEngine)' != 'working' and '$(VoucherEngine)' != 'baseline' and '$(VoucherEngine)' != 'reference'">
+    <Error Text="VoucherEngine must be working, baseline or reference (got '$(VoucherEngine)')." />
+  </Target>
+</Project>

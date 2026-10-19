@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Workshop 10, after the AI agent patched voucher.py: the human checks the patch
-# with the frozen tests and hashes, and collects the evidence in a new report folder
+# Workshop 10, after the AI agent patched Voucher/VoucherService.cs: the human checks the
+# patch with the frozen tests and hashes, and collects the evidence in a new report folder
 # (.lab-workspaces/voucher-report.XXXXXX, path saved to voucher-report.env).
 set -euo pipefail
 repo_root="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd -P)"
@@ -25,27 +25,52 @@ status=0
   REPORT_DIR=$2
   RECORD=$3
   failed=0
-  echo "== 1. patch.diff (voucher.py before -> after)"
-  diff -u "$LAB_PACK_DIR/workflow-security/voucher.py" voucher.py > "$REPORT_DIR/patch.diff" || [ "$?" -eq 1 ] || failed=1
-  cat "$REPORT_DIR/patch.diff"
-  echo "== 2. readonly-check.txt (files the agent must not change)"
-  sha256sum -c "$RECORD" > "$REPORT_DIR/readonly-check.txt" 2>&1 || failed=1
-  cat "$REPORT_DIR/readonly-check.txt"
-  echo "== 3. tests.log (frozen learner suite)"
-  python3 -m unittest discover -s tests -p test_redemption_contract.py -v > "$REPORT_DIR/tests.log" 2>&1 || failed=1
-  tail -n 4 "$REPORT_DIR/tests.log"
-  echo "== 4. checker.json (suite vs baseline, reference and mutants)"
-  python3 reference/check_contract.py \
-    --learner-tests tests/test_redemption_contract.py --expect-working secure > "$REPORT_DIR/checker.json" || failed=1
-  grep -E "\"(quality_passed|working_expectation_met|overall_passed)\"" "$REPORT_DIR/checker.json"
+  # Same listing as voucher-freeze: every file except the editable engine and the record copy.
+  list_files() {
+    find . \( -name bin -o -name obj -o -name .claude -o -name .training-agent-control \) -prune -o \
+      -type f ! -path ./Voucher/VoucherService.cs ! -path ./readonly-inputs.sha256 -print | sed "s#^\./##" | sort
+  }
+  readonly_check() {  # writes $REPORT_DIR/readonly-check.txt; prints "N OK, M changed or missing, K added"
+    sha256sum -c "$RECORD" > "$REPORT_DIR/readonly-check.txt" 2>&1
+    local added
+    added=$(comm -13 <(sed -E "s/^[0-9a-f]{64}  //" "$RECORD" | sort) <(list_files))
+    [ -n "$added" ] && printf "%s\n" "$added" | sed "s/\$/: ADDED/" >> "$REPORT_DIR/readonly-check.txt"
+    printf "%s OK, %s changed or missing, %s added" \
+      "$(grep -c ": OK$" "$REPORT_DIR/readonly-check.txt")" \
+      "$(grep -cE ": FAILED( open or read)?$" "$REPORT_DIR/readonly-check.txt")" \
+      "$(grep -c ": ADDED$" "$REPORT_DIR/readonly-check.txt")"
+  }
+  # One line per check here; the full output of each check is in its file in REPORT_DIR.
+  diff -u --label a/Voucher/VoucherService.cs --label b/Voucher/VoucherService.cs \
+    "$LAB_PACK_DIR/workflow-security/Voucher/VoucherService.cs" Voucher/VoucherService.cs > "$REPORT_DIR/patch.diff" || [ "$?" -eq 1 ] || failed=1
+  echo "1. patch.diff          Voucher/VoucherService.cs $(awk "/^(\+\+\+|---) /{next} /^\+/{a++} /^-/{d++} END{printf \"+%d -%d\", a, d}" "$REPORT_DIR/patch.diff") lines"
+  before=$(readonly_check)
+  case "$before" in *" 0 changed or missing, 0 added") ;; *) failed=1 ;; esac
+  echo "2. readonly-check.txt  $before (files the agent must not change)"
+  dotnet test tests --logger "console;verbosity=normal" --blame-hang-timeout 60s > "$REPORT_DIR/tests.log" 2>&1 || failed=1
+  summary=$(awk "/^Test Run /{on=1} on && !/Total time/{sub(/^ +/, \"\"); printf \"%s \", \$0}" "$REPORT_DIR/tests.log")
+  echo "3. tests.log           ${summary:-build or test run failed: read tests.log}"
+  dotnet build reference/ContractCheck --nologo -v q > "$REPORT_DIR/checker.log" 2>&1 || failed=1
+  dotnet run --no-build --project reference/ContractCheck -- \
+    --learner-tests tests/RedemptionContractTests.cs --expect-working secure > "$REPORT_DIR/checker.json" 2>> "$REPORT_DIR/checker.log" || failed=1
+  echo "4. checker.json        $(grep -oE "\"(quality_passed|working_expectation_met|overall_passed)\": (true|false)" "$REPORT_DIR/checker.json" | tr -d "\"" | paste -sd " " -)"
+  # The patched code has now run: make sure it did not change the read-only files while it ran.
+  after=$(readonly_check)
+  if [ "$after" != "$before" ]; then
+    echo "!! read-only files changed while the tests ran: $after (see readonly-check.txt)"
+    failed=1
+  fi
   exit "$failed"
 ' _ "$LAB_PACK_DIR" "$REPORT_DIR" "$record" || status=$?
 
-cp "$LAB_PACK_DIR/workflow-security/voucher.py" "$REPORT_DIR/voucher-before.py"
+cp "$LAB_PACK_DIR/workflow-security/Voucher/VoucherService.cs" "$REPORT_DIR/VoucherService-before.cs"
 cp "$record" "$REPORT_DIR/readonly-inputs.sha256"
-cp voucher.py "$REPORT_DIR/voucher-after.py" || status=1
+cp Voucher/VoucherService.cs "$REPORT_DIR/VoucherService-after.cs" || status=1
 
-echo "Report folder: $REPORT_DIR (saved in .lab-workspaces/voucher-report.env)"
+echo "Report folder: .lab-workspaces/$(basename -- "$REPORT_DIR") (REPORT_DIR in .lab-workspaces/voucher-report.env)"
+if (( status == 0 )); then
+  echo "All checks passed."
+fi
 if (( status )); then
   echo "Some checks failed: read the files above, fix the cause, then run this script again." >&2
 fi

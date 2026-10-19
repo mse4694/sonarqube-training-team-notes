@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Instructor checker: runs one contract suite against the frozen baseline, the secure
+       reference, five weakened mutants and the working engine. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>VoucherLab.ContractCheck</RootNamespace>
+    <AssemblyName>contract-check</AssemblyName>
+  </PropertyGroup>
+</Project>

@@ -167,7 +167,7 @@ git clone --config core.autocrlf=false https://github.com/mikelopster/sonarqube-
 
 The repository's `.gitattributes` also forces LF. A checkout made earlier with
 CRLF shows errors such as `$'\r': command not found` or `bash\r: No such file`
-(scripts, `labs/**/*.sh` and the Agent hook `labs/agent-control/guard.py` are all
+(scripts, `labs/**/*.sh` and the Agent hook sources under `labs/agent-control/` are all
 affected). Clone again with the command above, or, when the checkout has no
 work you need to keep, re-checkout every file and rebuild the tools image:
 
