@@ -8,6 +8,7 @@ public static class ApiKeyEndpoints
     {
         app.MapGet("/api/me/api-keys", ListAsync);
         app.MapPost("/api/me/api-keys", CreateAsync);
+        app.MapPost("/api/me/api-keys/{id}/rotate", RotateAsync);
         app.MapDelete("/api/me/api-keys/{id}", RevokeAsync);
     }
 
@@ -52,6 +53,20 @@ public static class ApiKeyEndpoints
             key,
             api_key = new { row.id, row.name, row.prefix, row.created_at, row.last_used_at, row.revoked_at },
         }, statusCode: 201);
+    }
+
+    // Reissue the secret of an existing key, keeping its id/name, and return the new key so the
+    // caller can copy it. Used by the "Rotate" button next to each key on the Settings page.
+    private static async Task<IResult> RotateAsync(HttpContext ctx, ApiKeyService keys, int id)
+    {
+        var session = ApiHelpers.GetSession(ctx);
+        if (session is null) return ApiHelpers.Unauthorized();
+
+        var rotated = await keys.RotateAsync(id);
+        if (rotated is null) return Results.Json(new { error = "not found" }, statusCode: 404);
+
+        var (row, key) = rotated.Value;
+        return Results.Json(new { key, api_key = new { row.id, row.name, row.prefix, row.created_at, row.last_used_at, row.revoked_at } });
     }
 
     private static async Task<IResult> RevokeAsync(HttpContext ctx, ApiKeyService keys, int id)

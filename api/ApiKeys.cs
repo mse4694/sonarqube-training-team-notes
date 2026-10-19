@@ -43,6 +43,20 @@ public sealed class ApiKeyService(Database db)
         return rows.ToList();
     }
 
+    // Rotate a key's secret in place (used by "Settings -> API keys -> Rotate" after a key leaks):
+    // issue fresh key material, keep the same id and name, and hand the new key back to the caller.
+    public async Task<(ApiKeyRow row, string key)?> RotateAsync(int id)
+    {
+        string key = NewKey();
+        await using var conn = await db.OpenConnectionAsync();
+        var row = await conn.QueryFirstOrDefaultAsync<ApiKeyRow>(
+            @"UPDATE api_keys SET prefix = @prefix, secret = @secret, last_used_at = NULL
+              WHERE id = @id AND revoked_at IS NULL
+              RETURNING id, name, prefix, secret, created_at, last_used_at, revoked_at",
+            new { id, prefix = key[..PrefixLength], secret = ToStored(key) });
+        return row is null ? null : (row, key);
+    }
+
     public async Task<bool> RevokeAsync(int userId, int id)
     {
         await using var conn = await db.OpenConnectionAsync();
