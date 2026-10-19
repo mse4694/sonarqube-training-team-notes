@@ -381,7 +381,7 @@
   },
   {
     "path": "security-tools/README.md",
-    "sha256": "1a13db9dedae65905cffd63f2c00da698f41c96c23a8a082526002002fc711f8"
+    "sha256": "a4c50c78a2b9b7c6cd5f8da4a287bd6657bc274a2bd2609ba6d60e38d87f2e54"
   },
   {
     "path": "security-tools/config/bad/Dockerfile",
@@ -402,6 +402,10 @@
   {
     "path": "security-tools/semgrep/auth-header-log.yml",
     "sha256": "7105842b96451a845f5a2d77f10bf28935206442d5c7d1facd109cad3963cdae"
+  },
+  {
+    "path": "security-tools/zap-evidence-gaps.md",
+    "sha256": "c3ece5273d132abe5038a4b68576aff6f02e17615fb21f3cd13baaa21cd42d4a"
   },
   {
     "path": "sonarcloud-issue/AuthEndpoints.learner-baseline.cs.txt",

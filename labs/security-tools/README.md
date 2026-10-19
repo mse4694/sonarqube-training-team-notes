@@ -1,14 +1,12 @@
 # Security tools: complementary measurements
 
-Receive the evidence-gap list from Workshop 11. These tool examples measure
-HTTP responses, Dockerfile policy, a team-written AST rule and a live TLS
-fixture. They do not repeat Sonar project setup, dependency review or another
-application repair/commit/rescan loop.
-
-Label each task as a case-specific follow-up only when its target/predicate
-answers the chosen Workshop 11 case. Otherwise it is an independent controlled
-measurement with its own question. TLS/Dockerfile observations do not prove
-Markdown behavior or package/build identity.
+Start the ZAP exercise from `zap-evidence-gaps.md`: sample source evidence with
+three open HTTP questions. Pick one gap and write its target and pass/fail
+predicate before you scan; it does not depend on any earlier workshop's output.
+These tool examples measure HTTP responses, Dockerfile policy, a team-written AST
+rule and a live TLS fixture. They do not repeat Sonar project setup, dependency
+review or another application repair/commit/rescan loop. TLS/Dockerfile
+observations do not prove Markdown behavior or package/build identity.
 
 The files are included in the Team Notes GitHub repository. Start from its existing root:
 
