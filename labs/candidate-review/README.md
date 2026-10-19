@@ -31,11 +31,11 @@ A is `UseAdvancedExtensions().DisableHtml()`. B is the unmodified renderer from 
 
 `provided-evidence.json` is the actual original offline render result using Markdig1.3.2; its provenance is adjacent. This is evidence you can audit when you cannot run the example, but label it as provided evidence rather than your own reproduced execution.
 
-Five original payload/predicate checks give A3/5 and B5/5. A generates real unsafe `href` and `onmouseover` attributes. Separate link-only/autolink-only probes make it clear the URL failure is not escaped-text noise. Both preserve bold text and the legitimate https link.
+The evidence covers five original payload/predicate checks plus separate link-only/autolink-only probes and a formatting positive control. Derive each candidate's counts and counterexamples from the evidence yourself.
 
 The shared-note row uses the exact note-content payload and renderer predicate ONLY. It does not create/share a note or run HTTP/auth/storage/xUnit. Do not call the output “five full application tests passed.”
 
-Final deliverable: a short candidate assessment with claim, counterexample, evidence ID, accept/reject/inconclusive reason, tested scope, limitations and next action. Reject A's completeness claim; accept B only for the checked render behavior. No commit, push, new application branch, seed reset or rescan is needed for this exercise.
+Final deliverable: an evidence audit with claim, counterexample, evidence ID, accept/reject/inconclusive reason, tested scope, limitations and one evidence gap. No commit, push, new application branch, seed reset or rescan is needed for this exercise.
 
 Source anchors: api.Tests/Security/Lab5MarkdownXssTests.cs (five payloads/predicates), main/solution api/MarkdownRenderer.cs, api/Endpoints/MarkdownEndpoints.cs. The endpoint delegates to this renderer but is not executed by the harness.
 

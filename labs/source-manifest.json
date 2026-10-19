@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "ee833195d1bf399fa578be988e5eb416f30b099a5cc54e74c3ba1dc177a2b2c1"
+    "sha256": "0b291847c1a470512f85d3469eab6dfcaba995df67bd9512a99a0938fd30e8c0"
   },
   {
     "path": "agent-control/Guard/AgentGuard.csproj",
@@ -57,7 +57,7 @@
   },
   {
     "path": "candidate-review/README.md",
-    "sha256": "9dfe239d22750f8a27eca5e6970e36fdb789ff4753292efa7c6fa5a3af479d09"
+    "sha256": "6ad8bc9031d148fee184e06e45324678538bef60b64116de07ab4f7ff6a6ff83"
   },
   {
     "path": "candidate-review/dependency-evidence.json",
@@ -84,28 +84,12 @@
     "sha256": "87f697f687947f7457ed1fb3fa342b803a7eb1097c16d9d0f1d0e614d6e1ee66"
   },
   {
-    "path": "course-assets/candidate-comparison/audit.md",
-    "sha256": "ba7a51525c676630c5755cebc001b4cb6d1d1595c40812416cdc3094f4993e48"
-  },
-  {
     "path": "course-assets/candidate-comparison/report-prompt.txt",
     "sha256": "560139df1066a4f8da6392ab6bb7e739ddbfd5e0d9cd62e9d293c594d9b66fad"
   },
   {
-    "path": "course-assets/candidate-comparison/report.html",
-    "sha256": "a33f253692861e1c6aa28eb14d22d4d25390e6bcb46b04de2f37d753d59ca98c"
-  },
-  {
-    "path": "course-assets/candidate-comparison/result.md",
-    "sha256": "1c43f408b078a1cd1966a5afc72234c0ede22325b3b5ab4727675749f41ea7c9"
-  },
-  {
     "path": "course-assets/lab52-terminal-example-prompt-marked-v2-20261018.avif",
     "sha256": "bbfdfe6138175d540d242d76f36b1821baa204aa3931d4c547edc0d4ebfc5a76"
-  },
-  {
-    "path": "course-assets/learner-candidate-comparison-report-20261018.html",
-    "sha256": "a33f253692861e1c6aa28eb14d22d4d25390e6bcb46b04de2f37d753d59ca98c"
   },
   {
     "path": "course-assets/learner-candidate-report-browser-bottom-20261018.avif",
@@ -200,10 +184,6 @@
     "sha256": "604f1a2289fa4f5ba492b95851a58a263eae9612236060937d259138a4590447"
   },
   {
-    "path": "course-assets/learner-lab71-document-20261018.pdf",
-    "sha256": "9b6d96dfd28a54b245481ab1247d7b1252e1a79bb09940f83b29ad21b2b82ad6"
-  },
-  {
     "path": "course-assets/learner-lab71-english-prompt-marked-20261018.avif",
     "sha256": "453f14a1f91c6851d74f70d3ff0d1d23d4409cef7ac6a883a5933d00073020ed"
   },
@@ -216,10 +196,6 @@
     "sha256": "e2e1d6160c51d0cf5c7184fb0bf7103fcc6a44fd3c8ef390fbd07832971879a2"
   },
   {
-    "path": "course-assets/learner-lab72-dfd-document-20261018-three.pdf",
-    "sha256": "3b34a4a68c029f96320489f6205631fc9ada2fa7f50d0e2043e0403227ecd697"
-  },
-  {
     "path": "course-assets/learner-lab72-dfd-english-prompt-marked-20261018.avif",
     "sha256": "962d9d3e87519350ef9e35cc3f3ff7d7e3410a3a9b08e9a311494a8e7d64887a"
   },
@@ -230,10 +206,6 @@
   {
     "path": "course-assets/learner-lab73-control-agent-run-prompt-marked-20261018-three.avif",
     "sha256": "a65020beeddace97b372c8e65eb7ad71ebd6b1b0effdb136922e252cfdf5f5f8"
-  },
-  {
-    "path": "course-assets/learner-lab73-control-document-20261018-three-reviewed.pdf",
-    "sha256": "3a52a9e5ac1202e6c9df5e6e6a4fa40ebb0b7036b71bf0459a9829c92e94d1f8"
   },
   {
     "path": "course-assets/learner-lab73-control-english-prompt-marked-20261018.avif",
