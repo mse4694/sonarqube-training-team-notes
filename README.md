@@ -135,10 +135,14 @@ After changing the tools Dockerfile or entrypoint, explicitly rebuild and replac
 the tools container from the checkout root (this does not rebuild the app):
 
 ```bash
-export LAB_REPO_DIR="$(pwd -P)"
+export LAB_REPO_DIR="$(pwd -P)" LAB_REPO_SOURCE="$(pwd -P)"
 docker compose build lab-tools
 docker compose up -d --no-deps --no-build --force-recreate lab-tools
 ```
+
+On Windows, remove the image instead (`docker image rm team-notes-lab-tools:latest`);
+the next `./scripts/lab-tools` or `.\scripts\lab-tools.ps1` call rebuilds it with
+the right paths.
 
 Use `docker compose stop lab-tools` to stop the idle tools container; the next
 wrapper command starts it again. Keep durable work inside the checkout or the
@@ -150,6 +154,51 @@ redirections such as `> result.json` work. No host .NET/Python/Node installation
 is required. Day 2 scratch work belongs in `.lab-workspaces/` inside the checkout
 so Docker can see it; that directory is ignored by Git. AI client applications
 and the Docker CLI run from the learner's terminal, not inside this tools image.
+
+### Windows
+
+Use **Git Bash** (installed with Git for Windows) for every lab command: the
+commands and `./scripts/*` helpers run there unchanged. Docker Desktop must be
+running. Clone with LF line endings so bash and the tools image work:
+
+```bash
+git clone --config core.autocrlf=false https://github.com/mikelopster/sonarqube-training-team-notes.git
+```
+
+The repository's `.gitattributes` also forces LF. A checkout made earlier with
+CRLF shows errors such as `$'\r': command not found` or `bash\r: No such file`
+(scripts, `labs/**/*.sh` and the Agent hook `labs/agent-control/guard.py` are all
+affected). Clone again with the command above, or, when the checkout has no
+work you need to keep, re-checkout every file and rebuild the tools image:
+
+```bash
+git config core.autocrlf false
+git rm -rq --cached . && git reset -q --hard   # discards local changes
+docker image rm team-notes-lab-tools:latest
+```
+
+In Git Bash, `scripts/lab-tools` passes the checkout to Docker Desktop as
+`C:/...` and mounts it at the same `/c/...` path the shell uses, with MSYS path
+rewriting turned off for Docker. That avoids `too many colons` and
+`mount denied` errors.
+
+Day 1 commands also work in **PowerShell** (Windows PowerShell 5.1 or
+PowerShell 7) through `scripts/lab-tools.ps1`. It shares the same tools
+container as the Git Bash wrapper:
+
+```powershell
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
+docker compose up -d --build
+.\scripts\lab-tools.ps1 curl --fail http://127.0.0.1:8080/health
+```
+
+If PowerShell blocks the script, allow local scripts for this window only:
+`Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`. PowerShell removes
+a bare `--` before the script sees it, so quote it (`'--'`). On Windows
+PowerShell 5.1, `> file` writes UTF-16; redirect inside the container instead
+(`.\scripts\lab-tools.ps1 bash -c 'jq . in.json > out.json'`). The Day 2 helpers
+(`voucher-*`, `candidate-workspace`, `zap-scan`) are bash scripts; run them in
+Git Bash.
 
 ## Tests
 

@@ -62,7 +62,8 @@ services:
       LAB_WORKSPACE: ${LAB_REPO_DIR:-/work}
       NUGET_PACKAGES: /nuget
     volumes:
-      - "${LAB_REPO_DIR:-.}:${LAB_REPO_DIR:-/work}"
+      # scripts/lab-tools sets both; the source differs from the target only on Windows (C:/... vs /c/...).
+      - "${LAB_REPO_SOURCE:-.}:${LAB_REPO_DIR:-/work}"
       - lab-nuget:/nuget
     # Keep existing curl examples for localhost:8080 connected to the running API.
     network_mode: service:api

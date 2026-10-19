@@ -11,8 +11,20 @@ if (( $# == 0 )); then
   echo 'Usage: ./scripts/lab-tools <command> [arguments...]' >&2
   exit 2
 fi
+# Git Bash on Windows (MSYS): Docker Desktop needs the Windows form (C:/...) as
+# the bind source, while the container keeps the same /c/... path the shell
+# uses. Stop MSYS from rewriting POSIX paths and the mount target on the way
+# to docker.exe, which otherwise ends in "too many colons" or a missing workdir.
+windows_host=0
+case "$(uname -s)" in MINGW*|MSYS*|CYGWIN*) windows_host=1 ;; esac
 export LAB_REPO_DIR="$repo_root"
-compose=(docker compose --project-directory "$repo_root" -f "$repo_root/docker-compose.yml")
+export LAB_REPO_SOURCE="$repo_root"
+if (( windows_host )); then
+  export MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL='*' MSYS2_ENV_CONV_EXCL='LAB_REPO_DIR'
+  LAB_REPO_SOURCE="$(cygpath -m "$repo_root")"
+fi
+# docker.exe reads its own path arguments as Windows paths (/c/... would become C:\c\...).
+compose=(docker compose --project-directory "$LAB_REPO_SOURCE" -f "$LAB_REPO_SOURCE/docker-compose.yml")
 api_id=$("${compose[@]}" ps --status running -q api)
 if [[ -z "$api_id" ]]; then
   echo 'Start the existing Team Notes app with docker compose up -d before running lab tools.' >&2
@@ -31,6 +43,8 @@ inspect_tools() {
     case "$line" in
       "env:LAB_WORKSPACE=$repo_root") workspace_ok=1 ;;
       "bind:$repo_root"$'\t'"$repo_root"$'\ttrue') bind_ok=1 ;;
+      # Docker Desktop reports a Windows bind source in its own form; the target still has to match.
+      "bind:"*$'\t'"$repo_root"$'\ttrue') if (( windows_host )); then bind_ok=1; fi ;;
     esac
   done <<< "$details"
   tools_compatible=0

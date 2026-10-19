@@ -1,3 +1,5 @@
+* text=auto eol=lf
+# Windows checkouts keep LF too: bash scripts and the lab-tools entrypoint copied into Docker break on CRLF.
 labs/**/*.pdf binary
 # Keep exported evidence byte-for-byte, including meaningful diff context and source EOFs.
 labs/report-evidence/code-snapshot/** whitespace=-blank-at-eof

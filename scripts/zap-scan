@@ -9,6 +9,14 @@ lab_tools="$repo_root/scripts/lab-tools"
 target="http://web:3000/login"
 zap_image="ghcr.io/zaproxy/zaproxy:stable"
 stop() { echo "Stop: $*" >&2; exit 1; }
+# Git Bash on Windows: keep /zap/wrk as written and give Docker the C:/... form of the report folder.
+host_path() { printf '%s' "$1"; }
+case "$(uname -s)" in
+  MINGW*|MSYS*|CYGWIN*)
+    export MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL='*'
+    host_path() { cygpath -m "$1"; }
+    ;;
+esac
 cd "$repo_root"
 
 # lab-tools shares the api container's network, so it reaches the web service by name.
@@ -18,7 +26,7 @@ echo "login HTTP $login_http ($target)"
 
 docker pull -q "$zap_image" >/dev/null
 echo "ZAP image: $(docker image inspect --format '{{index .RepoDigests 0}}' "$zap_image")"
-web_id=$(docker compose --project-directory "$repo_root" -f "$repo_root/docker-compose.yml" ps -q web)
+web_id=$(docker compose --project-directory "$(host_path "$repo_root")" -f "$(host_path "$repo_root/docker-compose.yml")" ps -q web)
 [[ -n "$web_id" ]] || stop "the web service is not running"
 web_net=$(docker inspect --format '{{range $name, $cfg := .NetworkSettings.Networks}}{{$name}}{{"\n"}}{{end}}' "$web_id" | head -n 1)
 
@@ -31,7 +39,7 @@ echo "Target: $target (network $web_net, no login session)"
 
 zap_exit=0
 # Only the report folder is mounted: no Docker socket, credentials or source.
-docker run --rm --network "$web_net" -v "$TOOLS_DIR/zap:/zap/wrk:rw" \
+docker run --rm --network "$web_net" -v "$(host_path "$TOOLS_DIR/zap"):/zap/wrk:rw" \
   "$zap_image" zap-baseline.py -t "$target" -m 1 -T 5 -J zap.json -r zap.html || zap_exit=$?
 
 case "$zap_exit" in
