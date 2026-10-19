@@ -1,7 +1,7 @@
 [
   {
     "path": "README.md",
-    "sha256": "8cdf6e1e1b5c3bb96450df0f6ce3d1a7bf773bfb28b5df3ad7960cdbf40ff59e"
+    "sha256": "ee833195d1bf399fa578be988e5eb416f30b099a5cc54e74c3ba1dc177a2b2c1"
   },
   {
     "path": "agent-control/Guard/AgentGuard.csproj",
@@ -296,62 +296,6 @@
     "sha256": "efd93c7abb35867dfebaa28d1b67bc8be597752fe80e2f7d002f2a030c8ca68b"
   },
   {
-    "path": "course-assets/voucher-patch-report-dotnet/AgentExecutionRecord.md",
-    "sha256": "43bf21aa661925439e05a955e838a22530ce40fabd36fc63e5b4448812ad6382"
-  },
-  {
-    "path": "course-assets/voucher-patch-report-dotnet/README.md",
-    "sha256": "cd108a28b2f8ee49ad4a20836685675270e83e924a089d69b29b9abde6d80188"
-  },
-  {
-    "path": "course-assets/voucher-patch-report-dotnet/VoucherService-after.cs",
-    "sha256": "f4b3683721d2f94b958108f6a66b3ef805097bf6fe41acc3c2be3a1248be5924"
-  },
-  {
-    "path": "course-assets/voucher-patch-report-dotnet/VoucherService-before.cs",
-    "sha256": "77dad1a4587ff2f97731c5efc608c351e3714b9e664d6d773e777ae2815bdc1c"
-  },
-  {
-    "path": "course-assets/voucher-patch-report-dotnet/checker.json",
-    "sha256": "3a6b4dee80f0e25117d340a3fdeb781bcbd28db575eb5e8574e5eecd52a004a5"
-  },
-  {
-    "path": "course-assets/voucher-patch-report-dotnet/checker.log",
-    "sha256": "8a29d11b8999a08a8f65e37480510cde30147076b1c9b9d0657307ec751db672"
-  },
-  {
-    "path": "course-assets/voucher-patch-report-dotnet/implementation-request.md",
-    "sha256": "a25cd7cc5b45cbe13f8b567af214c0b8d95ef58c5a1c24b74cbdcec28dd4459e"
-  },
-  {
-    "path": "course-assets/voucher-patch-report-dotnet/implementation-result.md",
-    "sha256": "4437bf2452ce8f4b72a17a3208a9a4dc9a1713e917e48e2a7fd5c44ba7a238da"
-  },
-  {
-    "path": "course-assets/voucher-patch-report-dotnet/patch.diff",
-    "sha256": "3ffa71456af11382d93df29e5ee3f9071d621693d29411e52e20d75ba39097b4"
-  },
-  {
-    "path": "course-assets/voucher-patch-report-dotnet/readonly-check.txt",
-    "sha256": "ee28a611e6f8172bc6f868d9396e7afe8601b3fb85458c2a7d504c6628713640"
-  },
-  {
-    "path": "course-assets/voucher-patch-report-dotnet/readonly-inputs.sha256",
-    "sha256": "f57519f1ab950a1824ce243e0b89955c26cb882f3aef929f74183547e252a420"
-  },
-  {
-    "path": "course-assets/voucher-patch-report-dotnet/report.html",
-    "sha256": "b87765b94c7a4fbc7c09163c1981852e389039511057d4cc9ebb164b1be93c98"
-  },
-  {
-    "path": "course-assets/voucher-patch-report-dotnet/result.md",
-    "sha256": "d20869b345b0c92d7938df8965cada622fc544f54795735aa8e86c58febdc90c"
-  },
-  {
-    "path": "course-assets/voucher-patch-report-dotnet/tests.log",
-    "sha256": "9270831d4a45cc165dff73f1872104a0b9c47e5d954df820c85158bfe25d2ae5"
-  },
-  {
     "path": "forge_admin_jwt.py",
     "sha256": "3a06fed074b55fd8b09d730ff67485c2197be755b6a0a5f6830b28e30453e9fc"
   },
@@ -553,7 +497,7 @@
   },
   {
     "path": "workflow-security/README.md",
-    "sha256": "3d2bddb11f80438c166ff3406c34e777f1fe9369506cf394b0bbb08730905135"
+    "sha256": "c9f5b86e1ea0f73380e3bc2b4742d712c34f8880f26896967e5b5497b80f7f5f"
   },
   {
     "path": "workflow-security/VOUCHER_SCENARIO.md",
@@ -588,36 +532,8 @@
     "sha256": "e9a812988cea22a8a50128ad58a393959feae39086b0558a7ed10ab051cd829c"
   },
   {
-    "path": "workflow-security/reference/ContractTests.cs",
-    "sha256": "e53eba016a8b34c5d72974981898b813b2c1863b33aa1875f4b5a50595a8aee1"
-  },
-  {
-    "path": "workflow-security/reference/Engines/Mutants/MissingExpiryGuard.cs",
-    "sha256": "91c3bdb48b44ab87b79c4a4ebc92de348a99a2f7fe93171d496f3d864871f80a"
-  },
-  {
-    "path": "workflow-security/reference/Engines/Mutants/MissingStateGuard.cs",
-    "sha256": "e9406d3e6eb40dc99f4733aa828dbd87d8cd3ceba3344914d47a219635d2c465"
-  },
-  {
-    "path": "workflow-security/reference/Engines/Mutants/NonAtomicTransition.cs",
-    "sha256": "447dc7f7e01b1c48965cbfd448bb309595b27f1a90433f13f5c0867cb7ff423b"
-  },
-  {
-    "path": "workflow-security/reference/Engines/Mutants/ReplayAllowed.cs",
-    "sha256": "09d8c2fad0a988d6626b9f92f86290bb5dfee8a9f51b13c7f1900c98b99f21b9"
-  },
-  {
-    "path": "workflow-security/reference/Engines/Mutants/SkipsCheckpoint.cs",
-    "sha256": "36d314ac4d9cd20a0b9cdbabb889d4674759dc90c967699df0fb5d90e044fe5a"
-  },
-  {
-    "path": "workflow-security/reference/Engines/SecureVoucherBase.cs",
-    "sha256": "a3f51b49be81aa41fb1e2088192b3e394eb1ae023c86f76eb15bf207e7173c6e"
-  },
-  {
-    "path": "workflow-security/reference/Engines/SecureVoucherService.cs",
-    "sha256": "676b32cfead6037139092ec2d8ca09432c43a3f076a9971c4a5b2b187caeef52"
+    "path": "workflow-security/reference/ENGINES.sha256",
+    "sha256": "23dfed7c1fcb5ddb3556dfc2b1de3ba726e7234fd5dd207fb5fb71167a851eaa"
   },
   {
     "path": "workflow-security/reference/Engines/VulnerableVoucherService.cs",

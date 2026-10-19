@@ -8,7 +8,10 @@ simulation data. This is a workflow/security-test exercise, not another BOLA,
 SQL injection, password-hashing or Sonar setup exercise.
 
 `./scripts/voucher-workspace` copies this folder ONCE to your own `WORKFLOW_DIR`
-(`.lab-workspaces/voucher.XXXXXX`). Use that same folder for Business Logic & Workflow
+(`.lab-workspaces/voucher.XXXXXX`, git-ignored). It also fetches the checker's comparison engines and the provided
+contract from branch `solution-day2` into that copy (network needed once) and checks them against
+`reference/ENGINES.sha256`: they are answers, so `main` does not carry them. Run the commands below inside `WORKFLOW_DIR`.
+Use that same folder for Business Logic & Workflow
 Security, Security Test Engineering and the Agent exercise. In Lab 9.1, the Agent may help
 write `tests/RedemptionContractTests.cs` from the contract while the human reviews
 assertions and runs the suite. In Workshop 10, only `Voucher/VoucherService.cs` is editable;
@@ -26,7 +29,7 @@ the path allowlist and test results.
 | `Voucher/ScenarioSupport.cs` | `Scenario.Now`/`ExpiresAt`, `ActiveService`, `ConcurrentObservation`, `RedemptionObservation` | Read-only |
 | `Probes/` | `dotnet run --project Probes -- <scenario>`: manual observations as JSON or a table | Read-only |
 | `tests/RedemptionContractTests.cs` | Learner contract tests (starter: 2 complete + 6 skipped) | The learner (with AI help) in Lab 9.1, then frozen |
-| `reference/` | Instructor engines, mutants, completed contract and checker | Instructor material; the Agent may not read it |
+| `reference/` | Checker (`ContractCheck/`), frozen baseline and `ENGINES.sha256`. The secure engine, mutants and completed contract are answers, so they live on branch `solution-day2`; `voucher-workspace` copies them into your workspace only | Instructor material; the Agent may not read it |
 
 ## Business contract
 

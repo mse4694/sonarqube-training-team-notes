@@ -52,6 +52,21 @@ if [[ -n "$legacy_dir" ]]; then
 else
   # Copy the source only: build output (bin/obj) from another checkout path must not come along.
   tar -C "$repo_root/labs/workflow-security" --exclude=bin --exclude=obj -cf - . | tar -C "$new_dir" -xf -
+  # The checker's comparison engines and provided contract are answers, so main does not carry them: fetch them from
+  # the solution-day2 branch into this private (git-ignored) workspace and check them against main's hash list.
+  solution_repo=${VOUCHER_SOLUTION_REPO:-https://github.com/mikelopster/sonarqube-training-team-notes.git}
+  fetch_engines() {
+    git -C "$repo_root" fetch --quiet --no-tags "$solution_repo" solution-day2 || return 1
+    git -C "$repo_root" archive FETCH_HEAD labs/workflow-security/reference/Engines labs/workflow-security/reference/ContractTests.cs \
+      | tar -C "$new_dir" --strip-components=2 -xf - || return 1
+    (cd "$new_dir" && sha256sum --quiet -c reference/ENGINES.sha256) || return 1
+  }
+  if ! fetch_engines; then
+    rm -rf -- "$new_dir"
+    trap - ERR INT TERM
+    stop "could not fetch or verify the comparison engines from branch solution-day2 of $solution_repo (needs network once)"
+  fi
+  echo "Fetched the checker's comparison engines from branch solution-day2 (hashes OK)"
 fi
 
 printf 'export TRAINING_ROOT=%q\nexport LAB_PACK_DIR=%q\nexport LAB_TOOLS=%q\nexport WORKFLOW_DIR=%q\n' \
